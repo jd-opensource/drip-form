@@ -8,17 +8,8 @@ import styles from './styles.module.css'
 
 const features = [
   {
-    feature: '自动化',
-    desc: `表单界面由JSON数据自动生成，表单中的组件、样式、表单项之间的交互和校验逻辑等都由JSON文件维护；
-           Drip-Form以数据为核心驱动，开发人员只需要关注数据层便可配置满足业务需求的表单。
-         `,
-    imgurl:
-      'https://m.360buyimg.com/babel/jfs/t1/216709/33/4211/31064/618e11e1E35c025f5/e5b5d119518a826e.png!q20.webp',
-    link: 'docs/start/dripform',
-  },
-  {
     feature: '语义化',
-    desc: `简洁高效的JSON协议使得表单结构更加清晰，更有助于开发者阅读和理解，能够有效降低开发和维护成本。`,
+    desc: '简洁高效的JSON协议使得表单结构更加清晰，更有助于开发者阅读和理解，能够有效降低开发和维护成本。',
     imgurl:
       'https://m.360buyimg.com/babel/jfs/t1/137903/4/23517/13776/618e2fdbEb411a7b2/d7cb5f13dacd2f9e.png!q20.webp',
     link: 'docs/use/unitedSchema',
@@ -45,6 +36,15 @@ const features = [
     imgurl:
       'https://m.360buyimg.com/babel/jfs/t1/205544/27/15297/13457/618e2fe9E543aa34b/47a00e8d6322a2c2.png!q20.webp',
     link: 'docs/expert/customTheme',
+  },
+  {
+    feature: '自动化',
+    desc: `表单界面由JSON数据自动生成，表单中的组件、样式、表单项之间的交互和校验逻辑等都由JSON文件维护；
+           Drip-Form以数据为核心驱动，开发人员只需要关注数据层便可配置满足业务需求的表单。
+         `,
+    imgurl:
+      'https://m.360buyimg.com/babel/jfs/t1/216709/33/4211/31064/618e11e1E35c025f5/e5b5d119518a826e.png!q20.webp',
+    link: 'docs/expert/automatic',
   },
   {
     feature: '使用示例',
