@@ -28,9 +28,7 @@ module.exports = {
           label: '文档',
           position: 'right',
         },
-        // { to: 'blog', label: '博客', position: 'right' },
         { to: 'faq', label: '常见问题', position: 'right' },
-        // { to: 'todo', label: '后续规划', position: 'right' },
         {
           href: 'https://github.com/JDFED/drip-form',
           label: 'GitHub',

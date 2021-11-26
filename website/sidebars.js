@@ -60,6 +60,7 @@ module.exports = {
         'expert/customTheme',
         'expert/customVerify',
         'expert/getset',
+        'expert/automatic',
       ],
     },
   ],
