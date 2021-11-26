@@ -1,0 +1,24 @@
+{
+	"name": "form-generator",
+	"version": "0.0.0",
+	"author": "JDFED",
+	"private": true,
+	"scripts": {
+		"dev": "vite",
+		"build:generator": "vite build",
+		"serve": "vite preview"
+	},
+	"dependencies": {
+		"@jdfed/drip-form": "*",
+		"@jdfed/drip-form-theme-antd": "*",
+		"@jdfed/form-generator": "*",
+		"@jdfed/utils": "*",
+		"react": "^17.0.0",
+		"react-dom": "^17.0.0",
+		"recoil": "^0.4.0"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-react-refresh": "^1.3.1",
+		"vite": "^2.4.4"
+	}
+}

@@ -1,0 +1,17 @@
+:global {
+  .leftsidebar-item {
+    @apply border border-blue-500 border-none text-blue-500 font-medium bg-blue-50 flex justify-between m-2 p-4 leading-8 rounded-lg hover:bg-blue hover:ring hover:text-white;
+    align-items: center;
+    user-select: none;
+    display: flex;
+    justify-content: start;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.title {
+  font-size: 13px;
+  margin-left: 4px;
+}

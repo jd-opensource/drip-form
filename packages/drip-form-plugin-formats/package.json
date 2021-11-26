@@ -1,0 +1,48 @@
+{
+	"name": "@jdfed/drip-form-plugin-formats",
+	"version": "0.1.0",
+	"description": "drip-form ajv formats插件",
+	"keywords": [
+		"ajv",
+		"drip-form"
+	],
+	"author": "JDFED",
+	"homepage": "https://github.com/JDFED/drip-form/",
+	"license": "MIT",
+	"main": "dist/cjs/index.js",
+	"types": "dist/esm/index.d.ts",
+	"module": "dist/esm/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"watch": "rollup --config --watch"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"distExports": {
+		"dist": "./dist",
+		"build-info": "./build-info",
+		"format": [
+			"esm",
+			"cjs"
+		]
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.10.2"
+	},
+	"peerDependencies": {
+		"ajv": "^8.6.2"
+	},
+	"devDependencies": {
+		"ajv": "^8.6.2"
+	}
+}

@@ -1,0 +1,80 @@
+---
+id: cascaderField
+title: Cascader 级联选择
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/3e1642c6e7-826cf870-4cf9-11ec-beba-01cc54c313fe.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "array",
+    "title": "级联选择",
+    "ui": {
+    "type": "cascader",
+    "options": [
+        {
+            "label": "ShangHai",
+            "value": "shanghai",
+            "children": [{
+                "label": "BaoShan",
+                "value": "baoshan"
+                }, {
+                "label": "JingAn",
+                "value": "jingan"
+                }
+            ]
+        },
+        {
+            "label": "BeiJing",
+            "value": "beijing",
+            "children": [{
+                "label": "YiZhuang",
+                "value": "yizhuang"
+                }
+            ]
+        }
+    ]
+    },
+    "fieldKey": "cascader_k3uvh_"
+}
+```
+
+
+## API
+| 参数            | 说明                                  | 类型                                 | 是否必填 | 默认值 |
+|:-------------- |:--------------------------------------|:------------------------------------|:--------|:---|
+| filedKey       | 表单数据存放字段（必须唯一）               | string                              | 必填    | - |
+| options        | 可选数据源                              | options[ ]                          | 必填    | - |
+| disabled       | 值为 `true` 时，选择器为禁用状态          | boolean                              | 非必填  | false |
+| expandTrigger  | 次级菜单的展开方式，可选 `click` 、`hover` | string                              | 非必填   | click |
+| onChange       | 选择完成后的回调                         | (value, selectedOptions) => void     | 非必填  | - |
+| placeholder    | 输入框占位文本                           | string                              | 非必填   | Please Select|
+| showSearch     | 在选择框中显示搜索框                      | boolean/Object                      | 非必填   | false |
+
+### ShowSearch
+`showSearch` 为对象时，其中的字段：
+
+|参数	|说明	|类型	|是否必填	|默认值|
+|:--|:--|:--|:--|:--|
+|filter	|接收 inputValue path 两个参数，当 path 符合筛选条件时，应返回 true，反之则返回 false	|function(inputValue, path): boolean	| 必填	| - |
+|limit|	搜索结果展示数量	|`number`、`false`|	非必填|	50|
+|render| 用于渲染 filter 后的选项 |function(inputValue, path): ReactNode| 非必填| -	|
+|sort	|用于排序 filter 后的选项 |function(a, b, inputValue)|非必填|-|
+
+### Options
+```js
+options {
+    value: string | number;
+    label?: React.ReactNode;
+    disabled?: boolean;
+    children?: Option[];
+}
+
+```
+
+

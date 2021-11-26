@@ -1,0 +1,185 @@
+---
+id: control
+title: control 联动控制
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+## vcontrol 显隐控制
+
+### 介绍
+对于表单而言，我们经常会通过某些表单项的操作，触发另一些表单项的显隐。
+
+Drip-Form 为每个表单项内置了`vcontrol`字段，用于表单项之间产生**UI 显隐**的控制关联。
+
+该字段配置于`unitedSchema.json`中：
+
+```json title="unitedSchema.json"
+{
+  "validateTime": "submit",
+  "type": "object",
+  "theme": "drip-theme",
+  "schema": [
+    {
+      "title": "开关",
+      "type": "string",
+      "ui": {
+        "type": "switch",
+      },
+      "fieldKey": "switchItem"
+    },
+    {
+      "type": "string",
+      "title": "自定义组件",
+      "ui": {
+        "type": "custom2",
+        "vcontrol": "return props.formData.switchItem"
+      },
+      "fieldKey": "custom2"
+    }
+  ]
+}
+```
+
+我们为 `custom2` 添加了 `vcontrol` 字段，并配置了一个 return 语句。
+该语句在执行之后会返回一个 **Boolean** 值，用来触发被控制字段的显隐，返回 _`true`_ 则展示 `custom2`表单项，否则隐藏该项。
+
+:::caution 注意
+
+`vcontrol`仅支持以字符串的形式书写函数体，如果你需要复杂的显隐处理，请使用[函数占位符](customFunc)处理。
+:::
+
+`vcontrol`基于`new Function`实现，因此在书写的函数体内，我们可以使用如下三个参数：
+
+| 参数        | 类型   | 说明               |
+| :--------- | :----- | :----------------- |
+| formData   | Object | 当前最新的表单数据       |
+| fieldKey   | string | 当前操作表单项的fieldKey |
+| fieldData  | Object | 当前操作表单项的数据      |
+
+在上文中，我们使用 `props.formData.switchItem` 获取到了**switch 开关** 当前的状态，并根据其是否开启的来判断是否展示 custom2 自定义组件。
+
+### 完整示例
+
+```jsx title="Form.jsx"
+import React, { Component, memo, useState } from 'react'
+import DripForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import unitedSchema from './unitedComponents.json'
+import '@jdfed/drip-form-theme/dist/index.css'
+import '@jdfed/drip-form/dist/index.css'
+
+const CustomField1 = memo(() => {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <div onClick={() => setCount(count + 1)}>Click me</div>
+    </div>
+  )
+})
+
+const customComponents = {
+  custom1: CustomField1
+}
+
+export default class Form extends Component {
+  render() {
+    return (
+      <div>
+        <DripForm
+          unitedSchema={unitedSchema}
+          uiComponents={{ 'drip-theme': dripTheme }}
+          customComponents={customComponents}
+        />
+      </div>
+    )
+  }
+}
+```
+
+<img src='https://storage.360buyimg.com/imgtools/741a0f9e3a-89b6f7c0-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+
+## onChange 数据联动
+
+除了表单间的显隐控制联动，我们通常还会因为某些项的修改而触发另一些数据的变更。
+
+在 drip-form 中，我们可以在 `unitedSchema` 中为需要的表单项配置 `onChange` 字段：
+
+```json title="unitedSchema.json" {10}
+{
+  "validateTime": "submit",
+  "type": "object",
+  "theme": "drip-theme",
+  "schema": [
+    {
+      "title": "开关",
+      "type": "string",
+      "ui": {
+        "type": "switch",
+        "onChange": "val && dispatch({type: 'setFormData', custom2: '触发了开关开启'})"
+      },
+      "fieldKey": "switchItem"
+    },
+    {
+      "type": "string",
+      "title": "自定义组件",
+      "ui": {
+        "type": "custom2"
+      },
+      "fieldKey": "custom2"
+    }
+  ]
+}
+```
+
+和`vcontrol`一样，`onChange`字段同样接收一个字符串类型的函数体，其原理也是基于`new Function`。
+`onChange`允许我们在函数体内使用五个参数：
+
+| 参数          | 类型                      | 说明                                                                      |
+| :------------ | :------------------------ | :------------------------------------------------------------------------ |
+| val           | any                       | 一般情况下，返回修改过后的表单的 e.target.value，如果无法获取到，则返回 e |
+| dispatch      | (options: Object) => void | 触发表单修改的函数                                                        |
+| fieldKey      | string                    | 当前触发表单项的 key 值                                                   |
+| prevFieldData | any                       | 修改之前该项的表单数据                                                    |
+| fieldData     | any                       | 修改过后该项的表单数据，避免 val 获取到为 undefined 的问题                |
+
+:::caution 注意
+
+此处参数中的 `filedKey` 需要配置为待修改的表单 key 值，在上文的`unitedSchema`中，我们配置成了 **custom2**，因此会触发该表单项的修改。
+
+如果我们是触发`deleteFormData`操作，则只需配置为`{type: 'deleteFormData', key: 'custom2'}`即可。
+
+如果你需要复杂的数据联动处理，请使用[函数占位符](customFunc)处理。
+:::
+
+
+## control 全局控制
+
+在考虑使用 `control` 监听全局变化前，请先阅读**vontrol 控制显隐** 和 **onChange 数据联动**，如果这两者可以满足你的需求，请尽量不要使用 `control`，因为它可能会被触发而产生一些错误行为。
+
+`control` 会监听全局的数据和 UI 变化，因此你可以在此执行更为复杂的监听。它作为`props`传入 drip-form 中：
+
+```jsx title="Form.jsx" {4,5,6,11}
+import React, { memo, useCallback } from 'react'
+import DripForm from 'drip-form'
+
+const onGlobalChange = useCallback(({ formData, dispatch }) => {
+    // 在这里执行操作
+})
+
+const Form = memo(() => {
+    return <DripForm
+        ...
+        control={onGlobalChange}
+     />
+})
+```
+
+`control`支持四个参数：
+
+| 参数       | 类型              | 说明               |
+| :--------- | :---------------- | :----------------- |
+| formData   | object            | 当前表单数据       |
+| dispatch   | (options) => void | 触发表单修改的函数 |
+

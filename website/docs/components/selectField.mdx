@@ -1,0 +1,52 @@
+---
+id: selectField
+title: Select 选择器
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/f936078b88-86a041e0-4cf9-11ec-ba01-fb2536faa70c.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": [
+    "string",
+    "number",
+    "array"
+    ],
+    "title": "选择器",
+    "ui": {
+        "type": "select",
+        "options": [
+            {
+            "label": "shanghai",
+            "value": "shanghai"
+            },
+            {
+            "label": "beijing",
+            "value": "beijing"
+            }
+        ],
+        "placeholder": "请选择",
+        "multiple": true,
+        "requestCache": false
+    },
+    "fieldKey": "select_wHaS8k"
+}
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| allowClear      | 是否有清除按钮 | boolean   | 非必填 | false |
+| disabled      | 值为 `true` 时，选择器为禁用状态 | boolean   | 非必填 | false |
+| multiple      | 是否支持多选 | boolean   | 非必填 | false |
+| onChange      | 选中 option，或 input 的 value 变化时，调用此函数 | function(value, option:Option / Array`<Option>`)   |  非必填 | - |
+| placeholder      | 占位文本 | string   | 非必填 | Please Select|
+
+
+

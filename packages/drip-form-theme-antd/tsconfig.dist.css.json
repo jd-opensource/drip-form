@@ -1,0 +1,18 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"include": ["./src/"],
+	"exclude": [
+		"**/node_modules",
+		"dist/**",
+		"build-info/**",
+		"dist-css/**",
+		"build-css-info/**",
+		"**/*.css",
+		"**/*.styl"
+	],
+	"compilerOptions": {
+		"tsBuildInfoFile": "./build-css-info/tsconfig.tsbuildinfo",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true
+	}
+}

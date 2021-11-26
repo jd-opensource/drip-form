@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"strictNullChecks":true,
+		"strict": true,
+		"target": "es5",
+		"moduleResolution": "node",
+		"isolatedModules": true,
+		"jsx": "react",
+		"incremental": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true
+	},
+	"linterOptions": {
+    "exclude": [
+      "*.json",
+      "**/*.json"
+    ]
+  }
+}

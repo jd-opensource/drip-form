@@ -1,0 +1,37 @@
+{
+	"name": "@jdfed/utils",
+	"version": "0.1.0",
+	"description": "drip-form通用方法",
+	"keywords": [
+		"utils",
+		"drip-form"
+	],
+	"author": "JDFED",
+	"homepage": "https://github.com/JDFED/drip-form/",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"watch": "rollup --config --watch",
+		"build:test": "rollup --config --sourcemap --environment NODE_ENV:production:ts"
+	},
+	"distExports": {
+		"dist": "./dist",
+		"build-info": "./build-info"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.10.2"
+	},
+	"gitHead": "1416735284b5c9f0d76c7271117fb8723a2300ec"
+}

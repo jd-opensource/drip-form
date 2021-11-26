@@ -1,0 +1,41 @@
+---
+id: textField
+title: Text 输入框
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/765270b83b-8795ec80-4cf9-11ec-ba01-fb2536faa70c.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+      "type": "string",
+      "title": "输入框",
+      "ui": {
+        "type": "text",
+        "placeholder": "请输入",
+        "multiline": 2,
+        "showFontNum": false,
+        "disabled": false,
+        "allowClear": true
+      },
+      "fieldKey": "text_gov2yB"
+    }
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| allowClear      | 可以点击清除图标删除内容 | boolean   | 非必填 | false |
+| disabled      | 值为 `true` 时，输入框为禁用状态 | boolean   | 非必填 | false |
+| multiline      | 文本行数 | boolean   | 非必填 | false |
+| onChange      | 输入框内容变化时的回调 | function(e)  |  非必填 | - |
+| placeholder      | 输入框占位文本 | string   | 非必填 | 请输入 |
+| showCount      | 是否展示字数 | boolean | 非必填 | false |
+
+
+

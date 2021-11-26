@@ -1,0 +1,45 @@
+---
+id: checkboxField
+title: Checkbox 多选框
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+<img src='https://storage.360buyimg.com/imgtools/e9f2c83c4e-82939340-4cf9-11ec-89c8-f9e7ed0c7791.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "validateTime": "submit",
+    "type": "array",
+    "title": "多选框",
+    "default": "shanghai",
+    "ui": {
+        "type": "checkbox",
+        "needCheckAll": true,
+        "options": [
+            {
+            "label": "shanghai",
+            "value": "shanghai"
+            },
+            {
+            "label": "beijing",
+            "value": "beijing"
+            },
+            {
+            "label": "shenzhen",
+            "value": "shenzhen",
+            "disabled": true
+            }
+        ]
+    }
+}
+```
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| fieldKey      | 表单数据存放字段（必须唯一） | string   |必填| - |
+| options | 可选数据源              | options[ ] | 必填 | - |
+| needCheckAll | 判断是否使用全选 | boolean | 非必填| false |
+| onChange | 变化时回调函数 | function(e:Event) |  非必填  | - |

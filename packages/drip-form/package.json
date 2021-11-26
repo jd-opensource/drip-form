@@ -1,0 +1,64 @@
+{
+	"name": "@jdfed/drip-form",
+	"version": "0.1.0",
+	"description": "drip-form表单渲染core",
+	"keywords": [
+		"drip-form",
+		"core",
+		"drip"
+	],
+	"files": [
+		"dist"
+	],
+	"sideEffects": [
+		"dist/*"
+	],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
+	"distExports": {
+		"dist": "./dist",
+		"build-info": "./build-info"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"author": "JDFED",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"watch": "rollup --config --watch"
+	},
+	"engines": {
+		"node": ">=13.14.0",
+		"yarn": ">=1.0.0"
+	},
+	"devDependencies": {
+		"stylus": "^0.54.7"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.10.2",
+		"@fortawesome/fontawesome-svg-core": "^1.2.35",
+		"@fortawesome/free-regular-svg-icons": "^5.15.3",
+		"@fortawesome/free-solid-svg-icons": "^5.15.3",
+		"@fortawesome/react-fontawesome": "^0.1.14",
+		"@jdfed/ajv": "^0.1.0",
+		"@jdfed/hooks": "^0.1.0",
+		"@jdfed/utils": "^0.1.0",
+		"ajv": "^8.6.2",
+		"classnames": "^2.2.6",
+		"immer": "^9.0.5",
+		"use-immer": "^0.6.0"
+	},
+	"peerDependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"gitHead": "1416735284b5c9f0d76c7271117fb8723a2300ec"
+}

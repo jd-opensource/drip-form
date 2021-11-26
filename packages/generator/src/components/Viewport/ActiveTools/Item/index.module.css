@@ -1,0 +1,13 @@
+.activeButton {
+  height: 20px;
+  width: 20px;
+  margin-left:2px;
+  @apply flex justify-center items-center bg-blue-300 shadow-sm rounded;
+  &:hover {
+    @apply bg-blue-400
+  }
+}
+
+.icon {
+  color: white;
+}

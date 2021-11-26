@@ -1,0 +1,69 @@
+---
+id: arrayContainer
+title: 数组容器
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+<img src='https://storage.360buyimg.com/imgtools/45aee0dc0d-86e14280-4cf9-11ec-bf12-d7e468206312.gif' alt="图片加载出错"/>
+
+数组容器是一种表单中的特殊表单项，如gif所示，里面的内容可以增加，但是每次增加的表单项都是一样的。
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+    {
+      "validateTime": "submit",
+      "type": "array",
+      "title": "数组容器",
+      "ui": {
+        "mode": "add",
+        "type": "array"
+      },
+      "items": {
+        "type": "object",
+        "title": "",
+        "ui": {
+          "type": "object"
+        },
+        "schema": [
+          {
+            "validateTime": "submit",
+            "type": "boolean",
+            "title": "开关",
+            "ui": {
+              "type": "switch"
+            },
+            "fieldKey": "switch_mDJ7Lz"
+          },
+          {
+            "validateTime": "submit",
+            "type": "string",
+            "title": "单选",
+            "ui": {
+              "type": "radio",
+              "options": [
+                {
+                  "label": "是",
+                  "value": 1
+                },
+                {
+                  "label": "否",
+                  "value": 0
+                }
+              ]
+            },
+            "fieldKey": "0"
+          }
+        ]
+      },
+      "fieldKey": "array_4LrpU6"
+    }
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| fieldKey      | 表单数据存放字段（必须唯一） | string   |必填| - |
+| items | 数组容器子元素              | object `unitedSchema` | 必填 | - |
+| ui.mode | 数组容器的增加模式，`add`、`normal` | string | 非必填| `add` |

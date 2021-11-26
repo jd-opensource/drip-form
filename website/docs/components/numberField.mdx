@@ -1,0 +1,40 @@
+---
+id: numberField
+title: Number 数字输入框
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img  class='picture' src='https://storage.360buyimg.com/imgtools/3993d64efc-85bf30b0-4cf9-11ec-ba01-fb2536faa70c.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "number",
+    "title": "数字输入框",
+    "ui": {
+        "type": "number",
+        "disabled": false,
+        "placeholder": "请输入数字",
+        "defaultValue": 1,
+        "step": 1
+    },
+    "fieldKey": "number_WZnfGE"
+    }
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| default      | 初始值 | number | 非必填 | - |
+| disabled      | 值为 `true` 时，输入框为禁用状态 | boolean   | 非必填 | false |
+| onChange      | 变化回调 | function(value: `number `、 `string` 、 `null`)   |  非必填 | - |
+| placeholder      | 输入框占位文本 | string   | 非必填 | - |
+| step      | 每次改变步数，可以为小数 | `number` 、 `string` | 非必填 | 1 |
+| style      | 自定义样式 | React.CSSProperties | 非必填 | - |
+
+
+

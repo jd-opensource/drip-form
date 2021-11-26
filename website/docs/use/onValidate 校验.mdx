@@ -1,0 +1,261 @@
+---
+id: onValidate
+title: onValidate 校验
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+## 常规校验
+
+- drip-form 校验基于`jsonSchema`。关于jsonSchema 的详细内容可以[查看](https://json-schema.org/)
+
+**常规校验有两种方法**
+
+1. 一种是使用 jsonSchema 自带的校验关键字。
+2. 当 jsonSchema 自带的关键字无法满足校验情况时，可以使用 ajv-keywords 校验。ajv-keywords 扩展了一些常用的校验种类。
+
+**使用 jsonSchma 校验**
+
+想要使用 jsonSchema 常见校验，请查看[jsonSchema](https://json-schema.org/understanding-json-schema/index.html)如何编写
+
+**使用 ajv-keywords 校验**
+
+ajv-keywords 补全了一些常见校验种类。
+
+下面列出了一些 ajv-keyword 的关键字，所有关键字请查看[参考](#参考)
+
+**关键字**
+
+1. [typeof](https://www.npmjs.com/package/ajv-keywords#typeof)
+
+   基于 js 的 typeof 实现
+
+2. [instaceof](https://www.npmjs.com/package/ajv-keywords#instanceof)
+
+   基于 js 的 instaceof 实现
+
+`number`
+
+- [range 和 exclusiveRange](https://www.npmjs.com/package/ajv-keywords#range-and-exclusiverange)
+
+`string`
+
+- [regexp](https://www.npmjs.com/package/ajv-keywords#regexp)
+
+  - 支持标准`pattern`不支持的标志
+
+  - 此关键字仅适用于字符串。如果数据不是字符串，则验证成功
+
+- [formatmaximum、formatminimum、formatexclusivemaximum、formatexclusiveminimum](https://www.npmjs.com/package/ajv-keywords#formatmaximum--formatminimum-and-formatexclusivemaximum--formatexclusiveminimum)
+
+  校验 format：datetime、time、date 类型 的范围
+
+- [transform](https://www.npmjs.com/package/ajv-keywords#transform)
+
+  Json schema 是严格校验的，所以字符串中的空格也会影响校验结果
+
+  `transform`可以在校验前改变字符串
+
+  - `trim`: remove whitespace from start and end
+  - `trimLeft`: remove whitespace from start
+  - `trimRight`: remove whitespace from end
+  - `toLowerCase`: case string to all lower case
+  - `toUpperCase`: case string to all upper case
+  - `toEnumCase`: case string to match case in schema
+
+`arrays`
+
+- [uniqueitemproperties](https://www.npmjs.com/package/ajv-keywords#uniqueitemproperties)
+
+  对象组成的数组每个值必须是不同的
+
+`objects`
+
+- [allRequired](https://www.npmjs.com/package/ajv-keywords#allrequired)
+
+  对象中所有的都要满足
+
+- [anyRequired](https://www.npmjs.com/package/ajv-keywords#anyrequired)
+
+  对象中只要有一个满足
+
+- [oneRequired](https://www.npmjs.com/package/ajv-keywords#onerequired)
+
+  对象中有且只有一个满足
+
+- [prohibited](https://www.npmjs.com/package/ajv-keywords#prohibited)
+
+  对象中不存在 prohibited 中指定的属性
+
+- [deepPropperties](https://www.npmjs.com/package/ajv-keywords#deepproperties)
+
+  - 校验深层结构中某个属性具体的校验
+
+- [deepRequired](https://www.npmjs.com/package/ajv-keywords#deeprequired)
+
+  - 校验数组（对象）深层结构中某个值是必须的
+
+`computer keywords`
+
+- [switch](https://www.npmjs.com/package/ajv-keywords#switch-deprecated)
+
+  可用 if/then/else 代替
+
+- [select/selectcases/selectdefault](https://www.npmjs.com/package/ajv-keywords#select--selectcases--selectdefault)
+
+  select 查询某个值，匹配 selectcases 找那个值，并执行其中校验。匹配不到则校验 selectdefault
+
+`All types`
+
+- [dynamicDefaults](https://www.npmjs.com/package/ajv-keywords#dynamicdefaults)
+
+  设置默认值，并且可以扩展自定义函数。类似 uuid 等
+
+## 参考
+
+1. [ajv-keywords readme](https://www.npmjs.com/package/ajv-keywords)
+
+## 异步校验
+表单经常会存在异步校验。大概有以下两种场景
+
+1. 点击按钮触发异步校验
+2. 表单数据改变，触发异步校验
+
+我们看下下面的 gif 动画
+
+<img src='https://storage.360buyimg.com/imgtools/e1e7accf06-823aebf0-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+
+**JSON配置**
+
+异步校验的json配置示例，需要配置错误文案等字段，如下所示：
+
+```json title="unitedSchema.json"
+{
+  "validateTime": "submit",
+  "type": "object",
+  "theme": "drip-theme",
+  "schema": [
+    {
+      "type": "string",
+      "title": "文本1",
+      "errMsg": {
+        "_": "必填"
+      },
+      "ui": {
+        "type": "text",
+        "title": {
+          "requiredIcon": true
+        }
+      },
+      "requiredMsg": "必填",
+      "fieldKey": "text_UEA7bW"
+    },
+    {
+      "type": "string",
+      "title": "文本2",
+      "errMsg": {
+        "_": "必填"
+      },
+      "ui": {
+        "type": "text",
+        "title": {
+          "requiredIcon": true
+        }
+      },
+      "requiredMsg": "必填",
+      "fieldKey": "text_VYe65G"
+    }
+  ]
+}
+```
+
+**使用 drip-form 的组件**
+```jsx
+import DripForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import '@jdfed/drip-form-theme/dist/index.css'
+import unitedSchema from './unitedSchema.json'
+
+// 异步校验
+const onValidate = {
+  name1: {
+    type: 'change',
+    fn: (val) => {
+      //异步校验操作
+      console.log('change 校验name1', val)
+      return '异步校验，发生错误'
+    },
+  },
+  name: {
+    type: 'click',
+    fn: (val) => {
+      console.log('点击name', val)
+      return '点击异步校验，发生错误'
+    },
+  },
+}
+//highlight-end
+
+<DripForm
+  unitedSchema={unitedSchema}
+  uiComponents={{'drip-theme': dripTheme}}
+  onValidate={onValidate}
+/>
+```
+
+drip-form `onValidate prop`用来支持表单的异步校验。
+
+从上面示例可以看出`onValidate`是一个对象。
+
+- key 值对应表单各自的 key。
+
+- value 是一个由`type`和`fn`组成的对象
+
+  - type: 'change'|'click'
+
+    change 代表表单数据改变即触发异步校验
+
+    click 代表点击确定触发异步校验
+
+  - fn 是一个函数，接收当前表单的数据
+
+    可以在 fn 中做数据的异步校验操作
+
+    fn 返回一个字符串形式的错误信息。当异步校验正确时，返回空字符串即可。
+
+## 自定义校验
+当存在特殊校验，常规校验两种方式（jsonSchema 和 ajv-keywords）无法满足时，可以使用自定义校验
+
+自定义校验有两种场景
+
+1. 校验很常见，想将当前校验集成到 drip-form 中，直接通过配置 dataSchema 方式来进行校验
+2. 校验不是很常见，只是针对当前某个表单需要这个校验
+
+第一种方法需要通知 drip-form 开发人员，告知校验场景，我们会快速支持
+
+第二种方法可以如下方法实现
+
+```jsx
+//highlight-start
+const onValidate = {
+  'key':{
+    type:'change',
+    fn:(val)=>{
+      //自定义校验的代码
+      return '这是自定义校验的错误信息'
+    }
+  }
+}
+//highlight-end
+
+<DripForm
+  unitedSchema={{unitedSchema}}
+  uiComponents={{
+  	 'drip-theme': dripTheme
+   }}
+  //highlight-next-line
+  onValidate={onValidate}
+/>
+```
+
+从上面代码可以看出基本和异步校验的 change 方法一样。唯一区别就是把异步校验代码换成了自定义校验的代码

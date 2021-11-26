@@ -1,0 +1,4 @@
+.container {
+  height: calc(100% - 50px);
+  @apply w-full p-2 bg-gray-100;
+}

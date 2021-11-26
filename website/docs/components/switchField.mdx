@@ -1,0 +1,39 @@
+---
+id: switchField
+title: Switch 开关
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/d16134741b-875e3ab0-4cf9-11ec-beba-01cc54c313fe.png' alt="图片加载出错"/>
+
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "boolean",
+    "title": "开关",
+    "ui": {
+        "type": "switch",
+        "disabled": false,
+        "checked": true,
+        "size": "default",
+        "checkedChildren": "内容"
+    },
+    "fieldKey": "switch_J9UiEf"
+}
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| checked | 指定当前是否选中              | boolean | 非必填 | false |
+| checkedChildren | 选中时展示的内容 | ReactNode | 非必填 | - |
+| disabled      | 值为 `true` 时，开关为禁用状态 | boolean   | 非必填 | false |
+| onChange      | 变化时回调函数 | (function(checked: boolean, event: Event)   |  非必填 | - |
+| size | 开关大小，可选值：`default` `small`| string | 非必填 | default |
+
+

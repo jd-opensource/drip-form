@@ -1,0 +1,9 @@
+.titleHeader {
+  border-bottom: 1px solid #eee;
+  user-select: none;
+  @apply p-2 flex items-center;
+}
+
+.pagetitle {
+  @apply text-xl font-medium mr-2;
+}

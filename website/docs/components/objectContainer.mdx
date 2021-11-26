@@ -1,0 +1,58 @@
+---
+id: objectContainer
+title: 对象容器
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/a82404d7e8-85e8ffd0-4cf9-11ec-bf12-d7e468206312.jpeg' alt="图片加载出错"/>
+
+对象容器也是一种特殊的表单项，它相当于是一个独立的子表单，可以给这个子表单增加标题，如上图所示。
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type":"object",
+    "fieldKey":"title",
+    "ui":{
+        "type":"object",
+        "mode":"collapse"
+    },
+    "title":"标题",
+    "schema":[
+        {
+            "fieldKey":"title",
+            "type":"string",
+            "title":"名称",
+            "ui":{
+                "type":"text",
+                "placeholder":"请输入单行文本",
+                "allowClear":true
+            }
+        },
+        {
+            "fieldKey":"requiredIcon",
+            "type":"boolean",
+            "title":"是否展示*号",
+            "default":false,
+            "ui":{
+                "type":"switch",
+                "description":{
+                    "title":"需配置校验规则为必填时才生效",
+                    "type":"icon",
+                    "trigger":"hover"
+                }
+            }
+        }
+    ]
+}
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| fieldKey      | 表单数据存放字段（必须唯一） | string   |必填| - |
+| schema | 对象容器子元素              | array `Schema` | 必填 | - |
+| ui.mode | 对象容器的模式，`collapse`、`normal` | string | 非必填| `collapse` |

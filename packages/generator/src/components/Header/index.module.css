@@ -1,0 +1,30 @@
+.header {
+  height: 50px;
+  @apply p-5 flex justify-between items-center shadow-sm;
+  border-bottom: 1px solid #eee;
+  min-width:1024px;
+}
+
+.logo {
+  @apply text-2xl font-semibold flex items-center justify-center;
+}
+
+.btncontainer {
+  @apply flex justify-around items-center;
+}
+
+.btn {
+  @apply mx-2 px-2 py-1 rounded-lg border border-solid  flex items-center justify-between cursor-pointer;
+}
+
+.text {
+  @apply border-gray-200 bg-white hover:text-blue-500 hover:border-blue-500 text-gray-600;
+}
+
+.primary {
+  @apply border-blue-500 bg-blue-500 hover:bg-blue-400 hover:border-blue-300 text-white;
+}
+
+.ico {
+  @apply w-7 h-7 mr-2;
+}

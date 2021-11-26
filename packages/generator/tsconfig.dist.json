@@ -1,0 +1,20 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"include": ["./src/"],
+	"compilerOptions": {
+		"tsBuildInfoFile": "./build-info/tsconfig.tsbuildinfo",
+		"baseUrl":".",
+		"paths":{
+			"@generator/components": ["src/components"],
+			"@generator/store": ["src/store"],
+			"@generator/hooks": ["src/hooks"],
+			"@generator/fields": ["src/fields"],
+			"@generator/utils": ["src/utils"],
+			"@generator/components/*": ["src/components/*"],
+			"@generator/store/*": ["src/store/*"],
+			"@generator/hooks/*": ["src/hooks/*"],
+			"@generator/fields/*": ["src/fields/*"],
+			"@generator/utils/*": ["src/utils/*"]
+		}
+	}
+}

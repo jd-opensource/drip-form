@@ -1,0 +1,62 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+
+**Note:** Version bump only for package @jdfed/drip-form-theme-antd
+
+
+
+
+
+## 0.1.0 (2021-11-24)
+
+
+### Features
+
+* 补充Uploader的组件能力以支持京东图片服务 ([09bfe47](https://github.com/jdfed/drip-form/commit/09bfe477700d7c9b727253b16056b8b1e4100232))
+* 单选选项卡后跟悬浮提示 ([df2d2e4](https://github.com/jdfed/drip-form/commit/df2d2e48b6a74da1e2d8048add0d3598317636ad))
+* 迁移babel-form至drip-form ([7687505](https://github.com/jdfed/drip-form/commit/768750518a8fdd9de93234fb8fbd5fc1cbd555b6))
+* 嵌套表单 ([b939eed](https://github.com/jdfed/drip-form/commit/b939eed9bf23db5efa9a6c8177a24b397f4e8ba8))
+* 嵌套对象必填支持&useQuery支持getkey ([d33a002](https://github.com/jdfed/drip-form/commit/d33a002567c7061ee28f5063738cba71c53872bf))
+* 删除Spin loading ([1a6d7df](https://github.com/jdfed/drip-form/commit/1a6d7df9e638d49bb3b938c2bbc46fb274bb6ea3))
+* 异步校验loading态 ([6efb51a](https://github.com/jdfed/drip-form/commit/6efb51ad5f75a4a14b41a7b460eb51438d6807f2))
+* 支持set、get、merge ([dc267b6](https://github.com/jdfed/drip-form/commit/dc267b6a23d7d9a8b5bf3edff303adfed7a98056))
+* bug修复+容器组件title配置 ([7fc0a05](https://github.com/jdfed/drip-form/commit/7fc0a054e1e3edc824d7153d6bb4b7a1540585f0))
+* checkbox增加提示 ([134f176](https://github.com/jdfed/drip-form/commit/134f176e44c18aba2d881190d9837560acf64aeb))
+* colorPicker添加defaultValue字段控制默认颜色（默认[#000000](https://github.com/jdfed/drip-form/issues/000000)） ([471f287](https://github.com/jdfed/drip-form/commit/471f28758b918ce2cc218f48851a8a7b1c3c7cd5))
+* container外部封装高阶拖拽组件 ([45f8427](https://github.com/jdfed/drip-form/commit/45f842764601aaa44b267a39f3530827be11c0a3))
+* objectContainer支持折叠 ([cae8d71](https://github.com/jdfed/drip-form/commit/cae8d715dfa6899b96484764310c0bce06880442))
+
+
+### Bug Fixes
+
+* 1.输入框，组件撑满容器宽度；2.多选文案校验修改 ([0b1017e](https://github.com/jdfed/drip-form/commit/0b1017e9e7d61a4e3a74e5f980b84932701706f3))
+* 更新版本 ([7de7c83](https://github.com/jdfed/drip-form/commit/7de7c83b4d4225bb3d8010e81c4877625c719422))
+* 滑动输入框，垂直展示 ts style 修改 ([2aea851](https://github.com/jdfed/drip-form/commit/2aea851eb54c25052b74ec341d695ea24e2402c6))
+* 滑动输入框，垂直展示，设置默认高度 ([93b2e02](https://github.com/jdfed/drip-form/commit/93b2e02106a1ff9ec1aaf5f8696ca6d0cf1dde8a))
+* 滑动输入框，垂直展示，自定义高度 ([ed4214b](https://github.com/jdfed/drip-form/commit/ed4214b512e9c726863fb1c3e3fc108463d1243d))
+* 修复@ant-design/icon按需加载失效 ([2ca16a0](https://github.com/jdfed/drip-form/commit/2ca16a01e273a8a4e085703be6f807f949786b0f))
+* 修复导出包无法被vite或snowpack使用的问题 ([37f6636](https://github.com/jdfed/drip-form/commit/37f6636124ecd3223eac7152fb19a4accf2c5ca8))
+* 修复默认导出声明 ([f32e7a2](https://github.com/jdfed/drip-form/commit/f32e7a2eb3f597b19bb5b5c24716ecdb5e5ecb17))
+* 修复一系列问题 ([52d3e42](https://github.com/jdfed/drip-form/commit/52d3e4258f962958189f1c8ced9b8c20dcf24653))
+* 修复description.title为reactNode时显示异常 ([1bfc76d](https://github.com/jdfed/drip-form/commit/1bfc76d063241e8f140b6d4d1964d1ff494c1f47))
+* 修复exports被删除后无法打包的问题 ([9d54151](https://github.com/jdfed/drip-form/commit/9d54151a8445fd0b7849b1ce2f806f4db8ef07a1))
+* 一系列问题 ([52f612a](https://github.com/jdfed/drip-form/commit/52f612a37c20c55ae5957365aa249e9ffff96db3))
+* babel配置&eslit报错 ([d121deb](https://github.com/jdfed/drip-form/commit/d121deb192f221c68dc7fb315943d98e7df9b992))
+* loading ([a724a19](https://github.com/jdfed/drip-form/commit/a724a19b1f085d3cf5d14de2ed3d145ddada4f5c))
+* loading 删除多余参数 ([c56ca48](https://github.com/jdfed/drip-form/commit/c56ca4889c5655b2952807ea69d61e600f5bfe8c))
+* loading加examplae ([fd6e0c4](https://github.com/jdfed/drip-form/commit/fd6e0c429183651f83d66e67675e571dbf5929e7))
+* loading只支持全局 ([f0a8e9d](https://github.com/jdfed/drip-form/commit/f0a8e9d4f4afabd26bc1c7eb8a60789c7f11f20c))
+* radio或checkbox的value是空字符串时，formData未拿到数据 #C2021012635832 ([8fb05fc](https://github.com/jdfed/drip-form/commit/8fb05fc62c034fb854e7b7fd32667c9d7e78c664)), closes [#C2021012635832](https://github.com/jdfed/drip-form/issues/C2021012635832)
+* stylus引号postcss无法解析问题 ([03cdac0](https://github.com/jdfed/drip-form/commit/03cdac0f8cc6486e69ad931202f3da2add27c2b9))
+* **antd:** 修复select组件mode为tags时出现空tag ([a1f224a](https://github.com/jdfed/drip-form/commit/a1f224a307d63d3caf8fa317602347a8095d9c99))
+* **radiotext:** rename import url of useField ([45fac01](https://github.com/jdfed/drip-form/commit/45fac01009c590b7b3acdf94210a4f48324f1f07))
+
+
+### style
+
+* 修复颜色选择器弹框input文字颜色覆盖问题 ([620076d](https://github.com/jdfed/drip-form/commit/620076d6c13dc682864893454030b88afdc59b98))
+* nullField默认添加work-break:break-all属性 ([4cbe65f](https://github.com/jdfed/drip-form/commit/4cbe65ffa1cc7039132176ab2088c778af044195))

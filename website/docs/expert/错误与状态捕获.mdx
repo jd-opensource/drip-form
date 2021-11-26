@@ -1,0 +1,78 @@
+---
+id: formdata
+title: 错误与状态捕获
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+使用 drip-form 之后，如何在 drip-form 组件外部获取表单当前的数据、表单当前的错误信息以及表单当前的校验状态。
+
+## ref
+
+drip-form 通过`ref.current`获取表单的数据、错误、校验状态
+
+```jsx
+import react,{useRef} from React
+import DripForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import unitedSchema from './unitedComponents.json'
+import '@jdfed/drip-form-theme/dist/index.css'
+
+const App = () => {
+  const ref = useRef(null)
+  return (
+  	<DripForm
+      ref={ref}
+      unitedSchema={unitedSchema}
+      uiComponents={{
+        'drip-theme': dripTheme
+      }}
+    />
+  )
+}
+```
+
+`ref.current`获取到的数据格式如下
+
+```js title="ref.current"
+{
+  formData:{},
+  errors:{},
+  checking:true,
+  dispatch:()=>{}
+}
+```
+
+## 表单当前数据 formData
+
+`ref.current.formData`获取表单数据
+
+更多详情请参阅[formData](../use/formData)
+
+## 表单当前校验状态 checking
+
+- 为了性能，drip-form 添加了防抖。
+
+  表单数据更改 300ms 之后才会触发校验。
+
+- 为了避免用户快速点击，跳过校验过程。
+
+  drip-form 通过 ref.current.checking 可获取到当前校验是否完毕。
+
+  只有在`ref.current.checking===false`时，校验才完毕。
+
+## 表单联动函数 dispatch
+
+`ref.current.dispatch`获取当前表单的联动控制函数`dispatch`
+
+可配合`control prop`实现<a href={useBaseUrl('docs/expert/multiForm')} target="_blank">多表单联动</a>
+
+## 表单当前校验错误信息
+
+`ref.current.errors`获取表单错误信息。
+
+:::caution 注意
+
+在获取错误信息之前，判断`ref.current.checking===false`。否则获取到的错误信息不一定是最新的
+:::

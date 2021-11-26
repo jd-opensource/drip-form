@@ -1,0 +1,112 @@
+---
+id: multiForm
+title: 多表单联动
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+当一页面存在多个 drip-form 表单时，如何控制多个 drip-form 表单之间的联动？
+<img src='https://storage.360buyimg.com/imgtools/272b5853ae-85334460-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+
+如上图所示，存在两个 drip-form 构建的表单（表单 1 和表单 2）。当表单 1 的输入是`123`的时候，表单 2 的开关按钮会被关闭
+
+## 多表单联动实现步骤
+
+1. 通过 ref 获取到表单的`dispatch`
+
+   `dispatch`函数可修改表单内部的 ui、校验、数据，具体请查看<a href={useBaseUrl('docs/start/schema')}>dispatch 函数</a>
+
+   对 ref 获取`dispatch`有疑问的先查看<a href={useBaseUrl('docs/expert/formdata')}>错误于状态捕获</a>
+
+2. 通过`control prop`控制表单联动
+
+   对 control prop 有疑问，先查看<a href={useBaseUrl('docs/use/control')}>联动-control 全局控制</a>
+
+3. 通过`ref.current.dispatch`和`control prop`的配合既可以做到任意 drip-form 表单之间的联动控制。
+
+## 代码实现
+
+```jsx title="代码实现"
+import React,{useRef,useCallback,Fragment} from 'react'
+import DripForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import '@jdfed/drip-form/dist/index.css'
+import '@jdfed/drip-form-theme/dist/index.css'
+
+//表单1的unitedSchema
+const unitedSchemaMulti = {
+	"validateTime": "change",
+  "type": "object",
+  "theme": "drip-theme",
+	"schema": [
+		{
+			"fieldKey": "text2",
+			"title": "表单1:输入框",
+			"type": "string",
+			"transform": ["trim"],
+			"ui": {
+			  "type": "text",
+			  "placeholder": "当输入123，表单2开关关闭",
+			  "description": {
+				  "type": "icon",
+			  	"title": "表单1",
+			  	"trigger": "hover"
+		  	}
+			}
+		}
+	]
+}
+
+//表单2的unitedSchema
+const unitedSchema = {
+	"validateTime": "change",
+  "type": "object",
+  "theme": "drip-theme",
+	"schema": [
+		{
+			"fieldKey": "switch1",
+			"title": "表单2:开关",
+			"type": "boolean",
+			"default": true,
+			"ui": {
+				"type": "switch",
+			  "disabled": false
+			}
+		}
+	]
+}
+
+const DripForm1 = memo(()=>{
+  const ref = useRef(null)
+  const controlFn = useCallback(({formData})=>{
+    //当表单1的name字段是123的时候。获取
+    if (formData.name === '123') {
+      ref.current.dispatch({
+        type: 'setFormData',
+        switch: false,
+      })
+    } else {
+      ref.current.dispatch({
+        type: 'setFormData',
+        switch: true,
+      })
+    }
+  },[])
+
+  return (
+    <Fragment>
+		  <DripForm>
+        ref={ref}
+        unitedSchema={unitedSchemaMulti}
+        uiComponents={{'drip-theme': dripTheme}}
+      </DripForm>
+      <DripForm>
+			  unitedSchema={unitedSchema}
+        uiComponents={{'drip-theme': dripTheme}}
+        control={controlFn}
+      </DripForm>
+    </Fragment>
+  )
+})
+```

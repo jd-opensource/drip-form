@@ -1,0 +1,65 @@
+{
+	"name": "@jdfed/form-generator",
+	"version": "0.1.0",
+	"description": "drip-form 生成器",
+	"keywords": [
+		"hooks",
+		"drip-form"
+	],
+	"author": "JDFED",
+	"homepage": "https://github.com/JDFED/drip-form/",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
+	"distExports": {
+		"dist": "./dist",
+		"build-info": "./build-info"
+	},
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"watch": "rollup --config --watch",
+		"build:self": "rollup --config --sourcemap --environment NODE_ENV:development:ts",
+		"watch:self": "rollup --config --watch --environment NODE_ENV:development:ts"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "gitlab",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^4.7.0",
+		"@dnd-kit/core": "^4.0.0",
+		"@dnd-kit/modifiers": "^4.0.0",
+		"@dnd-kit/sortable": "^5.0.0",
+		"@dnd-kit/utilities": "^3.0.0",
+		"@jdfed/drip-form": "^0.1.0",
+		"@jdfed/drip-form-theme-antd": "^0.1.0",
+		"@jdfed/hooks": "^0.1.0",
+		"@jdfed/utils": "^0.1.0",
+		"@monaco-editor/react": "^4.2.2",
+		"antd": "^4.16.13",
+		"classnames": "^2.3.1",
+		"file-saver": "^2.0.5",
+		"immer": "^9.0.6",
+		"nanoid": "^3.1.23",
+		"rc-upload": "^4.3.1",
+		"recoil": "^0.4.0",
+		"tailwindcss": "^2.2.7"
+	},
+	"peerDependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^3.1.5",
+		"@types/file-saver": "^2.0.3",
+		"autoprefixer": "^10.3.1",
+		"postcss-import": "^14.0.2",
+		"rollup-plugin-copy": "^3.4.0"
+	}
+}

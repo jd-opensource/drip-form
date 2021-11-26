@@ -1,0 +1,76 @@
+---
+id: treeSelectField
+title: TreeSelect 树选择
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/df7ef02fd7-894faa70-4cf9-11ec-89c8-f9e7ed0c7791.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+      "validateTime": "submit",
+      "type": "array",
+      "title": "树选择",
+      "ui": {
+        "type": "treeSelect",
+        "requestCache": true,
+        "showSearch": true,
+        "multiple": true,
+        "placeholder": "请选择您想要的选项",
+        "options": [
+          {
+            "label": "shanghai",
+            "value": "shanghai",
+            "children": [
+              {
+                "label": "baoshan",
+                "value": "baoshan"
+              },
+              {
+                "label": "jingan",
+                "value": "jingan"
+              }
+            ]
+          },
+          {
+            "label": "beijing",
+            "value": "beijing",
+            "children": [
+              {
+                "label": "yizhuang",
+                "value": "yizhuang"
+              },
+              {
+                "value": "beichen",
+                "label": "beichen"
+              }
+            ]
+          }
+        ]
+      },
+      "fieldKey": "treeSelect_iOBbGg"
+    }
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      |表单数据存放字段（必须唯一） | string   | 必填 | - |
+| options | 可选数据源              | options[ ] | 必填 | - |
+| allowClear      | 是否允许清除 | boolean   | 非必填 | false |
+| disabled      | 值为 `true` 时，选择器为禁用状态 | boolean   | 非必填 | false |
+| multiple      | 支持多选（当设置 treeCheckable 时自动变为 true） | boolean  | 非必填| false |
+| onChange      | 选中树节点时调用此函数 | function(value, label, extra)  |  非必填 | - |
+ placeholder      | 占位文本 | string   | 非必填 | - |
+| requestCache      | 是否请求缓存数据 | boolean   | 非必填 | false |
+| showCheckedStrategy      | 配置 `treeCheckable` 时，定义选中项回填的方式。`TreeSelect.SHOW_ALL`: 显示所有选中节点(包括父节点)。`TreeSelect.SHOW_PARENT`: 只显示父节点(当父节点下所有子节点都选中时)。 默认只显示子节点 | `all`、`parent`、`child`   | 非必填 | child |
+| showSearch      | 是否支持搜索框 | boolean   | 非必填 | false |
+| treeCheckable      | 显示 Checkbox | boolean   | 非必填 | false |
+| treeDataSimpleMode      | 是否使用简单格式的treeData 即扁平化options | boolean   | 非必填 | false |
+| withPidDelimiter      | 包括pId的分隔符 即扁平化options | string   | 非必填 | false |
+
+

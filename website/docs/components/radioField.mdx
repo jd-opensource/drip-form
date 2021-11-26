@@ -1,0 +1,58 @@
+---
+id: radioField
+title: Radio 单选框
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+### outline
+<img class='picture' src='https://storage.360buyimg.com/imgtools/a592d3f1d3-865b49a0-4cf9-11ec-9620-6d9821f0161f.png' alt="图片加载出错"/>
+
+### solid
+<img class='picture' src='https://storage.360buyimg.com/imgtools/0912369f5c-87006340-4cf9-11ec-9620-6d9821f0161f.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "string",
+    "title": "单选",
+    "ui": {
+        "type": "radio",
+        "buttonStyle": "outline",
+        "options": [
+            {
+            "label": "是",
+            "value": "0"
+            },
+            {
+            "label": "否",
+            "value": "1"
+            }
+        ],
+        "disabled": false
+    },
+    "fieldKey": "radio_qYjFa-"
+}
+```
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| options | 可选数据源              | options[ ] | 必填 | - |
+|buttonStyle      | RadioButton 的样式，目前仅支持两种风格 | `outline`、`solid`   | 非必填 | `outline`|
+| disabled      | 值为 `true` 时，单选框为禁用状态 | boolean   | 非必填 | false |
+| onChange      | 选项变化时的回调函数 | function(e:Event)  |  非必填 | - |
+### Options
+``` js
+options {
+    value: string | number;
+    label?: React.ReactNode;
+    disabled?: boolean;
+}
+
+```
+
+
+

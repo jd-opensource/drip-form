@@ -1,0 +1,128 @@
+import type { ElementType, Dispatch as DispatchR } from 'react'
+import type { UnitedSchema, Action, Map, Get, Theme } from '@jdfed/utils'
+import type { Set, Merge, DeleteField, GetKey, AddField } from '@jdfed/hooks'
+import type { Plugin, Options } from 'ajv/dist/2019'
+import type Ajv from 'ajv/dist/2019'
+
+export type Dispatch = DispatchR<Action>
+
+export type UiComponentType = {
+  [propName: string]: any
+} & {
+  theme: string
+}
+
+// 支持混合模式
+export type UiComponents = Partial<Record<Theme, UiComponentType>>
+
+export type FuncType = {
+  [propName: string]: () => any
+}
+
+type ControlFuc = ({
+  formData,
+  uiSchema,
+  dataSchema,
+  dispatch,
+  changeKey,
+  checking,
+  get,
+  set,
+  deleteField,
+}: {
+  uiSchema: Map
+  dataSchema: Map
+  formData: Map
+  dispatch: Dispatch
+  changeKey: string
+  checking: boolean
+  get: Get
+  set: Set
+  merge: Merge
+  deleteField: DeleteField
+}) => void
+
+export type CustomFunc = (
+  val: any,
+  dispatch: Dispatch,
+  fieldKey: string,
+  prevFieldData?: any
+) => void
+
+export type ParseFunc = (formData: Map | undefined) => Map
+export type TransformFunc = (formData: Map | undefined) => void | Map
+
+export type CustomComponents = Record<string, ElementType>
+
+/**
+ * 供DripFormContainer和DripForm使用的通用Props
+ */
+export type DripFormProps = {
+  // 自定义Ajv插件
+  plugins?: Array<Plugin<Options>> | Plugin<Options>
+  unitedSchema: UnitedSchema
+  // 表单数据
+  formData?: Map
+  uiComponents: UiComponents
+  customComponents?: CustomComponents
+  customFunc?: Record<string, CustomFunc | JSX.Element>
+  control?: ControlFuc
+  onQuery?: FuncType
+  // v2 默认状态 formData、unitedSchema变化会触发reducer的reload（一般情况无需设置）
+  reload?: boolean
+  onValidate?: FuncType
+  // 首轮外渲染时都会触发对formData的解析
+  parse?: ParseFunc
+  // 每次渲染完成时都会触发对formData的转化，转化在校验后执行
+  transform?: TransformFunc
+  // 允许入参高阶组件，针对renderCoreFn中的Container进行包裹，便于执行拖拽等操作
+  containerHoc?: (
+    FormItem: JSX.Element,
+    formItemProps: { fieldKey: string }
+  ) => JSX.Element
+  onSubmit?: ({
+    formData,
+    errors,
+    checking,
+  }: {
+    formData: Map
+    errors: Map
+    checking: boolean
+  }) => void
+}
+
+/**
+ * 供DripForm/index.tsx使用的组件入参
+ */
+export type DripFormRenderProps = {
+  ajv: Ajv
+} & DripFormProps
+
+/**
+ * DripForm对外的ref的类型
+ */
+export type DripFormRefType = {
+  // 获取任意FieldKey对应的schema，根路径key为''
+  get: Get
+  // 设置任意FieldKey对应的schema，根路径key为''
+  set: Set
+  // 合并任意FieldKey对应的schema，根路径key为''
+  merge: Merge
+  // 获取fieldKey相对uiSchema、dataSchema、typeMap路径
+  getKey: GetKey
+  // 错误信息
+  errors: Map
+  // 是否在校验态
+  checking: boolean
+  // 【已废弃，请使用set】修改函数
+  dispatch: Dispatch
+  // 表单数据
+  formData: Map
+  // 仅适用于生成器的对象
+  __generator__: {
+    // 删除表单项并清除对应的schema
+    deleteField: DeleteField
+    // 添加表单项
+    addField: AddField
+  }
+}

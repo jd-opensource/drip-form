@@ -1,0 +1,50 @@
+{
+	"name": "@jdfed/drip-form-theme-antd",
+	"version": "0.1.0",
+	"author": "JDFED",
+	"description": "drip-form antd主题包",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
+	"main-css": "dist-css/index.js",
+	"distExports": {
+		"dist": "./dist",
+		"dist-css": "./dist-css",
+		"build-info": "./build-info",
+		"build-css-info": "./build-css-info"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"build:lib": "rollup --config --sourcemap --banner //lib",
+		"watch": "rollup --config --watch"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^4.7.0",
+		"@babel/runtime": "^7.10.2",
+		"@jdfed/hooks": "^0.1.0",
+		"@jdfed/utils": "^0.1.0",
+		"moment": "^2.26.0",
+		"react": "^16.13.1",
+		"react-color": "^2.18.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"prop-types": "^15.7.2"
+	},
+	"peerDependencies": {
+		"antd": "^4.5.4",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"gitHead": "1416735284b5c9f0d76c7271117fb8723a2300ec"
+}

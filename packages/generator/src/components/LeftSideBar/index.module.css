@@ -1,0 +1,42 @@
+.left {
+  @apply transition-all w-1/5 h-full;
+  overflow-y: scroll;
+  min-width: 320px;
+}
+
+.leftClose {
+  width: 10%;
+  min-width: 160px;
+  @apply transition-all;
+}
+
+.title {
+  border-bottom: 1px solid #eee;
+  @apply text-xl p-2 font-medium flex justify-between items-center;
+}
+
+.subtitle {
+  border-bottom: 1px solid #eee;
+  @apply text-lg pt-2 pb-1 pl-2;
+}
+
+.container {
+  @apply p-3;
+}
+
+.containeropen {
+  @apply flex flex-wrap;
+}
+
+.closebtn {
+  @apply hover:bg-blue-300 flex items-center p-2;
+}
+
+.componentstyle {
+  height: calc(100vh - 100px);
+  @apply pb-4 overflow-scroll;
+}
+
+.componentstyle::-webkit-scrollbar {
+  display: none;
+}

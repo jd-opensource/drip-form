@@ -1,0 +1,28 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@jdfed/drip-form": ["packages/drip-form/src"],
+			"@jdfed/drip-form-theme-antd": ["packages/drip-form-theme-antd/src"],
+			"@jdfed/hooks": ["packages/hooks/src"],
+			"@jdfed/utils": ["packages/utils/src"],
+			"@jdfed/generator": ["packages/generator/src"],
+			"@generator/components": ["packages/generator/src/components"],
+			"@generator/store": ["packages/generator/src/store"],
+			"@generator/hooks": ["packages/generator/src/hooks"],
+			"@generator/fields": ["packages/generator/src/fields"],
+			"@generator/utils": ["packages/generator/src/utils"],
+			"@generator/components/*": ["packages/generator/src/components/*"],
+			"@generator/store/*": ["packages/generator/src/store/*"],
+			"@generator/hooks/*": ["packages/generator/src/hooks/*"],
+			"@generator/fields/*": ["packages/generator/src/fields/*"],
+			"@generator/utils/*": ["packages/generator/src/utils/*"]
+		},
+		"downlevelIteration": true
+	},
+	"exclude": ["node_modules", "dist"],
+	"rules": {
+		"react/prop-types": 0
+	}
+}

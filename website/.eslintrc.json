@@ -1,0 +1,11 @@
+{
+	"plugins": ["@typescript-eslint"],
+	"overrides": [
+		{
+			"files": ["*.js"],
+			"rules": {
+				"@typescript-eslint/explicit-module-boundary-types": 0
+			}
+		}
+	]
+}

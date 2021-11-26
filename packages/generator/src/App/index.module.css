@@ -1,0 +1,19 @@
+:global {
+  .drip-form-generator * {
+    font-size: 13px;
+  }
+  body {
+    overflow: hidden;
+  }
+}
+
+.body {
+  @apply flex divide-x divide-gray-100;
+  height: calc(100vh - 52px);
+  overflow: hidden;
+  min-width:1024px;
+}
+
+.drip_form_generator {
+  overflow-x:auto;
+}

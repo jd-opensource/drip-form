@@ -1,0 +1,60 @@
+// .array-field
+// &--container
+.array-item
+	&--field
+		position relative
+		padding-top 15px
+		padding-right 20px
+		padding-left 20px
+		border-bottom 1px #d9d9d9 solid
+
+		&_last-child
+			border-bottom none
+
+		.fa-trash-alt
+			position absolute
+			top 0
+			right 0
+			color #d9d9d9
+			cursor pointer
+
+	&--number
+		position absolute
+		top 0
+		left 0
+		font-size 12px
+
+	&--add
+		display flex
+		justify-content center
+		align-items center
+		height 32px
+		border 1px #d9d9d9 dashed
+		cursor pointer
+
+		&_title
+			margin-left 8px
+
+.array-field--container
+	display flex
+	justify-content space-between
+
+	&.title
+		&-top
+			flex-direction column
+
+			.object-container__title
+				width 100%
+
+		&-bottom
+			flex-direction column-reverse
+
+			.object-container__title
+				width 100%
+
+		&-right
+			flex-direction row-reverse
+
+			.object-container__title
+				width 82px
+				text-align right

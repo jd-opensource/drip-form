@@ -1,0 +1,36 @@
+---
+id: colorPickerField
+title: ColorPicker 颜色选择框
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img class='picture' src='https://storage.360buyimg.com/imgtools/6e88859476-82b63670-4cf9-11ec-bf12-d7e468206312.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "string",
+    "title": "颜色选择框",
+    "format": "color",
+    "default": "#1e74f4",
+    "ui": {
+        "type": "colorPicker",
+        "disableAlpha": false
+    },
+    "fieldKey": "colorPicker_CtzLLF"
+}
+```
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| default | 恢复默认的颜色              | string |非必填 | #000000 |
+| disabled      | 值为 `true` 时，颜色选择器为禁用状态 | boolean   | 非必填 | false |
+| disableAlpha      | 是否支持透明度选择 | boolean   | 非必填| false|
+| onChange      | 颜色发生变化的回调 | function(e) |  非必填 | - |
+| presetColors      | 弹框下面的固定颜色     | string  | 非必填 | - |
+
+

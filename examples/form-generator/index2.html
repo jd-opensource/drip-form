@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./checklist.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drip-Form Generator</title>
+  </head>
+  <body>
+    <iframe style="width:100vw;height:100vh" src="http://localhost:2002?exportForIframe=true"></iframe>
+    <script>
+      // 测试postMessage
+      window.addEventListener('message', function(e) {
+        console.log(e)
+      })
+    </script>
+  </body>
+</html>

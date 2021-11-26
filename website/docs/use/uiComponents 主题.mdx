@@ -1,0 +1,151 @@
+---
+id: uiComponents
+title: uiComponents 主题
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+;
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+- 使用主题前必须先安装相应主题，详见<a href={useBaseUrl('docs/start/install')} target="_blank">安装 drip-form 和主题</a>
+
+- 在`unitedSchema`中可通过`theme`属性用来控制默认主题。
+
+- 同时需要给`Drip-Form`传递`uiComponents`props规定使用的主题。
+
+- `unitedSchema` 中每个表单项对应的 `schema`中都有一个`theme`属性来控制具体的特定主题。详见[混合主题](#混合主题)
+
+接下来我们将会对单一主题、混合主题逐个进行介绍。
+
+## 单一主题
+
+### 使用 Drip-Form 默认主题
+
+```json title="unitedSchema.json"
+{
+  "type": "object",
+  "validateTime": "change",
+  "theme": "drip-theme",
+  "schema": [
+    ...
+  ]
+}
+```
+
+```jsx
+import React, { memo } from 'react'
+// 引入核心包和主题
+import DripForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import '@jdfed/drip-form-theme/dist/index.css'
+// 引入配置项
+import unitedSchema from './unitedSchema.json'
+
+const Form = memo(() => {
+    return <div>
+        <DripForm
+          unitedSchema={unitedSchema}
+          uiComponents={{'drip-theme': dripTheme}}
+        />
+      </div>
+})
+```
+
+如果你的项目并没有接入`less`的打包，可以忽略 默认主题 的样式污染问题，主题包也提供了 **css** 形式的引入，只需要将`Form.jsx`中引入主题包的形式改为：
+
+## 混合主题
+
+### 使用场景
+
+- 当默认主题暂时不支持某个表单控件，可以对某个或某些表单特定使用自定义主题。
+
+### 优势
+
+相当于单一主题，混合主题可以快速支持特定需求
+
+### 使用方法
+
+```json title="unitedSchema.json"
+{
+    "validateTime" : "submit",
+    "type": "object",
+    "theme": "drip-theme",
+    "schema": [ 
+    {
+      "fieldKey": "selectText",
+      "type": "object",
+      "title": "单选输入",
+      "ui": {
+        "type": "selectText",
+        "placeholder": "请选择",
+        "allowClear": true,
+        "multiple": true,
+        "requestCache": true,
+        "options": [
+            { "label": "北京", "value": "0" },
+            { "label": "上海", "value": "1" },
+            { "label": "成都", "value": "2" },
+            { "label": "武汉", "value": "3" }
+        ]
+      }
+    },
+    {
+      "fieldKey": "babelRadio",
+      "type": "string",
+      "title": "单选",
+      "ui": {
+        "type": "radio",
+        "theme": "babel-ui", //自定义主题
+        "options": [
+           { 
+              "label": "北京",
+              "value": "0",
+              "description": {
+                  "title": "<p>内容</p>这是babel-ui的tooltip内容，hover展开",
+                  "trigger":"hover"
+              }
+           },
+           {
+              "label": "上海",
+              "value": "1",
+              "description": {
+                  "title": "<p>内容</p>这是babel-ui的tooltip内容，点击展开",
+                  "trigger":"click"
+              }
+            },
+            { "label": "成都", "value": "2" },
+            { "label": "武汉", "value": "3" }
+        ]
+      }
+    }
+  ]
+}
+```
+
+默认使用 `drip-theme`主题，第二个 radio 使用 `other` 主题
+
+```jsx title="Form.jsx"
+import DripForm from '@jdfed/drip-form'
+//highlight-start
+// 仅为示例，other为你自定义主题
+import other from 'other'
+import dripTheme from '@jdfed/drip-form-theme'
+
+const Form = memo(() => {
+    return <div>
+            <BabelForm
+              dataSchema={data}
+              uiSchema={ui}
+              uiComponents={{
+                //highlight-start
+                'drip-theme': dripTheme,
+                'other': other,
+                //highlight-end
+              }}
+            />
+           </div>
+})
+```
+
+<img src='https://storage.360buyimg.com/imgtools/15a823244a-85510590-4cf9-11ec-ba01-fb2536faa70c.jpeg' alt="图片加载出错"/>

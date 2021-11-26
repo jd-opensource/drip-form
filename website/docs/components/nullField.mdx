@@ -1,0 +1,32 @@
+---
+id: nullField
+title: Null 纯文本
+---
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+<img src='https://storage.360buyimg.com/imgtools/57486b4111-857fddc0-4cf9-11ec-89c8-f9e7ed0c7791.png' alt="图片加载出错"/>
+
+## 配置
+该字段配置在`schema`中：
+
+```json title="schema" {12,13,14}
+{
+    "type": "string",
+    "title": "文本",
+    "ui": {
+        "type": "null",
+        "text": "这是一个不会绑定数据的空表单。只用作特殊场景下展示文字使用"
+    },
+    "fieldKey": "null_YQhdLs"
+}
+```
+
+## API
+| 参数        | 说明     | 类型     |  是否必填 | 默认值 |
+|:-----------|:--------------------------------------------------------------|:--------|:---|:---|
+| filedKey      | 表单数据存放字段（必须唯一）| string   | 必填 | - |
+| style      | 自定义文本样式 | React.CSSProperties   | 非必填 | -  |
+| text      | 文本内容 | string  | 必填 | - |
+
+

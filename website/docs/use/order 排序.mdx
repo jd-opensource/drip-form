@@ -1,0 +1,55 @@
+---
+id: order
+title: order 排序
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+drip-form 支持使用`uiSchema`中的`order`属性配置表单的顺序
+
+```json title="uiSchema.json" {2}
+{
+  "order": ["dripRadio", "dripRadio1"],
+  "theme": "drip-design",
+  "properties": {
+    "dripRadio": {
+      "type": "radio",
+      "options": [
+        { "label": "北京", "value": "0" },
+        { "label": "上海", "value": "1" },
+        { "label": "成都", "value": "2" },
+        { "label": "武汉", "value": "3" }
+      ]
+    },
+    "dripRadio1": {
+      "type": "radio",
+      "options": [
+        {
+          "label": "开启",
+          "value": "1"
+        },
+        {
+          "label": "关闭",
+          "value": "0"
+        }
+      ]
+    }
+  }
+}
+```
+
+上述 uiSchema 中的 order 字段代表表单从上往下依次是 dripRadio 和 dripRadio1。
+<img src='https://storage.360buyimg.com/imgtools/362e487398-863dfda0-4cf9-11ec-ba01-fb2536faa70c.jpeg' alt="图片加载出错"/>
+
+若想切换顺序，则 order 配置改为`[dripRadio1, dripRadio]`
+
+:::caution 注意
+
+只有在 order 中的表单才会展示
+:::
+
+:::info 提示
+
+可以通过 order 的配置来控制表单是否展示
+:::

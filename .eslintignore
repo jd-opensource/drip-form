@@ -1,0 +1,22 @@
+.idea/
+.vscode/
+**/node_modules
+.DS_Store
+*.log
+yarn.lock
+
+# Build Script
+scripts/
+*.config.js
+
+# Packages ignore
+packages/drip-form/dist
+packages/drip-form-theme-antd/dist
+packages/drip-form-theme-antd/dist-css
+packages/utils/dist
+packages/hooks/dist
+website/
+coverage
+packages/*/dist
+packages/*/dist-css
+examples/*/dist

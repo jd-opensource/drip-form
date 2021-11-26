@@ -1,0 +1,77 @@
+{
+	"packages": [
+		"packages/*",
+		"examples/*"
+	],
+	"npmClient": "yarn",
+	"useWorkspaces": true,
+	"version": "0.1.0",
+	"command": {
+		"version": {
+			"allowBranch": [
+				"main"
+			],
+			"message": "chore(release): 发布%s"
+		}
+	},
+	"ignoreChanges": [
+		"**/*.md",
+		"**/*.txt"
+	],
+	"changelogPreset": {
+		"name": "conventionalcommits",
+		"types": [
+			{
+				"type": "feat",
+				"section": "Features"
+			},
+			{
+				"type": "fix",
+				"section": "Bug Fixes"
+			},
+			{
+				"type": "perf",
+				"section": "Performance Improvements"
+			},
+			{
+				"type": "style",
+				"section": "style"
+			},
+			{
+				"type": "chore",
+				"hidden": true
+			},
+			{
+				"type": "docs",
+				"hidden": true
+			},
+			{
+				"type": "refactor",
+				"hidden": true
+			},
+			{
+				"type": "test",
+				"hidden": true
+			},
+			{
+				"type": "ci",
+				"hidden": true
+			},
+			{
+				"type": "revert",
+				"hidden": true
+			},
+			{
+				"type": "build",
+				"hidden": true
+			}
+		],
+		"commitUrlFormat": "{{host}}/jdfed/drip-form/commit/{{hash}}",
+		"compareUrlFormat": "{{host}}/jdfed/drip-form/compare/{{previousTag}}...{{currentTag}}",
+		"issueUrlFormat": "{{host}}/jdfed/drip-form/issues/{{id}}",
+		"userUrlFormat": "{{host}}/{{user}}",
+		"issuePrefixes": [
+			"#"
+		]
+	}
+}

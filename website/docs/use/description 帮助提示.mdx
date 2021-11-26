@@ -1,0 +1,144 @@
+---
+id: description
+title: description 帮助提示
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+:::caution 注意
+
+由于`@jdfed/drip-form`包中移除了对`drip-theme`的样式引入，
+因此在项目中需要手动引入样式，以正常显示description样式：
+```
+// 使用drip-theme主题
+import '@jdfed/drip-form-theme/dist/index.css'
+```
+
+:::
+
+当表单标题或`placeholder`无法满足对表单项的描述时，我们可以使用`description`字段来配置额外的说明，它包含两个参数：
+
+| 参数  | 类型   | 说明               |
+| :---- | :----- | :----------------- |
+| type  | `text` \| `icon` | 展示类型           |
+| title | string | 需要展示的描述文案 |
+
+该字段配置在`uiSchema`中：
+
+```json title="uiSchema.json" {12,13,14}
+{
+  "order": ["radioForm"],
+  "theme": "drip-design",
+  "properties": {
+    "radio1": {
+      "type": "radio",
+      "options": [
+        { "label": "北京", "value": "北京" },
+        { "label": "上海", "value": "上海" },
+        { "label": "武汉", "value": "武汉" }
+      ],
+      "description": {
+        "type": "text",
+        "title": "额外的描述文案"
+      }
+    }
+  }
+}
+```
+
+该描述会展示在表单下方，如下图：
+
+<p align="center">
+    <img alt="表单描述选项" src='https://storage.360buyimg.com/imgtools/2529901c67-83760400-4cf9-11ec-a98c-659ccf3eecae.jpeg' width="500px" />
+</p>
+
+也可以配置为以下形式：
+```json title="uiSchema.json"
+{
+  ...,
+  "description": {
+    "type": "icon",
+    "title": "hover触发提示",
+    "trigger": "hover"
+  },
+  ..
+}
+```
+其中`trigger`支持`click` | `hover`两种触发形式
+
+## 选项description
+当单选框、多选框内的选项需要被描述时，可在`options`内增加`description`字段来配置额外的说明，它包含两个参数：
+
+| 参数  | 类型   | 说明               |
+| :---- | :----- | :----------------- |
+| trigger  | string | 触发方式，支持'click'和'hover'两种方式，默认为'hover'         |
+| title | string | 需要展示的描述文案 |
+
+在`uiSchema`中：
+
+```json title="uiSchema.json" {12,13,14}
+{
+  "order": ["radioForm"],
+  "theme": "drip-design",
+  "properties": {
+    "radio1": {
+      "type": "radio",
+      "options": [
+        {
+          "label": "北京",
+          "value": "北京",
+          "description": {
+            "title": "这是对北京的描述",
+            "trigger": "click"
+          }
+        },
+        {
+          "label": "上海",
+          "value": "上海"
+        },
+      ],
+    }
+  }
+}
+```
+
+该描述会展示在选项右侧，如下图
+
+<p align="center">
+    <img alt="表单描述选项" src='https://storage.360buyimg.com/imgtools/6578f72f0f-86173bc0-4cf9-11ec-9620-6d9821f0161f.jpeg' width="500px" />
+</p>
+
+点击问号后的效果如下图
+
+<p align="center">
+    <img alt="表单描述选项" src='https://storage.360buyimg.com/imgtools/77771d85fe-83983200-4cf9-11ec-ba01-fb2536faa70c.jpeg' width="500px" />
+</p>
+
+多选框的使用和单选框类似，
+在`uiSchema`中：
+
+```json title="uiSchema.json" {12,13,14}
+{
+  "order": ["radioForm"],
+  "properties": {
+    "radio1": {
+      "type": "checkbox",
+      "options": [
+        {
+					"label": "选项1",
+          "value": "choice1",
+          "description": {
+						"title": "<p>内容</p>这是内容，hover展开",
+						"trigger":"hover"
+					}
+				},
+				{
+					"label": "选项2",
+          "value": "choice2"
+				},
+      ],
+    }
+  }
+}
+```

@@ -1,0 +1,132 @@
+---
+id: onQuery
+title: onQuery 异步获取表单数据
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+表单数据可以通过 drip-form `formData` prop 传递初始值，也可以通过配置`unitedSchema`的`default`关键字传递兜底值，但是当我们的表单数据需要从后端接口异步拉取时，我们如何配置呐？
+
+目前 drip-form 的 select 和 treeselect 组件支持异步获取数据。如果其他表单控件需要支持异步获取数据，请联系 drip-form 开发人员。我们会快速支持。
+
+```json title="unitedSchema.json"
+{
+    "validateTime": "submit",
+    "type": "object",
+    "theme": "drip-theme",
+    "schema": [
+      {
+        "title": "选择器",
+        "type": ["string", "number", "array"],
+        "errMsg": {
+          "_": "必填"
+        },
+        "ui": {
+          "type": "select",
+          "placeholder": "请选择",
+          "allowClear": true,
+          "multiple": true,
+          "style": {
+            "width": "100%"
+          },
+          "requestCache": true
+        },
+        "requiredMsg": "必填",
+        "fieldKey": "select"
+      },
+      {
+        "title": "树形选择(异步加载数据)",
+        "type": "array",
+        "default": [],
+        "fieldKey": "treeselect",
+        "errMsg": {
+          "_": "必填"
+        },
+        "ui": {
+          "minItems": 1,
+          "maxItems": 2,
+          "type": "treeSelect",
+          "placeholder": "请选择",
+          "requestCache": true,
+          "treeDataSimpleMode": true,
+          "multiple": true,
+          "showCheckedStrategy": "parent",
+          "allowClear": true,
+          "treeCheckable": true,
+          "style": {
+            "width": "50%"
+          }
+       },
+        "requiredMsg": "必填",
+      }
+    ]
+}
+```
+
+从`unitedSchema.json`可见，并没有详细配置 selct 和 treeselect 的数据。selct 和 treeselect 的数据都是通过接口异步获取得到
+
+我们这里注意下`requestCache`字段。当该字段为`true`时，代表获取到的数据会缓存下来。避免每次都调用接口。如果需要每次都实时调用接口，改为 false 就可以
+
+```jsx
+import React from 'react'
+import BabelForm from '@jdfed/drip-form'
+import dripTheme from '@jdfed/drip-form-theme'
+import '@jdfed/drip-form-theme/dist/index.css'
+import unitedSchema from './unitedSchema.json'
+
+// 异步数据查询
+const onQuery = {
+  select: () => {
+    console.log('select选择器异步查询数据')
+    return [
+      {
+        label: '选项1',
+        value: 'choice1',
+      },
+      {
+        label: '选项2',
+        value: 'choice2',
+      },
+      {
+        label: '选项3',
+        value: 'choice3',
+      },
+    ]
+  },
+  treeSelect: async ({ isFirstLoad, pId }) => {
+    console.log('treeselect异步查询数据')
+    // 第一次加载获取第一层级数据
+    if (isFirstLoad) {
+      return treeSelectOptions
+    }
+    const random = Math.random()
+    // 点击箭头，异步获取级联数据并返回
+    return [
+      {
+        id: random,
+        pId,
+        title: 'expand',
+        isLeaf: false,
+        value: random,
+      },
+    ]
+  },
+}
+
+<BabelForm
+  unitedSchema={unitedSchema}
+  uiComponents={{
+    'drip-theme': dripTheme
+   }}
+  onQuery={onQuery}
+/>
+```
+
+<img src='https://storage.360buyimg.com/imgtools/27bb6cb8de-818864d0-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+
+从上面 gif 可以看出
+
+- 当点击选择器时，会调用接口。并缓存接口数据
+
+- 当点击树形选择每个节点时都会调用接口获取数据。

@@ -1,0 +1,45 @@
+{
+	"name": "@jdfed/ajv",
+	"version": "0.1.0",
+	"description": "drip ajv核心包",
+	"keywords": [
+		"ajv"
+	],
+	"author": "JDFED",
+	"homepage": "https://github.com/JDFED/drip-form/",
+	"license": "MIT",
+	"main": "dist/cjs/index.js",
+	"typings": "dist/esm/index.d.ts",
+	"module": "dist/esm/index.js",
+	"distExports": {
+		"dist": "./dist",
+		"build-info": "./build-info",
+		"format": [
+			"esm",
+			"cjs"
+		]
+	},
+	"scripts": {
+		"link": "yarn link",
+		"build": "rollup --config --sourcemap",
+		"build:self": "rollup --config --sourcemap --environment NODE_ENV:development:ts",
+		"watch": "rollup --config --watch"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"dependencies": {
+		"@jdfed/drip-form-plugin-formats": "^0.1.0",
+		"@jdfed/drip-form-plugin-keywords": "^0.1.0",
+		"ajv": "^8.6.2",
+		"ajv-errors": "^3.0.0",
+		"ajv-formats": "^2.1.0",
+		"ajv-formats-draft2019": "^1.4.3",
+		"ajv-keywords": "^5.0.0"
+	}
+}

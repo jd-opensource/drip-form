@@ -1,0 +1,116 @@
+---
+id: error_des
+title: errorMessage 错误提示
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl'
+
+
+drip-form 是实时校验的。不过可以通过配置`dataSchema`来控制是否展示错误信息
+
+`dataSchema`的`validateTime`字段为`change`时，将会展示表单错误信息在表单下方。
+
+不配置`validateTime`字段时，默认不展示错误信息
+
+## 使用场景
+
+1. 实时在表单下方展示错误信息
+
+   ```json title="dataSchema.json" {4}
+   {
+     "$schema": "http://json-schema.org/draft-07/schema#",
+     "type": "object",
+     "validateTime": "change",
+     "properties": {
+       "name": {
+         "title": "名字",
+         "type": "string",
+         "transform": ["trim"]
+       },
+       "name1": {
+         "title": "名字1",
+         "type": "string",
+         "transform": ["trim", "toLowerCase"]
+       }
+     },
+     "required": ["name", "name1"],
+     "errorMessage": {
+       "required": {
+         "name1": "必填",
+         "name": "必填"
+       }
+     }
+   }
+   ```
+
+2. 表单提交才展示错误信息
+
+   1. 首先设置dataSchem的validateTime字段为`submit`
+
+      ```json title="dataSchema.json"
+      {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        //highlight-next-line
+        "validateTime": "submit",
+        "properties": {
+          "name": {
+            "title": "名字",
+            "type": "string",
+            "transform": ["trim"]
+          }
+        },
+        "required": ["name"],
+        "errorMessage": {
+          "required": {
+            "name": "必填"
+          }
+        }
+      }
+      ```
+
+   2. 点击提交按钮，使用`ref.current.dispatch`设置validateTime为change
+
+      ```jsx
+      const Form = () => {
+        const ref = useRef(null)
+        const onSubmit = () => {
+          //highlight-start
+          const { dispatch } = ref.current
+          // 点击的时候才展示错误信息
+          dispatch({
+            type: 'setDataSchema',
+            validateTime: 'change',
+          })
+          //highlight-end
+        }
+
+        return (
+          <>
+            <DripForm
+              ref={ref}
+              dataSchema={dataSchemaMult}
+              uiSchema={uiSchemaMult}
+              uiComponents={{ 'drip-design': DripDesign }}
+            />
+            <Button
+              type="primary"
+              className="button--submit"
+              onClick={() => {
+                onSubmit()
+              }}
+            >
+              提交表单
+            </Button>
+          </>
+        )
+      }
+      ```
+
+   :::info 提示
+
+   drip-form 总是会将错误记录下来，最后可以通过`ref.current.checking`和`ref.current.errors`获取校验状态以及错误信息。详情<a href={useBaseUrl('docs/expert/formdata#表单当前校验状态 checking')} target="_blank">查看</a>
+
+   :::
+
+

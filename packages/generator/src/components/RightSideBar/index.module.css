@@ -1,0 +1,53 @@
+.container {
+  @apply w-1/4 p-3 h-full;
+  min-width: 350px;
+  overflow: hidden scroll;
+}
+
+.containerjson {
+  @apply w-5/12;
+}
+
+.propertyConfig {
+  @apply flex text-gray-500;
+  line-height: 30px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.propertyConfigTitle {
+  width: 82px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.propertyConfigContent {
+  flex: 1;
+}
+
+.icon {
+  @apply pr-2 text-blue-500;
+}
+
+.title {
+  border-bottom: 1px solid #eee;
+  @apply text-xl font-medium p-2 flex justify-between items-center;
+}
+
+.btncontainer {
+  @apply flex justify-between items-center;
+}
+
+.jsonbtn {
+  @apply cursor-pointer text-gray-500 hover:text-blue-500 mx-2 flex justify-between items-center;
+}
+
+.panelConfig {
+  height: calc(100vh - 160px);
+  @apply pb-4 overflow-scroll;
+}
+
+.panelConfig::-webkit-scrollbar {
+  display: none;
+}

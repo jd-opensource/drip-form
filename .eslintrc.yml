@@ -1,0 +1,54 @@
+env:
+  jest: true
+  browser: true
+  es6: true
+  node: true
+extends:
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:react/recommended'
+  - 'plugin:react-hooks/recommended'
+  - 'eslint:recommended'
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - react-hooks
+  - '@typescript-eslint'
+overrides:
+  - files:
+      - '*.ts'
+      - '*.tsx'
+    rules:
+      'no-undef': 'off'
+settings:
+  react:
+    version: 'detect'
+rules:
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  no-var: error
+  no-var-requires: 0
+  no-unused-vars: 0
+  '@typescript-eslint/no-unused-vars':
+    - error
+  'react/prop-types': 0
+  '@typescript-eslint/no-var-requires': 0
+  '@typescript-eslint/no-explicit-any': 0
+  '@typescript-eslint/explicit-module-boundary-types':
+    - error
+    - allowArgumentsExplicitlyTypedAsAny: true
+      allowHigherOrderFunctions: true
