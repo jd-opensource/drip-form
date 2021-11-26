@@ -15,9 +15,10 @@
 
 .header {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 2em;
+  margin-bottom: 1em;
 }
 
 .header .container {
@@ -27,8 +28,9 @@
 
 .header .mac {
   width: 50%;
-  max-width: 850px;
+  max-width: 500px;
   object-fit: cover;
+  margin-left: 5em;
 }
 
 .tagline {
