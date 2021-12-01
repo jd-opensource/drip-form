@@ -39,6 +39,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "xinysongxixi",
+      "name": "xinysongxixi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/95020343?v=4",
+      "profile": "https://github.com/xinysongxixi",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
