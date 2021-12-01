@@ -120,6 +120,17 @@
         "code",
         "design"
       ]
+    },
+    {
+      "login": "Too-Tao",
+      "name": "Tao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40811570?v=4",
+      "profile": "https://github.com/Too-Tao",
+      "contributions": [
+        "code",
+        "doc",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
