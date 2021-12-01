@@ -68,6 +68,16 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "helloqian12138",
+      "name": "helloqian12138",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13211910?v=4",
+      "profile": "https://github.com/helloqian12138",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
