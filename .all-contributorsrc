@@ -30,6 +30,15 @@
         "example",
         "ideas"
       ]
+    },
+    {
+      "login": "yirenliancheng",
+      "name": "yirenliancheng",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53106277?v=4",
+      "profile": "https://github.com/yirenliancheng",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
