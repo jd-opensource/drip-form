@@ -1,24 +1,23 @@
 <a href='http://drip.jd.com/drip-form/index.html'>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 <h1 style="display: flex; align-items: center; justify-content: center">
   <img src='https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg'/>
   <span style="margin-left: 10px">Drip-Form</span>
 </h1>
 </a>
-<p align="center">基于React和JSONSchema的动态表单解决方案</p>
-<p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <img src="https://img.shields.io/badge/node-%3E%3D13.14.0-blue.svg" />
-  <img src="https://img.shields.io/badge/yarn-%3E%3D1.0.0-blue.svg" />
-  <a href="http://drip.jd.com/drip-form/index.html" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-</p>
+基于React和JSONSchema的动态表单解决方案
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[contributors]: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![node](https://img.shields.io/badge/node-%3E%3D13.14.0-blue.svg)
+![yarn](https://img.shields.io/badge/yarn-%3E%3D1.0.0-blue.svg)
+![document](https://img.shields.io/badge/documentation-yes-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![All Contributors][contributors]](#contributors-)
+
 
 Drip-Form使用**JSON配置文件**生成具备**数据联动、复杂校验、异步请求及嵌套**的表单，可以减少复杂冗余的表单开发工作。
 
@@ -69,19 +68,6 @@ const Form = memo(() => {
 
 ### ✨ 贡献者
 
-
-## 🌟 感谢支持
-
-如果Drip-Form解决了您的开发痛点，对您有帮助的话，请不要吝惜您的`star`🌟哦！
-
-## 📄 许可
-MIT License
-
-Copyright (c) 2020 <a href='https://www.jd.com/'>JD.com</a>, Inc.
-
-
-## Contributors ✨
-
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -99,3 +85,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## 🌟 感谢支持
+
+如果Drip-Form解决了您的开发痛点，对您有帮助的话，请不要吝惜您的`star`🌟哦！
+
+## 📄 许可
+MIT License
+
+Copyright (c) 2020 <a href='https://www.jd.com/'>JD.com</a>, Inc.
+
