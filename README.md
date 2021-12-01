@@ -16,7 +16,7 @@
 ![yarn](https://img.shields.io/badge/yarn-%3E%3D1.0.0-blue.svg)
 ![document](https://img.shields.io/badge/documentation-yes-brightgreen.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-[![All Contributors][contributors]](#contributors-)
+[![All Contributors][contributors]](./CONTRIBUTORS.md)
 
 
 Drip-Form使用**JSON配置文件**生成具备**数据联动、复杂校验、异步请求及嵌套**的表单，可以减少复杂冗余的表单开发工作。
