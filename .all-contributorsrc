@@ -1,9 +1,11 @@
 {
   "files": [
-    "docs/CONTRIBUTING.md"
+    "CONTRIBUTORS.md",
+    "README.md"
   ],
   "imageSize": 100,
   "commit": false,
+  "badgeTemplate": "[contributors]: https://img.shields.io/badge/all_contributors-<%=contributors.length %>-orange.svg?style=flat-square 'Number of contributors on All-Contributors'",
   "contributors": [
     {
       "login": "mengshang918",

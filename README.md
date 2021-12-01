@@ -68,7 +68,7 @@ const Form = memo(() => {
 
 ### ✨ 贡献者
 
-[Thanks goes to these wonderful people](./docs/CONTRIBUTING.md)
+[Thanks goes to these wonderful people](./CONTRIBUTORS.md)
 
 ## 🌟 感谢支持
 
