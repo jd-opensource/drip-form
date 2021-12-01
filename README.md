@@ -8,7 +8,7 @@
 基于React和JSONSchema的动态表单解决方案
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[contributors]: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
+[contributors]: https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
