@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "KingGanZeng",
+      "name": "KingGanZeng",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22743840?v=4",
+      "profile": "https://github.com/KingGanZeng",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "example",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "drip-form",
+  "projectOwner": "JDFED",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
