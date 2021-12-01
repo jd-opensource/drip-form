@@ -17,6 +17,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/scizorrr"><img src="https://avatars.githubusercontent.com/u/95006544?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yellow.Zerooo</b></sub></a><br /><a href="https://github.com/JDFED/drip-form/commits?author=scizorrr" title="Documentation">📖</a> <a href="#ideas-scizorrr" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/sum324"><img src="https://avatars.githubusercontent.com/u/59863521?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sum324</b></sub></a><br /><a href="https://github.com/JDFED/drip-form/commits?author=sum324" title="Documentation">📖</a> <a href="#design-sum324" title="Design">🎨</a></td>
   </tr>
 </table>
 
