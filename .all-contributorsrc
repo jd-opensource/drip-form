@@ -6,6 +6,19 @@
   "commit": false,
   "contributors": [
     {
+      "login": "mengshang918",
+      "name": "mengshang918",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19370610?v=4",
+      "profile": "https://mengshang918.github.io/blog/",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "example",
+        "ideas"
+      ]
+    },
+    {
       "login": "KingGanZeng",
       "name": "KingGanZeng",
       "avatar_url": "https://avatars.githubusercontent.com/u/22743840?v=4",
