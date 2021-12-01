@@ -98,6 +98,16 @@
         "doc",
         "design"
       ]
+    },
+    {
+      "login": "tinymins",
+      "name": "Emil Zhai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1808990?v=4",
+      "profile": "https://zhaiyiming.com/",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
