@@ -58,6 +58,16 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "CrazyWood007",
+      "name": "Cloud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44600593?v=4",
+      "profile": "https://github.com/CrazyWood007",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
