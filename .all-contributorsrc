@@ -88,6 +88,16 @@
         "doc",
         "ideas"
       ]
+    },
+    {
+      "login": "sum324",
+      "name": "sum324",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59863521?v=4",
+      "profile": "https://github.com/sum324",
+      "contributions": [
+        "doc",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
