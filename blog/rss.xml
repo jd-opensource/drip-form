@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Drip-Form Blog</title>
-        <link>https://jdfed.github.io/drip-form/blog</link>
+        <link>http://drip.jd.com/blog</link>
         <description>Drip-Form Blog</description>
         <lastBuildDate>Thu, 27 Aug 2020 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[使用babel-form快速搭建表单]]></title>
-            <link>https://jdfed.github.io/drip-form/blog/babel-form-create</link>
+            <link>http://drip.jd.com/blog/babel-form-create</link>
             <guid>babel-form-create</guid>
             <pubDate>Thu, 27 Aug 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[如何使用 babel-form 快速搭建表单]]></description>

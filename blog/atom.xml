@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://jdfed.github.io/drip-form/blog</id>
+    <id>http://drip.jd.com/blog</id>
     <title>Drip-Form Blog</title>
     <updated>2020-08-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://jdfed.github.io/drip-form/blog"/>
+    <link rel="alternate" href="http://drip.jd.com/blog"/>
     <subtitle>Drip-Form Blog</subtitle>
-    <icon>https://jdfed.github.io/drip-form/https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg</icon>
+    <icon>http://drip.jd.com/https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg</icon>
     <entry>
         <title type="html"><![CDATA[使用babel-form快速搭建表单]]></title>
         <id>babel-form-create</id>
-        <link href="https://jdfed.github.io/drip-form/blog/babel-form-create"/>
+        <link href="http://drip.jd.com/blog/babel-form-create"/>
         <updated>2020-08-27T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[如何使用 babel-form 快速搭建表单]]></summary>
         <content type="html"><![CDATA[<p>如何使用 babel-form 快速搭建表单</p>]]></content>
