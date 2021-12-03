@@ -4,8 +4,8 @@ const path = require('path')
 module.exports = {
   title: 'Drip-Form',
   tagline: '基于 React 和 JsonSchema 的动态表单解决方案',
-  url: 'http://drip.jd.com',
-  baseUrl: '/',
+  url: 'https://jdfed.github.io/',
+  baseUrl: '/drip-form/',
   onBrokenLinks: 'throw',
   favicon:
     'https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg',
