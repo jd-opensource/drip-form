@@ -23,10 +23,27 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
-          activeBasePath: 'docs',
+          type: 'dropdown',
           label: '文档',
           position: 'right',
+          items: [
+            {
+              type: 'doc',
+              label: 'drip-form文档',
+              docId: 'background/background',
+            },
+            {
+              type: 'doc',
+              label: 'drip-form-generator文档',
+              docId: 'generator/start/generator',
+            },
+          ],
+        },
+        {
+          to: 'generator_demo',
+          label: '编辑器',
+          position: 'right',
+          target: '_blank',
         },
         { to: 'faq', label: '常见问题', position: 'right' },
         {

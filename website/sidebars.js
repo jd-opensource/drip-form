@@ -64,4 +64,31 @@ module.exports = {
       ],
     },
   ],
+  generator: [
+    {
+      type: 'doc',
+      id: 'generator/start/generator',
+    },
+    {
+      type: 'doc',
+      id: 'generator/start/use',
+    },
+    {
+      type: 'category',
+      label: 'api',
+      collapsed: true,
+      items: [
+        'generator/api/schema',
+        'generator/api/theme',
+        'generator/api/customComponents',
+        'generator/api/renderLeftHeader',
+      ],
+    },
+    {
+      type: 'category',
+      label: '进阶',
+      collapsed: true,
+      items: ['generator/expert/custom_component'],
+    },
+  ],
 }
