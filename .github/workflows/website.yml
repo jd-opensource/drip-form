@@ -43,6 +43,7 @@ jobs:
 
       - run: |
           yarn
+          yarn build:prod
           cd website
           yarn build:website
 
