@@ -4,7 +4,7 @@ import type { FieldConfigType } from '@generator/fields/types'
 
 export type GeneratorType = {
   // 由外部导入的联合schema，用于初始化
-  schema: UnitedSchema
+  schema?: UnitedSchema
   // 自定义导出JSON事件
   customExport: (innerHandle: () => void) => void
   // 导出的文案

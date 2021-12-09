@@ -12,7 +12,7 @@ import TitleHeader from './TitleHeader'
 import styles from './index.module.css'
 import DripFrom from '@jdfed/drip-form'
 import { produce } from 'immer'
-import { typeCheck } from '@jdfed/utils'
+import { typeCheck, isEmpty as isObjectEmpty } from '@jdfed/utils'
 import { usePrevious } from '@jdfed/hooks'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
@@ -39,7 +39,7 @@ export function createRange<T = number>(
   return [...new Array(length)].map((_, index) => initializer(index))
 }
 interface Props {
-  schema: UnitedSchema
+  schema?: UnitedSchema
   removable?: boolean
 }
 
@@ -139,7 +139,7 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
      * 初始化时，将外部传入的联合schema填充至recoil
      */
     useEffect(() => {
-      setUnitedSchema(schema)
+      schema && !isObjectEmpty(schema) && setUnitedSchema(schema)
       // 此处请不要添加依赖，schema仅在初始化时进行操作
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
