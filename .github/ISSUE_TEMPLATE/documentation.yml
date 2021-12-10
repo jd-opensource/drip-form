@@ -1,7 +1,7 @@
 name: 📚 Documentation
 description: Report an issue related to documentation
 labels:
-	- documentation
+  - documentation
 body:
   - type: markdown
     attributes:
