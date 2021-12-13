@@ -4,12 +4,11 @@ name: website
 
 # Controls when the workflow will run
 on:
-  pull_request_review:
+  pull_request:
     branches:
       - dev
     paths:
       - 'website/**'
-    types: [submitted]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
