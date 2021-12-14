@@ -1,4 +1,4 @@
-name: Prelease npm package
+name: Prerelase npm package
 on:
   schedule:
     - cron: '0 20 * * 3,5'
@@ -16,16 +16,14 @@ on:
         required: false
 
 jobs:
+  use-check-action:
+    uses: JDFED/drip-form/.github/workflows/check.yml@dev
+    with:
+      branch: dev
   publish:
+    needs: use-check-action
     runs-on: ubuntu-latest
-
     steps:
-
-    - name: 'use check action'
-      uses: ./.github/workflows/check.yml
-      with:
-        branch: dev
-
     - name: 'set username and useEmail'
       run: |
         git config user.name mengshang918
