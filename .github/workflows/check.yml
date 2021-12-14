@@ -1,5 +1,12 @@
 name: Checks
 on:
+  workflow_call:
+    inputs:
+      branch:
+        description: 指定拉取特定分支(branchName、all)
+        default: ''
+        type: string
+        required: true
   pull_request:
     types: [opened, synchronize]
 
@@ -8,10 +15,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # pr check use this
     - name: "Checkout"
+      if: ${{inputs.branch}} == ''
+      uses: actions/checkout@v2
+
+    # lerna use this fetch_depth
+    - name: "Checkout"
+      if: ${{inputs.branch}} != ''
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        ref: ${{branch}}
 
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.5.0
