@@ -24,11 +24,6 @@ jobs:
     needs: use-check-action
     runs-on: ubuntu-latest
     steps:
-    - name: 'set username and useEmail'
-      run: |
-        git config user.name mengshang918
-        git config user.email mengshang918@gmail.com
-
     - name: 'lerna command'
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
