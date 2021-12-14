@@ -1,4 +1,4 @@
-name: Release npm package
+name: Prelease npm package
 on:
   schedule:
     - cron: '0 20 * * 3,5'
