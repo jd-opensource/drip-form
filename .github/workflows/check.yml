@@ -10,6 +10,9 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   checks:
     runs-on: ubuntu-latest
