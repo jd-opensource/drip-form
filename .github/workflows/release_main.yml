@@ -48,6 +48,7 @@ jobs:
     - name: 'lerna command'
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         npx lerna version --yes --conventional-commits --conventional-graduate -m "chore(release): publish @s" --force-git-tag --create-release github --no-private
         npx lerna publish from-package --yes
