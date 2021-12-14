@@ -17,12 +17,12 @@ jobs:
     steps:
     # pr check use this
     - name: "Checkout"
-      if: ${{inputs.branch}} == ''
+      if: ${{inputs.branch == ''}}
       uses: actions/checkout@v2
 
     # lerna use this fetch_depth
     - name: "Checkout"
-      if: ${{inputs.branch}} != ''
+      if: ${{inputs.branch != ''}}
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
