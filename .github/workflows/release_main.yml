@@ -1,0 +1,29 @@
+name: Release npm package
+on:
+  schedule:
+    - cron: '0 20 * * 1'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: 'use check action'
+      uses: ./.github/workflows/check.yml
+      with:
+        branch: main
+
+    - name: 'set username and useEmail'
+      run: |
+        git config user.name mengshang918
+        git config user.email mengshang918@gmail.com
+
+    - name: 'lerna command'
+      env:
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: |
+        npx lerna version --yes --conventional-commits --conventional-graduate -m "chore(release): publish @s" --force-git-tag --create-release github --no-private
+        # npx lerna publish from-package --yes
+
