@@ -5,10 +5,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  use-check-action:
-    uses: JDFED/drip-form/.github/workflows/check.yml@dev
-    with:
-      branch: main
+  # use-check-action:
+  #   uses: JDFED/drip-form/.github/workflows/check.yml@dev
+  #   with:
+  #     branch: main
   publish:
     runs-on: ubuntu-latest
     needs: use-check-action
@@ -51,5 +51,5 @@ jobs:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         npx lerna version --yes --conventional-commits --conventional-graduate -m "chore(release): publish @s" --force-git-tag --create-release github --no-private
-        # npx lerna publish from-package --yes
+        npx lerna publish from-package --yes
 

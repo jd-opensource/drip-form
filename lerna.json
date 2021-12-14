@@ -10,7 +10,8 @@
 	"command": {
 		"version": {
 			"allowBranch": [
-				"main"
+				"main",
+				"dev"
 			],
 			"message": "chore(release): 发布%s"
 		}
