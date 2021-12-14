@@ -49,6 +49,7 @@ const App = memo(() => {
             unitedSchema: {
               type: 'string',
               title: '自定义组件',
+              '$:customFirstLevelProp': '位于顶层的自定义组件属性',
               ui: {
                 type: 'custom',
                 theme: 'custom',
