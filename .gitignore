@@ -16,3 +16,7 @@ packages/**/build-info
 packages/**/build-css-info
 .size-snapshot.json
 coverage
+logs/
+run/
+*.swp
+
