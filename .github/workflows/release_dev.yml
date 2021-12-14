@@ -16,10 +16,6 @@ on:
         required: false
 
 jobs:
-  # use-check-action:
-  #   uses: JDFED/drip-form/.github/workflows/check.yml@dev
-  #   with:
-  #     branch: dev
   publish:
     needs: use-check-action
     runs-on: ubuntu-latest
