@@ -38,7 +38,11 @@ function recursiveParse(
   // 获取父级元素的ui类型
   const fatherUiType = fatherItem.ui?.type || fatherItem['ui:type']
   // 如果是数组或对象容器（undefined默认为对象容器），则需要创建order字段用于ui渲染
-  if (fatherUiType === 'array' || fatherUiType === 'object' || fatherUiType === undefined) {
+  if (
+    fatherUiType === 'array' ||
+    fatherUiType === 'object' ||
+    fatherUiType === undefined
+  ) {
     // 判断currLevelUiSchema是否存在order属性，如果没有则创建
     judgeAndRegister(currLevelUiSchema, 'array', 'order')
   }
@@ -213,6 +217,26 @@ function initParse(
 }
 
 /**
+ * 处理联合schema中不在items或property的自定义属性
+ * @param unitedSchema
+ */
+function handleFirstLevelCustomDataProps(unitedSchema: UnitedSchema): Map {
+  const customDataSchema: Map = {}
+  // 遍历联合schema
+  for (const key in unitedSchema) {
+    // 如果是 $: 开头的自定义属性，则加入自定义属性中
+    if (
+      Object.prototype.hasOwnProperty.call(unitedSchema, key) &&
+      key.match(/^\$:/)
+    ) {
+      customDataSchema[key] = unitedSchema[key]
+    }
+  }
+
+  return customDataSchema
+}
+
+/**
  * 解析联合Schema
  * @param unitedSchema
  */
@@ -254,10 +278,11 @@ const parseUnitedSchema = (
       type: unitedSchema.type || 'object',
       ...(unitedSchema?.title && { title: unitedSchema.title }),
       ...dataSchema,
+      ...handleFirstLevelCustomDataProps(unitedSchema),
     } as DataSchema,
     uiSchema: {
       ...(unitedSchema.formMode && { formMode: unitedSchema.formMode }),
-      ...unitedSchema?.theme && { theme: unitedSchema?.theme },
+      ...(unitedSchema?.theme && { theme: unitedSchema?.theme }),
       ...(!isEmpty(ui) && ui),
       ...(unitedSchema.footer && { footer: unitedSchema.footer }),
       ...(unitedSchema.containerStyle && {
