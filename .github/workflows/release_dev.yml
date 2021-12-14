@@ -14,6 +14,8 @@ on:
       bump:
         description: '指定版本发布变更类型(premajor、preminor、prepatch)'
         required: false
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   # use-check-action:
@@ -59,7 +61,6 @@ jobs:
     - name: 'lerna command'
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid}} ${{github.event.inputs.bump}} --force-publish
         npx lerna publish from-package --yes --dist-tag ${{github.event.inputs.preid}}

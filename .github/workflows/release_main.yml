@@ -4,6 +4,9 @@ on:
     - cron: '0 20 * * 1'
   workflow_dispatch:
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   # use-check-action:
   #   uses: JDFED/drip-form/.github/workflows/check.yml@dev
@@ -48,7 +51,6 @@ jobs:
     - name: 'lerna command'
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         npx lerna version --yes --conventional-commits --conventional-graduate -m "chore(release): publish @s" --force-git-tag --create-release github --no-private
         npx lerna publish from-package --yes
