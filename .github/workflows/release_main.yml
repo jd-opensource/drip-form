@@ -48,6 +48,10 @@ jobs:
         git config user.name mengshang918
         git config user.email mengshang918@gmail.com
 
+    - name: 'set npm'
+      run: |
+        npm set "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}"
+
     - name: 'lerna command'
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
