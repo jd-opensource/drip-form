@@ -1,60 +1,64 @@
 {
-  "name": "@jdfed/drip-form-plugin-eggjs",
+	"name": "@jdfed/drip-form-plugin-eggjs",
 	"version": "0.1.0",
-  "description": "drip-form eggjs插件",
-  "eggPlugin": {
-    "name": "dripValidator",
-    "dependencies": "@jdfed/ajv"
-  },
-  "keywords": [
-    "drip",
-    "drip-form",
-    "egg",
-    "eggPlugin",
-    "egg-plugin"
-  ],
-  "devDependencies": {
-    "autod": "^3.0.1",
-    "autod-egg": "^1.1.0",
-    "egg": "^2.16.0",
-    "egg-bin": "^4.11.0",
-    "egg-ci": "^1.11.0",
-    "egg-mock": "^3.21.0",
-    "eslint": "^5.13.0",
-    "eslint-config-egg": "^7.1.0"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "scripts": {
-    "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "egg-bin cov",
-    "lint": "eslint .",
-    "ci": "egg-bin pkgfiles --check && npm run lint && npm run cov",
-    "pkgfiles": "egg-bin pkgfiles",
-    "autod": "autod"
-  },
-  "files": [
-    "app.js",
-    "agent.js",
-    "config",
-    "app"
-  ],
-  "ci": {
-    "version": "8, 10"
-  },
-  "repository": {
-    "type": "github",
-    "url": "https://github.com/JDFED/drip-form/"
-  },
-  "bugs": {
-    "url": "https://github.com/JDFED/drip-form/issues"
-  },
-  "homepage": "https://github.com/JDFED/drip-form/",
-  "author": "kapeter",
-  "license": "MIT",
-  "dependencies": {
-    "@jdfed/ajv": "^0.1.0"
-  }
+	"description": "drip-form eggjs插件",
+	"eggPlugin": {
+		"name": "dripValidator",
+		"dependencies": "@jdfed/ajv"
+	},
+	"keywords": [
+		"drip",
+		"drip-form",
+		"egg",
+		"eggPlugin",
+		"egg-plugin"
+	],
+	"devDependencies": {
+		"autod": "^3.0.1",
+		"autod-egg": "^1.1.0",
+		"egg": "^2.16.0",
+		"egg-bin": "^4.11.0",
+		"egg-ci": "^1.11.0",
+		"egg-mock": "^3.21.0",
+		"eslint": "^5.13.0",
+		"eslint-config-egg": "^7.1.0"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"scripts": {
+		"test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
+		"test-local": "egg-bin test",
+		"cov": "egg-bin cov",
+		"lint": "eslint .",
+		"ci": "egg-bin pkgfiles --check && npm run lint && npm run cov",
+		"pkgfiles": "egg-bin pkgfiles",
+		"autod": "autod"
+	},
+	"files": [
+		"app.js",
+		"agent.js",
+		"config",
+		"app"
+	],
+	"ci": {
+		"version": "8, 10"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/JDFED/drip-form/"
+	},
+	"bugs": {
+		"url": "https://github.com/JDFED/drip-form/issues"
+	},
+	"homepage": "https://github.com/JDFED/drip-form/",
+	"author": "kapeter",
+	"license": "MIT",
+	"dependencies": {
+		"@jdfed/ajv": "^0.1.0"
+	}
 }
