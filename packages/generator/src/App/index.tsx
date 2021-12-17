@@ -16,6 +16,7 @@ import {
   schemaAtom,
   DripFormUiComponetsAtom,
   sidebarDataAtom,
+  headerConfigAtom,
 } from '@generator/store'
 import '@jdfed/drip-form/dist/index.css'
 import '@jdfed/drip-form-theme-antd/dist/index.css'
@@ -33,13 +34,36 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       renderLeftHeader,
       theme,
       customComponents,
+      headerConfig,
     },
     ref
   ) => {
     const formRef = useRef<DripFormRefType>()
     const unitedSchema = useRecoilValue(schemaAtom)
+    const setHeaderConfig = useSetRecoilState(headerConfigAtom)
     const setDripFormUiComonents = useSetRecoilState(DripFormUiComponetsAtom)
     const setSidebarData = useSetRecoilState(sidebarDataAtom)
+
+    useEffect(() => {
+      // 设置header配置
+      if (customExport || exportText || renderLeftHeader || headerConfig) {
+        setHeaderConfig((oldOption) => {
+          return {
+            ...oldOption,
+            ...(customExport && { customExport }),
+            ...(exportText && { exportText }),
+            ...(renderLeftHeader && { renderLeftHeader }),
+            ...headerConfig,
+          }
+        })
+      }
+    }, [
+      customExport,
+      exportText,
+      headerConfig,
+      renderLeftHeader,
+      setHeaderConfig,
+    ])
 
     useEffect(() => {
       // 动态添加图标
@@ -84,11 +108,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
     return (
       <GeneratorContext.Provider value={formRef}>
         <div className={styles.drip_form_generator}>
-          <Header
-            customExport={customExport}
-            exportText={exportText}
-            renderLeftHeader={renderLeftHeader}
-          />
+          {(headerConfig?.showHeader ?? true) && <Header />}
           <div className={cx(styles.body)}>
             <DndWrapper>
               <LeftSideBar />
