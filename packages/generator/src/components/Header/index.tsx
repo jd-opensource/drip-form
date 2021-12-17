@@ -13,23 +13,26 @@ import {
   previewVisibleAtom,
   exportVisibleAtom,
   schemaAtom,
+  headerConfigAtom,
 } from '@generator/store'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
 import FileSaver from 'file-saver'
 import type { RcFile } from 'rc-upload/lib/interface'
 
-type HeaderType = {
-  customExport: (innerHandle: () => void) => void
-  // 导出的文案
-  exportText?: string
-  // 是否渲染Header
-  renderLeftHeader?: () => JSX.Element
-}
-
-const Header = ({ customExport, exportText, renderLeftHeader }: HeaderType) => {
+const Header = () => {
   const setFold = useSetRecoilState(componentsFoldAtom)
   const setPreviewVisible = useSetRecoilState(previewVisibleAtom)
   const setExportVisible = useSetRecoilState(exportVisibleAtom)
+  const {
+    customExport,
+    renderLeftHeader,
+    exportText,
+    showLogo,
+    showUploadJSON,
+    showEditJSON,
+    showPreviewForm,
+    showExportJSON,
+  } = useRecoilValue(headerConfigAtom)
   const [unitedSchema, setUnitedSchema] = useRecoilState(schemaAtom)
 
   const importJson = (file: RcFile) => {
@@ -85,42 +88,52 @@ const Header = ({ customExport, exportText, renderLeftHeader }: HeaderType) => {
   return (
     <div className={styles.header}>
       <div className={styles.logo}>
-        {renderLeftHeader ? (
-          renderLeftHeader()
-        ) : (
-          <Fragment>
-            <img
-              className={styles.ico}
-              src="http://m.360buyimg.com/babel/jfs/t1/198287/16/2689/8501/61133b1cEbf895566/fd5c679852e69de9.png"
-            />
-            Drip-Form Generator
-          </Fragment>
-        )}
+        {showLogo &&
+          (renderLeftHeader ? (
+            renderLeftHeader()
+          ) : (
+            <Fragment>
+              <img
+                className={styles.ico}
+                src="http://m.360buyimg.com/babel/jfs/t1/198287/16/2689/8501/61133b1cEbf895566/fd5c679852e69de9.png"
+              />
+              Drip-Form Generator
+            </Fragment>
+          ))}
       </div>
+
       <div className={styles.btncontainer}>
-        <Upload
-          accept="json"
-          multiple={false}
-          showUploadList={false}
-          beforeUpload={importJson}
-        >
-          <div className={cx(styles.btn, styles.text)}>
-            <DownloadOutlined />
-            <span className="ml-1">导入JSON</span>
+        {showUploadJSON && (
+          <Upload
+            accept="json"
+            multiple={false}
+            showUploadList={false}
+            beforeUpload={importJson}
+          >
+            <div className={cx(styles.btn, styles.text)}>
+              <DownloadOutlined />
+              <span className="ml-1">导入JSON</span>
+            </div>
+          </Upload>
+        )}
+        {showEditJSON && (
+          <div onClick={editJson} className={cx(styles.btn, styles.text)}>
+            <EditOutlined />
+            <span className="ml-1">JSON编辑</span>
           </div>
-        </Upload>
-        <div onClick={editJson} className={cx(styles.btn, styles.text)}>
-          <EditOutlined />
-          <span className="ml-1">JSON编辑</span>
-        </div>
-        <div onClick={preview} className={cx(styles.btn, styles.text)}>
-          <CompressOutlined />
-          <span className="ml-1">表单预览</span>
-        </div>
-        <div onClick={exportJson} className={cx(styles.btn, styles.primary)}>
-          <UploadOutlined />
-          <span className="ml-1">{exportText || '导出JSON'}</span>
-        </div>
+        )}
+        {showPreviewForm && (
+          <div onClick={preview} className={cx(styles.btn, styles.text)}>
+            <CompressOutlined />
+            <span className="ml-1">表单预览</span>
+          </div>
+        )}
+        {showExportJSON && (
+          <div onClick={exportJson} className={cx(styles.btn, styles.primary)}>
+            <UploadOutlined />
+            <span className="ml-1">{exportText}</span>
+          </div>
+        )}
       </div>
     </div>
   )
