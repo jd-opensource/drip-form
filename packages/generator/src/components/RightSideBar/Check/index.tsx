@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-19 11:28:20
+ * @Last Modified time: 2021-12-19 16:21:58
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -14,7 +14,7 @@ import {
   deleteDeepProp,
 } from '@jdfed/utils'
 import DripForm from '@jdfed/drip-form'
-import commonSchema from './Common'
+import commonSchema from '../../../fields/common/checkConfig/Common'
 import typeMap from './type'
 import { formItemMap } from '@generator/fields'
 import useRightSidebar from '../HeadlessComponents'
@@ -56,7 +56,7 @@ const CheckConfig = (): JSX.Element => {
   // 当前表单uiSchmea的type类型
   const uiType = uiSchema.type as keyof typeof formItemMap
   // 当前表单是否配置需要展示的校验关键字
-  const keywords = formItemMap[uiType]?.keywords
+  const keywords = formItemMap[uiType]?.checkConfig
 
   // 隐藏未配置错误类型的错误文案
   const vcontrol = useCallback<

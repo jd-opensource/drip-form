@@ -23,7 +23,7 @@ import '@jdfed/drip-form-theme-antd/dist/index.css'
 import 'antd/dist/antd.css'
 import type { GeneratorType, GeneratorRef } from './types'
 import type { UnitedSchema } from '@jdfed/utils'
-import { FieldConfigType } from '@generator/fields/types'
+import { Field } from '@generator/fields/types'
 
 const Generator = forwardRef<GeneratorRef, GeneratorType>(
   (
@@ -35,6 +35,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       theme,
       customComponents,
       headerConfig,
+      components,
     },
     ref
   ) => {
@@ -44,8 +45,8 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
     const setDripFormUiComonents = useSetRecoilState(DripFormUiComponetsAtom)
     const setSidebarData = useSetRecoilState(sidebarDataAtom)
 
+    // 设置header配置
     useEffect(() => {
-      // 设置header配置
       if (customExport || exportText || renderLeftHeader || headerConfig) {
         setHeaderConfig((oldOption) => {
           return {
@@ -65,8 +66,8 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       setHeaderConfig,
     ])
 
+    // 动态添加图标
     useEffect(() => {
-      // 动态添加图标
       const headerDomList = document.querySelector('head')
       const fontStyleDom = document.createElement('link')
       fontStyleDom.rel = 'stylesheet'
@@ -75,24 +76,39 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       headerDomList?.appendChild(fontStyleDom)
     }, [])
 
+    // 设置内部drip-form主题选项
     useEffect(() => {
       if (theme) {
         setDripFormUiComonents((draft) => {
           return { ...draft, ...theme }
         })
       }
-      if (customComponents) {
-        setSidebarData((draft) => {
-          const customComponent: Record<string, FieldConfigType> =
-            customComponents.reduce((prev, cur) => {
-              return { ...prev, [cur.unitedSchema.ui.type]: cur }
-            }, {})
-          return produce(draft, (draft) => {
-            draft[3].config = customComponent
-          })
+    }, [setDripFormUiComonents, theme])
+
+    // 设置左侧组件
+    useEffect(() => {
+      if (components) {
+        setSidebarData((oldSidebarData) => {
+          return {
+            ...oldSidebarData,
+            ...components,
+          }
         })
+      } else {
+        if (customComponents) {
+          setSidebarData((oldSidebarData) => {
+            const customComponent: Record<string, Field> =
+              customComponents.reduce((prev, cur) => {
+                return { ...prev, [cur.unitedSchema.ui.type]: cur }
+              }, {})
+            return produce(oldSidebarData, (draft) => {
+              draft.category.business.order = Object.keys(customComponent)
+              draft.category.business.fields = customComponent
+            })
+          })
+        }
       }
-    }, [customComponents, setDripFormUiComonents, setSidebarData, theme])
+    }, [components, customComponents, setSidebarData])
 
     /**
      * 外抛ref

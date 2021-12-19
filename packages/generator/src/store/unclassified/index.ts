@@ -88,3 +88,11 @@ export const versionAtom = atom<number>({
   key: 'viewportDripFromVersion',
   default: 0,
 })
+
+/**
+ * 当前选中的表单类型
+ */
+export const curTypeAtom = atom<string>({
+  key: 'curType',
+  default: 'root',
+})

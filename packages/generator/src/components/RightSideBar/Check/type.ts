@@ -6,10 +6,10 @@
  * @Last Modified time: 2021-11-04 17:25:33
  */
 
-import string from './String'
-import number from './Number'
-import object from './Object'
-import array from './Array'
+import string from '../../../fields/common/checkConfig/String'
+import number from '../../../fields/common/checkConfig/Number'
+import object from '../../../fields/common/checkConfig/Object'
+import array from '../../../fields/common/checkConfig/Array'
 type CheckKes = 'string' | 'number' | 'object' | 'array'
 type CheckValue = {
   common: Record<string, Record<string, unknown>>

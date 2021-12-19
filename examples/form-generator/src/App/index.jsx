@@ -57,6 +57,16 @@ const App = memo(() => {
             },
           },
         ]}
+        // components={{
+        //   order: ['a'],
+        //   category: {
+        //     a: {
+        //       title: 'a',
+        //       order: [],
+        //       fields: {},
+        //     },
+        //   },
+        // }}
         theme={{
           custom: {
             theme: 'custom',

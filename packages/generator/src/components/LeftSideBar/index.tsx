@@ -9,38 +9,42 @@ import { sidebarDataAtom } from '@generator/store'
 
 const LeftSideBar: React.FC = () => {
   const fold = useRecoilValue(componentsFoldAtom)
-  const sidebarData = useRecoilValue(sidebarDataAtom)
+  const { order, category } = useRecoilValue(sidebarDataAtom)
   return (
     <div className={cx(fold ? styles.leftClose : styles.left)}>
       <div className={styles.title}>组件区</div>
       <div className={styles.componentstyle}>
-        {sidebarData.map((item, index) => {
+        {order.map((key) => {
           return (
-            <Fragment key={index}>
-              {Object.keys(item.config).length > 0 && (
-                <div>
-                  <div className={styles.subtitle}>{item.subTitle}</div>
-                  <div
-                    className={cx(
-                      styles.container,
-                      !fold && styles.containeropen
-                    )}
-                  >
-                    <React.Suspense fallback={<div>loading...</div>}>
-                      {Object.keys(item.config).map((type) => {
-                        return (
+            <Fragment key={key}>
+              <div>
+                <div className={styles.subtitle}>{category[key].title}</div>
+                <div
+                  className={cx(
+                    styles.container,
+                    !fold && styles.containeropen
+                  )}
+                >
+                  <React.Suspense fallback={<div>loading...</div>}>
+                    {category[key].order.map((type) => {
+                      return (
+                        category[key].fields[type] && (
                           <DragAtom
                             // TODO @drag
-                            key={JSON.stringify(item.config[type].unitedSchema)}
-                            icon={item.config[type].icon}
-                            unitedSchema={item.config[type].unitedSchema}
+                            key={JSON.stringify(
+                              category[key].fields[type].unitedSchema
+                            )}
+                            icon={category[key].fields[type].icon}
+                            unitedSchema={
+                              category[key].fields[type].unitedSchema
+                            }
                           />
                         )
-                      })}
-                    </React.Suspense>
-                  </div>
+                      )
+                    })}
+                  </React.Suspense>
                 </div>
-              )}
+              </div>
             </Fragment>
           )
         })}
