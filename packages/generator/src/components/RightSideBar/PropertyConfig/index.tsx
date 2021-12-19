@@ -1,31 +1,22 @@
-import React, {
-  Fragment,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { Fragment, memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
 import type { Map } from '@jdfed/utils'
 import { deepClone, deleteDeepProp, isEmpty, setDeepProp } from '@jdfed/utils'
 import cx from 'classnames'
 import { SettingOutlined } from '@ant-design/icons'
-import { baseMap } from '@generator/fields'
 import {
   globalContainerStyleAtom,
-  sidebarDataAtom,
   uiTypeOptionsAtom,
+  curTypePropertyConfigSelector,
+  curTypeAtom,
 } from '@generator/store'
 // import BaseForm from './BaseForm'
 import useRightSidebar from '../HeadlessComponents'
-import rootConfig from '@generator/fields/container/root.field'
 import styles from '../index.module.css'
 import { original, produce } from 'immer'
 import type { SetType } from '@jdfed/hooks'
 import { Select } from 'antd'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { FieldConfigType } from '@generator/fields/types'
 const PropertyConfig = () => {
   const {
     generatorContext,
@@ -38,19 +29,14 @@ const PropertyConfig = () => {
     globalContainerStyleAtom
   )
   const uiTypeOptions = useRecoilValue(uiTypeOptionsAtom)
-  const sidebarData = useRecoilValue(sidebarDataAtom)
   // 当前选中的组件UI类型
-  const [type, setType] = useState(() => (uiSchema.type as string) || 'root')
-  //所有类型的样式配置schema
-  const stylesSchemaMap = useMemo<Record<string, FieldConfigType>>(() => {
-    return sidebarData.reduce((prev, cur) => {
-      return { ...prev, ...cur.config }
-    }, {})
-  }, [sidebarData])
+  const [type, setType] = useRecoilState(curTypeAtom)
+  //当前类型的样式配置schema
+  const curTypePropertyConfig = useRecoilValue(curTypePropertyConfigSelector)
 
   useEffect(() => {
     setType((uiSchema.type as string) || 'root')
-  }, [uiSchema.type])
+  }, [setType, uiSchema.type])
 
   /**
    * 初始化配置数据
@@ -296,7 +282,7 @@ const PropertyConfig = () => {
       // 更新类型
       setType(val)
     },
-    [generatorContext, onReplace, selectedFieldKey, uiTypeOptions]
+    [generatorContext, onReplace, selectedFieldKey, setType, uiTypeOptions]
   )
 
   /**
@@ -306,37 +292,9 @@ const PropertyConfig = () => {
     return {
       validateTime: 'change',
       theme: 'antd',
-      schema:
-        type === 'root'
-          ? rootConfig
-          : [
-              // 标题配置
-              baseMap.title,
-              // 提示配置
-              baseMap.description,
-              // 布局配置
-              baseMap.layout,
-              // 样式配置
-              ...(stylesSchemaMap[type as keyof typeof stylesSchemaMap]
-                .styleSchema
-                ? [
-                    {
-                      type: 'object',
-                      fieldKey: 'ui',
-                      ui: {
-                        type: 'object',
-                        mode: 'collapse',
-                      },
-                      title: '样式',
-                      schema:
-                        stylesSchemaMap[type as keyof typeof stylesSchemaMap]
-                          .styleSchema,
-                    },
-                  ]
-                : []),
-            ],
+      schema: curTypePropertyConfig,
     }
-  }, [stylesSchemaMap, type])
+  }, [curTypePropertyConfig])
 
   return (
     <Fragment>

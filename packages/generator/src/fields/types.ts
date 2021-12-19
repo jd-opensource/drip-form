@@ -1,4 +1,4 @@
-import { Map, UnitedSchema } from '@jdfed/utils'
+import type { Map, UnitedSchema } from '@jdfed/utils'
 
 export type UnitedSchemaAtom = {
   type: string | string[]
@@ -8,23 +8,39 @@ export type UnitedSchemaAtom = {
   } & Map
 } & Map
 
+// 属性配置
+type PropertyConfig = {
+  // 样式配置自定义(若定义了schema，当前设置无效)
+  styleSchema?: UnitedSchema['schema']
+  // 整个属性配置面板自定义
+  schema?: UnitedSchema['schema']
+}
+
+// 校验配置
+type CheckConfig = {
+  // 通用校验关键字
+  common?: Array<string>
+  // 业务校验关键字
+  business?: Array<string>
+}
+
 /**
  * 表单组件配置信息
  */
-export type FieldConfigType = {
+export type Field = {
   // 左侧列表对应的icon
   icon: string
+  // 表单对应的title（不填，默认使用unitedSchema.title）
+  title?: string
   // 渲染所需的基础属性，用于拖拽到中间区域的渲染
   unitedSchema: UnitedSchemaAtom
-  // 右侧配置面板中，该field可配置的的非通用属性
-  styleSchema: UnitedSchema['schema']
-  // 校验关键字
-  keywords?: {
-    // 通用校验关键字
-    common?: Array<string>
-    // 业务校验关键字
-    business?: Array<string>
-  }
+  propertyConfig?: PropertyConfig
+  checkConfig?: CheckConfig
+  /**
+   * 以下不推荐使用
+   */
+  // 同propertyConfig.styleSchema
+  styleSchema?: UnitedSchema['schema']
 }
 
 /**
@@ -49,4 +65,4 @@ export type FieldItemKeys =
 /**
  * 表单类型及其配置表
  */
-export type FieldItemMap = Record<string, FieldConfigType>
+export type FieldItemMap = Record<string, Field>

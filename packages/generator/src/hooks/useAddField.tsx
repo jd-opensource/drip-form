@@ -7,8 +7,8 @@
  */
 import { useCallback, useContext } from 'react'
 import { nanoid } from 'nanoid'
-import { useRecoilState } from 'recoil'
-import { selectedAtom, GeneratorContext } from '@generator/store'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { selectedAtom, GeneratorContext, curTypeAtom } from '@generator/store'
 import useDeleteField from './useDeleteField'
 import useCanEditJson from './useCanEditJson'
 import { message } from 'antd'
@@ -24,6 +24,7 @@ type AddField = (param: {
 const useAddField = (): AddField => {
   const generatorContext = useContext(GeneratorContext)
   const [selectedKey, setSelected] = useRecoilState(selectedAtom)
+  const setCurType = useSetRecoilState(curTypeAtom)
   const deleteField = useDeleteField()
   const canEdit = useCanEditJson()
 
@@ -115,13 +116,21 @@ const useAddField = (): AddField => {
         shouldDelete,
         cb: () => {
           setSelected(selectKey)
+          setCurType(unitedSchema.ui.type)
         },
       })
       if (shouldDelete && oldFieldKey) {
         deleteField(oldFieldKey)
       }
     },
-    [canEdit, deleteField, generatorContext, selectedKey, setSelected]
+    [
+      canEdit,
+      deleteField,
+      generatorContext,
+      selectedKey,
+      setCurType,
+      setSelected,
+    ]
   )
   return addField
 }

@@ -4,9 +4,9 @@ import objectConfig from './container/object.field'
 /**
  * 通用配置项
  */
-import descConfig from './common/description.schema'
-import layoutConfig from './common/layout.schema'
-import titleConfig from './common/title.schema'
+import descConfig from './common/propertyConfig/description.schema'
+import layoutConfig from './common/propertyConfig/layout.schema'
+import titleConfig from './common/propertyConfig/title.schema'
 /**
  * 表单组件左侧列表配置及右侧面板schema
  */
@@ -23,7 +23,7 @@ import switchConfig from './formItem/switch.field'
 import timepickerConfig from './formItem/timepicker.field'
 // import treeselectConfig from './formItem/treeselect.field'
 import uploadConfig from './formItem/upload.field'
-import textConfig from './supportUnits/text.field'
+import textConfig from './auxiliary/text.field'
 
 /**
  * 普通组件
@@ -47,7 +47,7 @@ export const formItemMap = {
 /**
  * 辅助组件
  */
-export const supportUnitsMap = {
+export const auxiliaryMap = {
   null: textConfig,
 }
 

@@ -27,6 +27,7 @@ import {
   DripFormUiComponetsAtom,
   draggingFieldKeyAtom,
   versionAtom,
+  curTypeAtom,
 } from '@generator/store'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { combine, deepClone } from '@jdfed/utils'
@@ -66,7 +67,8 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
     // 当前正在拖拽的元素
     const draggingFieldKey = useRecoilValue(draggingFieldKeyAtom)
     // 当前选中的表单项
-    const [, setSelectedFieldKey] = useRecoilState(selectedAtom)
+    const setSelectedFieldKey = useSetRecoilState(selectedAtom)
+    const setCurType = useSetRecoilState(curTypeAtom)
     // 当前正在拖拽元素的schema
     const draggingFieldSchema = useMemo(() => {
       const schema: { data: Map | undefined; ui: Map | undefined } = {
@@ -164,11 +166,13 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
       }
     }, [isEmpty, prevIsEmpty, setVersion])
 
+    const clickFn = useCallback(() => {
+      setSelectedFieldKey(null)
+      setCurType('root')
+    }, [setCurType, setSelectedFieldKey])
+
     return (
-      <div
-        className={styles.viewport}
-        onClick={setSelectedFieldKey.bind(null, null)}
-      >
+      <div className={styles.viewport} onClick={clickFn}>
         <TitleHeader />
         <div className={styles.formstyle} ref={ref}>
           <DripFrom

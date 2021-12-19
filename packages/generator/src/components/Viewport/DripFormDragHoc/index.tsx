@@ -7,11 +7,16 @@
  */
 import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import cx from 'classnames'
 import { useDroppable, useDraggable, DragOverlay } from '@dnd-kit/core'
 import styles from './index.module.css'
-import { selectedAtom, closestEdgeAtom, allFieldAtom } from '@generator/store'
+import {
+  selectedAtom,
+  closestEdgeAtom,
+  allFieldAtom,
+  curTypeAtom,
+} from '@generator/store'
 // import Placeholder from '../CustomComponents/Placeholder'
 import { useCanDrop } from '@generator/hooks'
 import DragItem from '@generator/components/LeftSideBar/DragAtom/Item'
@@ -82,6 +87,7 @@ const DripFormDragHoc: FC<Props> = memo(
 
     // 当前选中的field
     const [selectedFieldKey, setSelectedFieldKey] = useRecoilState(selectedAtom)
+    const setCurType = useSetRecoilState(curTypeAtom)
 
     /**
      * 选中field的事件
@@ -90,8 +96,9 @@ const DripFormDragHoc: FC<Props> = memo(
       (e) => {
         e.stopPropagation()
         setSelectedFieldKey(fieldKey as string)
+        setCurType(type)
       },
-      [fieldKey, setSelectedFieldKey]
+      [fieldKey, setCurType, setSelectedFieldKey, type]
     )
 
     useEffect(() => {
