@@ -1,7 +1,8 @@
 {
   "files": [
     "CONTRIBUTORS.md",
-    "README.md"
+    "README.md",
+    "README.EN.md"
   ],
   "imageSize": 100,
   "commit": false,
@@ -131,7 +132,18 @@
         "doc",
         "bug"
       ]
-    }
+    },
+        {
+          "login": "Too-Tao1",
+          "name": "Tao1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/40811570?v=41",
+          "profile": "https://github.com/Too-Tao1",
+          "contributions": [
+            "code",
+            "doc",
+            "bug"
+          ]
+        }
   ],
   "contributorsPerLine": 7,
   "projectName": "drip-form",
