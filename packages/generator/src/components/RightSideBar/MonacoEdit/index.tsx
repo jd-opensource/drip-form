@@ -1,6 +1,12 @@
 import React, { memo } from 'react'
-import Editor, { EditorProps } from '@monaco-editor/react'
+import Editor, { EditorProps, loader } from '@monaco-editor/react'
 import styles from './index.module.css'
+
+loader.config({
+  paths: {
+    vs: 'https://storage.360buyimg.com/bird/dripform',
+  },
+})
 
 const MonacoEdit: React.FC<EditorProps> = ({
   language = 'json',
@@ -34,7 +40,7 @@ const MonacoEdit: React.FC<EditorProps> = ({
             horizontalScrollbarSize: 5,
             alwaysConsumeMouseWheel: false,
           },
-          fontSize: '13px',
+          fontSize: 13,
         }}
       />
     </div>
