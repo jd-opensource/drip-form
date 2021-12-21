@@ -6,7 +6,7 @@
 </h1>
 </a>
 
-简体中文 | [English](./README.EN.md) | [Documentation](https://jdfed.github.io/drip-form/) | [Discussions](https://github.com/JDFED/drip-form/discussions)
+简体中文 | [English](./README.EN.md) | [官方文档](https://jdfed.github.io/drip-form/) | [讨论组](https://github.com/JDFED/drip-form/discussions)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [contributors]: https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
