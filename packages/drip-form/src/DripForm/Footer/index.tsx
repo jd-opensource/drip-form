@@ -67,7 +67,7 @@ const Footer: FC<
   }, [uiSchema?.footer])
   /**
    * 底部按钮点击事件
-   * 1.'提交'和'取消'事件的回调函数，都会返回 {formData, checking, errors} 三种参数
+   * 1.'提交'和'取消'事件的回调函数，都会返回 {formData, checking, errors} 参数
    * 2.'取消'事件会将 formData 的数据初始化
    */
   const onFooterBtnClick = useCallback(
