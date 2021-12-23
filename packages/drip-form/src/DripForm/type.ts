@@ -54,6 +54,16 @@ export type TransformFunc = (formData: Map | undefined) => void | Map
 
 export type CustomComponents = Record<string, ElementType>
 
+type FooterBtnFuncType = ({
+  formData,
+  errors,
+  checking,
+}: {
+  formData: Map
+  errors: Map
+  checking: boolean
+}) => void
+
 /**
  * 供DripFormContainer和DripForm使用的通用Props
  */
@@ -80,15 +90,8 @@ export type DripFormProps = {
     FormItem: JSX.Element,
     formItemProps: { fieldKey: string }
   ) => JSX.Element
-  onSubmit?: ({
-    formData,
-    errors,
-    checking,
-  }: {
-    formData: Map
-    errors: Map
-    checking: boolean
-  }) => void
+  onSubmit?: FooterBtnFuncType
+  onCancel?: FooterBtnFuncType
 }
 
 /**
