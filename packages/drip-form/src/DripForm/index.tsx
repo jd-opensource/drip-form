@@ -46,6 +46,7 @@ const DripForm = forwardRef(
       transform,
       containerHoc,
       onSubmit,
+      onCancel,
       parse,
       reload = true,
     }: DripFormRenderProps,
@@ -334,6 +335,7 @@ const DripForm = forwardRef(
             uiSchema={uiSchema}
             uiComponents={uiComponents}
             onSubmit={onSubmit}
+            onCancel={onCancel}
             transform={transform}
             globalTheme={globalTheme}
             checking={checking}

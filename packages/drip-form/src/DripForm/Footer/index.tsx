@@ -12,7 +12,10 @@ const justifyContent = {
 }
 
 const Footer: FC<
-  Pick<DripFormProps, 'uiComponents' | 'onSubmit' | 'transform'> & {
+  Pick<
+    DripFormProps,
+    'uiComponents' | 'onSubmit' | 'onCancel' | 'transform'
+  > & {
     uiSchema: UiSchema
     globalTheme: Theme
     checking: boolean
@@ -27,6 +30,7 @@ const Footer: FC<
   globalTheme,
   uiSchema,
   onSubmit,
+  onCancel,
   transform,
   formData,
   checking,
@@ -61,22 +65,32 @@ const Footer: FC<
       },
     }
   }, [uiSchema?.footer])
-  const onOk = useCallback(() => {
-    onSubmit &&
-      onSubmit({
-        formData: produce(formData, (draft) => {
-          transform && transform(draft)
-        }),
-        checking,
-        errors,
-      })
-  }, [checking, errors, formData, onSubmit, transform])
-  const onCancel = useCallback(() => {
-    dispatch({
-      type: 'setFormData',
-      formData: initFormData,
-    })
-  }, [dispatch, initFormData])
+  /**
+   * 底部按钮点击事件
+   * 1.'提交'和'取消'事件的回调函数，都会返回 {formData, checking, errors} 参数
+   * 2.'取消'事件会将 formData 的数据初始化
+   */
+  const onFooterBtnClick = useCallback(
+    (funcType) => {
+      const cb = funcType === 'submit' ? onSubmit : onCancel
+      cb &&
+        cb({
+          formData: produce(formData, (draft) => {
+            transform && transform(draft)
+          }),
+          checking,
+          errors,
+        })
+
+      if (funcType === 'cancel') {
+        dispatch({
+          type: 'setFormData',
+          formData: initFormData,
+        })
+      }
+    },
+    [checking, errors, formData, onSubmit, transform]
+  )
   return (
     Button && (
       <div className={'drip-form_container--footer'} style={footerStyle}>
@@ -88,14 +102,17 @@ const Footer: FC<
                 marginRight: (uiSchema?.footer as Map)?.margin,
               },
             })}
-            onClick={onOk}
+            onClick={onFooterBtnClick.bind(null, 'submit')}
             className="drip-form_button--onOK"
           >
             {footerProps.onOk.text}
           </Button>
         )}
         {footerProps.onCancel.text && (
-          <Button {...footerProps.onCancel.ui} onClick={onCancel}>
+          <Button
+            {...footerProps.onCancel.ui}
+            onClick={onFooterBtnClick.bind(null, 'cancel')}
+          >
             {footerProps.onCancel.text}
           </Button>
         )}
