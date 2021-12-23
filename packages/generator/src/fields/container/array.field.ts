@@ -12,6 +12,7 @@ const config: Field = {
     ui: {
       type: 'array',
       mode: 'add',
+      addTitle: '添加一行数据',
     },
   },
   propertyConfig: {
@@ -27,6 +28,14 @@ const config: Field = {
             { label: '加减模式', value: 'add' },
             { label: '不可变模式', value: 'normal' },
           ],
+        },
+      },
+      {
+        fieldKey: 'addTitle',
+        type: 'string',
+        title: '新增按钮文案',
+        ui: {
+          type: 'text',
         },
       },
     ],
