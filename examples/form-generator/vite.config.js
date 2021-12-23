@@ -3,12 +3,6 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 import path from 'path'
 
 var baseConfig = {
-  resolve: {
-    alias: {
-      react: path.join(__dirname, 'node_modules', 'react'),
-      'react-dom': path.join(__dirname, 'node_modules', 'react-dom'),
-    },
-  },
   plugins: [reactRefresh()],
   css: {
     preprocessorOptions: {
