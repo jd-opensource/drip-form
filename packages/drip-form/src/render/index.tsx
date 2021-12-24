@@ -147,15 +147,9 @@ const Render = ({
       | any = onValidate?.[item] || null
     // 当前Field的错误信息
     const error = errors[currentFieldKey] || ''
-    /*TODO fieldData兜底逻辑
-     * 现在默认数据均为空字符，后续需优化。否则会触发表单的PropTypes校验
-     */
     // 当前Field的数据
     const cKey = isArrayItem ? (currentArrayKey as number) : item
-    const fieldData =
-      currentFormData[cKey] === 0
-        ? currentFormData[cKey]
-        : currentFormData[cKey] ?? ''
+    const fieldData = currentFormData[cKey]
     // 当前Field是否展示标题
     const showTitle = Object.prototype.hasOwnProperty.call(
       properties[item],
