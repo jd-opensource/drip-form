@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-05 18:12:48
+ * @Last Modified time: 2021-12-24 14:53:47
  */
 import React, { useMemo, memo, useState, useEffect } from 'react'
 import { useContainer, useContainerStyle } from '@jdfed/hooks'
@@ -49,6 +49,7 @@ const ObjectContainer: FC<Props & RenderFnProps & ObjectContainerProps> = ({
   containerHoc,
   uiProp,
   formMode,
+  arrayKey,
 }) => {
   // title的margin样式
   const [titleMargin, onChangeTitleMargin] = useState(() => {
@@ -142,6 +143,7 @@ const ObjectContainer: FC<Props & RenderFnProps & ObjectContainerProps> = ({
               get,
               getKey,
               containerHoc,
+              arrayKey,
             })}
           </Panel>
         </Collapse>
@@ -182,6 +184,7 @@ const ObjectContainer: FC<Props & RenderFnProps & ObjectContainerProps> = ({
               get,
               getKey,
               containerHoc,
+              arrayKey,
             })}
           </div>
         </div>

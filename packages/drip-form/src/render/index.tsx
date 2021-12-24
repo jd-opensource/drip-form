@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-05 18:17:44
+ * @Last Modified time: 2021-12-24 15:08:15
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -30,6 +30,7 @@ const Render = ({
   get,
   getKey,
   isRoot,
+  arrayKey,
 }: RenderFnProps): Array<JSX.Element | null> => {
   const {
     theme = 'antd',
@@ -253,6 +254,7 @@ const Render = ({
       containerMap,
       // vcontrol 参数get函数。用来获取指定fieldKey的formData、uiSchema、dataSchema
       get,
+      arrayKey,
     }
     // 所有容器均需要传递
     const common = {
