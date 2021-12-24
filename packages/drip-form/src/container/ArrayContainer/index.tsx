@@ -3,9 +3,9 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-05 18:12:13
+ * @Last Modified time: 2021-12-24 15:58:43
  */
-import React, { useMemo, useState, useEffect, memo, Fragment } from 'react'
+import React, { useMemo, useState, useEffect, memo } from 'react'
 import cx from 'classnames'
 import { typeCheck } from '@jdfed/utils'
 import { useArray, useContainer, useContainerStyle } from '@jdfed/hooks'
@@ -64,6 +64,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
   getKey,
   containerHoc,
   formMode,
+  arrayKey,
 }) => {
   // title的margin样式
   const [titleMargin, onChangeTitleMargin] = useState(() => {
@@ -172,43 +173,43 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
         {(!isAdd || formMode === 'generator' ? [''] : fieldData || []).map(
           (item, i, array) => {
             return (
-              <Fragment key={i}>
-                <div
-                  className={cx({
-                    'array-item--field': isAdd,
-                    'array-item--field_last-child':
-                      isAdd && i === array.length - 1,
-                  })}
-                >
-                  {isAdd && <div className="array-item--number">{i + 1}</div>}
-                  {renderCoreFn({
-                    hasDefault,
-                    uiComponents,
-                    dataSchema,
-                    uiSchema,
-                    errors,
-                    formData,
-                    onQuery,
-                    onValidate,
-                    dispatch,
-                    containerHoc,
-                    containerMap,
-                    parentUiSchemaKey,
-                    parentDataSchemaKey,
-                    parentFormDataKey: fieldKey,
-                    customComponents,
-                    currentArrayKey: i,
-                    get,
-                    getKey,
-                  })}
-                  {isAdd && (
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      onClick={deltItem.bind(this, i)}
-                    />
-                  )}
-                </div>
-              </Fragment>
+              <div
+                key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
+                className={cx({
+                  'array-item--field': isAdd,
+                  'array-item--field_last-child':
+                    isAdd && i === array.length - 1,
+                })}
+              >
+                {isAdd && <div className="array-item--number">{i + 1}</div>}
+                {renderCoreFn({
+                  hasDefault,
+                  uiComponents,
+                  dataSchema,
+                  uiSchema,
+                  errors,
+                  formData,
+                  onQuery,
+                  onValidate,
+                  dispatch,
+                  containerHoc,
+                  containerMap,
+                  parentUiSchemaKey,
+                  parentDataSchemaKey,
+                  parentFormDataKey: fieldKey,
+                  customComponents,
+                  currentArrayKey: i,
+                  get,
+                  getKey,
+                  arrayKey,
+                })}
+                {isAdd && (
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    onClick={deltItem.bind(this, i)}
+                  />
+                )}
+              </div>
             )
           }
         )}

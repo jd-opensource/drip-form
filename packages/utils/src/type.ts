@@ -29,6 +29,8 @@ export type State = {
   visibleFieldKey: Array<string>
   // 当前正在变动的表单
   changeKey: string
+  // 数组容器对应的react key映射
+  arrayKey: Record<string, Array<string>>
 }
 
 type ReloadAction = {
@@ -116,6 +118,19 @@ type DeleteUiSchemaAction = {
   key: string
 }
 
+// 数组容器设置映射的组件唯一key（避免删除导致的组件渲染问题）
+type SetArrayKey = {
+  type: 'setArrayKey'
+  action: {
+    // 添加或删除的位置
+    order: number
+    // 数组父级fieldKey
+    fieldKey: string
+    // 是否删除 默认添加
+    isDelete?: boolean
+  }
+}
+
 export type Action =
   | ReloadAction
   | SetDataSchemaAction
@@ -131,3 +146,4 @@ export type Action =
   | DeleteVisibleFieldKeyAction
   | SetDefaultSuccessAction
   | DeleteUiSchemaAction
+  | SetArrayKey
