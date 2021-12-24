@@ -3,10 +3,15 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-05 21:08:38
+ * @Last Modified time: 2021-12-24 15:56:41
  */
 import { createContext, Dispatch } from 'react'
-import { deleteDeepProp, setDeepProp, typeCheck } from '@jdfed/utils'
+import {
+  deleteDeepProp,
+  setDeepProp,
+  typeCheck,
+  randomString,
+} from '@jdfed/utils'
 import addField from './addField'
 import deleteField from './deleteField'
 import type { Action, State } from '@jdfed/utils'
@@ -130,6 +135,17 @@ const formDataReducer = (state: State, action: Action): void => {
     case 'setDefaultSuccess': {
       state.hasDefault = action.hasDefault
       break
+    }
+    case 'setArrayKey': {
+      const { isDelete, fieldKey, order } = action.action
+      // 当前数组的所有react key
+      const fieldKeyComKey = state.arrayKey[fieldKey] || []
+      if (isDelete) {
+        fieldKeyComKey.splice(order, 1)
+      } else {
+        fieldKeyComKey[order] = randomString(52)
+        state.arrayKey[fieldKey] = fieldKeyComKey
+      }
     }
   }
 }

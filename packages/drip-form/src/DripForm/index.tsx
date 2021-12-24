@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 21:21:43
+ * @Last Modified time: 2021-12-24 15:59:29
  */
 import React, {
   forwardRef,
@@ -143,6 +143,7 @@ const DripForm = forwardRef(
         // 当前展示（已加载）的组件。用来优化校验逻辑（隐藏表单不校验)
         visibleFieldKey: [],
         changeKey: '',
+        arrayKey: {},
       }),
       [
         initTypePath,
@@ -196,6 +197,7 @@ const DripForm = forwardRef(
       hasDefault,
       visibleFieldKey,
       changeKey,
+      arrayKey,
     } = data
     const { theme = 'antd' } = uiSchema
 
@@ -329,6 +331,7 @@ const DripForm = forwardRef(
             getKey,
             get,
             containerHoc,
+            arrayKey,
             isRoot: true,
           })}
           <Footer

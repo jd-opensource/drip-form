@@ -56,4 +56,6 @@ export type RenderFnProps = {
   currentArrayKey?: number
   // 是否是第一层级
   isRoot?: boolean
+  // 数组容器对应的react key映射
+  arrayKey: Record<string, Array<string>>
 }
