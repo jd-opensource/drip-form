@@ -1,4 +1,4 @@
-import React, { memo, forwardRef } from 'react'
+import React, { memo, forwardRef, CSSProperties } from 'react'
 import { useAddField } from '@generator/hooks'
 import styles from './index.module.css'
 import cx from 'classnames'
@@ -9,23 +9,26 @@ import type { UnitedSchemaAtom } from '@generator/fields/types'
 export type DragAtomProps = {
   icon: string
   unitedSchema: UnitedSchemaAtom
+  customBarStyle?: CSSProperties
 }
 
 type ItemType = {
   listeners?: DraggableSyntheticListeners
   attributes?: any
+  customBarStyle?: CSSProperties
 } & DragAtomProps
 
 const Item = forwardRef<HTMLElement, ItemType>(
-  ({ listeners, attributes, icon, unitedSchema }, ref) => {
+  ({ listeners, customBarStyle, attributes, icon, unitedSchema }, ref) => {
     //点击添加新的表单项
     const onClick = useAddField()
+
     return (
       <div
         className={cx('leftsidebar-item')}
         onClick={onClick.bind(null, { unitedSchema })}
         ref={ref}
-        style={LEFTSIDEBARITEM_WH}
+        style={{ ...LEFTSIDEBARITEM_WH, ...customBarStyle }}
         {...listeners}
         {...attributes}
       >
