@@ -4,7 +4,7 @@ import styles from './index.module.css'
 
 loader.config({
   paths: {
-    vs: 'https://storage.360buyimg.com/bird/dripform',
+    vs: 'https://storage.360buyimg.com/bird/drip-form/vs',
   },
 })
 
