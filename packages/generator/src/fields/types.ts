@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
 export type UnitedSchemaAtom = {
@@ -29,6 +30,7 @@ type CheckConfig = {
  */
 export type Field = {
   // 左侧列表对应的icon
+  customBarStyle?: CSSProperties
   icon: string
   // 表单对应的title（不填，默认使用unitedSchema.title）
   title?: string
