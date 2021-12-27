@@ -38,6 +38,9 @@ const LeftSideBar: React.FC = () => {
                             unitedSchema={
                               category[key].fields[type].unitedSchema
                             }
+                            customBarStyle={
+                              category[key].fields[type].customBarStyle || {}
+                            }
                           />
                         )
                       )
