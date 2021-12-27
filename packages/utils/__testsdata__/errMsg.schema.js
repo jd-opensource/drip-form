@@ -2,8 +2,10 @@ export const unitedSchema = {
   theme: 'antd',
   validateTime: 'submit',
   type: 'object',
-  'ui:mode': 'edit',
-  'ui:$:type': 'drip',
+  ui: {
+    mode: 'edit',
+    '$:type': 'drip',
+  },
   schema: [
     {
       fieldKey: 'name',
@@ -126,5 +128,4 @@ export const parsedSchema = {
       type: 'string',
     },
   },
-  customProps: ['$:type'],
 }

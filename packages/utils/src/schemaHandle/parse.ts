@@ -69,20 +69,9 @@ function recursiveParse(
           Object.assign(currLevelUiSchema.properties[fieldKey], {
             ...item[key],
           })
-
-          // 如果ui中包含有 $: 开头的，将其填充到自定义props的统计数组中
-          for (const uiKey in item[key]) {
-            if (uiKey.match(/^\$:/)) {
-              customProps.push(uiKey)
-            }
-          }
         } else {
           // 对于 { 'ui:xxx': {}, 'ui:yyy': {} } 类型的解析
           currLevelUiSchema.properties[fieldKey][key.slice(3)] = item[key]
-          // 同理，此处的ui自定义属性也需要进行收集
-          if (key.slice(3).match(/^\$:/)) {
-            customProps.push(key.slice(3))
-          }
         }
       } else {
         switch (key) {
@@ -280,7 +269,7 @@ const parseUnitedSchema = (
   const uiSchema = {}
   // 用来存储每个表单项对应的type值，如果是嵌套格式，则解析为 { a: 'object', 'a.b': 'object', 'a.b.c': 'array' }
   const typePath = {}
-  // $:的自定义属性
+  // $:的自定义属性，仅统计dataSchema的
   const customProps: any[] = []
   // 根元素的ui配置
   const ui: Map = unitedSchema.ui || {}
@@ -296,9 +285,6 @@ const parseUnitedSchema = (
       i.startsWith('ui:')
     ) {
       ui[i.slice(3)] = unitedSchema[i]
-      if (i.slice(3).match(/^\$:/)) {
-        customProps.push(i.slice(3))
-      }
     }
   }
 

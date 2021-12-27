@@ -80,5 +80,5 @@ export const parsedSchema = {
       type: 'string',
     },
   },
-  customProps: ['$:customSchema', '$:customData', '$:customUi'],
+  customProps: ['$:customSchema', '$:customData'],
 }
