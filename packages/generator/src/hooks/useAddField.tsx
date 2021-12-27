@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-22 13:45:43
+ * @Last Modified time: 2021-12-27 16:40:13
  */
 import { useCallback, useContext } from 'react'
 import { nanoid } from 'nanoid'
@@ -81,8 +81,8 @@ const useAddField = (): AddField => {
                 }
               }
             } else {
-              // 拖拽到对象容器上，对象容器内无元素时，fieldKey不变化
-              newFieldKey = oldFieldKey
+              // 拖拽到对象容器上，对象容器内无元素时，fieldKey取最后
+              newFieldKey = lastFieldKey
             }
           }
           selectKey = `${parentKey ? `${parentKey}.` : ''}${newFieldKey}`
