@@ -2,9 +2,8 @@ export const unitedSchema = {
   theme: 'antd',
   validateTime: 'submit',
   type: 'object',
-  ui: {
-    mode: 'edit',
-  },
+  'ui:mode': 'edit',
+  'ui:$:type': 'drip',
   schema: [
     {
       fieldKey: 'name',
@@ -79,6 +78,7 @@ export const parsedSchema = {
     theme: 'antd',
     mode: 'edit',
     order: ['name', 'babelRadio'],
+    '$:type': 'drip',
     properties: {
       name: {
         type: 'text',
@@ -126,4 +126,5 @@ export const parsedSchema = {
       type: 'string',
     },
   },
+  customProps: ['$:type'],
 }

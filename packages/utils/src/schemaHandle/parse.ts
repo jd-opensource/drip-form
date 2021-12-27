@@ -15,6 +15,7 @@ import type { Map } from '../common/type'
  * @param {UiSchema} currLevelUiSchema 当前父节点的uiSchema
  * @param typePath
  * @param fatherPath
+ * @param customProps 自定义属性的收集存储
  */
 function recursiveParse(
   item: FieldAtomType,
@@ -24,7 +25,8 @@ function recursiveParse(
   currLevelDataSchema: DataSchema,
   currLevelUiSchema: UiSchema,
   typePath: Map,
-  fatherPath: string
+  fatherPath: string,
+  customProps: any[]
 ) {
   // 获取表单项标识符
   const fieldKey = item.fieldKey || idx
@@ -67,9 +69,20 @@ function recursiveParse(
           Object.assign(currLevelUiSchema.properties[fieldKey], {
             ...item[key],
           })
+
+          // 如果ui中包含有 $: 开头的，将其填充到自定义props的统计数组中
+          for (const uiKey in item[key]) {
+            if (uiKey.match(/^\$:/)) {
+              customProps.push(uiKey)
+            }
+          }
         } else {
           // 对于 { 'ui:xxx': {}, 'ui:yyy': {} } 类型的解析
           currLevelUiSchema.properties[fieldKey][key.slice(3)] = item[key]
+          // 同理，此处的ui自定义属性也需要进行收集
+          if (key.slice(3).match(/^\$:/)) {
+            customProps.push(key.slice(3))
+          }
         }
       } else {
         switch (key) {
@@ -97,7 +110,8 @@ function recursiveParse(
                 fieldKey
               ) as UiSchema,
               typePath,
-              currKeyPath
+              currKeyPath,
+              customProps
             )
             break
           case 'requiredMsg':
@@ -130,6 +144,11 @@ function recursiveParse(
             break
           default:
             if (key !== 'fieldKey') {
+              // 判断并收集自定义属性
+              if (key.match(/^\$:/)) {
+                customProps.push(key)
+              }
+
               if (fieldKey === '$container') {
                 judgeAndRegister(currLevelDataSchema, 'object', containerKey)
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -163,6 +182,7 @@ function recursiveParse(
  * @param {DataSchema} dataSchema 在dataSchema上截取的当前节点的部分
  * @param {UiSchema} uiSchema 同上，但在uiSchema上
  * @param typePath
+ * @param customProps 用户的所有$开头的自定义属性，用于在ajv中注册
  * @param fatherPath
  * @param {Boolean} fromRoot 是否来自根节点
  */
@@ -172,6 +192,7 @@ function initParse(
   uiSchema: UiSchema,
   typePath: Map,
   fatherPath = '',
+  customProps: any[],
   fromRoot = false
 ) {
   // 判断下一阶段递归需要读取的容器字段，items标识父节点为数组结构，properties标识为对象结构
@@ -191,7 +212,8 @@ function initParse(
         dataSchema,
         uiSchema,
         typePath,
-        fatherPath
+        fatherPath,
+        customProps
       )
     })
   } else if (typeof schema.items === 'object') {
@@ -207,7 +229,8 @@ function initParse(
       dataSchema,
       uiSchema,
       typePath,
-      fatherPath
+      fatherPath,
+      customProps
     )
   } else {
     throw fromRoot
@@ -219,8 +242,12 @@ function initParse(
 /**
  * 处理联合schema中不在items或property的自定义属性
  * @param unitedSchema
+ * @param customProps
  */
-function handleFirstLevelCustomDataProps(unitedSchema: UnitedSchema): Map {
+function handleFirstLevelCustomDataProps(
+  unitedSchema: UnitedSchema,
+  customProps: any[]
+): Map {
   const customDataSchema: Map = {}
   // 遍历联合schema
   for (const key in unitedSchema) {
@@ -230,6 +257,7 @@ function handleFirstLevelCustomDataProps(unitedSchema: UnitedSchema): Map {
       key.match(/^\$:/)
     ) {
       customDataSchema[key] = unitedSchema[key]
+      customProps.push(key)
     }
   }
 
@@ -246,13 +274,21 @@ const parseUnitedSchema = (
   uiSchema: UiSchema
   dataSchema: DataSchema
   typePath: Map
+  customProps?: any[]
 } => {
   const dataSchema = {}
   const uiSchema = {}
   // 用来存储每个表单项对应的type值，如果是嵌套格式，则解析为 { a: 'object', 'a.b': 'object', 'a.b.c': 'array' }
   const typePath = {}
+  // $:的自定义属性
+  const customProps: any[] = []
   // 根元素的ui配置
   const ui: Map = unitedSchema.ui || {}
+  // 处理全局schema配置
+  const firstLevelProps = handleFirstLevelCustomDataProps(
+    unitedSchema,
+    customProps
+  )
 
   for (const i in unitedSchema) {
     if (
@@ -260,6 +296,9 @@ const parseUnitedSchema = (
       i.startsWith('ui:')
     ) {
       ui[i.slice(3)] = unitedSchema[i]
+      if (i.slice(3).match(/^\$:/)) {
+        customProps.push(i.slice(3))
+      }
     }
   }
 
@@ -269,6 +308,7 @@ const parseUnitedSchema = (
     uiSchema as UiSchema,
     typePath as Map,
     '',
+    customProps,
     true
   )
 
@@ -278,7 +318,7 @@ const parseUnitedSchema = (
       type: unitedSchema.type || 'object',
       ...(unitedSchema?.title && { title: unitedSchema.title }),
       ...dataSchema,
-      ...handleFirstLevelCustomDataProps(unitedSchema),
+      ...firstLevelProps,
     } as DataSchema,
     uiSchema: {
       ...(unitedSchema.formMode && { formMode: unitedSchema.formMode }),
@@ -291,6 +331,7 @@ const parseUnitedSchema = (
       ...uiSchema,
     },
     typePath,
+    ...(customProps.length > 0 && { customProps }),
   }
 }
 
