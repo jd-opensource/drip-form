@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 22:09:14
+ * @Last Modified time: 2021-12-24 17:19:52
  */
 import React, { memo, useState, useEffect, FC } from 'react'
 import { Upload, Button } from 'antd'
@@ -30,6 +30,7 @@ export type UploaderFileType = {
 type UploaderFieldProps = CommonProps &
   Partial<{
     action: string
+    // TODO parseUnitedSchema中进行maxFileNumber=>maxCount转换；兼容antd v4.10.0
     maxFileNumber: number
     listType: 'text' | 'picture' | 'picture-card'
     canDrag: boolean
@@ -104,12 +105,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
    */
   const change = useEventCallback(
     (value: { file?: any; fileList?: any }) => {
-      let { fileList } = value
-      // 如果需要限制最大文件上传数，需要定义maxFileNumber
-      if (maxFileNumber && maxFileNumber > 0) {
-        // 只保留末尾的maxFileNumber个文件
-        fileList = fileList.slice(-maxFileNumber)
-      }
+      const { fileList } = value
 
       // 如果定义了afterAction，则执行afterAction，并将value进行替换
       if (afterAction) {
@@ -181,7 +177,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
     // 是否需要在末尾填充
     let needPush = false
     // 待处理的文件列表
-    let beforeFileList = !initValue.fileList
+    const beforeFileList = !initValue.fileList
       ? [imgItem]
       : initValue.fileList.map((file: { uid: any }, idx: number) => {
           if (file.uid === imgItem.uid) return imgItem
@@ -197,10 +193,6 @@ const UploaderField: FC<UploaderFieldProps> = ({
     // 如果列表中不存在正在操作的文件，则在末尾填充
     if (needPush) {
       beforeFileList.push(imgItem)
-    }
-    // 自动截取
-    if (maxFileNumber && maxFileNumber > 0) {
-      beforeFileList = beforeFileList.slice(-maxFileNumber)
     }
 
     return beforeFileList
@@ -289,6 +281,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
         return Promise.resolve(false)
       }}
       {...(customUpload && { customRequest })}
+      {...(maxFileNumber && { maxCount: maxFileNumber })}
       {...restProps}
     >
       <InboxOutlined />
@@ -308,6 +301,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
       }}
       fileList={initValue?.fileList || []}
       {...(customUpload && { customRequest })}
+      {...(maxFileNumber && { maxCount: maxFileNumber })}
       {...restProps}
     >
       {listType === 'picture-card' ? (
