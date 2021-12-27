@@ -86,7 +86,7 @@ const PropertyConfig = () => {
           formData.title = Object.assign({}, uiSchema.title, {
             title: dataSchema?.title || '',
             followRootConfig: isEmpty(uiSchema.title),
-            // showTitle: uiSchema?.showTitle || true,
+            showTitle: uiSchema?.showTitle ?? true,
           })
         }
         if (key === 'footer') {

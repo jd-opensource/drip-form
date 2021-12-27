@@ -55,7 +55,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
   parentUiSchemaKey,
   parentDataSchemaKey,
   onValidate,
-  fieldData,
+  fieldData = [],
   requiredFields,
   uiProp,
   fieldKey,
@@ -170,7 +170,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
           minWidth: '200px',
         }}
       >
-        {(!isAdd || formMode === 'generator' ? [''] : fieldData || []).map(
+        {(!isAdd || formMode === 'generator' ? [''] : fieldData).map(
           (item, i, array) => {
             return (
               <div
