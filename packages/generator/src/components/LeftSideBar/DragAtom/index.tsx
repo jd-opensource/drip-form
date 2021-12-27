@@ -5,7 +5,11 @@ import { nanoid } from 'nanoid'
 import Item from './Item'
 import type { DragAtomProps } from './Item'
 
-const DragAtom: React.FC<DragAtomProps> = ({ icon, unitedSchema }) => {
+const DragAtom: React.FC<DragAtomProps> = ({
+  icon,
+  unitedSchema,
+  customBarStyle,
+}) => {
   const id = useMemo(() => {
     return `${unitedSchema.ui.type}_${nanoid(6)}`
   }, [unitedSchema])
@@ -22,11 +26,16 @@ const DragAtom: React.FC<DragAtomProps> = ({ icon, unitedSchema }) => {
         listeners={listeners}
         icon={icon}
         unitedSchema={unitedSchema}
+        customBarStyle={customBarStyle}
       />
       {isDragging &&
         createPortal(
           <DragOverlay>
-            <Item icon={icon} unitedSchema={unitedSchema} />
+            <Item
+              icon={icon}
+              unitedSchema={unitedSchema}
+              customBarStyle={customBarStyle}
+            />
           </DragOverlay>,
           document.body,
           id
