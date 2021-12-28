@@ -33,6 +33,7 @@
 		"@babel/runtime": "^7.10.2",
 		"@jdfed/utils": "^0.1.0",
 		"ahooks": "^2.10.12",
+		"ajv": "^8.8.2",
 		"immer": "^9.0.5",
 		"moment": "^2.26.0"
 	},

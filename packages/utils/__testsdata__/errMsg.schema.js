@@ -4,6 +4,7 @@ export const unitedSchema = {
   type: 'object',
   ui: {
     mode: 'edit',
+    '$:type': 'drip',
   },
   schema: [
     {
@@ -79,6 +80,7 @@ export const parsedSchema = {
     theme: 'antd',
     mode: 'edit',
     order: ['name', 'babelRadio'],
+    '$:type': 'drip',
     properties: {
       name: {
         type: 'text',

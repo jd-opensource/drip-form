@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:56:41
+ * @Last Modified time: 2021-12-28 14:32:01
  */
 import { createContext, Dispatch } from 'react'
 import {
@@ -16,9 +16,7 @@ import addField from './addField'
 import deleteField from './deleteField'
 import type { Action, State } from '@jdfed/utils'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const initDispatch: Dispatch<Action> = () => {}
-export const FormDataContext = createContext(initDispatch)
+export const FormDataContext = createContext('')
 
 const formDataReducer = (state: State, action: Action): void => {
   const type = action.type

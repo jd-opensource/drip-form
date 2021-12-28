@@ -7,7 +7,7 @@ import type {
   UiSchema,
   DataSchema,
 } from '@jdfed/utils'
-import type { ErrorsMap } from '../validate'
+import type { ErrorsMap } from '@jdfed/hooks'
 import type { FuncType, UiComponents, CustomComponents } from '../DripForm/type'
 import { Dispatch } from 'react'
 
