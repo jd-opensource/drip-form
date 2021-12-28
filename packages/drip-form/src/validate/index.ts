@@ -5,16 +5,8 @@
  * @Last Modified time: yyyy-05-dd 15:29:58
  */
 import produce from 'immer'
-import type Ajv from 'ajv/dist/2019'
+import type { Validate } from '@jdfed/hooks'
 import type { ErrorObject } from 'ajv/dist/2019'
-export type Errors = ErrorObject[]
-export type ErrorsMap = Record<string, string>
-export type validateReturn = {
-  pass: boolean
-  errors: Errors
-  errorsMap: ErrorsMap
-  formData: Record<string, unknown>
-}
 
 /**
  *
@@ -27,13 +19,19 @@ export type validateReturn = {
  *  error {} 校验错误信息
  * }
  */
-const validate = (
-  schema: Record<string, unknown>,
-  formData: Record<string, unknown>,
-  ajv: Ajv,
-  visibleFieldKey?: string[]
-): validateReturn => {
+const validate: Validate = ({
+  schema,
+  formData,
+  ajv,
+  visibleFieldKey,
+  customProps,
+}) => {
   try {
+    const ignoreKeywords =
+      customProps?.filter((item) => !ajv.RULES.keywords[item]) || []
+    if (ignoreKeywords?.length > 0) {
+      ajv.addVocabulary(ignoreKeywords)
+    }
     // 编译ajv
     const validateFuc = ajv.compile(schema)
     // 校验是否通过

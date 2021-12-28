@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 22:43:55
+ * @Last Modified time: 2021-12-28 14:28:43
  */
 import React, {
   memo,
@@ -17,11 +17,11 @@ import React, {
 import cx from 'classnames'
 // 配置
 import { useContainer, useContainerStyle } from '@jdfed/hooks'
+import { FormDataContext } from '../../reducers'
 import { typeCheck } from '@jdfed/utils'
 import './index.styl'
 import type { Props } from '../type'
 import type { TitlePlacement, TitleUi } from '@jdfed/utils'
-import { FormDataContext } from '../../DripForm/index'
 // 垂直和水平对齐方式
 export enum Align {
   center = 'center',

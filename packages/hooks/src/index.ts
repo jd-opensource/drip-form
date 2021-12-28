@@ -6,6 +6,7 @@
  */
 import type { Set, Merge, SetType, DeleteField, AddField } from './useSchema'
 import type { Get, GetKey } from '@jdfed/utils'
+import type { Validate, ErrorsMap } from './useValidate'
 export { default as useModal } from './useModal'
 export { default as useRefProp } from './useRefProp'
 export { default as usePrevious } from './usePrevious'
@@ -19,4 +20,14 @@ export { default as useContainer } from './useContainer'
 export { default as useSchema } from './useSchema'
 export { default as useGetKey } from './useGetKey'
 export { default as useContainerStyle } from './useContainerStyle'
-export type { Get, Set, Merge, DeleteField, AddField, GetKey, SetType }
+export type {
+  Get,
+  Set,
+  Merge,
+  DeleteField,
+  AddField,
+  GetKey,
+  SetType,
+  Validate,
+  ErrorsMap,
+}

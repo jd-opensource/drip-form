@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:59:29
+ * @Last Modified time: 2021-12-28 14:26:18
  */
 import React, {
   forwardRef,
@@ -11,14 +11,13 @@ import React, {
   useEffect,
   useImperativeHandle,
   useMemo,
-  createContext,
 } from 'react'
 import produce from 'immer'
 import { useImmerReducer } from 'use-immer'
 import './index.styl'
 // 配置与工具
 import validate from '../validate'
-import formDataReducer from '../reducers'
+import formDataReducer, { FormDataContext } from '../reducers'
 import renderCoreFn from '../render'
 import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
 import { useValidate, useSchema, useGetKey, usePrevious } from '@jdfed/hooks'
@@ -26,7 +25,6 @@ import containerMap from '../container'
 import Footer from './Footer'
 import type { DripFormRenderProps } from './type'
 import type { State, Action, Theme } from '@jdfed/utils'
-export const FormDataContext = createContext('')
 
 /**
  * 表单入口
@@ -75,6 +73,7 @@ const DripForm = forwardRef(
       uiSchema: initUiSchema,
       dataSchema: initDataSchema,
       typePath: initTypePath,
+      customProps,
     } = useMemo(() => {
       return parseUnitedSchema(unitedSchema)
     }, [unitedSchema])
@@ -133,8 +132,12 @@ const DripForm = forwardRef(
         uiSchema: memoUiSchema,
         dataSchema: initDataSchema,
         formData:
-          validate(initDataSchema, parseFormData || initFormData, ajv)
-            .formData || {},
+          validate({
+            schema: initDataSchema,
+            formData: parseFormData || initFormData,
+            ajv,
+            customProps,
+          }).formData || {},
         // ajv是否已经将dataSchema中的默认值添加到formData中
         hasDefault: false,
         errors: {},
@@ -152,6 +155,7 @@ const DripForm = forwardRef(
         parseFormData,
         initFormData,
         ajv,
+        customProps,
       ]
     )
     const [data, dispatch] = useImmerReducer<State, Action>(

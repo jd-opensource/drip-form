@@ -6,7 +6,27 @@
  * @Last Modified time: yyyy-05-dd 15:30:48
  */
 import { useDebounceFn } from 'ahooks'
+import type Ajv from 'ajv/dist/2019'
+import type { ErrorObject } from 'ajv/dist/2019'
+
 import React from 'react'
+
+type Errors = ErrorObject[]
+export type ErrorsMap = Record<string, string>
+type ValidateReturn = {
+  pass: boolean
+  errors: Errors
+  errorsMap: ErrorsMap
+  formData: Record<string, unknown>
+}
+
+export type Validate = (param: {
+  schema: Record<string, unknown>
+  formData: Record<string, unknown>
+  ajv: Ajv
+  visibleFieldKey?: string[]
+  customProps?: string[]
+}) => ValidateReturn
 
 type Params = {
   dataSchema: {
@@ -23,19 +43,7 @@ type Params = {
   }
 }
 
-type ValidateFuc = (
-  dataSchema: any,
-  formData: any,
-  ajv: any,
-  visibleFieldKey?: string[]
-) => {
-  errorsMap: {
-    [propName: string]: string
-  }
-  formData: Record<string, any>
-}
-
-const useValidate = (validate: ValidateFuc): ((arg0: Params) => void) => {
+const useValidate = (validate: Validate): ((arg0: Params) => void) => {
   const { run } = useDebounceFn(
     ({ dataSchema, formData, dispatch, visibleFieldKey, ajv, onValidate }) => {
       /*
@@ -46,12 +54,12 @@ const useValidate = (validate: ValidateFuc): ((arg0: Params) => void) => {
       const ignoreKeys = Object.keys(onValidate).filter((item) => {
         return onValidate[item].type === 'change'
       })
-      const { errorsMap, formData: newFormData } = validate(
-        dataSchema,
+      const { errorsMap, formData: newFormData } = validate({
+        schema: dataSchema,
         formData,
         ajv,
-        visibleFieldKey
-      )
+        visibleFieldKey,
+      })
 
       dispatch({
         type: 'setError',
