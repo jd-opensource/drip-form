@@ -14,4 +14,8 @@
 .title {
   font-size: 13px;
   margin-left: 4px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

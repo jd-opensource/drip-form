@@ -101,10 +101,9 @@ const config: Field = {
         },
       },
       {
-        fieldKey: 'maxFileNumber',
+        fieldKey: 'maxCount',
         type: 'number',
         title: '最大上传文件数',
-        default: 1,
         ui: {
           type: 'number',
         },
