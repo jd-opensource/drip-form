@@ -318,6 +318,7 @@ const PropertyConfig = () => {
           </div>
         )}
         <DripForm
+          key={selectedFieldKey}
           formData={formData}
           parse={onParse}
           control={onChangeSchema}

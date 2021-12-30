@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-19 16:21:58
+ * @Last Modified time: 2021-12-30 16:14:14
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -394,6 +394,7 @@ const CheckConfig = (): JSX.Element => {
   return (
     <DripForm
       formData={formData}
+      key={selectedFieldKey}
       control={controlFn}
       unitedSchema={unitedSchema}
       uiComponents={uiComponents}
