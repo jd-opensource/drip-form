@@ -15,7 +15,8 @@ import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
 import { original, produce } from 'immer'
 import type { SetType } from '@jdfed/hooks'
-import { Select } from 'antd'
+import { Select, Input, Button } from 'antd'
+import { CopyOutlined } from '@ant-design/icons'
 import { useRecoilState, useRecoilValue } from 'recoil'
 const PropertyConfig = () => {
   const {
@@ -24,6 +25,7 @@ const PropertyConfig = () => {
     dataSchema,
     uiSchema,
     uiComponents,
+    fieldKey,
   } = useRightSidebar()
   const [globalContainerStyle, setGlobalContainerStyle] = useRecoilState(
     globalContainerStyleAtom
@@ -103,6 +105,7 @@ const PropertyConfig = () => {
       dataSchema?.title,
       globalContainerStyle?.width,
       uiSchema.footer,
+      uiSchema?.showTitle,
       uiSchema.title,
     ]
   )
@@ -300,22 +303,40 @@ const PropertyConfig = () => {
     <Fragment>
       <div className={styles.panelConfig}>
         {type !== 'root' && (
-          <div className={cx(styles.propertyConfig)}>
-            <div className={styles.propertyConfigTitle}>
-              <SettingOutlined className={cx(styles.icon)} />
-              <span>组件类型</span>
+          <>
+            <div className={cx(styles.propertyConfig)}>
+              <div className={styles.propertyConfigTitle}>
+                <SettingOutlined className={cx(styles.icon)} />
+                <span>组件类型</span>
+              </div>
+              <div className={styles.propertyConfigContent}>
+                <Select
+                  style={{
+                    width: '100%',
+                  }}
+                  value={type}
+                  onChange={onChangeUiType}
+                  options={uiTypeOptions}
+                />
+              </div>
             </div>
-            <div className={styles.propertyConfigContent}>
-              <Select
-                style={{
-                  width: '100%',
-                }}
-                value={type}
-                onChange={onChangeUiType}
-                options={uiTypeOptions}
-              />
+            <div className={cx(styles.propertyConfig)}>
+              <div className={styles.propertyConfigTitle}>
+                <SettingOutlined className={cx(styles.icon)} />
+                <span>fieldKey</span>
+              </div>
+              <div className={styles.propertyConfigContent}>
+                <Input.Group compact>
+                  <Input
+                    className={styles.fieldKey}
+                    defaultValue={fieldKey}
+                    disabled
+                  />
+                  <Button icon={<CopyOutlined />} />
+                </Input.Group>
+              </div>
             </div>
-          </div>
+          </>
         )}
         <DripForm
           formData={formData}
