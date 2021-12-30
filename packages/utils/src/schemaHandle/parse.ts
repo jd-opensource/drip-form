@@ -317,7 +317,7 @@ const parseUnitedSchema = (
       ...uiSchema,
     },
     typePath,
-    ...(customProps.length > 0 && { customProps }),
+    ...(customProps.length > 0 && { customProps: [...new Set(customProps)] }),
   }
 }
 
