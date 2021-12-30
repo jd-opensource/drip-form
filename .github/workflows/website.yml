@@ -9,6 +9,7 @@ on:
       - dev
     paths:
       - 'website/**'
+      - 'packages/**'
     types:
       - closed
 
@@ -55,4 +56,3 @@ jobs:
         with:
           branch: gh-pages
           folder: website/build
-
