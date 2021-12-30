@@ -2,9 +2,10 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 17:19:52
+ * @Last Modified time: 2021-12-29 19:27:52
  */
-import React, { memo, useState, useEffect, FC } from 'react'
+import React, { memo, useEffect, FC } from 'react'
+import { useImmer as useState } from 'use-immer'
 import { Upload, Button } from 'antd'
 import { UploadOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons'
 import { useField, useEventCallback, usePrevious } from '@jdfed/hooks'
@@ -90,13 +91,19 @@ const UploaderField: FC<UploaderFieldProps> = ({
       fieldKey,
       onChange,
       asyncValidate,
-      options: { isUploader: true },
+      options: { isUploader: true, draft: true },
     },
     dispatch
   )
   // 删除
   const _onDelete1 = useField(
-    { getKey, fieldKey, onChange, asyncValidate, options: { isDelete: true } },
+    {
+      getKey,
+      fieldKey,
+      onChange,
+      asyncValidate,
+      options: { isDelete: true, draft: true },
+    },
     dispatch
   )
 
@@ -168,8 +175,13 @@ const UploaderField: FC<UploaderFieldProps> = ({
     ) {
       _onChange(initValue)
     }
-  }, [_onChange, initValue, initValue?.file?.status, prevValue?.file?.status])
-
+  }, [
+    _onChange,
+    initValue,
+    initValue?.file?.status,
+    prevValue?.file?.status,
+    initValue?.file?.thumbUrl,
+  ])
   /**
    * 自定义上传时手动处理fileList
    */

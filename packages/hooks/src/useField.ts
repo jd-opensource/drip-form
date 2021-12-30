@@ -1,3 +1,4 @@
+import { produce } from 'immer'
 /*
  * Field表单onChange生成 hooks
  * 该hooks会自动根据
@@ -349,6 +350,10 @@ const useField = (
           ? e?.target?.value
           : e
         : fieldData
+      //uploader内部修改不可变数据特殊处理
+      if (options.draft) {
+        value = produce(value, (draft: any) => draft)
+      }
       // 判断当前传的options配置项是否需要特殊format处理
       const formatKeys = Object.keys(formatMap)
       const specialFormatKeys = Object.keys(options).filter(
