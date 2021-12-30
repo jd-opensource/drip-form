@@ -34,7 +34,8 @@
 		"@jdfed/hooks": "^0.1.0",
 		"@jdfed/utils": "^0.1.0",
 		"moment": "^2.26.0",
-		"react-color": "^2.18.1"
+		"react-color": "^2.18.1",
+		"use-immer": "^0.6.0"
 	},
 	"devDependencies": {
 		"prop-types": "^15.7.2"

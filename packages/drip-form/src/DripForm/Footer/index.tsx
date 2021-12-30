@@ -89,7 +89,16 @@ const Footer: FC<
         })
       }
     },
-    [checking, errors, formData, onSubmit, transform]
+    [
+      checking,
+      dispatch,
+      errors,
+      formData,
+      initFormData,
+      onCancel,
+      onSubmit,
+      transform,
+    ]
   )
   return (
     Button && (

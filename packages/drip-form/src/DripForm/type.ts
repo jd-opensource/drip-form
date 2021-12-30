@@ -105,6 +105,11 @@ export type DripFormRenderProps = {
  * DripForm对外的ref的类型
  */
 export type DripFormRefType = {
+  reset: () => void
+  submit: () => () => Promise<{
+    formData: Record<string, any>
+    errors: Map
+  }>
   // 获取任意FieldKey对应的schema，根路径key为''
   get: Get
   // 设置任意FieldKey对应的schema，根路径key为''
