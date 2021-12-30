@@ -339,6 +339,7 @@ const PropertyConfig = () => {
           </>
         )}
         <DripForm
+          key={selectedFieldKey}
           formData={formData}
           parse={onParse}
           control={onChangeSchema}
