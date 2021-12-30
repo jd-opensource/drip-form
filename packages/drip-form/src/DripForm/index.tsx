@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-28 14:26:18
+ * @Last Modified time: 2021-12-30 13:59:27
  */
 import React, {
   forwardRef,
@@ -23,13 +23,13 @@ import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
 import { useValidate, useSchema, useGetKey, usePrevious } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
-import type { DripFormRenderProps } from './type'
+import type { DripFormRenderProps, DripFormRefType } from './type'
 import type { State, Action, Theme } from '@jdfed/utils'
 
 /**
  * 表单入口
  */
-const DripForm = forwardRef(
+const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
   (
     {
       formData: initFormData = {},
@@ -47,7 +47,7 @@ const DripForm = forwardRef(
       onCancel,
       parse,
       reload = true,
-    }: DripFormRenderProps,
+    },
     ref
   ) => {
     const prevUnitedSchema = usePrevious(unitedSchema)
@@ -225,12 +225,36 @@ const DripForm = forwardRef(
     // 获取当前fieldKey相对uiSchema、dataSchema路径
     const { getKey } = useGetKey(typePath)
 
+    // 提交表单
+    const submit = useCallback<DripFormRefType['submit']>(
+      () => () =>
+        new Promise((resolve) => {
+          if (checking === false) {
+            resolve({
+              formData,
+              errors,
+            })
+          }
+        }),
+      [checking, errors, formData]
+    )
+
+    // 重置表单
+    const reset = useCallback(() => {
+      dispatch({
+        type: 'reload',
+        ...initArgs,
+      })
+    }, [dispatch, initArgs])
+
     // 向外抛出表单数据
-    useImperativeHandle(
+    useImperativeHandle<DripFormRefType, DripFormRefType>(
       ref,
       () => ({
         errors,
         checking,
+        submit,
+        reset,
         dispatch,
         get,
         set,
@@ -258,7 +282,9 @@ const DripForm = forwardRef(
         get,
         getKey,
         merge,
+        reset,
         set,
+        submit,
         transform,
       ]
     )
