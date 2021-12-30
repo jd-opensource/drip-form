@@ -106,7 +106,7 @@ export type DripFormRenderProps = {
  */
 export type DripFormRefType = {
   reset: () => void
-  submit: () => () => Promise<{
+  submit: () => Promise<{
     formData: Record<string, any>
     errors: Map
   }>

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-30 13:59:27
+ * @Last Modified time: 2021-12-30 18:12:44
  */
 import React, {
   forwardRef,
@@ -227,7 +227,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     // 提交表单
     const submit = useCallback<DripFormRefType['submit']>(
-      () => () =>
+      () =>
         new Promise((resolve) => {
           if (checking === false) {
             resolve({
