@@ -41356,7 +41356,7 @@ Add the correct display in Chrome and Safari.
         -ms-user-select: none;
             user-select: none;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
 .leftsidebar-item:hover {
@@ -41603,7 +41603,15 @@ Add the correct display in Chrome and Safari.
   position: absolute;
   right: 0;
   top: -22px;
-  z-index:999;
+  z-index: 999;
+  display: flex;
+}
+
+.index-module_firstActiveTools__jQYUc {
+  position: absolute;
+  right: 0;
+  bottom: -22px;
+  z-index: 999;
   display: flex;
 }
 
