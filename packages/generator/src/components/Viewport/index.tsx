@@ -31,6 +31,8 @@ import {
 } from '@generator/store'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { combine, deepClone } from '@jdfed/utils'
+import type { ContainerHoc } from '@jdfed/drip-form'
+
 const defaultInitializer = (index: number) => index
 
 export function createRange<T = number>(
@@ -87,27 +89,32 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
     /**
      * 针对DripForm的Container，使用可拖拽的高阶组件进行包裹
      */
-    const containerHocFunc = useCallback((FormItem, formItemProps) => {
-      const {
-        fieldKey: currentFieldKey,
-        containerStyle,
-        type,
-        parentType,
-        parentMode,
-      } = formItemProps
-      return (
-        <DripFormDragHoc
-          key={currentFieldKey}
-          fieldKey={currentFieldKey}
-          containerStyle={containerStyle}
-          type={type}
-          parentMode={parentMode}
-          parentType={parentType}
-        >
-          {FormItem}
-        </DripFormDragHoc>
-      )
-    }, [])
+    const containerHocFunc = useCallback<ContainerHoc>(
+      (FormItem, formItemProps) => {
+        const {
+          fieldKey: currentFieldKey,
+          containerStyle,
+          type,
+          parentType,
+          parentMode,
+          isFirst,
+        } = formItemProps
+        return (
+          <DripFormDragHoc
+            key={currentFieldKey}
+            fieldKey={currentFieldKey}
+            containerStyle={containerStyle}
+            type={type}
+            parentMode={parentMode}
+            parentType={parentType}
+            isFirst={isFirst}
+          >
+            {FormItem}
+          </DripFormDragHoc>
+        )
+      },
+      []
+    )
 
     /**
      * 有序fieldKey列表，从generatorContext的order中获取，用于渲染

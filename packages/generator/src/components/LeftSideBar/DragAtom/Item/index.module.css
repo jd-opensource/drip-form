@@ -4,7 +4,7 @@
     align-items: center;
     user-select: none;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     &:hover {
       cursor: pointer;
     }

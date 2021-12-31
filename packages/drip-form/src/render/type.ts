@@ -17,6 +17,20 @@ export type ContainerType = {
   default: ElementType
 }
 
+export type ContainerHoc = (
+  FormItem: JSX.Element,
+  formItemProps: {
+    fieldKey: string
+    error: string
+    containerStyle: ContainerStyle
+    type: string
+    parentMode: string
+    parentType: string
+    // 是否是第一个表单
+    isFirst: boolean
+  }
+) => JSX.Element
+
 export type RenderFnProps = {
   // ajv是否已经设置了默认值
   hasDefault: boolean
@@ -36,17 +50,7 @@ export type RenderFnProps = {
   // 不同type类型对应渲染的容器 ArrayContainer 和objectContainer特有
   containerMap?: ContainerType
   // 允许入参高阶组件，在Container进行包裹
-  containerHoc?: (
-    FormItem: JSX.Element,
-    formItemProps: {
-      fieldKey: string
-      error: string
-      containerStyle: ContainerStyle
-      type: string
-      parentMode: string
-      parentType: string
-    }
-  ) => JSX.Element
+  containerHoc?: ContainerHoc
   get: Get
   dispatch: Dispatch<Action>
   uiComponents: UiComponents

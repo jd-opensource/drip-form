@@ -71,7 +71,7 @@ const Render = ({
   } = currentUiSchema
   // 表单是否在下方直接展示错误信息
   const showError = dataSchema.validateTime === 'change'
-  return (order || []).map((item: string) => {
+  return (order || []).map((item: string, i: number) => {
     // 当前Field ui类型
     const type = properties[item].type
     // 当前表单是否为普通数组（自增数组）中的每一项
@@ -312,6 +312,7 @@ const Render = ({
             type,
             parentMode,
             parentType,
+            isFirst: !!isRoot && i === 0,
           }
         )
       ) : (
