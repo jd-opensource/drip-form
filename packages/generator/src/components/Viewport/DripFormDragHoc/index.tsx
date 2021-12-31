@@ -31,6 +31,7 @@ type Props = {
   type: string
   parentType: string
   parentMode: string
+  isFirst: boolean
 }
 
 // over对应边classname
@@ -43,7 +44,15 @@ const directCls = {
 }
 
 const DripFormDragHoc: FC<Props> = memo(
-  ({ fieldKey, children, containerStyle, type, parentType, parentMode }) => {
+  ({
+    fieldKey,
+    children,
+    containerStyle,
+    type,
+    parentType,
+    parentMode,
+    isFirst,
+  }) => {
     const [ref, setRef] = useState<HTMLElement | null>(null)
     const allField = useRecoilValue(allFieldAtom)
     // 对象、数组容器为空（改变碰撞检测算法实现）
@@ -134,7 +143,7 @@ const DripFormDragHoc: FC<Props> = memo(
             width: containerStyle?.width || '100%',
           }}
         >
-          {selectedFieldKey === fieldKey && <ActiveTools />}
+          {selectedFieldKey === fieldKey && <ActiveTools isFirst={isFirst} />}
           <div
             className="draggable"
             {...listeners}
