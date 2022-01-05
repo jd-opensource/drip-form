@@ -17,6 +17,9 @@ var baseConfig = {
   },
   server: {
     port: 2002,
+    proxy: {
+      '/v2': 'https://www.mocky.io/',
+    },
   },
 }
 

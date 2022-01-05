@@ -2,17 +2,18 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-29 19:27:52
+ * @Last Modified time: 2022-01-05 18:10:22
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
 import { Upload, Button } from 'antd'
 import { UploadOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons'
 import { useField, useEventCallback, usePrevious } from '@jdfed/hooks'
-import { binaryData2Blob, isEmpty } from '@jdfed/utils'
+import { binaryData2Blob, isEmpty, checkImg } from '@jdfed/utils'
 import './index.styl'
-const { Dragger } = Upload
+const { Dragger, LIST_IGNORE } = Upload
 import { CommonProps } from '../global'
+import type { UploadProps } from 'antd'
 import type { Map } from '@jdfed/utils'
 
 export type UploaderFileType = {
@@ -37,12 +38,12 @@ type UploaderFieldProps = CommonProps &
     canDrag: boolean
     customUpload: (...args: any[]) => Promise<any>
     // 使用action上传完成后的处理
-    afterAction?: (value: { file?: any; fileList?: any }) => {
+    afterAction: (value: { file?: any; fileList?: any }) => {
       file: any
       fileList: any
     }
     // 针对京东图片服务的配置
-    jdAction?: {
+    jdAction: {
       // 上传的地址，具体参考：drip-design例子
       action: string
       // 拼接在返回值之前的域名，可自定义，具体参考：drip-design例子
@@ -50,6 +51,23 @@ type UploaderFieldProps = CommonProps &
       // 图片服务对应的jsf业务名
       jfsBusinessName: string
     }
+    // 尺寸限制
+    dimension: Partial<{
+      width: number
+      height: number
+      minWidth: number
+      minHeight: number
+      maxWidth: number
+      maxHeight: number
+      widthDivisor: number
+      heightDivisor: number
+      widthHeightEqual: boolean
+    }>
+    // 大小限制
+    size: Partial<{
+      max: number
+      min: number
+    }>
   }>
 
 const UploaderField: FC<UploaderFieldProps> = ({
@@ -67,6 +85,8 @@ const UploaderField: FC<UploaderFieldProps> = ({
   afterAction,
   getKey,
   jdAction,
+  dimension,
+  size,
   ...restProps
 }) => {
   const [initValue, setValue] = useState(fieldData)
@@ -281,11 +301,35 @@ const UploaderField: FC<UploaderFieldProps> = ({
     [customUpload]
   )
 
+  // 上传前diemension、size校验
+  const beforeUpload: UploadProps['beforeUpload'] = async (file) => {
+    try {
+      const { isOk, errors } = await checkImg({ file, dimension, size })
+      if (isOk) {
+        dispatch({
+          type: 'deleteError',
+          key: fieldKey,
+        })
+        return true
+      } else {
+        dispatch({
+          type: 'setError',
+          [fieldKey]: errors.join(';'),
+        })
+        return LIST_IGNORE
+      }
+    } catch (error) {
+      console.error('error')
+      return LIST_IGNORE
+    }
+  }
+
   return canDrag ? (
     <Dragger
       disabled={disabled}
       onChange={change}
       {...(action && { action })}
+      beforeUpload={beforeUpload}
       onRemove={() => {
         _onDelete1()
         setValue([])
@@ -305,6 +349,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {...(action && { action })}
       listType={listType}
       onChange={change}
+      beforeUpload={beforeUpload}
       onRemove={() => {
         _onDelete1()
         setValue([])
