@@ -62,6 +62,22 @@
 //       ],
 //       fieldKey: 'array_dk_fFn',
 //     },
+//     {
+//       validateTime: 'submit',
+//       type: 'object',
+//       title: '上传组件',
+//       ui: {
+//         type: 'uploader',
+//         listType: 'picture',
+//         canDrag: false,
+//         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+//         dimension: {
+//           width: 516,
+//           height: 238,
+//         },
+//       },
+//       fieldKey: 'uploader_Ux8m6P',
+//     },
 //   ],
 // }
 

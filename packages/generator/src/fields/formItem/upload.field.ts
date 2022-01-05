@@ -108,6 +108,126 @@ const config: Field = {
           type: 'number',
         },
       },
+      {
+        fieldKey: 'dimension',
+        type: 'object',
+        title: '图片尺寸限制',
+        ui: {
+          type: 'object',
+          mode: 'collapse',
+        },
+        schema: [
+          {
+            type: 'number',
+            title: '宽度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'width',
+          },
+          {
+            type: 'number',
+            title: '最小宽度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'minWidth',
+          },
+          {
+            type: 'number',
+            title: '最大宽度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'maxWidth',
+          },
+          {
+            type: 'number',
+            title: '宽度除数',
+            ui: {
+              description: {
+                type: 'icon',
+                trigger: 'hover',
+                title: '宽度是当前值的倍数',
+              },
+              type: 'number',
+            },
+            fieldKey: 'widthDivisor',
+          },
+          {
+            type: 'number',
+            title: '高度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'height',
+          },
+          {
+            type: 'number',
+            title: '最小高度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'minHeight',
+          },
+          {
+            type: 'number',
+            title: '最大高度',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'maxHeight',
+          },
+          {
+            type: 'number',
+            title: '高度除数',
+            ui: {
+              description: {
+                type: 'icon',
+                trigger: 'hover',
+                title: '高度是当前值的倍数',
+              },
+              type: 'number',
+            },
+            fieldKey: 'heightDivisor',
+          },
+          {
+            type: 'boolean',
+            title: '宽高相等',
+            ui: {
+              type: 'switch',
+            },
+            fieldKey: 'widthHeightEqual',
+          },
+        ],
+      },
+      {
+        fieldKey: 'size',
+        type: 'object',
+        title: '图片大小限制',
+        ui: {
+          type: 'object',
+          mode: 'collapse',
+        },
+        schema: [
+          {
+            type: 'number',
+            title: '最小尺寸',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'min',
+          },
+          {
+            type: 'number',
+            title: '最大尺寸',
+            ui: {
+              type: 'number',
+            },
+            fieldKey: 'max',
+          },
+        ],
+      },
     ],
   },
 }
