@@ -22,6 +22,7 @@ import { typeCheck } from '@jdfed/utils'
 import './index.styl'
 import type { Props } from '../type'
 import type { TitlePlacement, TitleUi } from '@jdfed/utils'
+import QuestionCircleAlternate from '../Components/QuestionCircleAlternate'
 // 垂直和水平对齐方式
 export enum Align {
   center = 'center',
@@ -207,7 +208,8 @@ const FieldContainer: FC<Props> = ({
    * title组件
    */
   const titleMemo = useMemo(() => {
-    const QuestionCircle = uiComponents[theme]?.QuestionCircle
+    const QuestionCircle =
+      uiComponents[theme]?.QuestionCircle || QuestionCircleAlternate
 
     return (
       <div

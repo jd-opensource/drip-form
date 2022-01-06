@@ -1,0 +1,35 @@
+.field-container-alternate
+	position relative
+	display inline-block
+
+	&__tooltip
+		position absolute
+		top -5px
+		left 50%
+		z-index 99
+		padding 8px 4px
+		border-radius 4px
+		background #404040
+		color #fff
+		text-align center
+		word-break break-word
+		opacity 0.9
+		transform translate(-50%, -100%)
+
+		&::before
+			position absolute
+			bottom -5px
+			left 50%
+			z-index 99
+			border-width 5px 6px 0
+			border-style solid
+			border-color transparent
+			border-top-color #404040
+			content ''
+			transform translateX(-50%)
+
+	&__text
+		display inline-block
+		max-width 280px
+		text-align left
+		word-break keep-all
