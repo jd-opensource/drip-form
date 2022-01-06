@@ -67,7 +67,7 @@ const config: Field = {
         title: '占位符',
         ui: {
           type: 'text',
-          placeholder: '请选择时间',
+          placeholder: '请选择日期',
           vcontrol: 'return !props.formData.ui.range',
         },
       },
