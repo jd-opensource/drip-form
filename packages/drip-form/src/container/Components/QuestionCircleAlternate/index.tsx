@@ -7,7 +7,7 @@ type Props = {
   trigger?: 'hover' | 'click'
 }
 
-const FieldContainerAlternate: FC<Props> = ({ title, trigger }) => {
+const QuestionCircleAlternate: FC<Props> = ({ title, trigger }) => {
   const [isTipVisible, setIsTipVisible] = useState(false)
 
   const onMouseEnter = () => {
@@ -29,14 +29,14 @@ const FieldContainerAlternate: FC<Props> = ({ title, trigger }) => {
   }
 
   return (
-    <div className="field-container-alternate">
+    <div className="question-circle-alternate">
       <div
-        className="field-container-alternate__tooltip"
+        className="question-circle-alternate__tooltip"
         style={{
           display: isTipVisible ? '' : 'none',
         }}
       >
-        <div className="field-container-alternate__text">{title}</div>
+        <div className="question-circle-alternate__text">{title}</div>
       </div>
       <QuestionCircleOutlined
         className="field-container__title-question"
@@ -48,4 +48,4 @@ const FieldContainerAlternate: FC<Props> = ({ title, trigger }) => {
   )
 }
 
-export default memo(FieldContainerAlternate)
+export default memo(QuestionCircleAlternate)
