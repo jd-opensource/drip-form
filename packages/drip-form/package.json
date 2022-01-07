@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/drip-form",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "drip-form表单渲染core",
 	"keywords": [
 		"drip-form",
@@ -48,9 +48,9 @@
 		"@fortawesome/free-regular-svg-icons": "^5.15.3",
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
 		"@fortawesome/react-fontawesome": "^0.1.14",
-		"@jdfed/ajv": "^0.1.0",
-		"@jdfed/hooks": "^0.1.0",
-		"@jdfed/utils": "^0.1.0",
+		"@jdfed/ajv": "^0.2.0",
+		"@jdfed/hooks": "^0.2.0",
+		"@jdfed/utils": "^0.2.0",
 		"ajv": "^8.6.2",
 		"classnames": "^2.2.6",
 		"immer": "^9.0.5",

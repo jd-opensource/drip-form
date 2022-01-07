@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/drip-form-plugin-formats",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "drip-form ajv formats插件",
 	"keywords": [
 		"ajv",

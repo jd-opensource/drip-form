@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.0 (2022-01-07)
+
+
+### Bug Fixes
+
+* provide a default key for dynamic children ([#53](https://github.com/jdfed/drip-form/issues/53)) ([3abe606](https://github.com/jdfed/drip-form/commit/3abe6068e20d2d567426eb7ee637e2b6a0c93af5))
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+
+
+
 
 
 **Note:** Version bump only for package @jdfed/hooks

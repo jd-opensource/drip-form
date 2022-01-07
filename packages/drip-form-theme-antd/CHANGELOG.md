@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.0 (2022-01-07)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+
+
+### Bug Fixes
+
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+
+
+
 
 
 **Note:** Version bump only for package @jdfed/drip-form-theme-antd
