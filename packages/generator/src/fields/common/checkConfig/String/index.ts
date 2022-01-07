@@ -42,6 +42,7 @@ const stringJsonSchema = {
       style: {
         width: '100%',
       },
+      allowClear: true,
       // TODO 后续接入埋点。统计用户使用次数，options异步拉取
       options: [
         // 水滴官方format插件 color关键字
