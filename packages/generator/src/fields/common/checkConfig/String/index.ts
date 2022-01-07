@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:31:04
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-31 14:00:15
+ * @Last Modified time: 2022-01-07 17:52:48
  */
 // dataSchema2019-09支持的字符串校验关键字
 const stringJsonSchema = {
@@ -49,6 +49,11 @@ const stringJsonSchema = {
         {
           value: 'color',
           label: 'color',
+        },
+        // 水滴官方format插件 https关键字
+        {
+          value: 'https',
+          label: 'https',
         },
         {
           value: 'date',
