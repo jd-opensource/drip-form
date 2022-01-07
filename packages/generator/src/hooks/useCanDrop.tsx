@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-14 14:35:52
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-03 18:04:36
+ * @Last Modified time: 2022-01-07 16:50:42
  */
 import { useMemo, useContext } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -53,7 +53,7 @@ const useTupleNestObject: CanDrop = ({
 }) => {
   return useMemo(() => {
     return (
-      parentMode !== 'normal' &&
+      parentMode === 'add' &&
       parentType === 'array' &&
       type === 'object' &&
       !hasEmptyEle

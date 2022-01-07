@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-04 17:37:02
+ * @Last Modified time: 2022-01-07 16:47:08
  */
 import { produce, original } from 'immer'
 import { deleteDeepProp, parseUnitedSchema, setDeepProp } from '@jdfed/utils'
@@ -31,7 +31,7 @@ const deleteField = ({
   // 待删除表单 父级元素类型 默认对象类型
   let deleteParentType = 'object'
   if (deleteParentUiSchema.type === 'array') {
-    if (deleteParentUiSchema.mode === 'normal') {
+    if (['normal', 'tuple'].includes(deleteParentUiSchema.mode)) {
       // 元祖
       deleteParentType = 'tuple'
     } else {
@@ -83,7 +83,7 @@ const deleteField = ({
         const { uiSchema: addGrandParentUiSchema } = get(grandParentPath)
         // 待添加表单 祖父级元素类型 默认对象类型
         if (addGrandParentUiSchema.type === 'array') {
-          if (addGrandParentUiSchema.mode === 'normal') {
+          if (['normal', 'tuple'].includes(addGrandParentUiSchema.mode)) {
             grandUiType = 'tuple'
             // 元祖
           } else {

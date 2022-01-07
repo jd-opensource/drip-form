@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-27 16:40:13
+ * @Last Modified time: 2022-01-07 16:52:36
  */
 import { useCallback, useContext } from 'react'
 import { nanoid } from 'nanoid'
@@ -56,7 +56,7 @@ const useAddField = (): AddField => {
       // 拖拽之后是否应该删除拖拽的元素
       let shouldDelete = true
 
-      if (type === 'array' && mode === 'normal') {
+      if (type === 'array' && mode && ['normal', 'tuple'].includes(mode)) {
         type = 'tuple'
       }
       switch (type) {
