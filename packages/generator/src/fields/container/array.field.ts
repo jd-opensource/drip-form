@@ -38,6 +38,14 @@ const config: Field = {
           type: 'text',
         },
       },
+      {
+        fieldKey: 'showNo',
+        type: 'boolean',
+        title: '是否展示索引序号',
+        ui: {
+          type: 'switch',
+        },
+      },
     ],
   },
 }
