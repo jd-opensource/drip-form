@@ -1,25 +1,15 @@
 {
-	"packages": [
-		"packages/*",
-		"examples/*",
-		"website"
-	],
+	"packages": ["packages/*", "examples/*", "website"],
 	"npmClient": "yarn",
 	"useWorkspaces": true,
 	"version": "0.1.0",
 	"command": {
 		"version": {
-			"allowBranch": [
-				"main",
-				"dev"
-			],
+			"allowBranch": ["dev"],
 			"message": "chore(release): 发布%s"
 		}
 	},
-	"ignoreChanges": [
-		"**/*.md",
-		"**/*.txt"
-	],
+	"ignoreChanges": ["**/*.md", "**/*.txt"],
 	"changelogPreset": {
 		"name": "conventionalcommits",
 		"types": [
@@ -72,8 +62,6 @@
 		"compareUrlFormat": "{{host}}/jdfed/drip-form/compare/{{previousTag}}...{{currentTag}}",
 		"issueUrlFormat": "{{host}}/jdfed/drip-form/issues/{{id}}",
 		"userUrlFormat": "{{host}}/{{user}}",
-		"issuePrefixes": [
-			"#"
-		]
+		"issuePrefixes": ["#"]
 	}
 }
