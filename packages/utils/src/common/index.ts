@@ -318,3 +318,56 @@ export function randomString(length: number): string {
     result += str[Math.floor(Math.random() * str.length)]
   return result
 }
+
+/**
+ * 将大于等于零的整数number转成中文汉字
+ */
+const numChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+const unitChar = ['', '十', '百', '千']
+const millionUnitChar = ['', '万', '亿', '万亿', '亿亿']
+// 已万为处理段，该方法处理万以内的数字转成中文
+function range2Chinese(range: number): string {
+  let numUnitChar = ''
+  let tempStr = ''
+  let unit = 0
+  let isNeedZero = true
+  while (range > 0) {
+    const currentNum = range % 10
+    if (currentNum === 0) {
+      if (!isNeedZero) {
+        isNeedZero = true
+        tempStr = numChar[currentNum] + tempStr
+      }
+    } else {
+      isNeedZero = false
+      numUnitChar = numChar[currentNum]
+      numUnitChar += unitChar[unit]
+      tempStr = numUnitChar + tempStr
+    }
+    unit++
+    range = Math.floor(range / 10)
+  }
+  return tempStr
+}
+export function number2Chinese(num: number): string {
+  let millionUnit = 0
+  let tempStr = ''
+  let resStr = ''
+  let isNeedZero = false
+  if (num === 0) {
+    return numChar[0]
+  }
+  while (num > 0) {
+    const range = num % 10000
+    if (isNeedZero) {
+      resStr = numChar[0] + resStr
+    }
+    tempStr = range2Chinese(range)
+    tempStr += range !== 0 ? millionUnitChar[millionUnit] : millionUnitChar[0]
+    resStr = tempStr + resStr
+    isNeedZero = range < 1000 && range > 0
+    num = Math.floor(num / 10000)
+    millionUnit++
+  }
+  return resStr
+}

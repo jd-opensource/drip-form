@@ -7,7 +7,7 @@
  */
 import React, { useMemo, useState, useEffect, memo } from 'react'
 import cx from 'classnames'
-import { typeCheck } from '@jdfed/utils'
+import { typeCheck, number2Chinese } from '@jdfed/utils'
 import { useArray, useContainer, useContainerStyle } from '@jdfed/hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -25,6 +25,11 @@ type ArrayProps = {
     addTitle?: string
     // 是否为加减模式，默认为加减模式
     mode?: 'add' | 'normal'
+    serialText?: {
+      afterText: string
+      beforeText: string
+      serialLang: 'number' | 'CN'
+    }
     [propName: string]: unknown
   }
   containerMap: ContainerType
@@ -91,7 +96,16 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
 
   const newContainerStyle = useContainerStyle(formMode, containerStyle)
   // 默认ArrayContainer模式为加减 normal不展示用于元祖
-  const { mode = 'add', addTitle = '添加一行数据', showNo } = uiProp
+  const {
+    mode = 'add',
+    addTitle = '添加一行数据',
+    serialText = {
+      afterText: '',
+      beforeText: '',
+      serialLang: 'number',
+    },
+    showNo,
+  } = uiProp
   // 是否为add加减模式
   const isAdd = useMemo(() => mode === 'add', [mode])
   const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
@@ -163,7 +177,9 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
       <div
         style={{
           width: `calc(100% - ${
-            titleUi?.placement === 'bottom' || titleUi?.placement === 'top'
+            !showTitle ||
+            titleUi?.placement === 'bottom' ||
+            titleUi?.placement === 'top'
               ? 0
               : titleUi?.width || 90
           }px)`,
@@ -175,37 +191,51 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
             <div
               key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
               className={cx('array-item--field', {
-                'array-item--field_last-child': i === array.length - 1,
+                'array-item--field_last-child': isAdd && i === array.length - 1,
               })}
             >
-              {showNo && <div className="array-item--number">{i + 1}</div>}
-              {renderCoreFn({
-                hasDefault,
-                uiComponents,
-                dataSchema,
-                uiSchema,
-                errors,
-                formData,
-                onQuery,
-                onValidate,
-                dispatch,
-                containerHoc,
-                containerMap,
-                parentUiSchemaKey,
-                parentDataSchemaKey,
-                parentFormDataKey: fieldKey,
-                customComponents,
-                currentArrayKey: i,
-                get,
-                getKey,
-                arrayKey,
-              })}
-              {isAdd && (
-                <FontAwesomeIcon
-                  icon={faTrashAlt}
-                  onClick={deltItem.bind(this, i)}
-                />
-              )}
+              <div className="array-item--header">
+                {showNo ? (
+                  <div className="array-item--number">
+                    {serialText.beforeText}
+                    {serialText.serialLang === 'CN'
+                      ? number2Chinese(i + 1)
+                      : i + 1}
+                    {serialText.afterText}
+                  </div>
+                ) : (
+                  <div />
+                )}
+                {isAdd && (
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    onClick={deltItem.bind(this, i)}
+                  />
+                )}
+              </div>
+              <div className="array-item--case">
+                {renderCoreFn({
+                  hasDefault,
+                  uiComponents,
+                  dataSchema,
+                  uiSchema,
+                  errors,
+                  formData,
+                  onQuery,
+                  onValidate,
+                  dispatch,
+                  containerHoc,
+                  containerMap,
+                  parentUiSchemaKey,
+                  parentDataSchemaKey,
+                  parentFormDataKey: fieldKey,
+                  customComponents,
+                  currentArrayKey: i,
+                  get,
+                  getKey,
+                  arrayKey,
+                })}
+              </div>
             </div>
           )
         })}
