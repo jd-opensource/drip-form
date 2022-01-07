@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:58:43
+ * @Last Modified time: 2022-01-07 11:18:18
  */
 import React, { useMemo, useState, useEffect, memo } from 'react'
 import cx from 'classnames'
@@ -91,7 +91,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
 
   const newContainerStyle = useContainerStyle(formMode, containerStyle)
   // 默认ArrayContainer模式为加减 normal不展示用于元祖
-  const { mode = 'add', addTitle = '添加一行数据' } = uiProp
+  const { mode = 'add', addTitle = '添加一行数据', showNo } = uiProp
   // 是否为add加减模式
   const isAdd = useMemo(() => mode === 'add', [mode])
   const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
@@ -159,7 +159,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
       }}
     >
       {showTitle && titleMemo}
-      {/* 元祖模式和generator模式需要展示表单，自增模式由数据渲染表单 */}
+      {/* generator模式需要默认展示一份表单，自增模式、元祖模式由数据渲染表单 */}
       <div
         style={{
           width: `calc(100% - ${
@@ -170,49 +170,45 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
           minWidth: '200px',
         }}
       >
-        {(!isAdd || formMode === 'generator' ? [''] : fieldData).map(
-          (item, i, array) => {
-            return (
-              <div
-                key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
-                className={cx({
-                  'array-item--field': isAdd,
-                  'array-item--field_last-child':
-                    isAdd && i === array.length - 1,
-                })}
-              >
-                {isAdd && <div className="array-item--number">{i + 1}</div>}
-                {renderCoreFn({
-                  hasDefault,
-                  uiComponents,
-                  dataSchema,
-                  uiSchema,
-                  errors,
-                  formData,
-                  onQuery,
-                  onValidate,
-                  dispatch,
-                  containerHoc,
-                  containerMap,
-                  parentUiSchemaKey,
-                  parentDataSchemaKey,
-                  parentFormDataKey: fieldKey,
-                  customComponents,
-                  currentArrayKey: i,
-                  get,
-                  getKey,
-                  arrayKey,
-                })}
-                {isAdd && (
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    onClick={deltItem.bind(this, i)}
-                  />
-                )}
-              </div>
-            )
-          }
-        )}
+        {(formMode === 'generator' ? [''] : fieldData).map((item, i, array) => {
+          return (
+            <div
+              key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
+              className={cx('array-item--field', {
+                'array-item--field_last-child': i === array.length - 1,
+              })}
+            >
+              {showNo && <div className="array-item--number">{i + 1}</div>}
+              {renderCoreFn({
+                hasDefault,
+                uiComponents,
+                dataSchema,
+                uiSchema,
+                errors,
+                formData,
+                onQuery,
+                onValidate,
+                dispatch,
+                containerHoc,
+                containerMap,
+                parentUiSchemaKey,
+                parentDataSchemaKey,
+                parentFormDataKey: fieldKey,
+                customComponents,
+                currentArrayKey: i,
+                get,
+                getKey,
+                arrayKey,
+              })}
+              {isAdd && (
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  onClick={deltItem.bind(this, i)}
+                />
+              )}
+            </div>
+          )
+        })}
         {isAdd && (
           <div
             className="array-item--add"
