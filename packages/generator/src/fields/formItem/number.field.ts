@@ -44,10 +44,15 @@ const config: Field = {
       },
       {
         fieldKey: 'precision',
-        type: 'string',
+        type: 'number',
         title: '精度',
         ui: {
-          type: 'text',
+          type: 'number',
+          description: {
+            type: 'icon',
+            trigger: 'hover',
+            title: '若要整数，则设置0',
+          },
           placeholder: '请输入',
           allowClear: true,
         },
@@ -56,7 +61,6 @@ const config: Field = {
         fieldKey: 'max',
         type: 'number',
         title: '最大值',
-        default: Number.MAX_SAFE_INTEGER,
         ui: {
           type: 'number',
         },
@@ -65,7 +69,6 @@ const config: Field = {
         fieldKey: 'min',
         type: 'number',
         title: '最小值',
-        default: Number.MIN_SAFE_INTEGER,
         ui: {
           type: 'number',
         },
