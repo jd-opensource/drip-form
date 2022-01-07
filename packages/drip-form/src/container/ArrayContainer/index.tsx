@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-07 11:18:18
+ * @Last Modified time: 2022-01-07 16:54:47
  */
 import React, { useMemo, useState, useEffect, memo } from 'react'
 import cx from 'classnames'
@@ -23,8 +23,14 @@ type ArrayProps = {
   uiProp: {
     // 点击增加按钮文案
     addTitle?: string
-    // 是否为加减模式，默认为加减模式
-    mode?: 'add' | 'normal'
+    //
+    /**
+     * 数组容器模式
+     * add: 数组加减模式  可以点击新增一行数据，根据fiedlData渲染
+     * normal、tuple：元祖模式 不展示索引、不展示新增删除按钮 展示数组中所有表单（normal即将废弃，使用tuple）
+     * fixed：数组非加减模式 不可以点击新增，根据fieldData渲染
+     */
+    mode?: 'add' | 'normal' | 'tuple' | 'fixed'
     serialText?: {
       afterText: string
       beforeText: string
@@ -95,7 +101,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
       : undefined
 
   const newContainerStyle = useContainerStyle(formMode, containerStyle)
-  // 默认ArrayContainer模式为加减 normal不展示用于元祖
+  // 默认ArrayContainer模式为加减模式
   const {
     mode = 'add',
     addTitle = '添加一行数据',
@@ -108,6 +114,8 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
   } = uiProp
   // 是否为add加减模式
   const isAdd = useMemo(() => mode === 'add', [mode])
+  // 是否是元祖模式
+  const isTuple = useMemo(() => ['normal', 'tuple'].includes(mode), [mode])
   const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
   /**
    * title组件
@@ -186,59 +194,62 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
           minWidth: '200px',
         }}
       >
-        {(formMode === 'generator' ? [''] : fieldData).map((item, i, array) => {
-          return (
-            <div
-              key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
-              className={cx('array-item--field', {
-                'array-item--field_last-child': isAdd && i === array.length - 1,
-              })}
-            >
-              <div className="array-item--header">
-                {showNo ? (
-                  <div className="array-item--number">
-                    {serialText.beforeText}
-                    {serialText.serialLang === 'CN'
-                      ? number2Chinese(i + 1)
-                      : i + 1}
-                    {serialText.afterText}
-                  </div>
-                ) : (
-                  <div />
-                )}
-                {isAdd && (
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    onClick={deltItem.bind(this, i)}
-                  />
-                )}
-              </div>
-              <div className="array-item--case">
-                {renderCoreFn({
-                  hasDefault,
-                  uiComponents,
-                  dataSchema,
-                  uiSchema,
-                  errors,
-                  formData,
-                  onQuery,
-                  onValidate,
-                  dispatch,
-                  containerHoc,
-                  containerMap,
-                  parentUiSchemaKey,
-                  parentDataSchemaKey,
-                  parentFormDataKey: fieldKey,
-                  customComponents,
-                  currentArrayKey: i,
-                  get,
-                  getKey,
-                  arrayKey,
+        {(formMode === 'generator' || isTuple ? [''] : fieldData).map(
+          (item, i, array) => {
+            return (
+              <div
+                key={(arrayKey[fieldKey] && arrayKey[fieldKey][i]) || i}
+                className={cx('array-item--field', {
+                  'array-item--field_last-child':
+                    isAdd && i === array.length - 1,
                 })}
+              >
+                <div className="array-item--header">
+                  {showNo ? (
+                    <div className="array-item--number">
+                      {serialText.beforeText}
+                      {serialText.serialLang === 'CN'
+                        ? number2Chinese(i + 1)
+                        : i + 1}
+                      {serialText.afterText}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                  {isAdd && (
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      onClick={deltItem.bind(this, i)}
+                    />
+                  )}
+                </div>
+                <div className="array-item--case">
+                  {renderCoreFn({
+                    hasDefault,
+                    uiComponents,
+                    dataSchema,
+                    uiSchema,
+                    errors,
+                    formData,
+                    onQuery,
+                    onValidate,
+                    dispatch,
+                    containerHoc,
+                    containerMap,
+                    parentUiSchemaKey,
+                    parentDataSchemaKey,
+                    parentFormDataKey: fieldKey,
+                    customComponents,
+                    currentArrayKey: i,
+                    get,
+                    getKey,
+                    arrayKey,
+                  })}
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          }
+        )}
         {isAdd && (
           <div
             className="array-item--add"

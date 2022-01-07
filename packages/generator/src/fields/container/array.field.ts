@@ -63,7 +63,8 @@ const config: Field = {
           type: 'radio',
           options: [
             { label: '加减模式', value: 'add' },
-            { label: '不可变模式', value: 'normal' },
+            { label: '不可变模式', value: 'fixed' },
+            { label: '元祖模式', value: 'tuple' },
           ],
         },
       },

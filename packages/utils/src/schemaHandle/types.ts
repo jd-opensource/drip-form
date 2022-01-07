@@ -56,7 +56,7 @@ type Properties = {
  */
 export type UiSchema = {
   formMode?: 'edit' | 'view' | 'generator'
-  mode: 'add' | 'normal' | 'collapse'
+  mode: 'add' | 'normal' | 'collapse' | 'tuple' | 'fixed'
   theme: Theme
   type: string
   properties: Properties
