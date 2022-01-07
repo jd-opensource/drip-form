@@ -192,6 +192,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
               : titleUi?.width || 90
           }px)`,
           minWidth: '200px',
+          flexShrink: 0,
         }}
       >
         {(formMode === 'generator' || isTuple ? [''] : fieldData).map(
@@ -204,26 +205,28 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
                     isAdd && i === array.length - 1,
                 })}
               >
-                <div className="array-item--header">
-                  {showNo ? (
-                    <div className="array-item--number">
-                      {serialText.beforeText}
-                      {serialText.serialLang === 'CN'
-                        ? number2Chinese(i + 1)
-                        : i + 1}
-                      {serialText.afterText}
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                  {isAdd && (
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      onClick={deltItem.bind(this, i)}
-                    />
-                  )}
-                </div>
-                <div className="array-item--case">
+                {!isTuple && (
+                  <div className="array-item--header">
+                    {showNo ? (
+                      <div className="array-item--number">
+                        {serialText.beforeText}
+                        {serialText.serialLang === 'CN'
+                          ? number2Chinese(i + 1)
+                          : i + 1}
+                        {serialText.afterText}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                    {isAdd && (
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        onClick={deltItem.bind(this, i)}
+                      />
+                    )}
+                  </div>
+                )}
+                <div className={cx({ 'array-item--case': !isTuple })}>
                   {renderCoreFn({
                     hasDefault,
                     uiComponents,
