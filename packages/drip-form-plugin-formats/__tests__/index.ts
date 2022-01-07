@@ -23,6 +23,17 @@ describe('addFormats', () => {
     })
   })
 
+  test('https', () => {
+    addFormats(ajv)
+    const validate = ajv.compile({ type: 'string', format: 'https' })
+    expect(
+      validate('https://www.example.com/foo/?bar=baz&inga=42&quux')
+    ).toEqual(true)
+    expect(validate('https://www.example.com')).toEqual(true)
+    expect(validate('http://www.example.com')).toEqual(false)
+    expect(validate('//www.example.com')).toEqual(false)
+  })
+
   test('color', () => {
     addFormats(ajv)
     const validate = ajv.compile({ type: 'string', format: 'color' })
