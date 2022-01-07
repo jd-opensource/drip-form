@@ -1,5 +1,42 @@
 import { Field } from '../types'
 
+const serialTextUiSchema = [
+  {
+    type: 'string',
+    fieldKey: 'beforeText',
+    title: '序号前文案',
+    ui: {
+      type: 'text',
+    },
+  },
+  {
+    type: 'string',
+    fieldKey: 'serialLang',
+    title: '序号展示类型',
+    ui: {
+      type: 'select',
+      options: [
+        {
+          value: 'number',
+          label: '数字',
+        },
+        {
+          value: 'CN',
+          label: '中文',
+        },
+      ],
+    },
+  },
+  {
+    type: 'string',
+    fieldKey: 'afterText',
+    title: '序号后文案',
+    ui: {
+      type: 'text',
+    },
+  },
+]
+
 /**
  * 数组容器
  */
@@ -45,6 +82,22 @@ const config: Field = {
         ui: {
           type: 'switch',
         },
+      },
+      {
+        fieldKey: 'serialText',
+        type: 'object',
+        title: '序号文案',
+        ui: {
+          type: 'object',
+          mode: 'collapse',
+          vcontrol: 'return props.formData.ui.showNo == true',
+        },
+        default: {
+          before: '',
+          serialLang: 'number',
+          after: '',
+        },
+        schema: serialTextUiSchema,
       },
     ],
   },

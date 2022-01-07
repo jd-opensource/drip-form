@@ -159,7 +159,9 @@ const ObjectContainer: FC<Props & RenderFnProps & ObjectContainerProps> = ({
           <div
             style={{
               width: `calc(100% - ${
-                titleUi?.placement === 'bottom' || titleUi?.placement === 'top'
+                !showTitle ||
+                titleUi?.placement === 'bottom' ||
+                titleUi?.placement === 'top'
                   ? 0
                   : titleUi?.width || 90
               }px)`,
