@@ -74,9 +74,9 @@ const config: Field = {
         fieldKey: 'placeholder',
         type: 'string',
         title: '占位符',
-        default: '请选择时间',
         ui: {
           type: 'text',
+          placeholder: '请选择时间',
           vcontrol: 'return !props.formData.ui.range',
         },
       },
