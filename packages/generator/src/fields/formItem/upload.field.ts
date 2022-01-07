@@ -84,10 +84,15 @@ const config: Field = {
       {
         fieldKey: 'accept',
         type: 'string',
-        title: '接收上传的地址',
+        title: '接收上传的文件类型',
         ui: {
           type: 'text',
-          placeholder: 'https://www.jd.com',
+          description: {
+            type: 'icon',
+            trigger: 'hover',
+            title:
+              '详细参考：https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept',
+          },
           allowClear: true,
         },
       },
