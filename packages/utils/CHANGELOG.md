@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.0 (2022-01-07)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+
+
+### Bug Fixes
+
+* custom keyword duplicate error  ([#84](https://github.com/jdfed/drip-form/issues/84)) ([afcaa7d](https://github.com/jdfed/drip-form/commit/afcaa7df4d0a2255de1685e37c59962d192c2b7e))
+* provide a default key for dynamic children ([#53](https://github.com/jdfed/drip-form/issues/53)) ([3abe606](https://github.com/jdfed/drip-form/commit/3abe6068e20d2d567426eb7ee637e2b6a0c93af5))
+* **utils:** 修复parse无法解析顶层$:xxx自定义属性的问题 ([36235e5](https://github.com/jdfed/drip-form/commit/36235e56f477461c49b4f59149c6da7e6ede99d9))
+
+
+
 
 
 **Note:** Version bump only for package @jdfed/utils
