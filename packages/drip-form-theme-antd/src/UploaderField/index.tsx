@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-05 18:10:22
+ * @Last Modified time: 2022-01-09 15:44:25
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
@@ -137,7 +137,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
       // 如果定义了afterAction，则执行afterAction，并将value进行替换
       if (afterAction) {
         value = afterAction(value)
-      } else if (action && /pic.jd.com/.test(action)) {
+      } else if (action && /jd.com/.test(action)) {
         // 未定义afterAction，但使用的action是京东的图片上传服务
         if (!isEmpty(value.file.response)) {
           const { id, msg } = value.file.response
