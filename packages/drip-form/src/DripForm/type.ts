@@ -20,7 +20,7 @@ export type FuncType = {
   [propName: string]: () => any
 }
 
-type ControlFuc = ({
+export type ControlFuc = ({
   formData,
   uiSchema,
   dataSchema,

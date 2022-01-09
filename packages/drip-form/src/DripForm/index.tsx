@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-30 18:12:44
+ * @Last Modified time: 2022-01-09 14:39:05
  */
 import React, {
   forwardRef,
@@ -23,8 +23,8 @@ import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
 import { useValidate, useSchema, useGetKey, usePrevious } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
-import type { DripFormRenderProps, DripFormRefType } from './type'
-import type { State, Action, Theme } from '@jdfed/utils'
+import type { DripFormRenderProps, DripFormRefType, ControlFuc } from './type'
+import type { State, Action, Theme, UiSchema } from '@jdfed/utils'
 
 /**
  * 表单入口
@@ -203,7 +203,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       changeKey,
       arrayKey,
     } = data
-    const { theme = 'antd' } = uiSchema
+    const { theme = 'antd', change } = uiSchema as UiSchema & {
+      change: string | ControlFuc
+    }
 
     useEffect(() => {
       // 当前值为暂时获取其他表单数据，后续会更新获取方法
@@ -328,6 +330,34 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           console.error(error)
         }
       }
+      if (change) {
+        let changeFn
+        try {
+          if (typeof change === 'function') {
+            changeFn = change
+          } else if (typeof change === 'string') {
+            changeFn = new Function('props', change as string)
+          }
+
+          if (changeFn) {
+            changeFn({
+              formData,
+              uiSchema,
+              dataSchema,
+              dispatch,
+              changeKey,
+              checking,
+              get,
+              set,
+              merge,
+              deleteField,
+            })
+          }
+        } catch (error) {
+          console.error('change函数体错误，请确认')
+          console.error(error)
+        }
+      }
     }, [
       control,
       dataSchema,
@@ -340,6 +370,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       set,
       merge,
       deleteField,
+      change,
     ])
     const globalTheme: Theme = theme
 
