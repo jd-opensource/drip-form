@@ -7,15 +7,31 @@ const config: Field = {
   icon: 'iconfont icon-cloud-storage',
   title: '上传组件',
   unitedSchema: {
-    type: 'object',
+    type: ['string', 'array'],
     title: '上传组件',
     ui: {
       type: 'uploader',
       listType: 'picture',
+      canDrag: false,
+      exportToString: true,
+      maxCount: 1,
     },
   },
   propertyConfig: {
     styleSchema: [
+      {
+        fieldKey: 'exportToString',
+        type: 'boolean',
+        title: '输出string',
+        ui: {
+          description: {
+            type: 'icon',
+            trigger: 'hover',
+            title: '关闭后，该组件返回对象形式',
+          },
+          type: 'switch',
+        },
+      },
       {
         fieldKey: 'disabled',
         type: 'boolean',
