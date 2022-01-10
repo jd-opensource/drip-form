@@ -51,6 +51,9 @@ const config: Field = {
               ui: {
                 type: 'text',
                 placeholder: '值',
+                style: {
+                  marginBottom: '20px',
+                },
               },
             },
           ],

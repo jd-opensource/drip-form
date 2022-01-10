@@ -301,7 +301,7 @@ const PropertyConfig = () => {
 
   return (
     <Fragment>
-      <div className={styles.panelConfig}>
+      <div className={`${styles.panelConfig} panelConfigGlobal`}>
         {type !== 'root' && (
           <>
             <div className={cx(styles.propertyConfig)}>

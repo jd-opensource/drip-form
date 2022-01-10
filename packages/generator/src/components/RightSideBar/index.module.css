@@ -1,3 +1,13 @@
+:global {
+  .panelConfigGlobal {
+    .object-container {
+      .object-container__collapse-custom {
+        margin-bottom: 0
+      }
+    }
+  }
+}
+
 .container {
   @apply w-1/4 p-3 h-full;
   min-width: 350px;
