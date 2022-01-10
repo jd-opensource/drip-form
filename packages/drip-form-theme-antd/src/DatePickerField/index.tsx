@@ -40,6 +40,10 @@ const DatePickerField = ({
   asyncValidate,
   showTime,
   getKey,
+  placeholder__range = {
+    0: '请选择日期',
+    1: '请选择日期',
+  },
   ...restProps
 }: DatePickerFieldProps) => {
   /**
@@ -108,6 +112,10 @@ const DatePickerField = ({
             }
           : showTime
       }
+      placeholder={[
+        placeholder__range[0] ?? '请选择日期',
+        placeholder__range[1] ?? '请选择日期',
+      ]}
       {...restProps}
     />
   ) : (

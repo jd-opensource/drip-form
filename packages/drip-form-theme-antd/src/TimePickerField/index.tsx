@@ -35,6 +35,10 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
   asyncValidate,
   format = 'HH:mm:ss',
   getKey,
+  placeholder__range = {
+    0: '请选择时间',
+    1: '请选择时间',
+  },
   ...restProps
 }) => {
   /**
@@ -93,6 +97,10 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       use12Hours={use12Hours}
       format={format}
       locale={locale}
+      placeholder={[
+        placeholder__range[0] ?? '请选择时间',
+        placeholder__range[1] ?? '请选择时间',
+      ]}
       {...restProps}
     />
   ) : (
