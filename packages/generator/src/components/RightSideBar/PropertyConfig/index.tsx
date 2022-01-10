@@ -198,6 +198,20 @@ const PropertyConfig = () => {
         changeSchema = 'dataSchema'
         // 在ajv校验时，如果formData中已经有值，则不再生成新的formData，需要set formData
         setFormData = true
+        if (changeKey.includes('ui.default__range')) {
+          key = 'ui.default'
+          data = get('ui.default__range').data
+        }
+      }
+      if (type === 'timePicker' || type === 'datePicker') {
+        if (changeKey === 'ui.range') {
+          setFormData = true
+          if (data === true) {
+            fieldData = get('ui.default__range').data
+          } else {
+            fieldData = get('ui.default').data
+          }
+        }
       }
       // 填充渲染区Schema
       generatorContext.current?.set(
