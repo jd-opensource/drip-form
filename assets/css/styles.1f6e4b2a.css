@@ -13723,6 +13723,9 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   cursor: not-allowed;
 }
 
+.object-container .object-container__collapse-custom {
+  margin-bottom: 20px;
+}
 .object-container__title--common {
   margin-bottom: 20px;
   font-size: 14px;
@@ -13785,6 +13788,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 .array-field--container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 .array-field--container.title-top {
   flex-direction: column;
@@ -41145,6 +41149,14 @@ Add the correct display in Chrome and Safari.
 
 /* purgecss start ignore */
 
+.panelConfigGlobal .object-container .object-container__collapse-custom {
+        margin-bottom: 0
+      }
+
+.panelConfigGlobal .array-field--container {
+      margin-bottom: 0
+    }
+
 .index-module_container__fH7Q7 {
   height: 100%;
   width: 25%;
@@ -41213,7 +41225,7 @@ Add the correct display in Chrome and Safari.
 
 .index-module_jsonbtn__2rLQr:hover {
   --tw-text-opacity: 1;
-  color: rgba(59, 130, 246, var(--tw-text-opacity));
+  color: rgba(59, 130, 246, var(--tw-text-opacity))
 }
 
 .index-module_panelConfig__owq5k {
