@@ -5,7 +5,7 @@
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: 2021-12-24 14:53:47
  */
-import React, { useMemo, memo, useState, useEffect } from 'react'
+import React, { useMemo, memo, useState, useEffect, CSSProperties } from 'react'
 import { useContainer, useContainerStyle } from '@jdfed/hooks'
 import cx from 'classnames'
 import renderCoreFn from '../../render'
@@ -115,11 +115,15 @@ const ObjectContainer: FC<Props & RenderFnProps & ObjectContainerProps> = ({
     <div
       className="object-container"
       style={{
+        ...(uiProp?.style as CSSProperties),
         ...(newContainerStyle?.width && { width: newContainerStyle.width }),
       }}
     >
       {isCollapse ? (
-        <Collapse defaultActiveKey={defaultActiveKey}>
+        <Collapse
+          defaultActiveKey={defaultActiveKey}
+          className={cx('object-container__collapse-custom')}
+        >
           <Panel
             header={titleMemo}
             key={fieldKey}

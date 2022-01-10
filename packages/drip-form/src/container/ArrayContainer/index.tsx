@@ -5,7 +5,7 @@
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: 2022-01-07 16:54:47
  */
-import React, { useMemo, useState, useEffect, memo } from 'react'
+import React, { useMemo, useState, useEffect, memo, CSSProperties } from 'react'
 import cx from 'classnames'
 import { typeCheck, number2Chinese } from '@jdfed/utils'
 import { useArray, useContainer, useContainerStyle } from '@jdfed/hooks'
@@ -135,6 +135,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
           }),
           display: 'flex',
           margin: titleMargin.style,
+          lineHeight: '32px',
         }}
       >
         {titleUi?.requiredIcon &&
@@ -177,6 +178,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
         titlePlacementCls(titlePlacement)
       )}
       style={{
+        ...(uiProp?.style as CSSProperties),
         ...(newContainerStyle?.width && { width: newContainerStyle.width }),
       }}
     >
@@ -192,6 +194,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
               : titleUi?.width || 90
           }px)`,
           minWidth: '200px',
+          flexShrink: 0,
         }}
       >
         {(formMode === 'generator' || isTuple ? [''] : fieldData).map(

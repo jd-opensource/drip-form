@@ -91,6 +91,9 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          style: {
+            paddingBottom: '20px',
+          },
           vcontrol: 'return props.formData.ui.showNo == true',
         },
         default: {
