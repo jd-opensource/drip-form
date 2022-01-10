@@ -29,7 +29,12 @@ const config: Field = {
         type: 'array',
         title: '选项',
         default: [],
-        ui: { type: 'array' },
+        ui: {
+          type: 'array',
+          style: {
+            marginBottom: '20px',
+          },
+        },
         items: {
           type: 'object',
           title: '',
@@ -51,9 +56,6 @@ const config: Field = {
               ui: {
                 type: 'text',
                 placeholder: '值',
-                style: {
-                  marginBottom: '20px',
-                },
               },
             },
           ],

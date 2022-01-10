@@ -194,6 +194,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
               : titleUi?.width || 90
           }px)`,
           minWidth: '200px',
+          flexShrink: 0,
         }}
       >
         {(formMode === 'generator' || isTuple ? [''] : fieldData).map(
