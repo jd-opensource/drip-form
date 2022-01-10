@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.0 (2022-01-10)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+* upload支持输出string类型([#52](https://github.com/jdfed/drip-form/issues/52)) ([#117](https://github.com/jdfed/drip-form/issues/117)) ([447489a](https://github.com/jdfed/drip-form/commit/447489a395c98ca63bcf76213c9778a73dffe010))
+
+
+### Bug Fixes
+
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+* upload组件jdAction域名匹配规则 ([347b31a](https://github.com/jdfed/drip-form/commit/347b31a44227dd47195b89ef20d335cdcd0d023f))
+
+
+
 ## 0.2.0 (2022-01-07)
 
 

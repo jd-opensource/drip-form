@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.0 (2022-01-10)
+
+
+### Features
+
+* array container support showNo config ([16f92a5](https://github.com/jdfed/drip-form/commit/16f92a5ae8b094768ff08ba3e8422170f40d8409))
+* ref外抛submit、reset函数 ([#85](https://github.com/jdfed/drip-form/issues/85)) ([a00704e](https://github.com/jdfed/drip-form/commit/a00704e7b5f769059fa891a693382bcd67bd91e5))
+* unitedSchema支持配置change ([#115](https://github.com/jdfed/drip-form/issues/115)) ([6175b29](https://github.com/jdfed/drip-form/commit/6175b29753d7fd146c9183944b0ac41df81585bb))
+* 数组容器样式优化 & 支持序号文案自定义 ([#109](https://github.com/jdfed/drip-form/issues/109)) ([2ca6f67](https://github.com/jdfed/drip-form/commit/2ca6f67a2b894fc0152230f3bee69f279bce640c))
+
+
+### Bug Fixes
+
+* provide a default key for dynamic children ([#53](https://github.com/jdfed/drip-form/issues/53)) ([3abe606](https://github.com/jdfed/drip-form/commit/3abe6068e20d2d567426eb7ee637e2b6a0c93af5))
+* ref外抛submit函数 ([#93](https://github.com/jdfed/drip-form/issues/93)) ([6ceffa7](https://github.com/jdfed/drip-form/commit/6ceffa77ef6286332703f63c8b3b393fdfe4184e))
+* the delete button of the first component of the visible area is hidden ([#94](https://github.com/jdfed/drip-form/issues/94)) ([e388b6b](https://github.com/jdfed/drip-form/commit/e388b6b662617215a2ca119070e90f4be0bb5704))
+* 修复元祖无数据不展示问题 ([#112](https://github.com/jdfed/drip-form/issues/112)) ([a67ae0e](https://github.com/jdfed/drip-form/commit/a67ae0e441d06d26812d257e34f82a245c9a84ea))
+* 修改组件初始默认值设置 ([6ba869f](https://github.com/jdfed/drip-form/commit/6ba869fb6409cba746b4093dbc361ed5e2c8d532))
+* 对象容器样式调整 & 数组｜对象容器schema支持style参数 ([#116](https://github.com/jdfed/drip-form/issues/116)) ([45f0f39](https://github.com/jdfed/drip-form/commit/45f0f39d7ba189f8859b3a9bfa2ad636e00c38ba))
+* 数组容器无默认值报错 ([#75](https://github.com/jdfed/drip-form/issues/75)) ([010adcf](https://github.com/jdfed/drip-form/commit/010adcfcfef9a64725f29127e4e8417e29ae8d4b))
+
+
+
 ## 0.2.0 (2022-01-07)
 
 

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.0 (2022-01-10)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* 数组容器样式优化 & 支持序号文案自定义 ([#109](https://github.com/jdfed/drip-form/issues/109)) ([2ca6f67](https://github.com/jdfed/drip-form/commit/2ca6f67a2b894fc0152230f3bee69f279bce640c))
+
+
+### Bug Fixes
+
+* custom keyword duplicate error  ([#84](https://github.com/jdfed/drip-form/issues/84)) ([afcaa7d](https://github.com/jdfed/drip-form/commit/afcaa7df4d0a2255de1685e37c59962d192c2b7e))
+* provide a default key for dynamic children ([#53](https://github.com/jdfed/drip-form/issues/53)) ([3abe606](https://github.com/jdfed/drip-form/commit/3abe6068e20d2d567426eb7ee637e2b6a0c93af5))
+* 修复元祖无数据不展示问题 ([#112](https://github.com/jdfed/drip-form/issues/112)) ([a67ae0e](https://github.com/jdfed/drip-form/commit/a67ae0e441d06d26812d257e34f82a245c9a84ea))
+* **utils:** 修复parse无法解析顶层$:xxx自定义属性的问题 ([36235e5](https://github.com/jdfed/drip-form/commit/36235e56f477461c49b4f59149c6da7e6ede99d9))
+
+
+
 ## 0.2.0 (2022-01-07)
 
 
