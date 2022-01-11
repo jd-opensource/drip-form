@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.0 (2022-01-11)
+
+
+### Features
+
+* ajv format添加https校验 ([#113](https://github.com/jdfed/drip-form/issues/113)) ([b38f7cb](https://github.com/jdfed/drip-form/commit/b38f7cb450d310d8651cb1934e9f8e07e199ff87))
+* array container support showNo config ([16f92a5](https://github.com/jdfed/drip-form/commit/16f92a5ae8b094768ff08ba3e8422170f40d8409))
+* generator schema非必填 ([628553f](https://github.com/jdfed/drip-form/commit/628553ff135a75c2ab668f0d2b29219e6c0ff514))
+* generator数组容器支持配置新增按钮文案 ([f4693e8](https://github.com/jdfed/drip-form/commit/f4693e814e9aa392a8d21f414f58b4e0fa23c64d))
+* module bar styles support custom ([#76](https://github.com/jdfed/drip-form/issues/76)) ([5b950b0](https://github.com/jdfed/drip-form/commit/5b950b05241a4a80243f3154a9abd7029aabf196))
+* ref外抛submit、reset函数 ([#85](https://github.com/jdfed/drip-form/issues/85)) ([a00704e](https://github.com/jdfed/drip-form/commit/a00704e7b5f769059fa891a693382bcd67bd91e5))
+* unitedSchema支持配置change ([#115](https://github.com/jdfed/drip-form/issues/115)) ([6175b29](https://github.com/jdfed/drip-form/commit/6175b29753d7fd146c9183944b0ac41df81585bb))
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+* upload支持输出string类型([#52](https://github.com/jdfed/drip-form/issues/52)) ([#117](https://github.com/jdfed/drip-form/issues/117)) ([447489a](https://github.com/jdfed/drip-form/commit/447489a395c98ca63bcf76213c9778a73dffe010))
+* 数组容器样式优化 & 支持序号文案自定义 ([#109](https://github.com/jdfed/drip-form/issues/109)) ([2ca6f67](https://github.com/jdfed/drip-form/commit/2ca6f67a2b894fc0152230f3bee69f279bce640c))
+* **drip-form-plugin-eggjs:** add drip-form-plugin-eggjs ([#20](https://github.com/jdfed/drip-form/issues/20)) ([cef14a9](https://github.com/jdfed/drip-form/commit/cef14a9ab551f29cf863b4ac62cd52d6e2281231))
+* **generator:** add description for number input precision config ([5eeb67b](https://github.com/jdfed/drip-form/commit/5eeb67b345a6e27262461d040e6e1b63025121a7))
+* **generator:** add description for upload accept config ([9f52274](https://github.com/jdfed/drip-form/commit/9f52274ece0dcdf7606a5198db0e7561da9d3f0e))
+* **generator:** regular verification configuration supports emptying options ([290d324](https://github.com/jdfed/drip-form/commit/290d3249357d72aca46f56f952786c9308559733))
+* 支持header配置 ([2568ee2](https://github.com/jdfed/drip-form/commit/2568ee2b68787a8edacfd4ef06e98b4846c697f2))
+* 支持复制fieldKey ([#89](https://github.com/jdfed/drip-form/issues/89)) ([a063827](https://github.com/jdfed/drip-form/commit/a06382719e1359419b8e5f7f56aecf273d838b6c))
+* 支持自定义组件区域和属性配置区域 ([4d9477f](https://github.com/jdfed/drip-form/commit/4d9477fd0e4fa411550af480f8047c83e5fdd27d))
+
+
+### Bug Fixes
+
+* custom keyword duplicate error  ([#84](https://github.com/jdfed/drip-form/issues/84)) ([afcaa7d](https://github.com/jdfed/drip-form/commit/afcaa7df4d0a2255de1685e37c59962d192c2b7e))
+* editConfig parse 函数 showTitle 判空逻辑错误修复 ([#77](https://github.com/jdfed/drip-form/issues/77)) ([bde5531](https://github.com/jdfed/drip-form/commit/bde5531190418b146fee3e61c5ca9a3ed0a7ddca))
+* monaco-editor always in loading ([5f50fa9](https://github.com/jdfed/drip-form/commit/5f50fa9021ec8e2817c42d01a2c02b66780fbb47))
+* property panel、 check panel not reload  ([#90](https://github.com/jdfed/drip-form/issues/90)) ([6c13d7a](https://github.com/jdfed/drip-form/commit/6c13d7afeaa275ca8d8084d4a580d64adb2c43e7))
+* provide a default key for dynamic children ([#53](https://github.com/jdfed/drip-form/issues/53)) ([3abe606](https://github.com/jdfed/drip-form/commit/3abe6068e20d2d567426eb7ee637e2b6a0c93af5))
+* ref外抛submit函数 ([#93](https://github.com/jdfed/drip-form/issues/93)) ([6ceffa7](https://github.com/jdfed/drip-form/commit/6ceffa77ef6286332703f63c8b3b393fdfe4184e))
+* the delete button of the first component of the visible area is hidden ([#94](https://github.com/jdfed/drip-form/issues/94)) ([e388b6b](https://github.com/jdfed/drip-form/commit/e388b6b662617215a2ca119070e90f4be0bb5704))
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+* upload组件jdAction域名匹配规则 ([347b31a](https://github.com/jdfed/drip-form/commit/347b31a44227dd47195b89ef20d335cdcd0d023f))
+* 修复元祖无数据不展示问题 ([#112](https://github.com/jdfed/drip-form/issues/112)) ([a67ae0e](https://github.com/jdfed/drip-form/commit/a67ae0e441d06d26812d257e34f82a245c9a84ea))
+* 修改组件初始默认值设置 ([6ba869f](https://github.com/jdfed/drip-form/commit/6ba869fb6409cba746b4093dbc361ed5e2c8d532))
+* 切换monaco-editor cdn路径 ([#78](https://github.com/jdfed/drip-form/issues/78)) ([96dbcde](https://github.com/jdfed/drip-form/commit/96dbcde19bdcedb54dfe5478940d8dd0db9922d5))
+* 对象容器样式调整 & 数组｜对象容器schema支持style参数 ([#116](https://github.com/jdfed/drip-form/issues/116)) ([45f0f39](https://github.com/jdfed/drip-form/commit/45f0f39d7ba189f8859b3a9bfa2ad636e00c38ba))
+* 对象嵌套拖拽报错 ([#79](https://github.com/jdfed/drip-form/issues/79)) ([a45f4a7](https://github.com/jdfed/drip-form/commit/a45f4a72fcbc2c77bb2a0a7f654e8a691305f053))
+* 数组容器无默认值报错 ([#75](https://github.com/jdfed/drip-form/issues/75)) ([010adcf](https://github.com/jdfed/drip-form/commit/010adcfcfef9a64725f29127e4e8417e29ae8d4b))
+* 时间选择器，默认占位符文案保持一致 ([#105](https://github.com/jdfed/drip-form/issues/105)) ([5b61efb](https://github.com/jdfed/drip-form/commit/5b61efb11b6f222206b0ce99dfdecea034b78730))
+* **utils:** 修复parse无法解析顶层$:xxx自定义属性的问题 ([36235e5](https://github.com/jdfed/drip-form/commit/36235e56f477461c49b4f59149c6da7e6ede99d9))
+
+
+### style
+
+* 删除无用样式，避免样式冲突 ([c252e3e](https://github.com/jdfed/drip-form/commit/c252e3e9ac8ce04ff9f8017a80f928e4c0cf0524))
+
+
+
 ## 0.2.0 (2022-01-07)
 
 
