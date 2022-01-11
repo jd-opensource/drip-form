@@ -98,6 +98,18 @@ const PropertyConfig = () => {
             // onCancel:
           })
         }
+        // 时间｜日期 开启范围选择器，要将default数组类型转换为default__range对象类型
+        if (
+          key === 'ui' &&
+          (formData.ui.type === 'timePicker' ||
+            formData.ui.type === 'datePicker') &&
+          formData.ui.range
+        ) {
+          formData.ui.default__range = {}
+          formData.ui.default.forEach((item: string, index: number) => {
+            formData.ui.default__range[index] = item
+          })
+        }
       })
       return formData
     },
@@ -203,6 +215,7 @@ const PropertyConfig = () => {
           data = get('ui.default__range').data
         }
       }
+      // 时间｜日期 开启范围选择器，要将default__range对象类型转换为default数组类型
       if (type === 'timePicker' || type === 'datePicker') {
         if (changeKey === 'ui.range') {
           setFormData = true
