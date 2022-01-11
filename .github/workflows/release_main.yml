@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: dev
-					token: ${{secrets.GH_TOKEN}}
+          token: ${{secrets.GH_TOKEN}}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.0
