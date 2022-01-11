@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.0 (2022-01-11)
+
+
+### Features
+
+* ajv format添加https校验 ([#113](https://github.com/jdfed/drip-form/issues/113)) ([b38f7cb](https://github.com/jdfed/drip-form/commit/b38f7cb450d310d8651cb1934e9f8e07e199ff87))
+
+
+
 ## 0.3.0 (2022-01-11)
 
 

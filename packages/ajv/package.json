@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/ajv",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "drip ajv核心包",
 	"keywords": [
 		"ajv"
@@ -34,8 +34,8 @@
 		"url": "https://github.com/JDFED/drip-form/"
 	},
 	"dependencies": {
-		"@jdfed/drip-form-plugin-formats": "^0.3.0",
-		"@jdfed/drip-form-plugin-keywords": "^0.3.0",
+		"@jdfed/drip-form-plugin-formats": "^0.4.0",
+		"@jdfed/drip-form-plugin-keywords": "^0.4.0",
 		"ajv": "^8.6.2",
 		"ajv-errors": "^3.0.0",
 		"ajv-formats": "^2.1.0",
