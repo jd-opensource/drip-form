@@ -98,6 +98,15 @@ const PropertyConfig = () => {
             // onCancel:
           })
         }
+        // 时间｜日期 开启范围选择器，default__range的值要从default中获取
+        if (
+          key === 'ui' &&
+          (formData.ui.type === 'timePicker' ||
+            formData.ui.type === 'datePicker') &&
+          formData.ui.range
+        ) {
+          formData.ui.default__range = formData.ui.default || []
+        }
       })
       return formData
     },
@@ -198,6 +207,22 @@ const PropertyConfig = () => {
         changeSchema = 'dataSchema'
         // 在ajv校验时，如果formData中已经有值，则不再生成新的formData，需要set formData
         setFormData = true
+        // 如果是范围选择器，需要从default__range取值
+        if (changeKey.includes('ui.default__range')) {
+          key = 'ui.default'
+          data = get('ui.default__range').data
+        }
+      }
+      // 时间｜日期 切换范围选择器时，fieldData需要分别从不同字段取值
+      if (type === 'timePicker' || type === 'datePicker') {
+        if (changeKey === 'ui.range') {
+          setFormData = true
+          if (data === true) {
+            fieldData = get('ui.default__range').data
+          } else {
+            fieldData = get('ui.default').data
+          }
+        }
       }
       // 填充渲染区Schema
       generatorContext.current?.set(
