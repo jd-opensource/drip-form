@@ -36,6 +36,7 @@ type ArrayProps = {
       beforeText: string
       serialLang: 'number' | 'CN'
     }
+    maxAddCount: number
     [propName: string]: unknown
   }
   containerMap: ContainerType
@@ -111,9 +112,15 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
       serialLang: 'number',
     },
     showNo,
+    maxAddCount,
   } = uiProp
   // 是否为add加减模式
   const isAdd = useMemo(() => mode === 'add', [mode])
+  // 加减模式，判断是否超过了最大可添加行数
+  const notExceedMaxCount = useMemo(
+    () => maxAddCount === undefined || maxAddCount > fieldData.length,
+    [maxAddCount, fieldData]
+  )
   // 是否是元祖模式
   const isTuple = useMemo(() => ['normal', 'tuple'].includes(mode), [mode])
   const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
@@ -253,7 +260,7 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
             )
           }
         )}
-        {isAdd && (
+        {isAdd && notExceedMaxCount && (
           <div
             className="array-item--add"
             // TODO 非object、array类型是否需要添加默认值，当前undeined
