@@ -40,6 +40,10 @@ const DatePickerField = ({
   asyncValidate,
   showTime,
   getKey,
+  placeholder__range = {
+    0: '请选择日期',
+    1: '请选择日期',
+  },
   ...restProps
 }: DatePickerFieldProps) => {
   /**
@@ -65,13 +69,13 @@ const DatePickerField = ({
   useEffect(() => {
     try {
       // 点击清空的时候，会变成null。
-      if (fieldData === null || fieldData === '') {
+      if (fieldData === null || fieldData === undefined || fieldData === '') {
         setValid(true)
       } else {
         if (range) {
           setValid(
-            moment(fieldData[0], format).isValid() &&
-              moment(fieldData[1], format).isValid()
+            (!fieldData[0] || moment(fieldData[0], 'HH:mm:ss').isValid()) &&
+              (!fieldData[1] || moment(fieldData[1], 'HH:mm:ss').isValid())
           )
         } else {
           setValid(moment(fieldData, format).isValid())
@@ -90,8 +94,11 @@ const DatePickerField = ({
       {...(isValid
         ? {
             value: fieldData
-              ? [moment(fieldData[0], format), moment(fieldData[1], format)]
-              : undefined,
+              ? [
+                  fieldData[0] ? moment(fieldData[0], format) : null,
+                  fieldData[1] ? moment(fieldData[1], format) : null,
+                ]
+              : null,
           }
         : null)}
       onChange={_onChange}
@@ -108,6 +115,10 @@ const DatePickerField = ({
             }
           : showTime
       }
+      placeholder={[
+        placeholder__range[0] ?? '请选择日期',
+        placeholder__range[1] ?? '请选择日期',
+      ]}
       {...restProps}
     />
   ) : (

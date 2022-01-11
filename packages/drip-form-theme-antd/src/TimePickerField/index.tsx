@@ -35,6 +35,10 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
   asyncValidate,
   format = 'HH:mm:ss',
   getKey,
+  placeholder__range = {
+    0: '请选择时间',
+    1: '请选择时间',
+  },
   ...restProps
 }) => {
   /**
@@ -60,13 +64,13 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
   useEffect(() => {
     try {
       // 点击清空的时候，会变成null。
-      if (fieldData === null) {
+      if (fieldData === null || fieldData === undefined || fieldData === '') {
         setValid(true)
       } else {
         if (range) {
           setValid(
-            moment(fieldData[0], 'HH:mm:ss').isValid() &&
-              moment(fieldData[1], 'HH:mm:ss').isValid()
+            (!fieldData[0] || moment(fieldData[0], 'HH:mm:ss').isValid()) &&
+              (!fieldData[1] || moment(fieldData[1], 'HH:mm:ss').isValid())
           )
         } else {
           setValid(moment(fieldData, 'HH:mm:ss').isValid())
@@ -77,14 +81,15 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       setValid(false)
     }
   }, [fieldData, range])
+
   return range ? (
     <RangePicker
       {...(isValid
         ? {
             value: fieldData
               ? [
-                  moment(fieldData[0], 'HH:mm:ss'),
-                  moment(fieldData[1], 'HH:mm:ss'),
+                  fieldData[0] ? moment(fieldData[0], 'HH:mm:ss') : null,
+                  fieldData[1] ? moment(fieldData[1], 'HH:mm:ss') : null,
                 ]
               : null,
           }
@@ -93,6 +98,10 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       use12Hours={use12Hours}
       format={format}
       locale={locale}
+      placeholder={[
+        placeholder__range[0] ?? '请选择时间',
+        placeholder__range[1] ?? '请选择时间',
+      ]}
       {...restProps}
     />
   ) : (
