@@ -20,6 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: dev
+					token: ${{secrets.GH_TOKEN}}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.0
@@ -56,5 +57,5 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version --yes --conventional-commits -m "chore(release): publish @s" --force-git-tag --create-release github --no-private
+          npx lerna version --yes --conventional-commits --force-git-tag --create-release github --no-private
           npx lerna publish from-package --yes
