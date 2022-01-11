@@ -77,6 +77,15 @@ const config: Field = {
         },
       },
       {
+        fieldKey: 'maxAddCount',
+        type: 'number',
+        title: '最大添加行数',
+        ui: {
+          type: 'number',
+          vcontrol: 'return props.formData.ui.mode == "add"',
+        },
+      },
+      {
         fieldKey: 'showNo',
         type: 'boolean',
         title: '是否展示索引序号',
