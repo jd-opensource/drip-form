@@ -1,7 +1,7 @@
 name: Release dryrun
 on:
-  schedule:
-    - cron: '0 20 * * 1'
+  # schedule:
+  #   - cron: '0 20 * * 1'
   workflow_dispatch:
 
 env:
