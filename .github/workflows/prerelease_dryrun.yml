@@ -1,7 +1,7 @@
 name: Prerelase dryrun
 on:
-  schedule:
-    - cron: '0 20 * * 5'
+  # schedule:
+  #   - cron: '0 20 * * 5'
   workflow_dispatch:
     inputs:
       version:
