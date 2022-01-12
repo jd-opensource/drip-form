@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 22:42:42
+ * @Last Modified time: 2022-01-12 15:42:00
  */
 import React, { memo, FC, useEffect } from 'react'
 import { TreeSelect } from 'antd'
@@ -35,7 +35,6 @@ const checkedMap = {
 
 export const TreeSelectField: FC<TreeSelectFieldProps> = memo(
   ({
-    placeholder,
     disabled,
     onChange,
     fieldData,
@@ -110,7 +109,6 @@ export const TreeSelectField: FC<TreeSelectFieldProps> = memo(
         allowClear={allowClear}
         // loadData={queryOptionsFuc as (...args: any[]) => Promise<unknown>}
         treeCheckable={treeCheckable}
-        placeholder={placeholder}
         disabled={disabled}
         value={fieldData}
         treeDataSimpleMode={treeDataSimpleMode}

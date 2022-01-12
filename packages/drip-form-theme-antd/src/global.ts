@@ -9,7 +9,6 @@ export declare type Dispatch = (arg0: {
 export declare type CommonProps = Partial<{
   // 是否禁用表单
   disabled?: boolean
-  placeholder?: string
   style?: CSSProperties
   onChange?: string
   queryFunc?: (...args: any[]) => any

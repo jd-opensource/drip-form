@@ -22,7 +22,6 @@ export type TimePickerFieldProps = CommonProps &
   }>
 
 const TimePickerField: FC<TimePickerFieldProps> = ({
-  placeholder = '请选择时间',
   disabled,
   onChange,
   fieldData,
@@ -73,7 +72,6 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
         }
       }
     } catch (error) {
-      console.error(error)
       setValid(false)
     }
   }, [fieldData, range])
@@ -97,7 +95,6 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
     />
   ) : (
     <TimePicker
-      placeholder={placeholder}
       allowClear={allowClear}
       {...(isValid
         ? {

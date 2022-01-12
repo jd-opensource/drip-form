@@ -9,7 +9,6 @@ interface ComplicateOption {
   value: any
   more?: boolean
   hideStyle?: 'visible' | 'disable'
-  placeholder?: string
   disabled?: boolean
   style?: CSSProperties
 }
@@ -58,7 +57,6 @@ const RadioTextField = ({
           value,
           label,
           more,
-          placeholder,
           hideStyle = 'disable',
           disabled,
           ...restOptions
@@ -70,7 +68,6 @@ const RadioTextField = ({
             </Radio>
             {textVisible(!!more, hideStyle, isMoreData) && (
               <Input
-                placeholder={placeholder}
                 disabled={!!disabled || !isMoreData}
                 value={isMoreData ? fieldData : ''}
                 {...restOptions}

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 20:18:36
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-11 14:41:44
+ * @Last Modified time: 2022-01-12 15:40:45
  */
 import React, { memo } from 'react'
 import { InputNumber } from 'antd'
@@ -12,7 +12,6 @@ import { CommonProps } from '../global'
 export type NumberFieldProps = CommonProps
 
 const NumberField = ({
-  placeholder,
   disabled,
   onChange,
   fieldData,
@@ -30,7 +29,6 @@ const NumberField = ({
   return (
     <InputNumber
       disabled={disabled}
-      placeholder={placeholder}
       onChange={_onChange}
       value={fieldData}
       style={style}
