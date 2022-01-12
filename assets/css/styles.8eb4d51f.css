@@ -41149,11 +41149,11 @@ Add the correct display in Chrome and Safari.
 
 /* purgecss start ignore */
 
-.panelConfigGlobal .object-container .object-container__collapse-custom {
+.rightSideBarGlobal .object-container .object-container__collapse-custom {
         margin-bottom: 0
       }
 
-.panelConfigGlobal .array-field--container {
+.rightSideBarGlobal .array-field--container {
       margin-bottom: 0
     }
 
