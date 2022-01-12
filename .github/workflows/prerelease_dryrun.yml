@@ -1,9 +1,19 @@
-name: Release npm package
+name: Prerelase npm package
 on:
   schedule:
-    - cron: '0 20 * * 1'
+    - cron: '0 20 * * 5'
   workflow_dispatch:
-
+    inputs:
+      version:
+        description: '指定版本发布'
+        required: false
+      preid:
+        description: '指定预发布版本dist-tag(alpha、beta、rc)'
+        default: alpha
+        required: true
+      bump:
+        description: '指定版本发布变更类型(premajor、preminor、prepatch)'
+        required: false
 env:
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -57,5 +67,7 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version --yes --conventional-commits --force-git-tag --create-release github --no-private
-          npx lerna publish from-package --yes
+          npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}} --force-publish
+          # TODO 输出prerelease dryrun脚本
+          cat lerna.json
+          cat CHANGELOG.md
