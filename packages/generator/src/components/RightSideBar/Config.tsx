@@ -13,7 +13,7 @@ interface RightSideBarType {
 
 const Config = () => {
   return (
-    <div className={cx(styles.container)}>
+    <div className={cx(styles.container, 'rightSideBarGlobal')}>
       <Tabs defaultActiveKey="1" type="card">
         <TabPane tab="属性配置" key="1">
           <PropertyConfig />
