@@ -67,7 +67,7 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}} --force-publish
+          npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}}
           # TODO 输出prerelease dryrun脚本
           cat lerna.json
           cat CHANGELOG.md

@@ -67,5 +67,5 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}} --force-publish
+          npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}}
           npx lerna publish from-package --yes --dist-tag ${{github.event.inputs.preid||'alpha'}}
