@@ -27,7 +27,6 @@ const CascaderField = ({
   fieldKey,
   fieldData,
   dispatch,
-  placeholder,
   expandTrigger,
   showSearch = false,
   onChange,
@@ -79,7 +78,6 @@ const CascaderField = ({
       value={fieldData}
       onChange={_onChange}
       {...(showSearch && { showSearch: _showSearchObj })}
-      {...(placeholder && { placeholder })}
       {...(expandTrigger && { expandTrigger })}
       {...restProps}
     />
