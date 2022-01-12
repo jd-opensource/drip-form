@@ -1,4 +1,4 @@
-name: Release npm package
+name: Release dryrun
 on:
   schedule:
     - cron: '0 20 * * 1'
@@ -57,6 +57,6 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version --conventional-commits --force-git-tag --create-release github --no-private --no-push --amend
+          npx lerna version --conventional-commits --force-git-tag --create-release github --no-private --amend
           cat lerna.json
           cat CHANGELOG.md

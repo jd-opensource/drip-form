@@ -1,4 +1,4 @@
-name: Prerelase npm package
+name: Prerelase dryrun
 on:
   schedule:
     - cron: '0 20 * * 5'
