@@ -88,9 +88,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',
@@ -117,9 +119,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',

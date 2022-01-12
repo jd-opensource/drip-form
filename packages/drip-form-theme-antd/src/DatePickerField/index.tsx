@@ -24,7 +24,6 @@ export type DatePickerFieldProps = CommonProps & {
   format?: string
   showTime?: boolean | ShowTimeProps
   picker?: 'date' | 'time' | 'week' | 'month' | 'quarter' | 'year' | undefined
-  placeholder?: [string, string] | undefined
 }
 
 const DatePickerField = ({
@@ -78,7 +77,6 @@ const DatePickerField = ({
         }
       }
     } catch (error) {
-      console.error(error)
       setValid(false)
     }
   }, [fieldData, format, range])
