@@ -57,6 +57,6 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          npx lerna version --conventional-commits --force-git-tag --create-release github --no-private --amend
+          npx lerna version --yes --conventional-commits --force-git-tag --create-release github --no-private --amend
           cat lerna.json
           cat CHANGELOG.md
