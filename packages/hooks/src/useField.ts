@@ -7,12 +7,12 @@ import { produce } from 'immer'
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: yyyy-05-dd 15:10:43
  */
-
 import moment, { Moment } from 'moment'
 import useEventCallback from './useEventCallback'
 import { useDebounceFn } from 'ahooks'
 import { isEmpty, typeCheck } from '@jdfed/utils'
-import type { GetKey } from '@jdfed/utils'
+import type { GetKey, Action } from '@jdfed/utils'
+import type { Dispatch } from 'react'
 type FormatMomentDataProps = {
   value: string | [Moment, Moment]
   format: string
@@ -220,11 +220,6 @@ const myComponent = ({fieldKey,onChange})=>{
  * @param {object} options 可选 表单字段特殊处理配置。注意：options中只能有一个字段的值是true。否则不会对特殊数据进行格式化
  * @param {func} dispatch 操作context
  */
-type Dispatch = (arg0: {
-  key?: string
-  type: string
-  [propName: string]: any
-}) => void
 type CustomFunc = ({
   val,
   dispatch,
@@ -235,7 +230,7 @@ type CustomFunc = ({
   fieldData,
 }: {
   val: any
-  dispatch: Dispatch
+  dispatch: Dispatch<Action>
   getKey: GetKey
   fieldKey: string
   prevFieldData: any
@@ -272,7 +267,7 @@ const useField = (
     prevFieldData?: any
     fieldData?: any
   },
-  dispatch: Dispatch
+  dispatch: Dispatch<Action>
 ): UseFieldR => {
   // onChange 回调 debounce
   const { run } = useDebounceFn(

@@ -5,7 +5,8 @@
  * @Last Modified time: 2021-11-05 10:45:25
  */
 import { useCallback } from 'react'
-import type { GetKey } from '@jdfed/utils'
+import type { Dispatch } from 'react'
+import type { GetKey, Action } from '@jdfed/utils'
 // import useCusDispatch from './useCusDispatch'
 
 /**
@@ -26,15 +27,9 @@ type Arg0 = {
   getKey: GetKey
 }
 
-type Dispatch = (arg0: {
-  key?: string
-  type: string
-  [propName: string]: any
-}) => void
-
 const useQuery = (
   { options, queryFunc, requestCache = true, fieldKey, getKey }: Arg0,
-  dispatch: Dispatch
+  dispatch: Dispatch<Action>
 ): ((...args: any[]) => void) => {
   return useCallback(
     async (...args) => {

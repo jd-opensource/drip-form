@@ -31,6 +31,8 @@ export type State = {
   changeKey: string
   // 数组容器对应的react key映射
   arrayKey: Record<string, Array<string>>
+  // 异步校验需要保留的错误key（用于防止异步校验的错误信息被ajv覆盖）
+  ignoreErrKey: Array<string>
 }
 
 type ReloadAction = {
@@ -78,19 +80,24 @@ type AddFieldAction = {
   shouldDelete: boolean
 }
 
-type SetErrorAction =
-  | ({
-      type: 'setError'
-    } & Record<string, string>)
-  | {
-      type: 'setError'
-      ignore?: Array<string>
-      errors?: Record<string, string>
-    }
+export type SetErrType = {
+  type: 'setError'
+  action?: {
+    ignore?: Array<string>
+  }
+} & Record<string, string>
+
+export type SetErrsType = {
+  type: 'setError'
+  ignore?: Array<string>
+  errors?: Record<string, string>
+}
+
+type SetErrorAction = SetErrType | SetErrsType
 
 type DeleteErrorAction = {
   type: 'deleteError'
-  key: string
+  key: Array<string> | string
 }
 
 type SetCheckingAction = {

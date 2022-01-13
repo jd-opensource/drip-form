@@ -9,8 +9,8 @@ import { useDebounceFn } from 'ahooks'
 import type Ajv from 'ajv/dist/2019'
 import type { ErrorObject } from 'ajv/dist/2019'
 
-import React from 'react'
-
+import type { Dispatch } from 'react'
+import type { Action } from '@jdfed/utils'
 type Errors = ErrorObject[]
 export type ErrorsMap = Record<string, string>
 type ValidateReturn = {
@@ -36,7 +36,7 @@ type Params = {
     [propName: string]: any
   }
   ajv: any
-  dispatch: React.Dispatch<any>
+  dispatch: Dispatch<Action>
   visibleFieldKey: string[]
   onValidate: {
     [propName: string]: any
