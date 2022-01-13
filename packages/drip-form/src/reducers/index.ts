@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-28 14:32:01
+ * @Last Modified time: 2022-01-13 16:37:39
  */
 import { createContext, Dispatch } from 'react'
 import {
@@ -14,7 +14,7 @@ import {
 } from '@jdfed/utils'
 import addField from './addField'
 import deleteField from './deleteField'
-import type { Action, State } from '@jdfed/utils'
+import type { Action, State, SetErrType } from '@jdfed/utils'
 
 export const FormDataContext = createContext('')
 
@@ -93,8 +93,13 @@ const formDataReducer = (state: State, action: Action): void => {
       if (args.errors && typeCheck(args.errors) === 'Object') {
         const ignoreErr: Record<string, string> = {}
         // ignore 用来将type：change的异步校验的结果保存下来。防止被validae给清空
-        if (args.ignore && Array.isArray(args.ignore)) {
-          args.ignore.map((item) => {
+        if (
+          (args.ignore && Array.isArray(args.ignore)) ||
+          state.ignoreErrKey.length > 0
+        ) {
+          Array.from(
+            new Set([...(args.ignore || []), ...state.ignoreErrKey])
+          ).map((item) => {
             if (state.errors[item]) {
               ignoreErr[item] = state.errors[item]
             }
@@ -106,13 +111,26 @@ const formDataReducer = (state: State, action: Action): void => {
         }
       } else {
         for (const i in args) {
+          const params = args as SetErrType
+          if (params?.action?.ignore) {
+            state.ignoreErrKey = Array.from(
+              new Set([...state.ignoreErrKey, ...params.action.ignore])
+            )
+          }
+
           state.errors[i] = args[i as keyof typeof args] as string
         }
       }
       break
     }
     case 'deleteError': {
-      delete state.errors[action.key]
+      if (Array.isArray(action.key)) {
+        action.key.map((item) => {
+          delete state.errors[item]
+        })
+      } else {
+        delete state.errors[action.key]
+      }
       break
     }
     case 'setChecking': {

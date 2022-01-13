@@ -1,10 +1,7 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, Dispatch as DispatchR } from 'react'
 import type { GetKey } from '@jdfed/hooks'
-export declare type Dispatch = (arg0: {
-  key?: string
-  type: string
-  [propName: string]: any
-}) => void
+import type { Action } from '@jdfed/utils'
+export declare type Dispatch = DispatchR<Action>
 
 export declare type CommonProps = Partial<{
   // 是否禁用表单

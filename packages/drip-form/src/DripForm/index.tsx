@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-09 14:39:05
+ * @Last Modified time: 2022-01-13 16:21:24
  */
 import React, {
   forwardRef,
@@ -147,6 +147,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         visibleFieldKey: [],
         changeKey: '',
         arrayKey: {},
+        ignoreErrKey: [],
       }),
       [
         initTypePath,
