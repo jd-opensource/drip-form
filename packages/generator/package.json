@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/form-generator",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"description": "drip-form 生成器",
 	"keywords": [
 		"hooks",
@@ -37,10 +37,10 @@
 		"@dnd-kit/modifiers": "^4.0.0",
 		"@dnd-kit/sortable": "^5.0.0",
 		"@dnd-kit/utilities": "^3.0.0",
-		"@jdfed/drip-form": "^0.4.0",
-		"@jdfed/drip-form-theme-antd": "^0.4.0",
-		"@jdfed/hooks": "^0.4.0",
-		"@jdfed/utils": "^0.4.0",
+		"@jdfed/drip-form": "^0.5.0",
+		"@jdfed/drip-form-theme-antd": "^0.5.0",
+		"@jdfed/hooks": "^0.5.0",
+		"@jdfed/utils": "^0.5.0",
 		"@monaco-editor/react": "^4.2.2",
 		"antd": "^4.16.13",
 		"classnames": "^2.3.1",

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
+
+
+### Features
+
+* setError支持配置action.ignore ([#125](https://github.com/jdfed/drip-form/issues/125)) ([b84aa5e](https://github.com/jdfed/drip-form/commit/b84aa5eead2b3f384d70bb45ce2961fcb1afbd1d))
+
+
+### Bug Fixes
+
+* 修复日期、时间选择器配置占位符、默认值无效问题 ([#123](https://github.com/jdfed/drip-form/issues/123)) ([e7e8543](https://github.com/jdfed/drip-form/commit/e7e85436fe32fb9da5af8bd927e2f30e243f4508))
+
+
+
 ## 0.4.0 (2022-01-11)
 
 
