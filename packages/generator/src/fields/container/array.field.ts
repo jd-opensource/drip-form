@@ -50,6 +50,12 @@ const config: Field = {
       type: 'array',
       mode: 'add',
       addTitle: '添加一行数据',
+      hasConfirm: false,
+      confirm: {
+        confirmTitle: '确定删除这一项？',
+        okText: '确定',
+        cancelText: '取消',
+      },
     },
   },
   propertyConfig: {
@@ -111,6 +117,50 @@ const config: Field = {
           after: '',
         },
         schema: serialTextUiSchema,
+      },
+      {
+        type: 'boolean',
+        title: '删除二次确认',
+        ui: {
+          type: 'switch',
+        },
+        fieldKey: 'hasConfirm',
+      },
+      {
+        type: 'object',
+        title: '二次确认配置',
+        ui: {
+          type: 'object',
+          mode: 'collapse',
+          vcontrol: 'return props.formData.ui.hasConfirm',
+        },
+        schema: [
+          {
+            type: 'string',
+            title: '删除提示文案',
+            ui: {
+              type: 'text',
+            },
+            fieldKey: 'confirmTitle',
+          },
+          {
+            type: 'string',
+            title: '确认按钮文案',
+            ui: {
+              type: 'text',
+            },
+            fieldKey: 'okText',
+          },
+          {
+            type: 'string',
+            title: '取消确认文案',
+            ui: {
+              type: 'text',
+            },
+            fieldKey: 'cancelText',
+          },
+        ],
+        fieldKey: 'confirm',
       },
     ],
   },

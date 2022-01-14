@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 14:57:53
+ * @Last Modified time: 2022-01-14 19:50:31
  */
 import React, { useMemo, useState, useEffect, memo, CSSProperties } from 'react'
 import cx from 'classnames'
@@ -35,6 +35,12 @@ type ArrayProps = {
       afterText: string
       beforeText: string
       serialLang: 'number' | 'CN'
+    }
+    hasConfirm?: boolean
+    confirm?: {
+      confirmTitle: string
+      okText: string
+      cancelText: string
     }
     maxAddCount: number
     [propName: string]: unknown
@@ -113,6 +119,15 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
     },
     showNo,
     maxAddCount,
+    // 删除二次确认，需要主题导出popConfig
+    // TODO 后续drip-form单独开发npm包兜底
+    hasConfirm = false,
+    // 删除提示文案
+    confirm = {
+      confirmTitle: '确定删除这一项？',
+      okText: '确定',
+      cancelText: '取消',
+    },
   } = uiProp
   // 是否为add加减模式
   const isAdd = useMemo(() => mode === 'add', [mode])
@@ -171,6 +186,8 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
 
   const addIcon = useMemo(() => <FontAwesomeIcon icon={faPlus} />, [])
 
+  const Popconfirm = uiComponents[theme]?.Popconfirm
+
   return (
     <div
       className={cx(
@@ -219,12 +236,22 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
                   ) : (
                     <div />
                   )}
-                  {isAdd && (
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      onClick={deltItem.bind(this, i)}
-                    />
-                  )}
+                  {isAdd &&
+                    (Popconfirm && hasConfirm ? (
+                      <Popconfirm
+                        title={confirm.confirmTitle || '确定删除这一项？'}
+                        onConfirm={deltItem.bind(this, i)}
+                        okText={confirm.okText || '确定'}
+                        cancelText={confirm.cancelText || '取消'}
+                      >
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </Popconfirm>
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        onClick={deltItem.bind(this, i)}
+                      />
+                    ))}
                 </div>
                 <div className="array-item--case">
                   {renderCoreFn({
