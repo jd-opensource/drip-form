@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-01 16:54:41
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:21:53
+ * @Last Modified time: 2022-01-14 16:03:21
  */
 import { useCallback } from 'react'
 import produce from 'immer'
@@ -53,6 +53,11 @@ const useArray = ({
           order,
           isDelete: true,
         },
+      })
+      // ajv实时校验会重新生成错误信息，如果用户setErr添加了ignore，则ajv会跳过，所以这里需要手动删除
+      dispatch({
+        type: 'deleteError',
+        key: `${fieldKey}.${order}`,
       })
       dispatch({
         type: 'deleteFormData',

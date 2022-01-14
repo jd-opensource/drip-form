@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-07 16:54:47
+ * @Last Modified time: 2022-01-14 14:57:53
  */
 import React, { useMemo, useState, useEffect, memo, CSSProperties } from 'react'
 import cx from 'classnames'
@@ -170,13 +170,6 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
   ])
 
   const addIcon = useMemo(() => <FontAwesomeIcon icon={faPlus} />, [])
-  // const deltIcon = useCallback(
-  //   (i) =>
-  //     isAdd && (
-  //       <FontAwesomeIcon icon={faTrashAlt} onClick={deltItem.bind(this, i)} />
-  //     ),
-  //   [deltItem, isAdd]
-  // )
 
   return (
     <div
