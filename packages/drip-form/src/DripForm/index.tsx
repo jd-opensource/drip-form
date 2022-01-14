@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-13 16:21:24
+ * @Last Modified time: 2022-01-14 19:22:57
  */
 import React, {
   forwardRef,
@@ -159,6 +159,14 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         customProps,
       ]
     )
+
+    // visibleFieldKey为组件初次加载设置，reload不会触发组件卸载操作，只是重置数据
+    const resetArgs = useMemo(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { visibleFieldKey, ...resetArgs } = initArgs
+      return resetArgs
+    }, [initArgs])
+
     const [data, dispatch] = useImmerReducer<State, Action>(
       formDataReducer,
       initArgs
@@ -175,7 +183,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       ) {
         dispatch({
           type: 'reload',
-          ...initArgs,
+          ...resetArgs,
         })
       }
     }, [
@@ -190,6 +198,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       prevUnitedSchema,
       unitedSchema,
       reload,
+      resetArgs,
     ])
 
     const {
@@ -246,9 +255,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     const reset = useCallback(() => {
       dispatch({
         type: 'reload',
-        ...initArgs,
+        ...resetArgs,
       })
-    }, [dispatch, initArgs])
+    }, [dispatch, resetArgs])
 
     // 向外抛出表单数据
     useImperativeHandle<DripFormRefType, DripFormRefType>(

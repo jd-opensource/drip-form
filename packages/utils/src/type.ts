@@ -37,7 +37,7 @@ export type State = {
 
 type ReloadAction = {
   type: 'reload'
-} & State
+} & Omit<State, 'visibleFieldKey'>
 
 type SetDataSchemaAction = {
   type: 'setDataSchema'
