@@ -28,6 +28,7 @@ export type ContainerHoc = (
     parentType: string
     // 是否是第一个表单
     isFirst: boolean
+    uiProp: Record<string, any>
   }
 ) => JSX.Element
 

@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:08:15
+ * @Last Modified time: 2022-01-14 14:49:36
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -313,6 +313,7 @@ const Render = ({
             parentMode,
             parentType,
             isFirst: !!isRoot && i === 0,
+            uiProp,
           }
         )
       ) : (
