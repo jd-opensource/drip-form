@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-30 16:14:14
+ * @Last Modified time: 2022-01-14 17:06:49
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -355,10 +355,9 @@ const CheckConfig = (): JSX.Element => {
             // 设置必填校验
             const newRequired = !oldRequired
               ? [selectedFieldKey]
-              : Array.isArray(oldRequired) &&
-                !oldRequired.includes(selectedFieldKey)
+              : !oldRequired.includes(selectedFieldKey)
               ? [...oldRequired, selectedFieldKey]
-              : [selectedFieldKey]
+              : oldRequired
             generatorContext.current?.merge(parentKey, 'dataSchema', {
               errorMessage: {
                 required: {
