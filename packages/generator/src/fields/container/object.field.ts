@@ -12,6 +12,7 @@ const config: Field = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      active: false,
     },
   },
   propertyConfig: {
@@ -27,6 +28,14 @@ const config: Field = {
             { label: '默认', value: 'normal' },
             { label: '折叠模式', value: 'collapse' },
           ],
+        },
+      },
+      {
+        fieldKey: 'active',
+        type: 'boolean',
+        title: '是否默认展开',
+        ui: {
+          type: 'switch',
         },
       },
     ],
