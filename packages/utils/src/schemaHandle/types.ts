@@ -74,7 +74,7 @@ export type DataSchema = {
   properties?: Map
   items?: Array<Map> | Map
   required?: Array<string | number>
-  errorMessage: {
+  errorMessage?: {
     required: Map
     properties?: Map
     items?: Map

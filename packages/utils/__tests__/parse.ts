@@ -41,6 +41,12 @@ import {
   unitedSchema as test7,
   parsedSchema as verify7,
 } from '../__testsdata__/datePicker.schema'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {
+  unitedSchema as test8,
+  parsedSchema as verify8,
+} from '../__testsdata__/array.schema'
 
 describe('parseUnitedSchema', () => {
   test('test datePicker.schema.js', () => {
@@ -76,5 +82,10 @@ describe('parseUnitedSchema', () => {
   test('test errMsg.schema3.js', () => {
     const data = parseUnitedSchema(test6)
     expect(data).toStrictEqual(verify6)
+  })
+
+  test('test array.schema.js', () => {
+    const data = parseUnitedSchema(test8)
+    expect(data).toStrictEqual(verify8)
   })
 })
