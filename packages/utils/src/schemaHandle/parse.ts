@@ -116,20 +116,30 @@ function recursiveParse(
               if (currLevelDataSchema.required) {
                 currLevelDataSchema.required.push(fieldKey)
               }
-              currLevelDataSchema.errorMessage.required[fieldKey] = item[key]
+              if (currLevelDataSchema.errorMessage) {
+                currLevelDataSchema.errorMessage.required[fieldKey] = item[key]
+              }
             }
             break
           case 'errMsg':
-            judgeAndRegister(
-              currLevelDataSchema,
-              'object',
-              containerKey,
-              fieldKey
-            )
+            if (fieldKey !== '$container') {
+              judgeAndRegister(
+                currLevelDataSchema,
+                'object',
+                containerKey,
+                fieldKey
+              )
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              currLevelDataSchema[containerKey][fieldKey].errorMessage =
+                item[key]
+            } else {
+              judgeAndRegister(currLevelDataSchema, 'object', containerKey)
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              currLevelDataSchema[containerKey].errorMessage = item[key]
+            }
             // 兜底报错信息解析
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            currLevelDataSchema[containerKey][fieldKey].errorMessage = item[key]
             break
           default:
             if (key !== 'fieldKey') {
