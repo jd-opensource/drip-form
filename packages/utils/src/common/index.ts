@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 21:10:39
+ * @Last Modified time: 2022-01-16 13:43:04
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -280,7 +280,7 @@ export function injectVcontrol(obj: Record<string, unknown>): void {
             setDeepProp(
               ['ui', 'vcontrol'],
               obj,
-              'return props.formData.viewMode==="configured"?props.get(props.fieldKey).data:true'
+              'const {fieldKey,formData,get}=props;return formData.viewMode==="configured"?typeof get(fieldKey).data!==\'number\'? get(fieldKey).data:true:true'
             )
           }
           break

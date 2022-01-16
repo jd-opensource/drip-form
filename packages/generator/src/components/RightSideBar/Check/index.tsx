@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 17:06:49
+ * @Last Modified time: 2022-01-16 13:44:17
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -63,7 +63,11 @@ const CheckConfig = (): JSX.Element => {
     (typw: 'common' | 'business', fieldKey: string) => string
   >((type, fieldKey) => {
     return `try {
-      return props.get('${type}.${fieldKey}').data
+      if(typeof props.get('${type}.${fieldKey}').data!=='number'){
+        return props.get('${type}.${fieldKey}').data
+      }else{
+        return true
+      }
     } catch (error) {
       return false
     }`
