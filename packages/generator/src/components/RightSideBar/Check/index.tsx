@@ -354,19 +354,21 @@ const CheckConfig = (): JSX.Element => {
         } else {
           const oldRequired =
             generatorContext.current?.get(parentKey).dataSchema.required
+          // 当前变动必填的key值
+          const requiredKey = selectedFieldKey.split('.').pop() as string
           // 必填字段需要设置到选中表单的父级schema中
           if (data) {
             // 设置必填校验
             const newRequired = !oldRequired
-              ? [selectedFieldKey]
-              : !oldRequired.includes(selectedFieldKey)
-              ? [...oldRequired, selectedFieldKey]
+              ? [requiredKey]
+              : !oldRequired.includes(requiredKey)
+              ? [...oldRequired, requiredKey]
               : oldRequired
             generatorContext.current?.merge(parentKey, 'dataSchema', {
               errorMessage: {
                 required: {
                   // 如果当前变化的key是必填错误文案（errorMessage.required），则默认使用设置的错误文案，否则文案为必填
-                  [selectedFieldKey]: key.startsWith('errorMessage')
+                  [requiredKey]: key.startsWith('errorMessage')
                     ? data || '必填'
                     : '必填',
                 },
@@ -374,13 +376,11 @@ const CheckConfig = (): JSX.Element => {
               required: newRequired,
             })
           } else {
-            const index = oldRequired?.findIndex(
-              (item) => item === selectedFieldKey
-            )
+            const index = oldRequired?.findIndex((item) => item === requiredKey)
             // 删除必填校验
             generatorContext.current?.set(parentKey, 'dataSchema', (draft) => {
               deleteDeepProp(
-                ['errorMessage', 'required', selectedFieldKey],
+                ['errorMessage', 'required', requiredKey],
                 draft as Map
               )
               if (index) {
