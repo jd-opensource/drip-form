@@ -23,6 +23,30 @@ describe('addKeywords', () => {
     })
   })
 
+  test('gbkLength', () => {
+    addKeywords(ajv)
+    const validate = ajv.compile({
+      type: 'string',
+      gbkLength: {
+        max: 4,
+        min: 1,
+      },
+    })
+    expect(validate('')).toEqual(false)
+    expect(validate('a')).toEqual(true)
+    expect(validate('ab')).toEqual(true)
+    expect(validate('abcd')).toEqual(true)
+    expect(validate('abcde')).toEqual(false)
+    expect(validate('张')).toEqual(true)
+    expect(validate('张三')).toEqual(true)
+    expect(validate('张三李')).toEqual(false)
+    expect(validate('张三a')).toEqual(false)
+    expect(validate('张ab')).toEqual(true)
+    expect(validate('1')).toEqual(true)
+    expect(validate('1234')).toEqual(true)
+    expect(validate('12345')).toEqual(false)
+  })
+
   test('rangeDelimiter', () => {
     addKeywords(ajv)
     const validate = ajv.compile({

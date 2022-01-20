@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-19 19:08:33
+ * @Last Modified time: 2022-01-20 19:51:07
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -64,7 +64,7 @@ const CheckConfig = (): JSX.Element => {
   >((type, fieldKey) => {
     return `try {
       if(typeof props.get('${type}.${fieldKey}').data!=='number'){
-        return props.get('${type}.${fieldKey}').data
+        return !!props.get('${type}.${fieldKey}').data
       }else{
         return true
       }
@@ -138,7 +138,7 @@ const CheckConfig = (): JSX.Element => {
         fieldKey: cur,
         ui: {
           type: 'text',
-          vcontrol: vcontrol('common', cur),
+          vcontrol: vcontrol('business', cur),
         },
       })
       // 注入vcontrol
