@@ -9,7 +9,17 @@ export type FieldAtomType = {
 
 export type ContainerStyle = Partial<{
   // 表单宽度
-  width?: number | string
+  width: number | string
+  // 容器margin-top
+  marginTop: number | string
+  // 容器margin-right
+  marginRight: number | string
+  // 容器margin-bottom
+  marginBottom: number | string
+  // 容器margin-left
+  marginLeft: number | string
+  // 容器margin
+  margin: string
 }> | null
 export type Description = {
   type: 'icon' | 'text'
@@ -19,24 +29,24 @@ export type TitlePlacement = 'left' | 'right' | 'bottom' | 'top'
 export type Theme = 'antd' | 'babel-ui' | 'drip-design' | string
 export type TitleUi = Partial<{
   // 标题宽度
-  width?: number
+  width: number | string
   // 标题margin-top
-  marginTop?: number
+  marginTop: number | string
   // 标题margin-right
-  marginRight?: number
+  marginRight: number | string
   // 标题margin-bottom
-  marginBottom?: number
+  marginBottom: number | string
   // 标题margin-left
-  marginLeft?: number
+  marginLeft: number | string
   // 标题margin
-  margin?: string
+  margin: string
   // 标题垂直对齐方式
-  verticalAlign?: 'center' | 'top' | 'bottom'
+  verticalAlign: 'center' | 'top' | 'bottom'
   // 标题水平对齐方式
-  textAlign?: 'left' | 'right' | 'center'
+  textAlign: 'left' | 'right' | 'center'
   // 是否展示必填*号
-  requiredIcon?: boolean
-  placement?: TitlePlacement
+  requiredIcon: boolean
+  placement: TitlePlacement
 }> | null
 
 type Properties = {

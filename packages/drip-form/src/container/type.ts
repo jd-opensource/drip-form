@@ -6,7 +6,6 @@ import type {
   Action,
   Theme,
   Description,
-  TitlePlacement,
   TitleUi,
 } from '@jdfed/utils'
 
@@ -31,8 +30,6 @@ export type Props = {
   description: Description
   // titleUi
   titleUi: TitleUi
-  // 标题布局位置
-  titlePlacement: TitlePlacement
   // 是否展示错误信息
   showError: boolean
   // 是否展示标题
