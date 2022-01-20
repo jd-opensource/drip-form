@@ -136,6 +136,9 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          containerStyle: {
+            marginBottom: 0,
+          },
         },
         schema: [
           {
@@ -229,6 +232,9 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          containerStyle: {
+            marginBottom: 0,
+          },
         },
         schema: [
           {

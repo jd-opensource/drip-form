@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 14:49:36
+ * @Last Modified time: 2022-01-19 17:33:30
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -162,7 +162,9 @@ const Render = ({
       : true
     // 布局样式
     const containerStyle = Object.assign(
-      {},
+      type === 'object' && properties[item]?.mode === 'collapse'
+        ? { marginBottom: 20 }
+        : {},
       isRoot ? globalContainerStyle : {},
       properties[item]?.containerStyle || {}
     )

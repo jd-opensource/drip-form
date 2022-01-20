@@ -8,6 +8,9 @@ const unitedSchema = {
   ui: {
     type: 'object',
     mode: 'collapse',
+    containerStyle: {
+      marginBottom: 0,
+    },
   },
   schema: [
     {

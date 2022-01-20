@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:31:04
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 20:34:06
+ * @Last Modified time: 2022-01-19 00:10:00
  */
 // dataSchema2019-09支持的字符串校验关键字
 const stringJsonSchema = {
@@ -222,6 +222,9 @@ const dripFormPluginKeywords = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
       description: {
         type: 'icon',
         title: '使用delimiter指定的字符分隔，最少多少，最多多少',

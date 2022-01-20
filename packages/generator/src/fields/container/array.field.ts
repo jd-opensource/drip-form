@@ -109,6 +109,9 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          containerStyle: {
+            marginBottom: 0,
+          },
           style: {
             paddingBottom: '20px',
           },
@@ -135,6 +138,9 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          containerStyle: {
+            marginBottom: 0,
+          },
           vcontrol: 'return props.formData.ui.hasConfirm',
         },
         schema: [
