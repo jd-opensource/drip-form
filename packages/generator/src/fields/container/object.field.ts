@@ -13,6 +13,9 @@ const config: Field = {
       type: 'object',
       mode: 'collapse',
       active: false,
+      title: {
+        verticalAlign: 'top',
+      },
     },
   },
   propertyConfig: {

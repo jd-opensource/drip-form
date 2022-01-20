@@ -47,6 +47,9 @@ const config: Field = {
     type: 'array',
     title: '数组容器',
     ui: {
+      title: {
+        verticalAlign: 'top',
+      },
       type: 'array',
       mode: 'add',
       addTitle: '添加一行数据',

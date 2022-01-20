@@ -126,13 +126,16 @@ const Render = ({
         if (!currentDataSchema.items[item]) return null
       }
     }
-    // 标题的Placement，默认为left，可设置为top/right/bottom/left
-    const titlePlacement =
-      properties[item]?.title?.placement || uiSchema?.title?.placement || 'left'
 
     // 当前Field的标题样式, property的样式会覆盖全局标题样式
     const titleUi = Object.assign(
-      {},
+      {
+        placement: 'left',
+        width: '82px',
+        textAlign: 'left',
+        verticalAlign: 'center',
+        requiredFields: false,
+      },
       globalTitleUi,
       properties[item]?.title || {}
     )
@@ -267,8 +270,6 @@ const Render = ({
       showTitle,
       // 当前表单的标题样式
       titleUi,
-      // 当前表单的位置
-      titlePlacement,
       // 是否展示错误
       showError,
       // 容器样式
