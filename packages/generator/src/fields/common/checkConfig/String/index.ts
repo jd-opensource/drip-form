@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:31:04
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-19 00:10:00
+ * @Last Modified time: 2022-01-20 19:46:55
  */
 // dataSchema2019-09支持的字符串校验关键字
 const stringJsonSchema = {
@@ -239,6 +239,40 @@ const dripFormPluginKeywords = {
           type: 'text',
         },
       },
+      {
+        type: 'number',
+        fieldKey: 'max',
+        title: '最多',
+        ui: {
+          type: 'number',
+        },
+      },
+      {
+        type: 'number',
+        fieldKey: 'min',
+        title: '最少',
+        ui: {
+          type: 'number',
+        },
+      },
+    ],
+  },
+  gbkLength: {
+    type: 'object',
+    fieldKey: 'gbkLength',
+    title: '中英文长度',
+    ui: {
+      type: 'object',
+      mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
+      description: {
+        type: 'icon',
+        title: '中文2个字符，英文1个字符',
+      },
+    },
+    schema: [
       {
         type: 'number',
         fieldKey: 'max',
