@@ -13627,78 +13627,55 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   width: 100%;
 }
 
-/*
- * @Author: jiangxiaowei
- * @Date: 2020-05-15 16:55:53
- * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-04-14 11:49:42
- */
-.field-container {
-  align-items: center;
-  font-size: 12px;
-}
-.field-container__form {
+.form-container__title {
   display: flex;
+  flex-shrink: 0;
+  word-break: break-all;
 }
-.field-container__form>div:last-child {
-  position: relative;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  width: 100%;
-}
-.field-container__form.title-top {
-  flex-direction: column;
-}
-.field-container__form.title-top .field-container__title {
-  width: 100%;
-}
-.field-container__form.title-bottom {
-  flex-direction: column-reverse;
-}
-.field-container__form.title-bottom .field-container__title {
-  width: 100%;
-}
-.field-container__form.title-right {
-  flex-direction: row-reverse;
-}
-.field-container__form.title-right .field-container__title {
-  width: 82px;
-  text-align: right;
-}
-.field-container__other {
+
+.form-container__other {
   line-height: 20px;
 }
-.field-container__tips {
+.form-container__tips {
   font-size: 12px;
   line-height: 20px;
   color: #999;
 }
-.field-container__error {
+.form-container__error {
   font-size: 12px;
   line-height: 20px;
   min-height: 20px;
   color: #f00;
 }
-.field-container__error--no-title {
+.form-container__error--no-title {
   padding-left: 0;
 }
-.field-container__title {
+
+.form-container {
+  font-size: 12px;
+}
+.form-container--main {
   display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  width: 82px;
-  text-align: left;
-  word-break: break-all;
 }
-.field-container__title-question {
-  margin-left: 5px;
-  cursor: pointer;
+.form-container--main.title-top {
+  flex-direction: column;
 }
-.field-container__babel-question {
-  color: #08ce96;
-  font-size: 14px !important;
+.form-container--main.title-bottom {
+  flex-direction: column-reverse;
 }
+.form-container--main.title-right {
+  flex-direction: row-reverse;
+}
+.form-container--content {
+  width: 100%;
+}
+
+/*
+ * @Author: jiangxiaowei
+ * @Date: 2020-05-15 16:55:53
+ * @Last Modified by: jiangxiaowei
+ * @Last Modified time: 2022-01-18 22:22:16
+ */
 .field__sure--container {
   display: flex;
   flex: 1;
@@ -13723,27 +13700,8 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   cursor: not-allowed;
 }
 
-.object-container .object-container__collapse-custom {
-  margin-bottom: 20px;
-}
-.object-container__title--common {
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-.object-container__title--collapse {
-  margin-bottom: unset;
-}
-.object-container .title-left {
-  flex-direction: row;
-}
-.object-container .title-top {
-  flex-direction: column;
-}
-.object-container .title-bottom {
-  flex-direction: column-reverse;
-}
-.object-container .title-right {
-  flex-direction: row-reverse;
+.object-container-err {
+  color: #f00;
 }
 
 .array-item--field {
@@ -13784,30 +13742,6 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 }
 .array-item--add_title {
   margin-left: 8px;
-}
-.array-field--container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.array-field--container.title-top {
-  flex-direction: column;
-}
-.array-field--container.title-top .object-container__title {
-  width: 100%;
-}
-.array-field--container.title-bottom {
-  flex-direction: column-reverse;
-}
-.array-field--container.title-bottom .object-container__title {
-  width: 100%;
-}
-.array-field--container.title-right {
-  flex-direction: row-reverse;
-}
-.array-field--container.title-right .object-container__title {
-  width: 82px;
-  text-align: right;
 }
 
 .drip-form_container--footer {
