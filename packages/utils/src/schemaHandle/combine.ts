@@ -46,12 +46,14 @@ function valueClone({
     }
   }
 
-  if (
-    dataType &&
-    !['object', 'array'].includes(dataType) &&
-    Object.hasOwnProperty.call(rawObj, 'errorMessage')
-  ) {
+  if (dataType && Object.hasOwnProperty.call(rawObj, 'errorMessage')) {
     targetObj.errMsg = deepClone(rawObj.errorMessage)
+    if (targetObj.errMsg.required) {
+      delete targetObj.errMsg.required
+      if (Object.keys(targetObj.errMsg).length === 0) {
+        delete targetObj.errMsg
+      }
+    }
   }
 }
 
@@ -74,7 +76,6 @@ function recursionCombine(
     rawObj: dataSchema,
     dataType: dataSchema.type,
   })
-
   // uiSchema非空时进行拷贝
   if (!isEmpty(uiSchema)) {
     // 填充ui属性，用于存放uiSchema

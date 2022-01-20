@@ -12,6 +12,10 @@ export const unitedSchema = {
         mode: 'add',
         addTitle: '添加一行数据',
       },
+      minItems: 1,
+      errMsg: {
+        minItems: '最小1',
+      },
       items: {
         validateTime: 'submit',
         type: 'string',
@@ -41,6 +45,10 @@ export const parsedSchema = {
         validateTime: 'submit',
         type: 'array',
         title: '数组容器',
+        minItems: 1,
+        errorMessage: {
+          minItems: '最小1',
+        },
         items: {
           validateTime: 'submit',
           type: 'string',
