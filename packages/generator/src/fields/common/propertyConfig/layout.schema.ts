@@ -7,6 +7,9 @@ const unitedSchema = {
   ui: {
     type: 'object',
     mode: 'collapse',
+    containerStyle: {
+      marginBottom: 0,
+    },
   },
   title: '布局',
   schema: [
@@ -24,6 +27,15 @@ const unitedSchema = {
           50: { label: '50%' },
           100: { label: '100%' },
         },
+      },
+    },
+    {
+      fieldKey: 'margin',
+      type: 'string',
+      title: '组件外边距',
+      ui: {
+        type: 'text',
+        placeholder: '形如0 30px 20px 0 | 0 30px',
       },
     },
   ],

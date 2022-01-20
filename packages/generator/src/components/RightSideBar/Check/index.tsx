@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-16 13:44:17
+ * @Last Modified time: 2022-01-19 19:08:33
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -201,7 +201,13 @@ const CheckConfig = (): JSX.Element => {
               type: 'object',
               title: '通用校验',
               fieldKey: 'common',
-              ui: { type: 'object', mode: 'collapse' },
+              ui: {
+                type: 'object',
+                mode: 'collapse',
+                containerStyle: {
+                  marginBottom: 0,
+                },
+              },
               schema: CommonSchema.concat(curTypeSchema),
             },
             ...(bussinessSchema.length > 0
@@ -210,7 +216,13 @@ const CheckConfig = (): JSX.Element => {
                     type: 'object',
                     title: '业务校验',
                     fieldKey: 'business',
-                    ui: { type: 'object', mode: 'collapse' },
+                    ui: {
+                      type: 'object',
+                      mode: 'collapse',
+                      containerStyle: {
+                        marginBottom: 0,
+                      },
+                    },
                     schema: bussinessSchema,
                   },
                 ]
@@ -222,6 +234,9 @@ const CheckConfig = (): JSX.Element => {
               ui: {
                 type: 'object',
                 mode: 'collapse',
+                containerStyle: {
+                  marginBottom: 0,
+                },
               },
               schema: [
                 {

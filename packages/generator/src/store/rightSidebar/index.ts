@@ -43,6 +43,9 @@ export const allPropertyConfigSchemaSelector = selector<
                 ui: {
                   type: 'object',
                   mode: 'collapse',
+                  containerStyle: {
+                    marginBottom: 0,
+                  },
                 },
                 title: '样式',
                 schema:

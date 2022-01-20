@@ -7,6 +7,9 @@ const unitedSchema = {
   ui: {
     type: 'object',
     mode: 'collapse',
+    containerStyle: {
+      marginBottom: 0,
+    },
   },
   title: '标题',
   schema: [
