@@ -17,7 +17,9 @@
 			"@generator/store/*": ["packages/generator/src/store/*"],
 			"@generator/hooks/*": ["packages/generator/src/hooks/*"],
 			"@generator/fields/*": ["packages/generator/src/fields/*"],
-			"@generator/utils/*": ["packages/generator/src/utils/*"]
+			"@generator/utils/*": ["packages/generator/src/utils/*"],
+			"@form/components/*": ["packages/drip-form/src/components/*"],
+			"@form/components": ["packages/drip-form/src/components"]
 		},
 		"downlevelIteration": true
 	},

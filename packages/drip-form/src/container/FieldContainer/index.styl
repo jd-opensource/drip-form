@@ -2,77 +2,8 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 16:55:53
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-04-14 11:49:42
+ * @Last Modified time: 2022-01-18 22:22:16
  */
-common()
-	font-size 12px
-	line-height 20px
-
-.field-container
-	align-items center
-	font-size 12px
-
-	&__form
-		display flex
-
-		&>div:last-child
-			position relative
-			display flex
-			flex 1
-			align-items center
-			width 100%
-
-		&.title
-			&-top
-				flex-direction column
-
-				.field-container__title
-					width 100%
-
-			&-bottom
-				flex-direction column-reverse
-
-				.field-container__title
-					width 100%
-
-			&-right
-				flex-direction row-reverse
-
-				.field-container__title
-					width 82px
-					text-align right
-
-	&__other
-		line-height 20px
-
-	&__tips
-		common()
-		color #999
-
-	&__error
-		common()
-		min-height 20px
-		color #ff0000
-
-		&--no-title
-			padding-left 0
-
-	&__title
-		display flex
-		flex-shrink 0
-		align-items center
-		width 82px
-		text-align left
-		word-break break-all
-
-		&-question
-			margin-left 5px
-			cursor pointer
-
-	&__babel-question
-		color #08ce96
-		font-size 14px !important
-
 .field__sure
 	&--container
 		display flex

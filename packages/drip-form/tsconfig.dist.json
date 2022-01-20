@@ -9,6 +9,11 @@
 		"**/*.styl"
 	],
 	"compilerOptions": {
-		"tsBuildInfoFile": "./build-info/tsconfig.tsbuildinfo"
+		"tsBuildInfoFile": "./build-info/tsconfig.tsbuildinfo",
+		"baseUrl": ".",
+		"paths": {
+			"@form/components/*": ["src/components/*"],
+			"@form/components": ["src/components"]
+		}
 	}
 }

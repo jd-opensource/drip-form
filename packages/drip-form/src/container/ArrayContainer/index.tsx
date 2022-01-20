@@ -3,18 +3,17 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 19:50:31
+ * @Last Modified time: 2022-01-18 17:06:44
  */
-import React, { useMemo, useState, useEffect, memo, CSSProperties } from 'react'
+import React, { useMemo, memo } from 'react'
 import cx from 'classnames'
 import { typeCheck, number2Chinese } from '@jdfed/utils'
-import { useArray, useContainer, useContainerStyle } from '@jdfed/hooks'
+import { useArray } from '@jdfed/hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import renderCoreFn from '../../render'
-import { calcTitleMargin, titlePlacementCls, Align } from '../FieldContainer'
+import { CommonContainerHoc } from '@form/components/index'
 import type { RenderFnProps, ContainerType } from '../../render/type'
-import type { FC } from 'react'
 import type { Props } from '../type'
 import './index.styl'
 
@@ -48,172 +47,84 @@ type ArrayProps = {
   containerMap: ContainerType
 }
 
-const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
-  theme,
-  containerStyle,
-  title,
-  description = {
-    type: 'icon',
-    title: '',
-  },
-  titleUi = {
-    requiredIcon: false,
-  },
-  titlePlacement,
-  showTitle,
-  customComponents,
-  uiComponents,
-  dispatch,
-  hasDefault,
-  dataSchema,
-  uiSchema,
-  errors,
-  formData,
-  onQuery,
-  parentUiSchemaKey,
-  parentDataSchemaKey,
-  onValidate,
-  fieldData = [],
-  requiredFields,
-  uiProp,
-  fieldKey,
-  containerMap,
-  get,
-  getKey,
-  containerHoc,
-  formMode,
-  arrayKey,
-}) => {
-  // title的margin样式
-  const [titleMargin, onChangeTitleMargin] = useState(() => {
-    return calcTitleMargin(titleUi, titlePlacement)
-  })
-
-  useEffect(() => {
-    onChangeTitleMargin(calcTitleMargin(titleUi, titlePlacement))
-  }, [titlePlacement, titleUi])
-
-  useContainer({ fieldKey, dispatch })
-  const currentDataSchema = (parentDataSchemaKey || []).reduce((prev, cur) => {
-    if (cur === '#') {
-      return prev
-    } else {
-      return prev[cur]
-    }
-  }, dataSchema as Record<string, any>)
-  // 数组自增数组子元素类型
-  const childType =
-    typeCheck(currentDataSchema.items) === 'Object'
-      ? currentDataSchema.items.type
-      : undefined
-
-  const newContainerStyle = useContainerStyle(formMode, containerStyle)
-  // 默认ArrayContainer模式为加减模式
-  const {
-    mode = 'add',
-    addTitle = '添加一行数据',
-    serialText = {
-      afterText: '',
-      beforeText: '',
-      serialLang: 'number',
-    },
-    showNo,
-    maxAddCount,
-    // 删除二次确认，需要主题导出popConfig
-    // TODO 后续drip-form单独开发npm包兜底
-    hasConfirm = false,
-    // 删除提示文案
-    confirm = {
-      confirmTitle: '确定删除这一项？',
-      okText: '确定',
-      cancelText: '取消',
-    },
-  } = uiProp
-  // 是否为add加减模式
-  const isAdd = useMemo(() => mode === 'add', [mode])
-  // 加减模式，判断是否超过了最大可添加行数
-  const notExceedMaxCount = useMemo(
-    () => maxAddCount === undefined || maxAddCount > fieldData.length,
-    [maxAddCount, fieldData]
-  )
-  // 是否是元祖模式
-  const isTuple = useMemo(() => ['normal', 'tuple'].includes(mode), [mode])
-  const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
-  /**
-   * title组件
-   */
-  const titleMemo = useMemo(() => {
-    const QuestionCircle = uiComponents[theme]?.QuestionCircle
-    return (
-      <div
-        className="object-container__title"
-        style={{
-          ...(titleUi?.width && { width: titleUi?.width }),
-          ...(titleUi?.textAlign && {
-            justifyContent: Align[titleUi?.textAlign],
-          }),
-          ...(titleUi?.verticalAlign && {
-            alignItems: Align[titleUi?.verticalAlign],
-          }),
-          display: 'flex',
-          margin: titleMargin.style,
-          lineHeight: '32px',
-        }}
-      >
-        {titleUi?.requiredIcon &&
-        requiredFields.includes(fieldKey.split('.').pop() as string) ? (
-          <span style={{ color: 'red' }}>*</span>
-        ) : (
-          ''
-        )}
-        {title}
-        {description &&
-          description?.type === 'icon' &&
-          description?.title &&
-          QuestionCircle && <QuestionCircle {...description} />}
-      </div>
-    )
-  }, [
-    description,
+const arrayContainer = memo<Props & RenderFnProps & ArrayProps>(
+  ({
     theme,
-    title,
-    titleUi,
-    requiredFields,
+    customComponents,
     uiComponents,
+    dispatch,
+    hasDefault,
+    dataSchema,
+    uiSchema,
+    errors,
+    formData,
+    onQuery,
+    parentUiSchemaKey,
+    parentDataSchemaKey,
+    onValidate,
+    fieldData = [],
+    uiProp,
     fieldKey,
-    titleMargin,
-  ])
+    containerMap,
+    get,
+    getKey,
+    containerHoc,
+    formMode,
+    arrayKey,
+  }) => {
+    const currentDataSchema = (parentDataSchemaKey || []).reduce(
+      (prev, cur) => {
+        if (cur === '#') {
+          return prev
+        } else {
+          return prev[cur]
+        }
+      },
+      dataSchema as Record<string, any>
+    )
+    // 数组自增数组子元素类型
+    const childType =
+      typeCheck(currentDataSchema.items) === 'Object'
+        ? currentDataSchema.items.type
+        : undefined
 
-  const addIcon = useMemo(() => <FontAwesomeIcon icon={faPlus} />, [])
+    // 默认ArrayContainer模式为加减模式
+    const {
+      mode = 'add',
+      addTitle = '添加一行数据',
+      serialText = {
+        afterText: '',
+        beforeText: '',
+        serialLang: 'number',
+      },
+      showNo,
+      maxAddCount,
+      // 删除二次确认，需要主题导出popConfig
+      // TODO 后续drip-form单独开发npm包兜底
+      hasConfirm = false,
+      // 删除提示文案
+      confirm = {
+        confirmTitle: '确定删除这一项？',
+        okText: '确定',
+        cancelText: '取消',
+      },
+    } = uiProp
+    // 是否为add加减模式
+    const isAdd = useMemo(() => mode === 'add', [mode])
+    // 加减模式，判断是否超过了最大可添加行数
+    const notExceedMaxCount = useMemo(
+      () => maxAddCount === undefined || maxAddCount > fieldData.length,
+      [maxAddCount, fieldData]
+    )
+    // 是否是元祖模式
+    const isTuple = useMemo(() => ['normal', 'tuple'].includes(mode), [mode])
+    const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
+    const addIcon = useMemo(() => <FontAwesomeIcon icon={faPlus} />, [])
+    const Popconfirm = uiComponents[theme]?.Popconfirm
 
-  const Popconfirm = uiComponents[theme]?.Popconfirm
-
-  return (
-    <div
-      className={cx(
-        'array-field--container',
-        titlePlacementCls(titlePlacement)
-      )}
-      style={{
-        ...(uiProp?.style as CSSProperties),
-        ...(newContainerStyle?.width && { width: newContainerStyle.width }),
-      }}
-    >
-      {showTitle && titleMemo}
-      {/* generator模式需要默认展示一份表单，自增模式、元祖模式由数据渲染表单 */}
-      <div
-        style={{
-          width: `calc(100% - ${
-            !showTitle ||
-            titleUi?.placement === 'bottom' ||
-            titleUi?.placement === 'top'
-              ? 0
-              : titleUi?.width || 90
-          }px)`,
-          minWidth: '200px',
-          flexShrink: 0,
-        }}
-      >
+    return (
+      <>
+        {/* generator模式需要默认展示一份表单，自增模式、元祖模式由数据渲染表单 */}
         {(formMode === 'generator' || isTuple ? [''] : fieldData).map(
           (item, i, array) => {
             return (
@@ -298,11 +209,9 @@ const ArrayContainer: FC<Props & RenderFnProps & ArrayProps> = ({
             <div className="array-item--add_title">{addTitle}</div>
           </div>
         )}
-      </div>
-    </div>
-  )
-}
-
-const memoArrayContainer = memo(ArrayContainer)
-
-export default memoArrayContainer
+      </>
+    )
+  }
+)
+arrayContainer.displayName = 'arrayContainer'
+export default CommonContainerHoc(arrayContainer)
