@@ -34,7 +34,6 @@
 		"addOwner": "node scripts/common/addOwner.js",
 		"postinstall": "node scripts/common/postinstall.js",
 		"eslint": "eslint packages/**/*.{tsx,ts}",
-		"start:dripform": "cd examples/DripForm && yarn start",
 		"start:website": "cd website && yarn start",
 		"start:generator": "cd examples/form-generator && yarn dev",
 		"watch:babel": "lerna run --parallel watch -- --environment NODE_ENV:development:babel",
