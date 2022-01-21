@@ -33,27 +33,27 @@ Currently, the [source](https://github.com/JDFED/drip-form/tree/dev) is split up
 
   - [drip-form-plugin-formats](https://github.com/JDFED/drip-form/tree/dev/packages/drip-form-plugin-formats)
 
-    Drip form AJV formats plugin
+    Drip-form AJV formats plugin
 
   - [drip-form-plugin-keywords](https://github.com/JDFED/drip-form/tree/dev/packages/drip-form-plugin-keywords)
 
-    Drip form AJV keyword plugin
+    Drip-form AJV keyword plugin
 
   - [drip-form-theme-antd](https://github.com/JDFED/drip-form/tree/dev/packages/drip-form-theme-antd)
 
-    Drip form antd theme
+    Drip-form antd theme
 
   - [generator](https://github.com/JDFED/drip-form/tree/dev/packages/generator)
 
-    Drip form generator
+    Drip-form generator
 
   - [hooks](https://github.com/JDFED/drip-form/tree/dev/packages/hooks)
 
-    Drip form hooks
+    Drip-form hooks
 
   - [utils](https://github.com/JDFED/drip-form/tree/dev/packages/utils)
 
-    Drip form utils
+    Drip-form utils
 
 - [scripts](https://github.com/JDFED/drip-form/tree/dev/packages/scripts)
 
@@ -61,15 +61,15 @@ Currently, the [source](https://github.com/JDFED/drip-form/tree/dev) is split up
 
 - [website](https://github.com/JDFED/drip-form/tree/dev/packages/website)
 
-  Drip form website
+  Drip-form website
 
 ## Semantic versioning
 
-Drip form follows [semantic versioning](https://semver.org/)
+Drip-form follows [semantic versioning](https://semver.org/)
 
 ## Commit message
 
-Drip form use [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/) to generate CHANGELOG。
+Drip-form use [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/) to generate CHANGELOG。
 
 See how a minor change to your commit message style can make you a better programmer.
 
@@ -103,7 +103,7 @@ Do not get too stressed about PR titles, however. The maintainers will help you 
 
 ## Code Conventions
 
-We use [husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/okonet/lint-staged#readme). In `pre-commit`, automatically run the `eslint` and` pretty` to lint code and format code.
+We use [husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/okonet/lint-staged#readme). In `pre-commit`, automatically run the `eslint` and ` prettier` to lint code and format code.
 
 ## Submitting Pull Requests
 
@@ -115,7 +115,7 @@ This project follows [GitHub's standard forking model](https://guides.github.com
 
 People are giving themselves and their free time to contribute to open source projects in so many ways, so we believe everyone should be praised for their contributions (code or not).
 
-`Drip form` follows [all-contributors](https://allcontributors.org/docs/en/specification) specification.
+`Drip-form` follows [all-contributors](https://allcontributors.org/docs/en/specification) specification.
 
 Write a comment on an issue or pull request to recognise their contribution.
 `@all-contributors please add @<username> for <contributions>`
