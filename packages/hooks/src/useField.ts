@@ -360,12 +360,16 @@ const useField = (
           ...options,
         })
       }
-      // 删除formData中相应表单字段（fix：表单唯恐之后必填校验失效）
-      // 删除dataSchema中相应default（fix: text默认值后续删除不自动添加 #C2020091124826）
+      /**
+       * 删除formData中相应表单字段（fix：表单为空之后必填校验失效）
+       * 删除dataSchema中相应default（fix: text默认值后续删除不自动添加）
+       * 数组容器中子项为空不删除
+       */
       if (
-        Object.prototype.hasOwnProperty.call(options, 'isDelete')
+        (Object.prototype.hasOwnProperty.call(options, 'isDelete')
           ? options.isDelete
-          : isEmpty(value)
+          : isEmpty(value)) &&
+        getKey(fieldKey, 'dataSchema').split('.').pop() !== 'items'
       ) {
         dispatch({
           type: 'deleteFormData',
