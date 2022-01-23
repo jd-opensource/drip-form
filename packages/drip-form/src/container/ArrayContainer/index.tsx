@@ -3,9 +3,9 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:25:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-18 17:06:44
+ * @Last Modified time: 2022-01-23 14:35:56
  */
-import React, { useMemo, memo } from 'react'
+import React, { useMemo, memo, useEffect } from 'react'
 import cx from 'classnames'
 import { typeCheck, number2Chinese } from '@jdfed/utils'
 import { useArray } from '@jdfed/hooks'
@@ -121,6 +121,19 @@ const arrayContainer = memo<Props & RenderFnProps & ArrayProps>(
     const { addItem, deltItem } = useArray({ fieldKey, dispatch, fieldData })
     const addIcon = useMemo(() => <FontAwesomeIcon icon={faPlus} />, [])
     const Popconfirm = uiComponents[theme]?.Popconfirm
+
+    // 初次加载，设置默认key
+    useEffect(() => {
+      if (!arrayKey[fieldKey]) {
+        dispatch({
+          type: 'setArrayKey',
+          action: {
+            fieldKey,
+          },
+        })
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
       <>
