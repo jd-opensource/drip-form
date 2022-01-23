@@ -129,10 +129,10 @@ type DeleteUiSchemaAction = {
 type SetArrayKey = {
   type: 'setArrayKey'
   action: {
-    // 添加或删除的位置
-    order: number
     // 数组父级fieldKey
     fieldKey: string
+    // 添加或删除的位置 （order为undefiedn，则全量设置当前fieldKey的key）
+    order?: number
     // 是否删除 默认添加
     isDelete?: boolean
   }

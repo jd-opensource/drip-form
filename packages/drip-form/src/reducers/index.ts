@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-13 16:37:39
+ * @Last Modified time: 2022-01-23 14:33:45
  */
 import { createContext, Dispatch } from 'react'
 import {
@@ -155,11 +155,29 @@ const formDataReducer = (state: State, action: Action): void => {
     case 'setArrayKey': {
       const { isDelete, fieldKey, order } = action.action
       // 当前数组的所有react key
-      const fieldKeyComKey = state.arrayKey[fieldKey] || []
-      if (isDelete) {
+      let fieldKeyComKey = state.arrayKey[fieldKey] || []
+      if (isDelete && order) {
         fieldKeyComKey.splice(order, 1)
       } else {
-        fieldKeyComKey[order] = randomString(52)
+        if (order) {
+          fieldKeyComKey[order] = randomString(52)
+        } else {
+          try {
+            const formDataKey = fieldKey.split('.')
+            const fieldData = formDataKey.reduce((prev, cur) => {
+              if (prev[cur]) {
+                return prev[cur]
+              } else {
+                return []
+              }
+            }, state.formData)
+            fieldKeyComKey = fieldData.map(() => {
+              return randomString(52)
+            })
+          } catch (error) {
+            // console.log(error)
+          }
+        }
         state.arrayKey[fieldKey] = fieldKeyComKey
       }
     }
