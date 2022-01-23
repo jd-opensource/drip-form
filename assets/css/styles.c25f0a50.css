@@ -13749,6 +13749,9 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   width: 100%;
 }
 
+.drip-form--colorpicker {
+  display: flex;
+}
 .colorpicker--show {
   margin-right: 5px;
   padding: 1px;
