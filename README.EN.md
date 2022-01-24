@@ -9,7 +9,9 @@
 [简体中文](./README.md) | English | [Documentation](https://jdfed.github.io/drip-form/) | [Discussions](https://github.com/JDFED/drip-form/discussions)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [contributors]: https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square 'Number of contributors on All-Contributors'
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
@@ -30,13 +32,14 @@ The use of supporting **visual form generator and Node verification** tool can f
 
 Drip-Form has the following five ✨highlights✨:
 
-* **Automation**：According to the form data, the initialization form can be automatically generated.
-* **Semantic**：Concise and efficient JSON protocol helps developers understand.
-* **Integrated verification**：Relying on `ajv`'s standardized verification capabilities, it can achieve integrated front-end and back-end verification.
-* **Visualization**：Visually build and modify the form `Schema`.
-* **Extensible**：Support secondary development, expandable custom component set and verification set.
+- **Automation**：According to the form data, the initialization form can be automatically generated.
+- **Semantic**：Concise and efficient JSON protocol helps developers understand.
+- **Integrated verification**：Relying on `ajv`'s standardized verification capabilities, it can achieve integrated front-end and back-end verification.
+- **Visualization**：Visually build and modify the form `Schema`.
+- **Extensible**：Support secondary development, expandable custom component set and verification set.
 
 ## 🔨How to use
+
 ### Environmental dependence
 
 - node >=13.14.0
@@ -59,17 +62,16 @@ import '@jdfed/drip-form-theme/dist/index.css'
 // Import configuration items
 import unitedSchema from './unitedSchema.json'
 
-const Form = memo(() => {
-  return 
-    <DripForm
-      unitedSchema={unitedSchema}
-      uiComponents={{'drip': dripTheme}}
-    />
-})
+const Form = memo(() => (
+	<DripForm unitedSchema={unitedSchema} uiComponents={{ drip: dripTheme }} />
+))
 ```
 
 ## 🤔 Contribution
+
 The main purpose of this repository is to continue to develop and improve **Drip-Form**, making it more powerful, more stable, and more convenient to use.If you have suggestions or bug fixes for **Drip-Form**, please submit `issue` and `merge`. We are very grateful to the community for promoting bug fixes and improvements.
+
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.
 
 ### ✨ Contributors
 
@@ -80,6 +82,7 @@ The main purpose of this repository is to continue to develop and improve **Drip
 If Drip-Form solves your development pain points and is helpful to you, please don't begrudge your `star`🌟!
 
 ## 📄 License
+
 MIT License
 
 Copyright (c) 2020 <a href='https://www.jd.com/'>JD.com</a>, Inc.
