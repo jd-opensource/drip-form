@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Features
+
+* containerHoc支持获取子组件ui配置 ([714ac6d](https://github.com/jdfed/drip-form/commit/714ac6d451f613b721e1bf2b6ae2189688cee4fa))
+* 数组容器删除子项支持二次确认配置 ([33eeff8](https://github.com/jdfed/drip-form/commit/33eeff86cef300af209889e82cd10fa663c300d4))
+* 表单布局支持配置外边距 ([2016881](https://github.com/jdfed/drip-form/commit/201688140cebb2403899acca0ca58000dba7aaa3))
+
+
+### Bug Fixes
+
+* reset导致visbleFieldKey清空，错误信息无法展示 ([c4d839c](https://github.com/jdfed/drip-form/commit/c4d839c6cf9199459c7c90244f75d29c687b326b))
+* 数组容器点击删除未删除错误内容 ([ce11e27](https://github.com/jdfed/drip-form/commit/ce11e273ab35ad8538990db90bb77000a059fc1b))
+* 数组容器组件key兜底使用数组下标导致删除错乱 ([#131](https://github.com/jdfed/drip-form/issues/131)) ([cc73d8d](https://github.com/jdfed/drip-form/commit/cc73d8d558114eb5ed339a9a6e98cc37fe435332))
+
+
+### style
+
+* 数组容器、对象容器标题位置默认居中对齐 ([4564f2f](https://github.com/jdfed/drip-form/commit/4564f2fd457b39e7f09773dd591a81d3cd844618))
+
+
+
 ## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
 
 

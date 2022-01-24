@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Features
+
+* 数组容器删除子项支持二次确认配置 ([33eeff8](https://github.com/jdfed/drip-form/commit/33eeff86cef300af209889e82cd10fa663c300d4))
+
+
+### style
+
+* 修复颜色选择器样式 ([91a32f0](https://github.com/jdfed/drip-form/commit/91a32f0dacc9a5017058aef5f01fa043d3cc5d4c))
+
+
+
 ## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
 
 

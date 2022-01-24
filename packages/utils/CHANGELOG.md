@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Bug Fixes
+
+* reset导致visbleFieldKey清空，错误信息无法展示 ([c4d839c](https://github.com/jdfed/drip-form/commit/c4d839c6cf9199459c7c90244f75d29c687b326b))
+* 修复errorMessage在对象数组未透传问题 ([d69d1d6](https://github.com/jdfed/drip-form/commit/d69d1d6b98bf73a630d78c47537e154ace7d2616))
+* 数组内部子元素校验失效 ([#126](https://github.com/jdfed/drip-form/issues/126)) ([6f0a89e](https://github.com/jdfed/drip-form/commit/6f0a89e20c276c35699607956668152100b28e45))
+* 数组容器组件key兜底使用数组下标导致删除错乱 ([#131](https://github.com/jdfed/drip-form/issues/131)) ([cc73d8d](https://github.com/jdfed/drip-form/commit/cc73d8d558114eb5ed339a9a6e98cc37fe435332))
+* 校验配置0，错误文案配置不展示 ([5f0f211](https://github.com/jdfed/drip-form/commit/5f0f2118488df32f1d579ca024a3556e4f91e049))
+
+
+
 ## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
 
 

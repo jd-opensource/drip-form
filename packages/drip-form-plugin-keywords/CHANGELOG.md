@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Features
+
+* ajv keyword添加gbkLength关键字 ([#129](https://github.com/jdfed/drip-form/issues/129)) ([ea35c0d](https://github.com/jdfed/drip-form/commit/ea35c0dc7299127a5d3ec9362e5725100446337f))
+
+
+
 ## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
 
 **Note:** Version bump only for package @jdfed/drip-form-plugin-keywords

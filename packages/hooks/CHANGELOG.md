@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Features
+
+* 表单布局支持配置外边距 ([2016881](https://github.com/jdfed/drip-form/commit/201688140cebb2403899acca0ca58000dba7aaa3))
+
+
+### Bug Fixes
+
+* 修复数组子项为空，当前项自动被删除问题 ([#128](https://github.com/jdfed/drip-form/issues/128)) ([5c8e66b](https://github.com/jdfed/drip-form/commit/5c8e66bdda52db461d76e00456d95ded5ee2883e))
+* 数组容器点击删除未删除错误内容 ([ce11e27](https://github.com/jdfed/drip-form/commit/ce11e273ab35ad8538990db90bb77000a059fc1b))
+
+
+
 ## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
 
 

@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/drip-form-plugin-keywords",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"description": "drip-form ajv关键字插件",
 	"keywords": [
 		"ajv",
