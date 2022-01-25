@@ -71,7 +71,7 @@ const Form = memo(() => (
 
 此存储库的主要目的是继续不断发展和完善 Drip-Form，使得它的性能更强，功能更稳定，更利于使用。如果您对于 Drip-Form 有建议或者错误修正等需求，欢迎提 `issue` 和 `merge`，我们极力感谢社区促进错误修正和改进。
 
-请确保在提 pull requrest 之前已经阅读了[贡献指南](./CONTRIBUTING.md)
+请确保在提 pull request 之前已经阅读了[贡献指南](./CONTRIBUTING.md)
 
 ### ✨ 贡献者
 
