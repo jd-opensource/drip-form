@@ -38,7 +38,7 @@ const config: Field = {
         items: {
           type: 'object',
           title: '',
-          ui: { type: 'object' },
+          ui: { type: 'object', showTitle: false },
           schema: [
             {
               type: 'string',
