@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-27 21:46:47
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-05 10:45:25
+ * @Last Modified time: 2022-01-28 14:46:16
  */
 import { useCallback } from 'react'
 import type { Dispatch } from 'react'
@@ -37,8 +37,12 @@ const useQuery = (
       if ((options.length === 0 || !requestCache) && queryFunc) {
         const data = await queryFunc(...args)
         dispatch({
-          type: 'setUiSchema',
-          [`${getKey(fieldKey, 'uiSchema')}.options`]: data,
+          type: 'setUi',
+          action: {
+            set: {
+              [`${getKey(fieldKey, 'uiSchema')}.options`]: data,
+            },
+          },
         })
       }
     },

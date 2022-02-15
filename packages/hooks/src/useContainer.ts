@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-05 11:18:43
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-04 18:10:51
+ * @Last Modified time: 2022-01-26 17:58:40
  */
 
 import { useEffect } from 'react'
@@ -20,13 +20,17 @@ const useContainer = ({
   //container容器加载的时候将当前表单fieldKey加入到visibleFieldKey中
   useEffect(() => {
     dispatch({
-      type: 'setVisibleFieldKey',
-      key: fieldKey,
+      type: 'setVisibleKey',
+      action: {
+        fieldKey,
+      },
     })
     return () => {
       dispatch({
-        type: 'deleteVisibleFieldKey',
-        key: fieldKey,
+        type: 'setVisibleKey',
+        action: {
+          deleteKeys: fieldKey,
+        },
       })
     }
   }, [dispatch, fieldKey])

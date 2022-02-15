@@ -308,26 +308,38 @@ const useField = (
           asyncValidateResult.then((res: string): void => {
             if (res) {
               dispatch({
-                type: 'setError',
-                [fieldKey]: res,
+                type: 'setErr',
+                action: {
+                  set: {
+                    [fieldKey]: res,
+                  },
+                },
               })
             } else {
               dispatch({
-                type: 'deleteError',
-                key: fieldKey,
+                type: 'setErr',
+                action: {
+                  deleteKeys: fieldKey,
+                },
               })
             }
           })
         } else {
           if (asyncValidateResult) {
             dispatch({
-              type: 'setError',
-              [fieldKey]: asyncValidateResult,
+              type: 'setErr',
+              action: {
+                set: {
+                  [fieldKey]: asyncValidateResult,
+                },
+              },
             })
           } else {
             dispatch({
-              type: 'deleteError',
-              key: fieldKey,
+              type: 'setErr',
+              action: {
+                deleteKeys: fieldKey,
+              },
             })
           }
         }
@@ -372,18 +384,25 @@ const useField = (
         getKey(fieldKey, 'dataSchema').split('.').pop() !== 'items'
       ) {
         dispatch({
-          type: 'deleteFormData',
-          key: fieldKey,
+          type: 'setData',
+          action: {
+            deleteKeys: fieldKey,
+          },
         })
         dispatch({
-          type: 'setDataSchema',
-          [`${getKey(fieldKey, 'dataSchema')}.default`]: '',
-          isDelete: true,
+          type: 'setValidate',
+          action: {
+            deleteKeys: `${getKey(fieldKey, 'dataSchema')}.default`,
+          },
         })
       } else {
         dispatch({
-          type: 'setFormData',
-          [fieldKey]: value,
+          type: 'setData',
+          action: {
+            set: {
+              [fieldKey]: value,
+            },
+          },
         })
       }
       dispatch({

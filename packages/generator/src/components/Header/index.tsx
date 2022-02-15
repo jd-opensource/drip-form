@@ -14,6 +14,7 @@ import {
   exportVisibleAtom,
   schemaAtom,
   headerConfigAtom,
+  versionAtom,
 } from '@generator/store'
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
 import FileSaver from 'file-saver'
@@ -34,6 +35,7 @@ const Header = () => {
     showExportJSON,
   } = useRecoilValue(headerConfigAtom)
   const [unitedSchema, setUnitedSchema] = useRecoilState(schemaAtom)
+  const setVersion = useSetRecoilState(versionAtom)
 
   const importJson = (file: RcFile) => {
     return new Promise<void>(() => {
@@ -46,6 +48,7 @@ const Header = () => {
             schema = JSON.parse(e.target.result as string)
           }
           setUnitedSchema(schema)
+          setVersion((version) => version + 1)
           message.success('上传成功!', 2)
         } catch (error) {
           message.error('上传失败,请检查文件格式!', 2)
