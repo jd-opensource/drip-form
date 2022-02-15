@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-06 15:33:25
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-07 17:04:36
+ * @Last Modified time: 2022-02-11 14:12:02
  */
 import { typeCheck } from '@jdfed/utils'
 import { useCallback } from 'react'
@@ -53,7 +53,7 @@ type HandleFn = (
   value: SetFn | StaticValue,
   type: SetType,
   mode?: 'set' | 'merge'
-) => void | unknown
+) => void | any
 
 const useSchema = ({
   uiSchema,
@@ -201,28 +201,51 @@ const useSchema = ({
       switch (type) {
         case 'data':
           dispatch({
-            type: 'setFormData',
-            [key === '' ? 'formData' : key]: handleFn(key, value, 'data'),
+            type: 'setData',
+            action: {
+              ...(key === '' && {
+                formData: handleFn(key, value, 'data'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [key]: handleFn(key, value, 'data'),
+                },
+              }),
+            },
           })
           break
         case 'uiSchema':
           dispatch({
-            type: 'setUiSchema',
-            [key === '' ? 'uiSchema' : getKey(key, 'uiSchema')]: handleFn(
-              key,
-              value,
-              'uiSchema'
-            ),
+            type: 'setUi',
+            action: {
+              ...(key === '' && {
+                uiSchema: handleFn(key, value, 'uiSchema'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [getKey(key, 'uiSchema')]: handleFn(key, value, 'uiSchema'),
+                },
+              }),
+            },
           })
           break
         case 'dataSchema':
           dispatch({
-            type: 'setDataSchema',
-            [key === '' ? 'dataSchema' : getKey(key, 'dataSchema')]: handleFn(
-              key,
-              value,
-              'dataSchema'
-            ),
+            type: 'setValidate',
+            action: {
+              ...(key === '' && {
+                dataSchema: handleFn(key, value, 'dataSchema'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [getKey(key, 'dataSchema')]: handleFn(
+                    key,
+                    value,
+                    'dataSchema'
+                  ),
+                },
+              }),
+            },
           })
           break
         default:
@@ -238,35 +261,57 @@ const useSchema = ({
       switch (type) {
         case 'data':
           dispatch({
-            type: 'setFormData',
-            [key === '' ? 'formData' : key]: handleFn(
-              key,
-              value,
-              'data',
-              'merge'
-            ),
+            type: 'setData',
+            action: {
+              ...(key === '' && {
+                formData: handleFn(key, value, 'data', 'merge'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [key]: handleFn(key, value, 'data', 'merge'),
+                },
+              }),
+            },
           })
           break
         case 'uiSchema':
           dispatch({
-            type: 'setUiSchema',
-            [key === '' ? 'uiSchema' : getKey(key, 'uiSchema')]: handleFn(
-              key,
-              value,
-              'uiSchema',
-              'merge'
-            ),
+            type: 'setUi',
+            action: {
+              ...(key === '' && {
+                uiSchema: handleFn(key, value, 'uiSchema', 'merge'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [getKey(key, 'uiSchema')]: handleFn(
+                    key,
+                    value,
+                    'uiSchema',
+                    'merge'
+                  ),
+                },
+              }),
+            },
           })
           break
         case 'dataSchema':
           dispatch({
-            type: 'setDataSchema',
-            [key === '' ? 'dataSchema' : getKey(key, 'dataSchema')]: handleFn(
-              key,
-              value,
-              'dataSchema',
-              'merge'
-            ),
+            type: 'setValidate',
+            action: {
+              ...(key === '' && {
+                dataSchema: handleFn(key, value, 'dataSchema', 'merge'),
+              }),
+              ...(key !== '' && {
+                set: {
+                  [getKey(key, 'dataSchema')]: handleFn(
+                    key,
+                    value,
+                    'dataSchema',
+                    'merge'
+                  ),
+                },
+              }),
+            },
           })
           break
         default:
@@ -282,10 +327,12 @@ const useSchema = ({
     (key) => {
       dispatch({
         type: 'deleteField',
-        fieldKey: key,
-        get,
-        getKey,
-        getTypeKey,
+        action: {
+          fieldKey: key,
+          get,
+          getKey,
+          getTypeKey,
+        },
       })
     },
     [dispatch, get, getKey, getTypeKey]
@@ -304,14 +351,16 @@ const useSchema = ({
     }) => {
       dispatch({
         type: 'addField',
-        fieldKey,
-        closestEdge,
-        unitedSchema,
-        overFieldKey,
-        get,
-        getKey,
-        getTypeKey,
-        shouldDelete,
+        action: {
+          fieldKey,
+          closestEdge,
+          unitedSchema,
+          overFieldKey,
+          get,
+          getKey,
+          getTypeKey,
+          shouldDelete,
+        },
       })
       cb && cb()
     },

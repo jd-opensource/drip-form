@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-12 15:42:00
+ * @Last Modified time: 2022-01-28 14:46:06
  */
 import React, { memo, FC, useEffect } from 'react'
 import { TreeSelect } from 'antd'
@@ -122,9 +122,13 @@ export const TreeSelectField: FC<TreeSelectFieldProps> = memo(
               })
               node.isloading = false
               dispatch({
-                type: 'setUiSchema',
-                [`${getKey(fieldKey, 'uiSchema')}.options`]:
-                  options.concat(data),
+                type: 'setUi',
+                action: {
+                  set: {
+                    [`${getKey(fieldKey, 'uiSchema')}.options`]:
+                      options.concat(data),
+                  },
+                },
               })
             },
           })}

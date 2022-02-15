@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-10 17:11:29
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-10 17:31:22
+ * @Last Modified time: 2022-01-28 18:20:14
  */
 
 import React, { memo, FC, useMemo, useCallback } from 'react'
@@ -207,14 +207,20 @@ const UploaderField: FC<UploaderFieldProps> = ({
       const { isOk, errors } = await checkImg({ file, dimension, size })
       if (isOk) {
         dispatch({
-          type: 'deleteError',
-          key: fieldKey,
+          type: 'setErr',
+          action: {
+            deleteKeys: fieldKey,
+          },
         })
         return true
       } else {
         dispatch({
-          type: 'setError',
-          [fieldKey]: errors.join(';'),
+          type: 'setErr',
+          action: {
+            set: {
+              [fieldKey]: errors.join(';'),
+            },
+          },
         })
         return LIST_IGNORE
       }

@@ -3,17 +3,17 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 15:29:06
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-07 16:46:50
+ * @Last Modified time: 2022-01-26 17:19:18
  */
 import { produce } from 'immer'
 import { setDeepProp, parseUnitedSchema } from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const addField = ({
-  args,
+  action,
   state,
 }: {
-  args: Record<string, any>
+  action: Record<string, any>
   state: State
 }): void => {
   // 添加一个新的表单项
@@ -26,7 +26,7 @@ const addField = ({
     getKey,
     getTypeKey,
     shouldDelete,
-  } = args
+  } = action
 
   const keyPath = overFieldKey.split('.')
   // overField 父级节点的FieldKey

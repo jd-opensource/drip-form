@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-01 16:54:41
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-14 16:03:21
+ * @Last Modified time: 2022-01-28 18:24:20
  */
 import { useCallback } from 'react'
 import produce from 'immer'
@@ -35,10 +35,14 @@ const useArray = ({
         },
       })
       dispatch({
-        type: 'setFormData',
-        [fieldKey]: produce(fieldData || [], (draft) => {
-          draft.splice(order, 0, item)
-        }),
+        type: 'setData',
+        action: {
+          set: {
+            [fieldKey]: produce(fieldData || [], (draft) => {
+              draft.splice(order, 0, item)
+            }),
+          },
+        },
       })
     },
     [dispatch, fieldData, fieldKey]
@@ -54,14 +58,18 @@ const useArray = ({
           isDelete: true,
         },
       })
-      // ajv实时校验会重新生成错误信息，如果用户setErr添加了ignore，则ajv会跳过，所以这里需要手动删除
+      // 删除自定义错误
       dispatch({
-        type: 'deleteError',
-        key: `${fieldKey}.${order}`,
+        type: 'setErr',
+        action: {
+          deleteKeys: `${fieldKey}.${order}`,
+        },
       })
       dispatch({
-        type: 'deleteFormData',
-        key: `${fieldKey}.${order}`,
+        type: 'setData',
+        action: {
+          deleteKeys: `${fieldKey}.${order}`,
+        },
       })
     },
     [dispatch, fieldKey]
