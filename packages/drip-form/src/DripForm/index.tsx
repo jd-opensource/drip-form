@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-02-11 15:10:39
+ * @Last Modified time: 2022-02-11 19:22:51
  */
 import React, {
   forwardRef,
@@ -434,7 +434,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             checking={checking}
             errors={errors}
             formData={formData}
-            initFormData={parseFormData}
+            initFormData={initArgs.formData}
             dispatch={dispatch}
           />
         </div>
