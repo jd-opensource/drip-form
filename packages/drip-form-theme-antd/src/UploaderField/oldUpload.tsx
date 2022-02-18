@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-10 17:31:02
+ * @Last Modified time: 2022-01-28 18:20:26
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
@@ -304,14 +304,20 @@ const UploaderField: FC<UploaderFieldProps> = ({
       const { isOk, errors } = await checkImg({ file, dimension, size })
       if (isOk) {
         dispatch({
-          type: 'deleteError',
-          key: fieldKey,
+          type: 'setErr',
+          action: {
+            deleteKeys: fieldKey,
+          },
         })
         return true
       } else {
         dispatch({
-          type: 'setError',
-          [fieldKey]: errors.join(';'),
+          type: 'setErr',
+          action: {
+            set: {
+              [fieldKey]: errors.join(';'),
+            },
+          },
         })
         return LIST_IGNORE
       }

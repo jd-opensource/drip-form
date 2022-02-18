@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-18 16:58:10
+ * @Last Modified time: 2022-01-28 18:19:59
  */
 import React, { memo, useMemo, useCallback, useContext } from 'react'
 import cx from 'classnames'
@@ -84,26 +84,38 @@ const fieldContainer = memo<Props>(
           asyncValidateResult.then((res: string): void => {
             if (res) {
               dispatch({
-                type: 'setError',
-                [fieldKey]: res,
+                type: 'setErr',
+                action: {
+                  set: {
+                    [fieldKey]: res,
+                  },
+                },
               })
             } else {
               dispatch({
-                type: 'deleteError',
-                key: fieldKey,
+                type: 'setErr',
+                action: {
+                  deleteKeys: fieldKey,
+                },
               })
             }
           })
         } else {
           if (asyncValidateResult) {
             dispatch({
-              type: 'setError',
-              [fieldKey]: asyncValidateResult,
+              type: 'setErr',
+              action: {
+                set: {
+                  [fieldKey]: asyncValidateResult,
+                },
+              },
             })
           } else {
             dispatch({
-              type: 'deleteError',
-              key: fieldKey,
+              type: 'setErr',
+              action: {
+                deleteKeys: fieldKey,
+              },
             })
           }
         }

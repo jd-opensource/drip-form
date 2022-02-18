@@ -141,6 +141,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         // ajv是否已经将dataSchema中的默认值添加到formData中
         hasDefault: false,
         errors: {},
+        customErrors: {},
+        ajvErrors: {},
         // 表单是否在校验中
         checking: false,
         // 当前展示（已加载）的组件。用来优化校验逻辑（隐藏表单不校验)
@@ -182,8 +184,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         reload
       ) {
         dispatch({
-          type: 'reload',
-          ...resetArgs,
+          type: 'reset',
+          action: {
+            state: resetArgs,
+          },
         })
       }
     }, [
@@ -206,13 +210,26 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       uiSchema,
       dataSchema,
       formData,
-      errors,
+      ajvErrors,
+      customErrors,
       checking,
       hasDefault,
       visibleFieldKey,
       changeKey,
       arrayKey,
     } = data
+
+    // 错误信息（ajv错误+用户自定义错误）
+    const errors = useMemo(() => {
+      const errors = { ...ajvErrors, ...data.errors }
+      Object.entries(customErrors).map(([key, item]) => {
+        if (Object.prototype.hasOwnProperty.call(errors, key)) {
+          errors[key] = `${errors[key]}；${item}`
+        }
+      })
+      return errors
+    }, [ajvErrors, customErrors, data.errors])
+
     const { theme = 'antd', change } = uiSchema as UiSchema & {
       change: string | ControlFuc
     }
@@ -254,8 +271,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     // 重置表单
     const reset = useCallback(() => {
       dispatch({
-        type: 'reload',
-        ...resetArgs,
+        type: 'reset',
+        action: {
+          state: resetArgs,
+        },
       })
     }, [dispatch, resetArgs])
 

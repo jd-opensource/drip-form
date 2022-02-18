@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-16 13:43:04
+ * @Last Modified time: 2022-02-11 14:19:51
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -370,4 +370,16 @@ export function number2Chinese(num: number): string {
     millionUnit++
   }
   return resStr
+}
+
+// TODO 更新Read more文档
+export function upgradeTips(oldApiName: string, newApiName: string): void {
+  console.warn(
+    `${oldApiName}: The current usage is about to discard after the next main version is upgraded, please use ${newApiName}! `
+  )
+}
+
+// 转换数组
+export function toArray(param: string | Array<string>): Array<string> {
+  return Array.isArray(param) ? param : [param]
 }

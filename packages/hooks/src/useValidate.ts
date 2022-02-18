@@ -45,15 +45,12 @@ type Params = {
 
 const useValidate = (validate: Validate): ((arg0: Params) => void) => {
   const { run } = useDebounceFn(
-    ({ dataSchema, formData, dispatch, visibleFieldKey, ajv, onValidate }) => {
+    ({ dataSchema, formData, dispatch, visibleFieldKey, ajv }) => {
       /*
       因为ajv中有option配置可以改变formData(useDefaults：true)修改默认值
       或者类似ajv-keywords的自定义关键字transform等情况会修改formData。
       所以需要在在validate中使用immer，并重新返回新的formData。在此需要对formData重新dispatch设置
       */
-      const ignoreKeys = Object.keys(onValidate).filter((item) => {
-        return onValidate[item].type === 'change'
-      })
       const { errorsMap, formData: newFormData } = validate({
         schema: dataSchema,
         formData,
@@ -62,13 +59,16 @@ const useValidate = (validate: Validate): ((arg0: Params) => void) => {
       })
 
       dispatch({
-        type: 'setError',
-        errors: errorsMap,
-        ignore: ignoreKeys,
+        type: 'setAjvErr',
+        action: {
+          errors: errorsMap,
+        },
       })
       dispatch({
-        type: 'setFormData',
-        formData: newFormData,
+        type: 'setData',
+        action: {
+          formData: newFormData,
+        },
       })
       dispatch({
         type: 'setChecking',
@@ -76,7 +76,9 @@ const useValidate = (validate: Validate): ((arg0: Params) => void) => {
       })
       dispatch({
         type: 'setDefaultSuccess',
-        hasDefault: true,
+        action: {
+          hasDefault: true,
+        },
       })
     },
     { wait: 500 }

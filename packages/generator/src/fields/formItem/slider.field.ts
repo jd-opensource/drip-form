@@ -141,7 +141,7 @@ const config: Field = {
         items: {
           type: 'object',
           title: '',
-          ui: { type: 'object' },
+          ui: { type: 'object', showTitle: false },
           minItems: 1,
           maxItems: 1,
           schema: [

@@ -4,21 +4,21 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-07 16:47:08
+ * @Last Modified time: 2022-01-26 17:16:23
  */
 import { produce, original } from 'immer'
 import { deleteDeepProp, parseUnitedSchema, setDeepProp } from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const deleteField = ({
-  args,
+  action,
   state,
 }: {
-  args: Record<string, any>
+  action: Record<string, any>
   state: State
 }): void => {
   // 删除表单项
-  const { fieldKey, get, getKey, getTypeKey } = args
+  const { fieldKey, get, getKey, getTypeKey } = action
   const keyPath = fieldKey.split('.')
   // overField 父级节点的FieldKey
   const deleteParentPath = keyPath.slice(0, keyPath.length - 1).join('.')
