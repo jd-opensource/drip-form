@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
+
+
+### Features
+
+* 数组容器删除子项支持二次确认配置 ([33eeff8](https://github.com/jdfed/drip-form/commit/33eeff86cef300af209889e82cd10fa663c300d4))
+
+
+### style
+
+* 修复颜色选择器样式 ([91a32f0](https://github.com/jdfed/drip-form/commit/91a32f0dacc9a5017058aef5f01fa043d3cc5d4c))
+
+
+
+## [0.5.0](https://github.com/jdfed/drip-form/compare/v0.4.0...v0.5.0) (2022-01-13)
+
+
+### Features
+
+* setError支持配置action.ignore ([#125](https://github.com/jdfed/drip-form/issues/125)) ([b84aa5e](https://github.com/jdfed/drip-form/commit/b84aa5eead2b3f384d70bb45ce2961fcb1afbd1d))
+
+
+### Bug Fixes
+
+* 修复日期、时间选择器配置占位符、默认值无效问题 ([#123](https://github.com/jdfed/drip-form/issues/123)) ([e7e8543](https://github.com/jdfed/drip-form/commit/e7e85436fe32fb9da5af8bd927e2f30e243f4508))
+
+
+
+## 0.4.0 (2022-01-11)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+* upload支持输出string类型([#52](https://github.com/jdfed/drip-form/issues/52)) ([#117](https://github.com/jdfed/drip-form/issues/117)) ([447489a](https://github.com/jdfed/drip-form/commit/447489a395c98ca63bcf76213c9778a73dffe010))
+
+
+### Bug Fixes
+
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+* upload组件jdAction域名匹配规则 ([347b31a](https://github.com/jdfed/drip-form/commit/347b31a44227dd47195b89ef20d335cdcd0d023f))
+
+
+
+## 0.3.0 (2022-01-11)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+* upload支持输出string类型([#52](https://github.com/jdfed/drip-form/issues/52)) ([#117](https://github.com/jdfed/drip-form/issues/117)) ([447489a](https://github.com/jdfed/drip-form/commit/447489a395c98ca63bcf76213c9778a73dffe010))
+
+
+### Bug Fixes
+
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+* upload组件jdAction域名匹配规则 ([347b31a](https://github.com/jdfed/drip-form/commit/347b31a44227dd47195b89ef20d335cdcd0d023f))
+
+
+
+## 0.2.0 (2022-01-07)
+
+
+### Features
+
+* upload support img size limit ([#102](https://github.com/jdfed/drip-form/issues/102)) ([acbd278](https://github.com/jdfed/drip-form/commit/acbd27861a44004abf3afb7ae5ca5d210c70c28d))
+* uploader support maxCount ([#72](https://github.com/jdfed/drip-form/issues/72))  ([0c01435](https://github.com/jdfed/drip-form/commit/0c0143593a3e4da4eb2ff1d438cbd88c5aa999ff))
+
+
+### Bug Fixes
+
+* upload preview error ([#83](https://github.com/jdfed/drip-form/issues/83)) ([fab9052](https://github.com/jdfed/drip-form/commit/fab90527dbedca35cc2119bca93106f9fa58ee28))
+
+
+
 
 
 **Note:** Version bump only for package @jdfed/drip-form-theme-antd

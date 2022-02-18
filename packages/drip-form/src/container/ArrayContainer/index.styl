@@ -3,25 +3,30 @@
 .array-item
 	&--field
 		position relative
-		padding-top 15px
-		padding-right 20px
-		padding-left 20px
-		border-bottom 1px #d9d9d9 solid
 
 		&_last-child
 			border-bottom none
 
 		.fa-trash-alt
-			position absolute
-			top 0
-			right 0
-			color #d9d9d9
+			margin-right 20px
+			color #2d64ff
+			font-size 0.9rem
+			opacity 0.7
 			cursor pointer
 
+	&--header
+		display flex
+		justify-content space-between
+		align-items center
+		padding 4px 0
+		height 32px
+		background-color #2864ff1a
+
+	&--case
+		padding 20px 20px 0
+
 	&--number
-		position absolute
-		top 0
-		left 0
+		margin-left 20px
 		font-size 12px
 
 	&--add
@@ -34,27 +39,3 @@
 
 		&_title
 			margin-left 8px
-
-.array-field--container
-	display flex
-	justify-content space-between
-
-	&.title
-		&-top
-			flex-direction column
-
-			.object-container__title
-				width 100%
-
-		&-bottom
-			flex-direction column-reverse
-
-			.object-container__title
-				width 100%
-
-		&-right
-			flex-direction row-reverse
-
-			.object-container__title
-				width 82px
-				text-align right

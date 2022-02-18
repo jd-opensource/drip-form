@@ -2,11 +2,12 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 13:34:38
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 14:16:57
+ * @Last Modified time: 2022-01-17 17:59:43
  */
 import type { Set, Merge, SetType, DeleteField, AddField } from './useSchema'
 import type { Get, GetKey } from '@jdfed/utils'
 import type { Validate, ErrorsMap } from './useValidate'
+import type { MarginType, TitleWidth } from './useTitle'
 export { default as useModal } from './useModal'
 export { default as useRefProp } from './useRefProp'
 export { default as usePrevious } from './usePrevious'
@@ -20,6 +21,7 @@ export { default as useContainer } from './useContainer'
 export { default as useSchema } from './useSchema'
 export { default as useGetKey } from './useGetKey'
 export { default as useContainerStyle } from './useContainerStyle'
+export { default as useTitle } from './useTitle'
 export type {
   Get,
   Set,
@@ -30,4 +32,6 @@ export type {
   SetType,
   Validate,
   ErrorsMap,
+  MarginType,
+  TitleWidth,
 }

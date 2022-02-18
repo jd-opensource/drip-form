@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-30 16:14:14
+ * @Last Modified time: 2022-01-20 19:51:07
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -63,7 +63,11 @@ const CheckConfig = (): JSX.Element => {
     (typw: 'common' | 'business', fieldKey: string) => string
   >((type, fieldKey) => {
     return `try {
-      return props.get('${type}.${fieldKey}').data
+      if(typeof props.get('${type}.${fieldKey}').data!=='number'){
+        return !!props.get('${type}.${fieldKey}').data
+      }else{
+        return true
+      }
     } catch (error) {
       return false
     }`
@@ -134,7 +138,7 @@ const CheckConfig = (): JSX.Element => {
         fieldKey: cur,
         ui: {
           type: 'text',
-          vcontrol: vcontrol('common', cur),
+          vcontrol: vcontrol('business', cur),
         },
       })
       // 注入vcontrol
@@ -197,7 +201,13 @@ const CheckConfig = (): JSX.Element => {
               type: 'object',
               title: '通用校验',
               fieldKey: 'common',
-              ui: { type: 'object', mode: 'collapse' },
+              ui: {
+                type: 'object',
+                mode: 'collapse',
+                containerStyle: {
+                  marginBottom: 0,
+                },
+              },
               schema: CommonSchema.concat(curTypeSchema),
             },
             ...(bussinessSchema.length > 0
@@ -206,7 +216,13 @@ const CheckConfig = (): JSX.Element => {
                     type: 'object',
                     title: '业务校验',
                     fieldKey: 'business',
-                    ui: { type: 'object', mode: 'collapse' },
+                    ui: {
+                      type: 'object',
+                      mode: 'collapse',
+                      containerStyle: {
+                        marginBottom: 0,
+                      },
+                    },
                     schema: bussinessSchema,
                   },
                 ]
@@ -218,6 +234,9 @@ const CheckConfig = (): JSX.Element => {
               ui: {
                 type: 'object',
                 mode: 'collapse',
+                containerStyle: {
+                  marginBottom: 0,
+                },
               },
               schema: [
                 {
@@ -350,20 +369,21 @@ const CheckConfig = (): JSX.Element => {
         } else {
           const oldRequired =
             generatorContext.current?.get(parentKey).dataSchema.required
+          // 当前变动必填的key值
+          const requiredKey = selectedFieldKey.split('.').pop() as string
           // 必填字段需要设置到选中表单的父级schema中
           if (data) {
             // 设置必填校验
             const newRequired = !oldRequired
-              ? [selectedFieldKey]
-              : Array.isArray(oldRequired) &&
-                !oldRequired.includes(selectedFieldKey)
-              ? [...oldRequired, selectedFieldKey]
-              : [selectedFieldKey]
+              ? [requiredKey]
+              : !oldRequired.includes(requiredKey)
+              ? [...oldRequired, requiredKey]
+              : oldRequired
             generatorContext.current?.merge(parentKey, 'dataSchema', {
               errorMessage: {
                 required: {
                   // 如果当前变化的key是必填错误文案（errorMessage.required），则默认使用设置的错误文案，否则文案为必填
-                  [selectedFieldKey]: key.startsWith('errorMessage')
+                  [requiredKey]: key.startsWith('errorMessage')
                     ? data || '必填'
                     : '必填',
                 },
@@ -371,13 +391,11 @@ const CheckConfig = (): JSX.Element => {
               required: newRequired,
             })
           } else {
-            const index = oldRequired?.findIndex(
-              (item) => item === selectedFieldKey
-            )
+            const index = oldRequired?.findIndex((item) => item === requiredKey)
             // 删除必填校验
             generatorContext.current?.set(parentKey, 'dataSchema', (draft) => {
               deleteDeepProp(
-                ['errorMessage', 'required', selectedFieldKey],
+                ['errorMessage', 'required', requiredKey],
                 draft as Map
               )
               if (index) {

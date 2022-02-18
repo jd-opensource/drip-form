@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-07 17:42:58
+ * @Last Modified time: 2022-01-12 15:41:44
  */
 import React, { memo, FC } from 'react'
 import { Input } from 'antd'
@@ -18,7 +18,6 @@ export type TextFieldProps = CommonProps &
   }>
 const TextField: FC<TextFieldProps> = ({
   multiline: autoSize = false,
-  placeholder = '请输入',
   disabled,
   onChange,
   fieldData,
@@ -44,7 +43,6 @@ const TextField: FC<TextFieldProps> = ({
   return autoSize && autoSize !== 1 ? (
     <TextArea
       {...(typeof autoSize === 'number' ? { rows: autoSize } : null)}
-      placeholder={placeholder}
       disabled={disabled}
       onChange={_onChange}
       value={fieldData}
@@ -53,7 +51,6 @@ const TextField: FC<TextFieldProps> = ({
     />
   ) : (
     <Input
-      placeholder={placeholder}
       disabled={disabled}
       onChange={_onChange}
       value={fieldData}

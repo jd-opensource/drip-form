@@ -7,18 +7,8 @@ const config: Field = {
   icon: 'iconfont icon-clock',
   title: '时间选择器',
   unitedSchema: {
-    type: 'array',
+    type: 'string',
     title: '时间选择框',
-    items: [
-      {
-        type: 'string',
-        format: 'time',
-      },
-      {
-        type: 'string',
-        format: 'time',
-      },
-    ],
     ui: {
       type: 'timePicker',
     },
@@ -74,9 +64,9 @@ const config: Field = {
         fieldKey: 'placeholder',
         type: 'string',
         title: '占位符',
-        default: '请选择时间',
         ui: {
           type: 'text',
+          placeholder: '请选择时间',
           vcontrol: 'return !props.formData.ui.range',
         },
       },
@@ -87,9 +77,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',
@@ -126,9 +118,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',

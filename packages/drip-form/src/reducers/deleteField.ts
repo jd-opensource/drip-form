@@ -4,21 +4,21 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-04 17:37:02
+ * @Last Modified time: 2022-01-26 17:16:23
  */
 import { produce, original } from 'immer'
 import { deleteDeepProp, parseUnitedSchema, setDeepProp } from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const deleteField = ({
-  args,
+  action,
   state,
 }: {
-  args: Record<string, any>
+  action: Record<string, any>
   state: State
 }): void => {
   // 删除表单项
-  const { fieldKey, get, getKey, getTypeKey } = args
+  const { fieldKey, get, getKey, getTypeKey } = action
   const keyPath = fieldKey.split('.')
   // overField 父级节点的FieldKey
   const deleteParentPath = keyPath.slice(0, keyPath.length - 1).join('.')
@@ -31,7 +31,7 @@ const deleteField = ({
   // 待删除表单 父级元素类型 默认对象类型
   let deleteParentType = 'object'
   if (deleteParentUiSchema.type === 'array') {
-    if (deleteParentUiSchema.mode === 'normal') {
+    if (['normal', 'tuple'].includes(deleteParentUiSchema.mode)) {
       // 元祖
       deleteParentType = 'tuple'
     } else {
@@ -83,7 +83,7 @@ const deleteField = ({
         const { uiSchema: addGrandParentUiSchema } = get(grandParentPath)
         // 待添加表单 祖父级元素类型 默认对象类型
         if (addGrandParentUiSchema.type === 'array') {
-          if (addGrandParentUiSchema.mode === 'normal') {
+          if (['normal', 'tuple'].includes(addGrandParentUiSchema.mode)) {
             grandUiType = 'tuple'
             // 元祖
           } else {

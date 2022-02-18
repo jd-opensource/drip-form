@@ -15,7 +15,6 @@ export type SelectFieldProps = CommonProps & {
 }
 
 const SelectTextField: FC<SelectFieldProps> = ({
-  placeholder,
   disabled,
   onChange,
   fieldData,
@@ -90,7 +89,6 @@ const SelectTextField: FC<SelectFieldProps> = ({
               showSearch: true,
             })}
         allowClear={allowClear}
-        placeholder={placeholder}
         disabled={disabled}
         value={select}
         onFocus={queryOptionsFuc}
@@ -98,7 +96,6 @@ const SelectTextField: FC<SelectFieldProps> = ({
         options={options}
       />
       <Input
-        placeholder={placeholder}
         disabled={disabled}
         onChange={_onTextChange}
         value={text}

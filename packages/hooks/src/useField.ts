@@ -7,12 +7,12 @@ import { produce } from 'immer'
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: yyyy-05-dd 15:10:43
  */
-
 import moment, { Moment } from 'moment'
 import useEventCallback from './useEventCallback'
 import { useDebounceFn } from 'ahooks'
 import { isEmpty, typeCheck } from '@jdfed/utils'
-import type { GetKey } from '@jdfed/utils'
+import type { GetKey, Action } from '@jdfed/utils'
+import type { Dispatch } from 'react'
 type FormatMomentDataProps = {
   value: string | [Moment, Moment]
   format: string
@@ -220,11 +220,6 @@ const myComponent = ({fieldKey,onChange})=>{
  * @param {object} options 可选 表单字段特殊处理配置。注意：options中只能有一个字段的值是true。否则不会对特殊数据进行格式化
  * @param {func} dispatch 操作context
  */
-type Dispatch = (arg0: {
-  key?: string
-  type: string
-  [propName: string]: any
-}) => void
 type CustomFunc = ({
   val,
   dispatch,
@@ -235,7 +230,7 @@ type CustomFunc = ({
   fieldData,
 }: {
   val: any
-  dispatch: Dispatch
+  dispatch: Dispatch<Action>
   getKey: GetKey
   fieldKey: string
   prevFieldData: any
@@ -272,7 +267,7 @@ const useField = (
     prevFieldData?: any
     fieldData?: any
   },
-  dispatch: Dispatch
+  dispatch: Dispatch<Action>
 ): UseFieldR => {
   // onChange 回调 debounce
   const { run } = useDebounceFn(
@@ -313,26 +308,38 @@ const useField = (
           asyncValidateResult.then((res: string): void => {
             if (res) {
               dispatch({
-                type: 'setError',
-                [fieldKey]: res,
+                type: 'setErr',
+                action: {
+                  set: {
+                    [fieldKey]: res,
+                  },
+                },
               })
             } else {
               dispatch({
-                type: 'deleteError',
-                key: fieldKey,
+                type: 'setErr',
+                action: {
+                  deleteKeys: fieldKey,
+                },
               })
             }
           })
         } else {
           if (asyncValidateResult) {
             dispatch({
-              type: 'setError',
-              [fieldKey]: asyncValidateResult,
+              type: 'setErr',
+              action: {
+                set: {
+                  [fieldKey]: asyncValidateResult,
+                },
+              },
             })
           } else {
             dispatch({
-              type: 'deleteError',
-              key: fieldKey,
+              type: 'setErr',
+              action: {
+                deleteKeys: fieldKey,
+              },
             })
           }
         }
@@ -365,26 +372,37 @@ const useField = (
           ...options,
         })
       }
-      // 删除formData中相应表单字段（fix：表单唯恐之后必填校验失效）
-      // 删除dataSchema中相应default（fix: text默认值后续删除不自动添加 #C2020091124826）
+      /**
+       * 删除formData中相应表单字段（fix：表单为空之后必填校验失效）
+       * 删除dataSchema中相应default（fix: text默认值后续删除不自动添加）
+       * 数组容器中子项为空不删除
+       */
       if (
-        Object.prototype.hasOwnProperty.call(options, 'isDelete')
+        (Object.prototype.hasOwnProperty.call(options, 'isDelete')
           ? options.isDelete
-          : isEmpty(value)
+          : isEmpty(value)) &&
+        getKey(fieldKey, 'dataSchema').split('.').pop() !== 'items'
       ) {
         dispatch({
-          type: 'deleteFormData',
-          key: fieldKey,
+          type: 'setData',
+          action: {
+            deleteKeys: fieldKey,
+          },
         })
         dispatch({
-          type: 'setDataSchema',
-          [`${getKey(fieldKey, 'dataSchema')}.default`]: '',
-          isDelete: true,
+          type: 'setValidate',
+          action: {
+            deleteKeys: `${getKey(fieldKey, 'dataSchema')}.default`,
+          },
         })
       } else {
         dispatch({
-          type: 'setFormData',
-          [fieldKey]: value,
+          type: 'setData',
+          action: {
+            set: {
+              [fieldKey]: value,
+            },
+          },
         })
       }
       dispatch({

@@ -23,6 +23,31 @@ describe('addFormats', () => {
     })
   })
 
+  test('jsonObject', () => {
+    addFormats(ajv)
+    const validate = ajv.compile({ type: 'string', format: 'jsonObject' })
+    expect(validate(0)).toEqual(false)
+    expect(validate(1234)).toEqual(false)
+    expect(validate(false)).toEqual(false)
+    expect(validate(true)).toEqual(false)
+    expect(validate(null)).toEqual(false)
+    expect(validate({})).toEqual(false)
+    expect(validate('[{"a":"b"}]')).toEqual(true)
+    expect(validate([{ a: 'b' }])).toEqual(false)
+    expect(validate({ a: 'b' })).toEqual(false)
+  })
+
+  test('https', () => {
+    addFormats(ajv)
+    const validate = ajv.compile({ type: 'string', format: 'https' })
+    expect(
+      validate('https://www.example.com/foo/?bar=baz&inga=42&quux')
+    ).toEqual(true)
+    expect(validate('https://www.example.com')).toEqual(true)
+    expect(validate('http://www.example.com')).toEqual(false)
+    expect(validate('//www.example.com')).toEqual(false)
+  })
+
   test('color', () => {
     addFormats(ajv)
     const validate = ajv.compile({ type: 'string', format: 'color' })

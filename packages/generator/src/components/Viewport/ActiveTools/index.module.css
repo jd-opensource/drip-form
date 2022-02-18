@@ -2,6 +2,14 @@
   position: absolute;
   right: 0;
   top: -22px;
-  z-index:999;
+  z-index: 999;
+  @apply flex;
+}
+
+.firstActiveTools {
+  position: absolute;
+  right: 0;
+  bottom: -22px;
+  z-index: 999;
   @apply flex;
 }

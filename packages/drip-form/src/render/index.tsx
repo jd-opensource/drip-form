@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:08:15
+ * @Last Modified time: 2022-01-19 17:33:30
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -71,7 +71,7 @@ const Render = ({
   } = currentUiSchema
   // 表单是否在下方直接展示错误信息
   const showError = dataSchema.validateTime === 'change'
-  return (order || []).map((item: string) => {
+  return (order || []).map((item: string, i: number) => {
     // 当前Field ui类型
     const type = properties[item].type
     // 当前表单是否为普通数组（自增数组）中的每一项
@@ -126,13 +126,16 @@ const Render = ({
         if (!currentDataSchema.items[item]) return null
       }
     }
-    // 标题的Placement，默认为left，可设置为top/right/bottom/left
-    const titlePlacement =
-      properties[item]?.title?.placement || uiSchema?.title?.placement || 'left'
 
     // 当前Field的标题样式, property的样式会覆盖全局标题样式
     const titleUi = Object.assign(
-      {},
+      {
+        placement: 'left',
+        width: '82px',
+        textAlign: 'left',
+        verticalAlign: 'center',
+        requiredFields: false,
+      },
       globalTitleUi,
       properties[item]?.title || {}
     )
@@ -159,7 +162,9 @@ const Render = ({
       : true
     // 布局样式
     const containerStyle = Object.assign(
-      {},
+      type === 'object' && properties[item]?.mode === 'collapse'
+        ? { marginBottom: 20 }
+        : {},
       isRoot ? globalContainerStyle : {},
       properties[item]?.containerStyle || {}
     )
@@ -267,8 +272,6 @@ const Render = ({
       showTitle,
       // 当前表单的标题样式
       titleUi,
-      // 当前表单的位置
-      titlePlacement,
       // 是否展示错误
       showError,
       // 容器样式
@@ -312,6 +315,8 @@ const Render = ({
             type,
             parentMode,
             parentType,
+            isFirst: !!isRoot && i === 0,
+            uiProp,
           }
         )
       ) : (

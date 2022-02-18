@@ -67,7 +67,7 @@ const config: Field = {
         title: '占位符',
         ui: {
           type: 'text',
-          placeholder: '请选择时间',
+          placeholder: '请选择日期',
           vcontrol: 'return !props.formData.ui.range',
         },
       },
@@ -88,9 +88,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',
@@ -117,9 +119,11 @@ const config: Field = {
         default: [],
         ui: {
           type: 'array',
-          mode: 'normal',
+          mode: 'tuple',
           vcontrol: 'return props.formData.ui.range',
         },
+        maxItems: 2,
+        minItems: 2,
         items: [
           {
             type: 'string',

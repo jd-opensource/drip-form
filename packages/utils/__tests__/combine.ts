@@ -41,6 +41,12 @@ import {
   unitedSchema as verify7,
   parsedSchema as test7,
 } from '../__testsdata__/datePicker.schema'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {
+  unitedSchema as verify8,
+  parsedSchema as test8,
+} from '../__testsdata__/array.schema'
 
 describe('combine', () => {
   test('test dataPicker.schema', () => {
@@ -80,5 +86,9 @@ describe('combine', () => {
   test('test errMsg3.schema.js', () => {
     const data = combine(test6.dataSchema, test6.uiSchema)
     expect(data).toStrictEqual(verify6)
+  })
+  test('test array.schema.js', () => {
+    const data = combine(test8.dataSchema, test8.uiSchema)
+    expect(data).toStrictEqual(verify8)
   })
 })

@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-01 16:54:41
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-24 15:21:53
+ * @Last Modified time: 2022-01-28 18:24:20
  */
 import { useCallback } from 'react'
 import produce from 'immer'
@@ -35,10 +35,14 @@ const useArray = ({
         },
       })
       dispatch({
-        type: 'setFormData',
-        [fieldKey]: produce(fieldData || [], (draft) => {
-          draft.splice(order, 0, item)
-        }),
+        type: 'setData',
+        action: {
+          set: {
+            [fieldKey]: produce(fieldData || [], (draft) => {
+              draft.splice(order, 0, item)
+            }),
+          },
+        },
       })
     },
     [dispatch, fieldData, fieldKey]
@@ -54,9 +58,18 @@ const useArray = ({
           isDelete: true,
         },
       })
+      // 删除自定义错误
       dispatch({
-        type: 'deleteFormData',
-        key: `${fieldKey}.${order}`,
+        type: 'setErr',
+        action: {
+          deleteKeys: `${fieldKey}.${order}`,
+        },
+      })
+      dispatch({
+        type: 'setData',
+        action: {
+          deleteKeys: `${fieldKey}.${order}`,
+        },
       })
     },
     [dispatch, fieldKey]

@@ -7,6 +7,9 @@ const unitedSchema = {
   ui: {
     type: 'object',
     mode: 'collapse',
+    containerStyle: {
+      marginBottom: 0,
+    },
   },
   title: '标题',
   schema: [
@@ -104,9 +107,9 @@ const unitedSchema = {
         type: 'select',
         style: { width: '50%' },
         options: [
-          { label: '上对齐', value: 'left' },
+          { label: '上对齐', value: 'top' },
           { label: '居中对齐', value: 'center' },
-          { label: '下对齐', value: 'right' },
+          { label: '下对齐', value: 'bottom' },
         ],
         vcontrol: 'return props.formData.title.followRootConfig == false',
       },

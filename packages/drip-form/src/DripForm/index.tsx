@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-30 13:59:27
+ * @Last Modified time: 2022-02-11 19:22:51
  */
 import React, {
   forwardRef,
@@ -23,8 +23,8 @@ import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
 import { useValidate, useSchema, useGetKey, usePrevious } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
-import type { DripFormRenderProps, DripFormRefType } from './type'
-import type { State, Action, Theme } from '@jdfed/utils'
+import type { DripFormRenderProps, DripFormRefType, ControlFuc } from './type'
+import type { State, Action, Theme, UiSchema } from '@jdfed/utils'
 
 /**
  * 表单入口
@@ -141,12 +141,15 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         // ajv是否已经将dataSchema中的默认值添加到formData中
         hasDefault: false,
         errors: {},
+        customErrors: {},
+        ajvErrors: {},
         // 表单是否在校验中
         checking: false,
         // 当前展示（已加载）的组件。用来优化校验逻辑（隐藏表单不校验)
         visibleFieldKey: [],
         changeKey: '',
         arrayKey: {},
+        ignoreErrKey: [],
       }),
       [
         initTypePath,
@@ -158,6 +161,14 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         customProps,
       ]
     )
+
+    // visibleFieldKey为组件初次加载设置，reload不会触发组件卸载操作，只是重置数据
+    const resetArgs = useMemo(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { visibleFieldKey, ...resetArgs } = initArgs
+      return resetArgs
+    }, [initArgs])
+
     const [data, dispatch] = useImmerReducer<State, Action>(
       formDataReducer,
       initArgs
@@ -173,8 +184,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         reload
       ) {
         dispatch({
-          type: 'reload',
-          ...initArgs,
+          type: 'reset',
+          action: {
+            state: resetArgs,
+          },
         })
       }
     }, [
@@ -189,6 +202,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       prevUnitedSchema,
       unitedSchema,
       reload,
+      resetArgs,
     ])
 
     const {
@@ -196,14 +210,29 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       uiSchema,
       dataSchema,
       formData,
-      errors,
+      ajvErrors,
+      customErrors,
       checking,
       hasDefault,
       visibleFieldKey,
       changeKey,
       arrayKey,
     } = data
-    const { theme = 'antd' } = uiSchema
+
+    // 错误信息（ajv错误+用户自定义错误）
+    const errors = useMemo(() => {
+      const errors = { ...ajvErrors, ...data.errors }
+      Object.entries(customErrors).map(([key, item]) => {
+        if (Object.prototype.hasOwnProperty.call(errors, key)) {
+          errors[key] = `${errors[key]}；${item}`
+        }
+      })
+      return errors
+    }, [ajvErrors, customErrors, data.errors])
+
+    const { theme = 'antd', change } = uiSchema as UiSchema & {
+      change: string | ControlFuc
+    }
 
     useEffect(() => {
       // 当前值为暂时获取其他表单数据，后续会更新获取方法
@@ -227,7 +256,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     // 提交表单
     const submit = useCallback<DripFormRefType['submit']>(
-      () => () =>
+      () =>
         new Promise((resolve) => {
           if (checking === false) {
             resolve({
@@ -242,10 +271,12 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     // 重置表单
     const reset = useCallback(() => {
       dispatch({
-        type: 'reload',
-        ...initArgs,
+        type: 'reset',
+        action: {
+          state: resetArgs,
+        },
       })
-    }, [dispatch, initArgs])
+    }, [dispatch, resetArgs])
 
     // 向外抛出表单数据
     useImperativeHandle<DripFormRefType, DripFormRefType>(
@@ -328,6 +359,34 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           console.error(error)
         }
       }
+      if (change) {
+        let changeFn
+        try {
+          if (typeof change === 'function') {
+            changeFn = change
+          } else if (typeof change === 'string') {
+            changeFn = new Function('props', change as string)
+          }
+
+          if (changeFn) {
+            changeFn({
+              formData,
+              uiSchema,
+              dataSchema,
+              dispatch,
+              changeKey,
+              checking,
+              get,
+              set,
+              merge,
+              deleteField,
+            })
+          }
+        } catch (error) {
+          console.error('change函数体错误，请确认')
+          console.error(error)
+        }
+      }
     }, [
       control,
       dataSchema,
@@ -340,6 +399,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       set,
       merge,
       deleteField,
+      change,
     ])
     const globalTheme: Theme = theme
 
@@ -374,7 +434,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             checking={checking}
             errors={errors}
             formData={formData}
-            initFormData={parseFormData}
+            initFormData={initArgs.formData}
             dispatch={dispatch}
           />
         </div>

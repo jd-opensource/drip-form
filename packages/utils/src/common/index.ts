@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 21:10:39
+ * @Last Modified time: 2022-02-11 14:19:51
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -280,7 +280,7 @@ export function injectVcontrol(obj: Record<string, unknown>): void {
             setDeepProp(
               ['ui', 'vcontrol'],
               obj,
-              'return props.formData.viewMode==="configured"?props.get(props.fieldKey).data:true'
+              'const {fieldKey,formData,get}=props;return formData.viewMode==="configured"?typeof get(fieldKey).data!==\'number\'? get(fieldKey).data:true:true'
             )
           }
           break
@@ -317,4 +317,69 @@ export function randomString(length: number): string {
   for (let i = length; i > 0; --i)
     result += str[Math.floor(Math.random() * str.length)]
   return result
+}
+
+/**
+ * 将大于等于零的整数number转成中文汉字
+ */
+const numChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+const unitChar = ['', '十', '百', '千']
+const millionUnitChar = ['', '万', '亿', '万亿', '亿亿']
+// 已万为处理段，该方法处理万以内的数字转成中文
+function range2Chinese(range: number): string {
+  let numUnitChar = ''
+  let tempStr = ''
+  let unit = 0
+  let isNeedZero = true
+  while (range > 0) {
+    const currentNum = range % 10
+    if (currentNum === 0) {
+      if (!isNeedZero) {
+        isNeedZero = true
+        tempStr = numChar[currentNum] + tempStr
+      }
+    } else {
+      isNeedZero = false
+      numUnitChar = numChar[currentNum]
+      numUnitChar += unitChar[unit]
+      tempStr = numUnitChar + tempStr
+    }
+    unit++
+    range = Math.floor(range / 10)
+  }
+  return tempStr
+}
+export function number2Chinese(num: number): string {
+  let millionUnit = 0
+  let tempStr = ''
+  let resStr = ''
+  let isNeedZero = false
+  if (num === 0) {
+    return numChar[0]
+  }
+  while (num > 0) {
+    const range = num % 10000
+    if (isNeedZero) {
+      resStr = numChar[0] + resStr
+    }
+    tempStr = range2Chinese(range)
+    tempStr += range !== 0 ? millionUnitChar[millionUnit] : millionUnitChar[0]
+    resStr = tempStr + resStr
+    isNeedZero = range < 1000 && range > 0
+    num = Math.floor(num / 10000)
+    millionUnit++
+  }
+  return resStr
+}
+
+// TODO 更新Read more文档
+export function upgradeTips(oldApiName: string, newApiName: string): void {
+  console.warn(
+    `${oldApiName}: The current usage is about to discard after the next main version is upgraded, please use ${newApiName}! `
+  )
+}
+
+// 转换数组
+export function toArray(param: string | Array<string>): Array<string> {
+  return Array.isArray(param) ? param : [param]
 }

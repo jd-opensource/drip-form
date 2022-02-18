@@ -84,8 +84,10 @@ const Footer: FC<
 
       if (funcType === 'cancel') {
         dispatch({
-          type: 'setFormData',
-          formData: initFormData,
+          type: 'setData',
+          action: {
+            formData: initFormData,
+          },
         })
       }
     },

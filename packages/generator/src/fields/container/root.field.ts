@@ -98,6 +98,9 @@ const unitedSchema = [
     ui: {
       type: 'object',
       mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
     },
     schema: [
       {
@@ -166,9 +169,9 @@ const unitedSchema = [
           type: 'select',
           style: { width: '50%' },
           options: [
-            { label: '上对齐', value: 'left' },
+            { label: '上对齐', value: 'top' },
             { label: '居中对齐', value: 'center' },
-            { label: '下对齐', value: 'right' },
+            { label: '下对齐', value: 'bottom' },
           ],
         },
       },
@@ -216,6 +219,9 @@ const unitedSchema = [
     ui: {
       mode: 'collapse',
       type: 'object',
+      containerStyle: {
+        marginBottom: 0,
+      },
     },
     schema: [
       {
@@ -237,6 +243,15 @@ const unitedSchema = [
           },
         },
       },
+      {
+        fieldKey: 'margin',
+        type: 'string',
+        title: '组件外边距',
+        ui: {
+          type: 'text',
+          placeholder: '形如0 30px 20px 0 | 0 30px',
+        },
+      },
     ],
   },
   {
@@ -246,6 +261,9 @@ const unitedSchema = [
     ui: {
       type: 'object',
       mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
     },
     schema: [
       {

@@ -1,6 +1,6 @@
 {
 	"name": "website",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"author": "JDFED",
 	"private": true,
 	"repository": {
@@ -19,7 +19,7 @@
 		"@docusaurus/core": "^2.0.0-alpha.66",
 		"@docusaurus/plugin-debug": "^2.0.0-alpha.66",
 		"@docusaurus/preset-classic": "^2.0.0-alpha.66",
-		"@jdfed/form-generator": "^0.1.0",
+		"@jdfed/form-generator": "*",
 		"@mdx-js/react": "^1.5.8",
 		"clsx": "^1.1.1",
 		"css-loader": "^4.3.0",

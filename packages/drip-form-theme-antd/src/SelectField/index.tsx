@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-11 15:45:16
+ * @Last Modified time: 2022-01-12 15:41:03
  */
 import React, { memo, FC } from 'react'
 import { Select } from 'antd'
@@ -20,7 +20,6 @@ export type SelectFieldProps = CommonProps & {
 }
 
 const SelectField: FC<SelectFieldProps> = ({
-  placeholder,
   disabled,
   onChange,
   fieldData,
@@ -72,7 +71,6 @@ const SelectField: FC<SelectFieldProps> = ({
             showSearch: true,
           })}
       allowClear={allowClear}
-      placeholder={placeholder}
       disabled={disabled}
       value={fieldData}
       onFocus={queryOptionsFuc}

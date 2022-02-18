@@ -1,6 +1,7 @@
 import type { ElementType, Dispatch as DispatchR } from 'react'
 import type { UnitedSchema, Action, Map, Get, Theme } from '@jdfed/utils'
 import type { Set, Merge, DeleteField, GetKey, AddField } from '@jdfed/hooks'
+import type { ContainerHoc } from '../render/type'
 import type { Plugin, Options } from 'ajv/dist/2019'
 import type Ajv from 'ajv/dist/2019'
 
@@ -19,7 +20,7 @@ export type FuncType = {
   [propName: string]: () => any
 }
 
-type ControlFuc = ({
+export type ControlFuc = ({
   formData,
   uiSchema,
   dataSchema,
@@ -86,10 +87,7 @@ export type DripFormProps = {
   // 每次渲染完成时都会触发对formData的转化，转化在校验后执行
   transform?: TransformFunc
   // 允许入参高阶组件，针对renderCoreFn中的Container进行包裹，便于执行拖拽等操作
-  containerHoc?: (
-    FormItem: JSX.Element,
-    formItemProps: { fieldKey: string }
-  ) => JSX.Element
+  containerHoc?: ContainerHoc
   onSubmit?: FooterBtnFuncType
   onCancel?: FooterBtnFuncType
 }
@@ -106,7 +104,7 @@ export type DripFormRenderProps = {
  */
 export type DripFormRefType = {
   reset: () => void
-  submit: () => () => Promise<{
+  submit: () => Promise<{
     formData: Record<string, any>
     errors: Map
   }>

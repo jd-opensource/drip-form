@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
-import type { Map } from '@jdfed/utils'
+import { typeCheck } from '@jdfed/utils'
 import { deepClone, deleteDeepProp, isEmpty, setDeepProp } from '@jdfed/utils'
 import cx from 'classnames'
 import { SettingOutlined } from '@ant-design/icons'
@@ -18,6 +18,8 @@ import type { SetType } from '@jdfed/hooks'
 import { Select, Input, Button } from 'antd'
 import { CopyOutlined } from '@ant-design/icons'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import type { Map } from '@jdfed/utils'
+
 const PropertyConfig = () => {
   const {
     generatorContext,
@@ -53,6 +55,11 @@ const PropertyConfig = () => {
       ui: {
         ...uiSchema,
         ...(!!dataSchema.default && { default: dataSchema.default }),
+        // TODO 后续等属性配置支持直接在主题测配置之后，迁移该部分
+        ...(['timePicker', 'datePicker'].includes(type) &&
+          typeCheck(uiSchema.placeholder) === 'Array' && {
+            placeholder__range: uiSchema.placeholder,
+          }),
       },
     }
   }, [dataSchema?.validateTime, dataSchema.default, type, uiSchema])
@@ -130,16 +137,34 @@ const PropertyConfig = () => {
       if (changeKey === 'validateTime') {
         changeSchema = 'dataSchema'
       }
-      if (type === 'slider') {
-        if (changeKey === 'ui.range') {
-          setFormData = true
-          if (data === true) {
-            fieldData = [uiSchema?.min || 0, uiSchema?.max || 100]
-          } else {
-            fieldData = uiSchema?.min || 0
+
+      // TODO 后续等属性配置支持直接在主题测配置之后，迁移该部分
+      switch (type) {
+        case 'slider':
+          if (changeKey === 'ui.range') {
+            setFormData = true
+            if (data === true) {
+              fieldData = [uiSchema?.min || 0, uiSchema?.max || 100]
+            } else {
+              fieldData = uiSchema?.min || 0
+            }
           }
-        }
+          break
+        case 'timePicker':
+        case 'datePicker':
+          if (changeKey.startsWith('ui.placeholder__range')) {
+            key = 'placeholder'
+            const newData = get('ui.placeholder__range').data
+            data = newData
+          }
+          if (changeKey.startsWith('ui.default__range')) {
+            key = 'ui.default'
+            const newData = get('ui.default__range').data
+            data = newData
+            fieldData = newData
+          }
       }
+
       if (changeKey.startsWith('ui.options.')) {
         data = get('ui.options').data
         key = 'ui.options'

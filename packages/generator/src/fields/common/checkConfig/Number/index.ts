@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 15:01:23
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-17 19:26:34
+ * @Last Modified time: 2022-01-12 14:19:08
  */
 // TODO 添加integer
 const numberDataSchema = {
@@ -56,8 +56,10 @@ const ajvKeywordsSchema = {
     fieldKey: 'range',
     ui: {
       type: 'array',
-      mode: 'normal',
+      mode: 'tuple',
     },
+    maxItems: 2,
+    minItems: 2,
     items: [
       {
         type: 'number',
@@ -87,7 +89,7 @@ const ajvKeywordsSchema = {
     fieldKey: 'exclusiveRange',
     ui: {
       type: 'array',
-      mode: 'normal',
+      mode: 'tuple',
     },
     items: [
       {

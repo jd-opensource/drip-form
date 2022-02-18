@@ -3,17 +3,17 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 15:29:06
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-04 17:36:58
+ * @Last Modified time: 2022-01-26 17:19:18
  */
 import { produce } from 'immer'
 import { setDeepProp, parseUnitedSchema } from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const addField = ({
-  args,
+  action,
   state,
 }: {
-  args: Record<string, any>
+  action: Record<string, any>
   state: State
 }): void => {
   // 添加一个新的表单项
@@ -26,7 +26,7 @@ const addField = ({
     getKey,
     getTypeKey,
     shouldDelete,
-  } = args
+  } = action
 
   const keyPath = overFieldKey.split('.')
   // overField 父级节点的FieldKey
@@ -47,7 +47,7 @@ const addField = ({
     const { uiSchema: addGrandParentUiSchema } = get(grandParentPath)
     // 待添加表单 祖父级元素类型 默认对象类型
     if (addGrandParentUiSchema.type === 'array') {
-      if (addGrandParentUiSchema.mode === 'normal') {
+      if (['normal', 'tuple'].includes(addGrandParentUiSchema.mode)) {
         // 元祖
       } else {
         // 自增数组
@@ -77,7 +77,7 @@ const addField = ({
   // 待添加表单 父级元素类型 默认对象类型
   let addParentType = 'object'
   if (addParentUiSchema.type === 'array') {
-    if (addParentUiSchema.mode === 'normal') {
+    if (['normal', 'tuple'].includes(addParentUiSchema.mode)) {
       // 元祖
       addParentType = 'tuple'
     } else {

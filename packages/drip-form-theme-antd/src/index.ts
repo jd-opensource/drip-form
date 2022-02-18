@@ -15,7 +15,7 @@ import { cascader as CascaderField } from './CascaderField'
 import { selectText as SelectTextField } from './SelectTextField'
 import { TreeSelectField } from './TreeSelectField'
 import { default as QuestionCircle } from './Shared/QuestionCircle'
-import { Collapse, Button } from './Shared'
+import { Collapse, Button, Popconfirm } from './Shared'
 
 const antdTheme: {
   theme: 'antd'
@@ -42,6 +42,7 @@ const antdTheme: {
   QuestionCircle,
   Collapse,
   Button,
+  Popconfirm,
   theme: 'antd',
 }
 

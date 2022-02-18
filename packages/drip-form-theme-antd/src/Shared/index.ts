@@ -1,2 +1,2 @@
 export { default as QuestionCircle } from './QuestionCircle'
-export { Button, Collapse } from 'antd'
+export { Button, Collapse, Popconfirm } from 'antd'

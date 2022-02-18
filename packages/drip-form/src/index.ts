@@ -7,7 +7,7 @@ import type {
   Dispatch,
   UiComponents,
 } from './DripForm/type'
-import type { RenderFnProps } from './render/type'
+import type { RenderFnProps, ContainerHoc } from './render/type'
 import type { ContainerStyle } from '@jdfed/utils'
 export default DripForm
 export { containerMap }
@@ -19,4 +19,5 @@ export type {
   RenderFnProps,
   ContainerStyle,
   UiComponents,
+  ContainerHoc,
 }

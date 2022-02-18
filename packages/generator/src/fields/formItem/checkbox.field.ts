@@ -29,11 +29,16 @@ const config: Field = {
         type: 'array',
         title: '选项',
         default: [],
-        ui: { type: 'array' },
+        ui: {
+          type: 'array',
+          style: {
+            marginBottom: '20px',
+          },
+        },
         items: {
           type: 'object',
           title: '',
-          ui: { type: 'object' },
+          ui: { type: 'object', showTitle: false },
           schema: [
             {
               type: 'string',

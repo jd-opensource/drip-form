@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-11 14:34:36
+ * @Last Modified time: 2022-01-21 11:25:34
  */
 import React, { memo, useState } from 'react'
 // import PropTypes from 'prop-types'
@@ -57,7 +57,7 @@ const ColorPickerField = ({
   }, [_onChange, initColor])
 
   return (
-    <>
+    <div className="drip-form--colorpicker">
       {disabled ? (
         <div
           className={cx('colorpicker--show', {
@@ -106,7 +106,7 @@ const ColorPickerField = ({
         style={{ width: 120, marginRight: 5 }}
       />
       {!disabled && <Button onClick={_changeInitColor}>恢复默认</Button>}
-    </>
+    </div>
   )
 }
 

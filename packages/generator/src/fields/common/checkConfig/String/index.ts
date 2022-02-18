@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:31:04
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-31 14:00:15
+ * @Last Modified time: 2022-01-20 19:46:55
  */
 // dataSchema2019-09支持的字符串校验关键字
 const stringJsonSchema = {
@@ -42,12 +42,23 @@ const stringJsonSchema = {
       style: {
         width: '100%',
       },
+      allowClear: true,
       // TODO 后续接入埋点。统计用户使用次数，options异步拉取
       options: [
         // 水滴官方format插件 color关键字
         {
           value: 'color',
           label: 'color',
+        },
+        // 水滴官方format插件 https关键字
+        {
+          value: 'https',
+          label: 'https',
+        },
+        // 水滴官方format插件 jsonObject关键字
+        {
+          value: 'jsonObject',
+          label: 'jsonObject',
         },
         {
           value: 'date',
@@ -211,6 +222,9 @@ const dripFormPluginKeywords = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
       description: {
         type: 'icon',
         title: '使用delimiter指定的字符分隔，最少多少，最多多少',
@@ -225,6 +239,40 @@ const dripFormPluginKeywords = {
           type: 'text',
         },
       },
+      {
+        type: 'number',
+        fieldKey: 'max',
+        title: '最多',
+        ui: {
+          type: 'number',
+        },
+      },
+      {
+        type: 'number',
+        fieldKey: 'min',
+        title: '最少',
+        ui: {
+          type: 'number',
+        },
+      },
+    ],
+  },
+  gbkLength: {
+    type: 'object',
+    fieldKey: 'gbkLength',
+    title: '中英文长度',
+    ui: {
+      type: 'object',
+      mode: 'collapse',
+      containerStyle: {
+        marginBottom: 0,
+      },
+      description: {
+        type: 'icon',
+        title: '中文2个字符，英文1个字符',
+      },
+    },
+    schema: [
       {
         type: 'number',
         fieldKey: 'max',
