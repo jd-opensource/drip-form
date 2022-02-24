@@ -82,6 +82,7 @@ module.exports = {
         'generator/api/theme',
         'generator/api/customComponents',
         'generator/api/renderLeftHeader',
+        'generator/api/viewportConfig',
       ],
     },
     {

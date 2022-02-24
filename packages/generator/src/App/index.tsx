@@ -17,6 +17,7 @@ import {
   DripFormUiComponetsAtom,
   sidebarDataAtom,
   headerConfigAtom,
+  viewportConfigAtom,
 } from '@generator/store'
 import '@jdfed/drip-form/dist/index.css'
 import '@jdfed/drip-form-theme-antd/dist/index.css'
@@ -35,6 +36,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       theme,
       customComponents,
       headerConfig,
+      viewportConfig,
       components,
     },
     ref
@@ -42,8 +44,21 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
     const formRef = useRef<DripFormRefType>()
     const unitedSchema = useRecoilValue(schemaAtom)
     const setHeaderConfig = useSetRecoilState(headerConfigAtom)
+    const setViewportConfig = useSetRecoilState(viewportConfigAtom)
     const setDripFormUiComonents = useSetRecoilState(DripFormUiComponetsAtom)
     const setSidebarData = useSetRecoilState(sidebarDataAtom)
+
+    // 设置vieport配置
+    useEffect(() => {
+      if (viewportConfig) {
+        setViewportConfig((oldOption) => {
+          return {
+            ...oldOption,
+            ...viewportConfig,
+          }
+        })
+      }
+    }, [setViewportConfig, viewportConfig])
 
     // 设置header配置
     useEffect(() => {

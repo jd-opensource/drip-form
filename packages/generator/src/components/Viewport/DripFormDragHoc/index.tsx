@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-09 14:28:24
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-24 22:43:26
+ * @Last Modified time: 2022-02-24 14:35:23
  */
 import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -16,6 +16,7 @@ import {
   closestEdgeAtom,
   allFieldAtom,
   curTypeAtom,
+  viewportConfigAtom,
 } from '@generator/store'
 // import Placeholder from '../CustomComponents/Placeholder'
 import { useCanDrop } from '@generator/hooks'
@@ -123,6 +124,9 @@ const DripFormDragHoc: FC<Props> = memo(
       },
       [setDropRef]
     )
+
+    const viewportConfig = useRecoilValue(viewportConfigAtom)
+
     return (
       <>
         <div
@@ -143,7 +147,9 @@ const DripFormDragHoc: FC<Props> = memo(
             width: containerStyle?.width || '100%',
           }}
         >
-          {selectedFieldKey === fieldKey && <ActiveTools isFirst={isFirst} />}
+          {selectedFieldKey === fieldKey && viewportConfig.showActionBar && (
+            <ActiveTools isFirst={isFirst} />
+          )}
           <div
             className="draggable"
             {...listeners}
