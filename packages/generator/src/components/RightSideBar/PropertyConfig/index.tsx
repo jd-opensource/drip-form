@@ -280,17 +280,36 @@ const PropertyConfig = () => {
    */
   const onChangeUiType = useCallback(
     (val) => {
-      let dataSchema: Map, uiSchema: Map
-      uiTypeOptions.every((item) => {
+      let dataSchema: Map = {},
+        uiSchema: Map = {}
+      // 获取修改组件类型前，该组件的schema
+      const preSchema = generatorContext.current?.get(selectedFieldKey || '')
+      const preType = preSchema?.uiSchema.type
+      const preTitle = preSchema?.dataSchema.title
+      // 检查组件title是否是预设的title，默认是
+      let isPresetTitle = true
+      uiTypeOptions.some((item) => {
+        // 找到原组件对应的初始schema，比较title
+        if (item.value === preType) {
+          isPresetTitle = preTitle === item.schema.title
+          return true
+        }
+        return false
+      })
+      uiTypeOptions.some((item) => {
+        // 找到新组件对应的初始schema，替换原组件
         if (item.value === val) {
           uiSchema = deepClone(item.schema.ui)
           dataSchema = deepClone(item.schema)
+          // 如果不是预设的title，意味着用户已经自行修改过，此时需要保留原值
+          if (!isPresetTitle) {
+            dataSchema.title = preTitle
+          }
           // 移除uiSchema配置
           Reflect.deleteProperty(dataSchema, 'ui')
-          return false
+          return true
         }
-
-        return true
+        return false
       })
 
       generatorContext.current?.set(
