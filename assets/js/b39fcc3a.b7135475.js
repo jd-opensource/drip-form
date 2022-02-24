@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkwebsite"] = self["webpackChunkwebsite"] || []).push([[61],{
+(self["webpackChunkwebsite"] = self["webpackChunkwebsite"] || []).push([[1018],{
 
 /***/ 35318:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
@@ -212,7 +212,7 @@ function createElement (type, props) {
 
 /***/ }),
 
-/***/ 78025:
+/***/ 51740:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -227,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_runner_work_drip_form_drip_form_node_modules_babel_runtime_helpers_esm_objectWithoutPropertiesLoose_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(30808);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27378);
 /* harmony import */ var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(35318);
-var _excluded=["components"];var frontMatter={id:'custom_component',title:'自定义业务组件'};var contentTitle=undefined;var metadata={"unversionedId":"generator/expert/custom_component","id":"generator/expert/custom_component","title":"自定义业务组件","description":"当存在自定业务组件需要添加到generator中时，可以配置customComponents prop","source":"@site/docs/generator/expert/自定义业务组件.md","sourceDirName":"generator/expert","slug":"/generator/expert/custom_component","permalink":"/drip-form/docs/generator/expert/custom_component","editUrl":"https://github.com/JDFED/drip-form/edit/master/website/docs/generator/expert/自定义业务组件.md","tags":[],"version":"current","frontMatter":{"id":"custom_component","title":"自定义业务组件"},"sidebar":"generator","previous":{"title":"renderLeftHeader","permalink":"/drip-form/docs/generator/api/renderLeftHeader"}};/* @jsxRuntime classic */ /* @jsx mdx */var toc=[];var layoutProps={toc:toc};var MDXLayout="wrapper";function MDXContent(_ref){var components=_ref.components,props=(0,_home_runner_work_drip_form_drip_form_node_modules_babel_runtime_helpers_esm_objectWithoutPropertiesLoose_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_ref,_excluded);return (0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)(MDXLayout,(0,_home_runner_work_drip_form_drip_form_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({},layoutProps,props,{components:components,mdxType:"MDXLayout"}),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,"\u5F53\u5B58\u5728\u81EA\u5B9A\u4E1A\u52A1\u7EC4\u4EF6\u9700\u8981\u6DFB\u52A0\u5230generator\u4E2D\u65F6\uFF0C\u53EF\u4EE5\u914D\u7F6E",(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("a",{parentName:"p","href":"../api/customComponents"},"customComponents prop")));};MDXContent.isMDXComponent=true;
+var _excluded=["components"];var frontMatter={id:'renderLeftHeader',title:'renderLeftHeader'};var contentTitle=undefined;var metadata={"unversionedId":"generator/api/renderLeftHeader","id":"generator/api/renderLeftHeader","title":"renderLeftHeader","description":"自定义header区左侧logo","source":"@site/docs/generator/api/renderLeftHeader.md","sourceDirName":"generator/api","slug":"/generator/api/renderLeftHeader","permalink":"/drip-form/docs/generator/api/renderLeftHeader","editUrl":"https://github.com/JDFED/drip-form/edit/master/website/docs/generator/api/renderLeftHeader.md","tags":[],"version":"current","frontMatter":{"id":"renderLeftHeader","title":"renderLeftHeader"},"sidebar":"generator","previous":{"title":"customComponents","permalink":"/drip-form/docs/generator/api/customComponents"},"next":{"title":"viewportConfig","permalink":"/drip-form/docs/generator/api/viewportConfig"}};/* @jsxRuntime classic */ /* @jsx mdx */var toc=[];var layoutProps={toc:toc};var MDXLayout="wrapper";function MDXContent(_ref){var components=_ref.components,props=(0,_home_runner_work_drip_form_drip_form_node_modules_babel_runtime_helpers_esm_objectWithoutPropertiesLoose_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_ref,_excluded);return (0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)(MDXLayout,(0,_home_runner_work_drip_form_drip_form_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({},layoutProps,props,{components:components,mdxType:"MDXLayout"}),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,"\u81EA\u5B9A\u4E49header\u533A\u5DE6\u4FA7logo"),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("pre",null,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("code",{parentName:"pre","className":"language-tsx"},"() => JSX.Element\n")));};MDXContent.isMDXComponent=true;
 
 /***/ })
 
