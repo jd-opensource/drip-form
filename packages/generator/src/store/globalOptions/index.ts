@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-12-17 11:22:05
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-12-17 17:29:35
+ * @Last Modified time: 2022-02-24 14:39:07
  */
 import { atom } from 'recoil'
 
@@ -29,6 +29,13 @@ export type HeaderConfig = {
   renderLeftHeader?: () => JSX.Element
 }
 
+export type ViewportConfig = {
+  // 是否展示操作栏 默认true
+  showActionBar?: boolean
+  // 是否展示删除 默认true
+  showDeleteIcon?: boolean
+}
+
 // 头部自定义配置
 export const headerConfigAtom = atom<HeaderConfig>({
   key: 'headerOptions',
@@ -40,5 +47,14 @@ export const headerConfigAtom = atom<HeaderConfig>({
     showPreviewForm: true,
     showExportJSON: true,
     exportText: '导出JSON',
+  },
+})
+
+// vieport区域配置
+export const viewportConfigAtom = atom<ViewportConfig>({
+  key: 'viewportOptions',
+  default: {
+    showActionBar: true,
+    showDeleteIcon: true,
   },
 })

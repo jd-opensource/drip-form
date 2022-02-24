@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
+import { useRecoilValue } from 'recoil'
 import { useDeleteField } from '@generator/hooks'
+import { viewportConfigAtom } from '@generator/store'
 import Item from './Item'
 import cx from 'classnames'
 import style from './index.module.css'
@@ -9,13 +11,16 @@ const ActiveTools = memo<{
   isFirst: boolean
 }>(({ isFirst = false }) => {
   const deleteField = useDeleteField()
+  const { showDeleteIcon } = useRecoilValue(viewportConfigAtom)
 
   return (
     <div className={cx(isFirst ? style.firstActiveTools : style.activeTools)}>
-      {/* <Item icon='xiangshang'/>
-    <Item icon='xiangxia'/> */}
-      {/* <Item icon="fuzhi1" /> */}
-      <Item icon="shanchu" onClick={deleteField.bind(this, undefined)} />
+      {/* <Item icon="xiangshang" />
+      <Item icon="xiangxia" />
+      <Item icon="fuzhi1" /> */}
+      {showDeleteIcon && (
+        <Item icon="shanchu" onClick={deleteField.bind(this, undefined)} />
+      )}
     </div>
   )
 })
