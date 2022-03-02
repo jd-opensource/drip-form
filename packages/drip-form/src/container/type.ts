@@ -1,5 +1,5 @@
 import type { ElementType, Dispatch } from 'react'
-import type { UiComponents } from '../DripForm/type'
+import type { UiComponents, FieldData, AsyncValidate } from '../DripForm/type'
 import type { GetKey } from '@jdfed/hooks'
 import type {
   ContainerStyle,
@@ -8,13 +8,6 @@ import type {
   Description,
   TitleUi,
 } from '@jdfed/utils'
-
-export type FieldData =
-  | string
-  | Record<string, unknown>
-  | boolean
-  | number
-  | Array<unknown>
 
 export type Props = {
   formMode: 'edit' | 'generator' | 'view'
@@ -47,10 +40,7 @@ export type Props = {
   parentKey?: Array<string>
   // 自定义查询（用于接口调用）
   queryFunc?: () => FieldData
-  asyncValidate?: {
-    type: 'change' | 'click'
-    fn: (fieldData: FieldData) => any
-  } | null
+  asyncValidate?: AsyncValidate
   /**
    * 表单组件对象，支持自定义组件库。
    * 类型为键值对，键：组件库命名空间，值：子组件集合。

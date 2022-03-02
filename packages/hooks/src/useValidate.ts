@@ -38,9 +38,6 @@ type Params = {
   ajv: any
   dispatch: Dispatch<Action>
   visibleFieldKey: string[]
-  onValidate: {
-    [propName: string]: any
-  }
 }
 
 const useValidate = (validate: Validate): ((arg0: Params) => void) => {

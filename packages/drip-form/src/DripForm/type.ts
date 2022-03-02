@@ -16,6 +16,20 @@ export type UiComponentType = {
 // 支持混合模式
 export type UiComponents = Partial<Record<Theme, UiComponentType>>
 
+export type FieldData =
+  | string
+  | Record<string, unknown>
+  | boolean
+  | number
+  | Array<unknown>
+
+export type AsyncValidate = {
+  type: 'change' | 'click' | 'submit'
+  fn: (fieldData: FieldData) => any
+}
+
+export type OnValidate = Record<string, AsyncValidate>
+
 export type FuncType = {
   [propName: string]: () => any
 }
@@ -81,7 +95,7 @@ export type DripFormProps = {
   onQuery?: FuncType
   // v2 默认状态 formData、unitedSchema变化会触发reducer的reload（一般情况无需设置）
   reload?: boolean
-  onValidate?: FuncType
+  onValidate?: OnValidate
   // 首轮外渲染时都会触发对formData的解析
   parse?: ParseFunc
   // 每次渲染完成时都会触发对formData的转化，转化在校验后执行
@@ -99,15 +113,18 @@ export type DripFormRenderProps = {
   ajv: Ajv
 } & DripFormProps
 
+export type SubmitReturn = {
+  formData: Record<string, any>
+  errors: Map
+  checking: boolean
+}
+
 /**
  * DripForm对外的ref的类型
  */
 export type DripFormRefType = {
   reset: () => void
-  submit: () => Promise<{
-    formData: Record<string, any>
-    errors: Map
-  }>
+  submit: () => Promise<SubmitReturn>
   // 获取任意FieldKey对应的schema，根路径key为''
   get: Get
   // 设置任意FieldKey对应的schema，根路径key为''
