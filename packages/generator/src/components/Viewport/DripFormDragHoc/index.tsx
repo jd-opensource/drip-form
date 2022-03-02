@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-09 14:28:24
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-02-24 14:35:23
+ * @Last Modified time: 2022-03-02 13:04:29
  */
 import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -16,7 +16,7 @@ import {
   closestEdgeAtom,
   allFieldAtom,
   curTypeAtom,
-  viewportConfigAtom,
+  viewportConfigSelector,
 } from '@generator/store'
 // import Placeholder from '../CustomComponents/Placeholder'
 import { useCanDrop } from '@generator/hooks'
@@ -125,7 +125,7 @@ const DripFormDragHoc: FC<Props> = memo(
       [setDropRef]
     )
 
-    const viewportConfig = useRecoilValue(viewportConfigAtom)
+    const viewportConfig = useRecoilValue(viewportConfigSelector)
 
     return (
       <>
