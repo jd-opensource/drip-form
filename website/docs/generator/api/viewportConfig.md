@@ -10,10 +10,21 @@ name: viewportConfig
 ```tsx
 type ViewportConfig = {
 	// 是否展示操作栏 默认true
-	showActionBar?: boolean
+	showActionBar?: ViewportConfigItem
 	// 是否展示删除 默认true
-	showDeleteIcon?: boolean
+	showDeleteIcon?: ViewportConfigItem
 }
+```
+
+```tsx
+type ViewportConfigItem =
+	| boolean
+	| ((param: {
+			//当前控件类型
+			type: string
+			//当前选中的表单fieldkey
+			selectedFieldKey: string | null
+	  }) => boolean)
 ```
 
 ## 例子
@@ -28,6 +39,11 @@ const App = memo(() => {
 		<DripFormGenerator
 			viewportConfig={{
 				showActionBar: false,
+				/* 也可使用函数形式，以下配置会导致 text 类型的不展示操作栏
+				showActionBar: ({ selectedFieldKey, type }) => {
+					return type !== 'text'
+				}, 
+				*/
 			}}
 		/>
 	)

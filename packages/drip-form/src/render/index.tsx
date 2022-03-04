@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-19 17:33:30
+ * @Last Modified time: 2022-03-02 16:35:49
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -142,12 +142,7 @@ const Render = ({
 
     // 当前Field的query函数
     const queryFunc = onQuery?.[item]
-    const asyncValidate:
-      | {
-          type: 'change' | 'click'
-          fn: () => any
-        }
-      | any = onValidate?.[item] || null
+    const asyncValidate = onValidate?.[item]
     // 当前Field的错误信息
     const error = errors[currentFieldKey] || ''
     // 当前Field的数据

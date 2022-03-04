@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-02-11 19:22:51
+ * @Last Modified time: 2022-03-02 21:28:18
  */
 import React, {
   forwardRef,
@@ -11,6 +11,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useMemo,
+  useRef,
 } from 'react'
 import produce from 'immer'
 import { useImmerReducer } from 'use-immer'
@@ -140,6 +141,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           }).formData || {},
         // ajv是否已经将dataSchema中的默认值添加到formData中
         hasDefault: false,
+        // 下个版本废弃，改用ajvErros和customErrors
         errors: {},
         customErrors: {},
         ajvErrors: {},
@@ -225,6 +227,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       Object.entries(customErrors).map(([key, item]) => {
         if (Object.prototype.hasOwnProperty.call(errors, key)) {
           errors[key] = `${errors[key]}；${item}`
+        } else {
+          errors[key] = item
         }
       })
       return errors
@@ -254,19 +258,63 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     // 获取当前fieldKey相对uiSchema、dataSchema路径
     const { getKey } = useGetKey(typePath)
 
-    // 提交表单
-    const submit = useCallback<DripFormRefType['submit']>(
-      () =>
-        new Promise((resolve) => {
-          if (checking === false) {
-            resolve({
-              formData,
-              errors,
-            })
-          }
+    // 用于获取实时的submit的返回值
+    const submitReturn = useRef({
+      formData,
+      errors,
+      checking,
+    })
+
+    useEffect(() => {
+      submitReturn.current = {
+        formData: produce(formData, (draft) => {
+          transform && transform(draft)
         }),
-      [checking, errors, formData]
-    )
+        errors,
+        checking,
+      }
+    }, [checking, errors, formData, transform])
+
+    // 提交表单
+    const submit = useCallback<DripFormRefType['submit']>(() => {
+      const onValidateResMap: Record<string, any> = {}
+      Object.entries(onValidate).map(([key, value]) => {
+        if (value.type === 'submit') {
+          onValidateResMap[key] = new Promise((resolve) => {
+            resolve(value.fn(get(key).data as any))
+          })
+        }
+      })
+      const fieldKeys = Object.keys(onValidateResMap)
+      return Promise.all(Object.values(onValidateResMap))
+        .then((res) => {
+          const checkTrueFieldKey: string[] = []
+          const setErrObj: Record<string, any> = {}
+          res.map((val, i) => {
+            if (val) {
+              setErrObj[fieldKeys[i]] = val
+            } else {
+              checkTrueFieldKey.push(fieldKeys[i])
+              return false
+            }
+          })
+          dispatch({
+            type: 'setErr',
+            action: {
+              set: setErrObj,
+            },
+          })
+          dispatch({
+            type: 'setErr',
+            action: {
+              deleteKeys: checkTrueFieldKey,
+            },
+          })
+        })
+        .then(() => {
+          return submitReturn.current
+        })
+    }, [dispatch, get, onValidate])
 
     // 重置表单
     const reset = useCallback(() => {
@@ -327,17 +375,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         ajv,
         dispatch,
         visibleFieldKey,
-        onValidate,
       })
-    }, [
-      dataSchema,
-      formData,
-      validateDebounce,
-      dispatch,
-      visibleFieldKey,
-      onValidate,
-      ajv,
-    ])
+    }, [dataSchema, formData, validateDebounce, dispatch, visibleFieldKey, ajv])
 
     // 最高等级 表单联动控制逻辑
     useEffect(() => {
@@ -428,12 +467,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             uiSchema={uiSchema}
             uiComponents={uiComponents}
             onSubmit={onSubmit}
+            submit={submit}
+            submitReturn={submitReturn}
             onCancel={onCancel}
-            transform={transform}
             globalTheme={globalTheme}
-            checking={checking}
-            errors={errors}
-            formData={formData}
             initFormData={initArgs.formData}
             dispatch={dispatch}
           />
