@@ -271,25 +271,71 @@ export const parsedSchema = {
     },
   },
   typePath: {
-    addSameList: { fatherKey: '', type: 'array' },
-    'addSameList.$container': { fatherKey: 'addSameList', type: 'string' },
-    tupleItem: { fatherKey: '', type: 'array' },
-    'tupleItem.0': { fatherKey: 'tupleItem', type: 'string' },
-    'tupleItem.1': { fatherKey: 'tupleItem', type: 'number' },
-    objectItem: { fatherKey: '', type: 'object' },
-    'objectItem.erp': { fatherKey: 'objectItem', type: 'string' },
-    'objectItem.age': { fatherKey: 'objectItem', type: 'number' },
-    'objectItem.c': { fatherKey: 'objectItem', type: 'object' },
-    'objectItem.c.a': { fatherKey: 'objectItem.c', type: 'string' },
-    nestArray: { fatherKey: '', type: 'array' },
-    'nestArray.$container': { fatherKey: 'nestArray', type: 'object' },
+    addSameList: {
+      fatherKey: '',
+      type: 'array',
+      unitedSchemaKey: 'schema.0',
+    },
+    'addSameList.$container': {
+      fatherKey: 'addSameList',
+      type: 'string',
+      unitedSchemaKey: 'schema.0.items',
+    },
+    tupleItem: { fatherKey: '', type: 'array', unitedSchemaKey: 'schema.1' },
+    'tupleItem.0': {
+      fatherKey: 'tupleItem',
+      type: 'string',
+      unitedSchemaKey: 'schema.1.items.0',
+    },
+    'tupleItem.1': {
+      fatherKey: 'tupleItem',
+      type: 'number',
+      unitedSchemaKey: 'schema.1.items.1',
+    },
+    objectItem: {
+      fatherKey: '',
+      type: 'object',
+      unitedSchemaKey: 'schema.2',
+    },
+    'objectItem.erp': {
+      fatherKey: 'objectItem',
+      type: 'string',
+      unitedSchemaKey: 'schema.2.schema.0',
+    },
+    'objectItem.age': {
+      fatherKey: 'objectItem',
+      type: 'number',
+      unitedSchemaKey: 'schema.2.schema.1',
+    },
+    'objectItem.c': {
+      fatherKey: 'objectItem',
+      type: 'object',
+      unitedSchemaKey: 'schema.2.schema.2',
+    },
+    'objectItem.c.a': {
+      fatherKey: 'objectItem.c',
+      type: 'string',
+      unitedSchemaKey: 'schema.2.schema.2.schema.0',
+    },
+    nestArray: {
+      fatherKey: '',
+      type: 'array',
+      unitedSchemaKey: 'schema.3',
+    },
+    'nestArray.$container': {
+      fatherKey: 'nestArray',
+      type: 'object',
+      unitedSchemaKey: 'schema.3.items',
+    },
     'nestArray.$container.erp': {
       fatherKey: 'nestArray.$container',
       type: 'string',
+      unitedSchemaKey: 'schema.3.items.schema.0',
     },
     'nestArray.$container.age': {
       fatherKey: 'nestArray.$container',
       type: 'number',
+      unitedSchemaKey: 'schema.3.items.schema.1',
     },
   },
 }

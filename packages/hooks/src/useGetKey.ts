@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 11:39:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-11-07 17:12:19
+ * @Last Modified time: 2022-03-03 18:10:22
  */
 import { useCallback } from 'react'
 import { generateReg } from '@jdfed/utils'
@@ -32,6 +32,8 @@ const useGetKey = (
   const getKey = useCallback<GetKey>(
     (fieldKey, type) => {
       if (type === 'data') return fieldKey
+      if (type === 'unitedSchema')
+        return typeMap[getTypeKey(fieldKey)].unitedSchemaKey
       return getTypeKey(fieldKey)
         .split('.')
         .reduce((prev, cur, index, arr) => {

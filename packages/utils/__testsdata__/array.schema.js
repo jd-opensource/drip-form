@@ -85,10 +85,12 @@ export const parsedSchema = {
     array_g6NF65: {
       fatherKey: '',
       type: 'array',
+      unitedSchemaKey: 'schema.0',
     },
     'array_g6NF65.$container': {
       fatherKey: 'array_g6NF65',
       type: 'string',
+      unitedSchemaKey: 'schema.0.items',
     },
   },
 }

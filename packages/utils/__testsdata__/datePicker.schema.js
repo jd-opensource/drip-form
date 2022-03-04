@@ -70,14 +70,17 @@ export const parsedSchema = {
     hahaha: {
       fatherKey: '',
       type: 'array',
+      unitedSchemaKey: 'schema.0',
     },
     'hahaha.0': {
       fatherKey: 'hahaha',
       type: 'string',
+      unitedSchemaKey: 'schema.0.items.0',
     },
     'hahaha.1': {
       fatherKey: 'hahaha',
       type: 'string',
+      unitedSchemaKey: 'schema.0.items.1',
     },
   },
   customProps: ['$:customSchema', '$:customData'],

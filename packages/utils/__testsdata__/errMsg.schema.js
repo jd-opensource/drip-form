@@ -122,10 +122,12 @@ export const parsedSchema = {
     babelRadio: {
       fatherKey: '',
       type: 'object',
+      unitedSchemaKey: 'schema.1',
     },
     name: {
       fatherKey: '',
       type: 'string',
+      unitedSchemaKey: 'schema.0',
     },
   },
 }

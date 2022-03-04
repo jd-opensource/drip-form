@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react'
-import { atom } from 'recoil'
+import { atom, atomFamily } from 'recoil'
 import { UnitedSchema } from '@jdfed/utils'
 import antd from '@jdfed/drip-form-theme-antd'
 import type { DripFormRefType, UiComponents } from '@jdfed/drip-form'
@@ -95,4 +95,14 @@ export const versionAtom = atom<number>({
 export const curTypeAtom = atom<string>({
   key: 'curType',
   default: 'root',
+})
+
+/**
+ * 当前编辑器fieldKey
+ */
+export const curEditFieldKeyAtom = atomFamily<string, string | null>({
+  key: 'curEditFieldKey',
+  default: (param) => {
+    return param?.split('.').pop() || ''
+  },
 })
