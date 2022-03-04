@@ -1,7 +1,13 @@
+/*
+ * @Author: jiangxiaowei
+ * @Date: 2022-03-02 13:04:51
+ * @Last Modified by:   jiangxiaowei
+ * @Last Modified time: 2022-03-02 13:04:51
+ */
 import React, { memo } from 'react'
 import { useRecoilValue } from 'recoil'
 import { useDeleteField } from '@generator/hooks'
-import { viewportConfigAtom } from '@generator/store'
+import { viewportConfigSelector } from '@generator/store'
 import Item from './Item'
 import cx from 'classnames'
 import style from './index.module.css'
@@ -11,7 +17,7 @@ const ActiveTools = memo<{
   isFirst: boolean
 }>(({ isFirst = false }) => {
   const deleteField = useDeleteField()
-  const { showDeleteIcon } = useRecoilValue(viewportConfigAtom)
+  const { showDeleteIcon } = useRecoilValue(viewportConfigSelector)
 
   return (
     <div className={cx(isFirst ? style.firstActiveTools : style.activeTools)}>
