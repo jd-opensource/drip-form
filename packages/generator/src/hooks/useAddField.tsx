@@ -3,12 +3,16 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-07 16:52:36
+ * @Last Modified time: 2022-03-04 16:38:05
  */
 import { useCallback, useContext } from 'react'
-import { nanoid } from 'nanoid'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { selectedAtom, GeneratorContext, curTypeAtom } from '@generator/store'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  selectedAtom,
+  GeneratorContext,
+  curTypeAtom,
+  optionsAtom,
+} from '@generator/store'
 import useDeleteField from './useDeleteField'
 import useCanEditJson from './useCanEditJson'
 import { message } from 'antd'
@@ -23,6 +27,7 @@ type AddField = (param: {
 
 const useAddField = (): AddField => {
   const generatorContext = useContext(GeneratorContext)
+  const { fieldKeyFn } = useRecoilValue(optionsAtom)
   const [selectedKey, setSelected] = useRecoilState(selectedAtom)
   const setCurType = useSetRecoilState(curTypeAtom)
   const deleteField = useDeleteField()
@@ -40,7 +45,7 @@ const useAddField = (): AddField => {
         return
       }
       // 生成当前新增表单项的key
-      let newFieldKey = `${unitedSchema.ui.type}_${nanoid(6)}`
+      let newFieldKey = fieldKeyFn(unitedSchema)
 
       // 选中新增的表单项
       let selectKey = newFieldKey

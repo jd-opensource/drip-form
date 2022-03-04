@@ -1,7 +1,19 @@
-import React, { Fragment, memo, useCallback, useEffect, useMemo } from 'react'
+import React, {
+  Fragment,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import DripForm from '@jdfed/drip-form'
-import { typeCheck } from '@jdfed/utils'
-import { deepClone, deleteDeepProp, isEmpty, setDeepProp } from '@jdfed/utils'
+import {
+  typeCheck,
+  deepClone,
+  deleteDeepProp,
+  isEmpty,
+  setDeepProp,
+} from '@jdfed/utils'
 import cx from 'classnames'
 import { SettingOutlined } from '@ant-design/icons'
 import {
@@ -17,10 +29,11 @@ import { useGetParentType } from '@generator/hooks'
 import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
 import { original, produce } from 'immer'
-import type { SetType } from '@jdfed/hooks'
 import { Select, Input, Button } from 'antd'
 import { CopyOutlined } from '@ant-design/icons'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { usePrevious } from '@jdfed/hooks'
+import type { SetType } from '@jdfed/hooks'
 import type { Map } from '@jdfed/utils'
 
 const PropertyConfig = () => {
@@ -31,10 +44,12 @@ const PropertyConfig = () => {
     uiSchema,
     uiComponents,
   } = useRightSidebar()
-  const parentType = useGetParentType()
   const [curEditFieldKey, setCurEditFieldKey] = useRecoilState(
     curEditFieldKeyAtom(selectedFieldKey)
   )
+  const [prevEditFieldKey, setPrevEditFieldKey] = useState(curEditFieldKey)
+  const prevSelectedFieldkey = usePrevious(selectedFieldKey)
+  const parentType = useGetParentType()
   const setUnitedSchema = useSetRecoilState(schemaAtom)
   const [globalContainerStyle, setGlobalContainerStyle] = useRecoilState(
     globalContainerStyleAtom
@@ -361,6 +376,7 @@ const PropertyConfig = () => {
       )
       // 修改全局unitdSchema
       unitedSchemaPath &&
+        value &&
         setUnitedSchema((unitedSchema) =>
           produce(unitedSchema, (draft) => {
             setDeepProp(
@@ -372,6 +388,22 @@ const PropertyConfig = () => {
         )
     },
     [generatorContext, selectedFieldKey, setCurEditFieldKey, setUnitedSchema]
+  )
+
+  useEffect(() => {
+    if (prevSelectedFieldkey !== selectedFieldKey) {
+      setPrevEditFieldKey(curEditFieldKey)
+    }
+  }, [curEditFieldKey, prevSelectedFieldkey, selectedFieldKey])
+
+  // fieldKey必填，所以失焦后自动恢复默认key
+  const onBlur = useCallback(
+    (e) => {
+      if (!e?.target?.value) {
+        setCurEditFieldKey(prevEditFieldKey)
+      }
+    },
+    [prevEditFieldKey, setCurEditFieldKey]
   )
 
   return (
@@ -406,6 +438,7 @@ const PropertyConfig = () => {
                     className={styles.fieldKey}
                     value={curEditFieldKey}
                     onChange={changeFieldKey}
+                    onBlur={onBlur}
                     placeholder="不可包含字符 ."
                     // 父元素为数组容器无法修改
                     disabled={parentType === 'array'}

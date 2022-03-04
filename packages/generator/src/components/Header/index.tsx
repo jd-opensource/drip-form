@@ -13,8 +13,8 @@ import {
   previewVisibleAtom,
   exportVisibleAtom,
   schemaAtom,
-  headerConfigAtom,
   versionAtom,
+  optionsAtom,
 } from '@generator/store'
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
 import FileSaver from 'file-saver'
@@ -25,15 +25,17 @@ const Header = () => {
   const setPreviewVisible = useSetRecoilState(previewVisibleAtom)
   const setExportVisible = useSetRecoilState(exportVisibleAtom)
   const {
-    customExport,
-    renderLeftHeader,
-    exportText,
-    showLogo,
-    showUploadJSON,
-    showEditJSON,
-    showPreviewForm,
-    showExportJSON,
-  } = useRecoilValue(headerConfigAtom)
+    headerConfig: {
+      customExport,
+      renderLeftHeader,
+      exportText,
+      showLogo,
+      showUploadJSON,
+      showEditJSON,
+      showPreviewForm,
+      showExportJSON,
+    },
+  } = useRecoilValue(optionsAtom)
   const [unitedSchema, setUnitedSchema] = useRecoilState(schemaAtom)
   const setVersion = useSetRecoilState(versionAtom)
 
