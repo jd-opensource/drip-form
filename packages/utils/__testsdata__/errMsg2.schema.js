@@ -64,6 +64,7 @@ export const parsedSchema = {
     name: {
       fatherKey: '',
       type: 'string',
+      unitedSchemaKey: 'schema.0',
     },
   },
 }

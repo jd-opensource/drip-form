@@ -198,30 +198,51 @@ export const parsedSchema = {
     },
   },
   typePath: {
-    nestObject: { fatherKey: '', type: 'object' },
-    'nestObject.personInfo': { fatherKey: 'nestObject', type: 'object' },
+    nestObject: { fatherKey: '', type: 'object', unitedSchemaKey: 'schema.0' },
+    'nestObject.personInfo': {
+      fatherKey: 'nestObject',
+      type: 'object',
+      unitedSchemaKey: 'schema.0.schema.0',
+    },
     'nestObject.personInfo.erp': {
       fatherKey: 'nestObject.personInfo',
       type: 'string',
+      unitedSchemaKey: 'schema.0.schema.0.schema.0',
     },
     'nestObject.personInfo.age': {
       fatherKey: 'nestObject.personInfo',
       type: 'number',
+      unitedSchemaKey: 'schema.0.schema.0.schema.1',
     },
-    'nestObject.address': { fatherKey: 'nestObject', type: 'object' },
+    'nestObject.address': {
+      fatherKey: 'nestObject',
+      type: 'object',
+      unitedSchemaKey: 'schema.0.schema.1',
+    },
     'nestObject.address.location': {
       fatherKey: 'nestObject.address',
       type: 'string',
+      unitedSchemaKey: 'schema.0.schema.1.schema.0',
     },
-    nestArray: { fatherKey: '', type: 'array' },
-    'nestArray.$container': { fatherKey: 'nestArray', type: 'object' },
+    nestArray: {
+      fatherKey: '',
+      type: 'array',
+      unitedSchemaKey: 'schema.1',
+    },
+    'nestArray.$container': {
+      fatherKey: 'nestArray',
+      type: 'object',
+      unitedSchemaKey: 'schema.1.items',
+    },
     'nestArray.$container.xxx': {
       fatherKey: 'nestArray.$container',
       type: 'array',
+      unitedSchemaKey: 'schema.1.items.schema.0',
     },
     'nestArray.$container.xxx.$container': {
       fatherKey: 'nestArray.$container.xxx',
       type: 'string',
+      unitedSchemaKey: 'schema.1.items.schema.0.items',
     },
   },
 }
