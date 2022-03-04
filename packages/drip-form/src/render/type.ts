@@ -8,7 +8,12 @@ import type {
   DataSchema,
 } from '@jdfed/utils'
 import type { ErrorsMap } from '@jdfed/hooks'
-import type { FuncType, UiComponents, CustomComponents } from '../DripForm/type'
+import type {
+  FuncType,
+  UiComponents,
+  CustomComponents,
+  OnValidate,
+} from '../DripForm/type'
 import { Dispatch } from 'react'
 
 export type ContainerType = {
@@ -41,7 +46,7 @@ export type RenderFnProps = {
   errors: ErrorsMap
   formData: Map
   onQuery?: FuncType
-  onValidate?: FuncType
+  onValidate?: OnValidate
   // 当前表单父级表单的fieldKey
   parentFormDataKey?: string
   // uiSchema父级表单的key

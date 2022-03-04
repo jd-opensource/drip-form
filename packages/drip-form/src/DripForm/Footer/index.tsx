@@ -1,8 +1,12 @@
 import React, { memo, useMemo, useCallback } from 'react'
-import { produce } from 'immer'
-import type { DripFormProps, Dispatch } from '../type'
+import type {
+  DripFormProps,
+  Dispatch,
+  DripFormRefType,
+  SubmitReturn,
+} from '../type'
 import type { Map, Theme, UiSchema } from '@jdfed/utils'
-import type { FC } from 'react'
+import type { FC, MutableRefObject } from 'react'
 import './index.styl'
 
 const justifyContent = {
@@ -12,30 +16,23 @@ const justifyContent = {
 }
 
 const Footer: FC<
-  Pick<
-    DripFormProps,
-    'uiComponents' | 'onSubmit' | 'onCancel' | 'transform'
-  > & {
+  Pick<DripFormProps, 'uiComponents' | 'onSubmit' | 'onCancel'> & {
     uiSchema: UiSchema
     globalTheme: Theme
-    checking: boolean
-    errors: Map
-    formData: Map
     // 表单初始值
     initFormData: Map
+    submitReturn: MutableRefObject<SubmitReturn>
     dispatch: Dispatch
-  }
+  } & Pick<DripFormRefType, 'submit'>
 > = ({
   uiComponents,
   globalTheme,
   uiSchema,
   onSubmit,
   onCancel,
-  transform,
-  formData,
-  checking,
-  errors,
+  submitReturn,
   dispatch,
+  submit,
   initFormData,
 }) => {
   const Button = uiComponents[globalTheme]?.Button
@@ -73,14 +70,14 @@ const Footer: FC<
   const onFooterBtnClick = useCallback(
     (funcType) => {
       const cb = funcType === 'submit' ? onSubmit : onCancel
-      cb &&
-        cb({
-          formData: produce(formData, (draft) => {
-            transform && transform(draft)
-          }),
-          checking,
-          errors,
-        })
+      if (funcType === 'submit') {
+        ;(async () => {
+          await submit()
+          cb && cb(submitReturn.current)
+        })()
+      } else {
+        cb && cb(submitReturn.current)
+      }
 
       if (funcType === 'cancel') {
         dispatch({
@@ -91,16 +88,7 @@ const Footer: FC<
         })
       }
     },
-    [
-      checking,
-      dispatch,
-      errors,
-      formData,
-      initFormData,
-      onCancel,
-      onSubmit,
-      transform,
-    ]
+    [dispatch, initFormData, onCancel, onSubmit, submit, submitReturn]
   )
   return (
     Button && (

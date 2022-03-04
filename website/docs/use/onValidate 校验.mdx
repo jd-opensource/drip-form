@@ -2,12 +2,12 @@
 id: onValidate
 title: onValidate 校验
 ---
-import useBaseUrl from '@docusaurus/useBaseUrl'
 
+import useBaseUrl from '@docusaurus/useBaseUrl'
 
 ## 常规校验
 
-- drip-form 校验基于`jsonSchema`。关于jsonSchema 的详细内容可以[查看](https://json-schema.org/)
+- drip-form 校验基于`jsonSchema`。关于 jsonSchema 的详细内容可以[查看](https://json-schema.org/)
 
 **常规校验有两种方法**
 
@@ -116,6 +116,7 @@ ajv-keywords 补全了一些常见校验种类。
 1. [ajv-keywords readme](https://www.npmjs.com/package/ajv-keywords)
 
 ## 异步校验
+
 表单经常会存在异步校验。大概有以下两种场景
 
 1. 点击按钮触发异步校验
@@ -123,53 +124,57 @@ ajv-keywords 补全了一些常见校验种类。
 
 我们看下下面的 gif 动画
 
-<img src='https://storage.360buyimg.com/imgtools/e1e7accf06-823aebf0-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+<img
+	src="https://storage.360buyimg.com/imgtools/e1e7accf06-823aebf0-4cf9-11ec-9620-6d9821f0161f.gif"
+	alt="图片加载出错"
+/>
 
-**JSON配置**
+**JSON 配置**
 
-异步校验的json配置示例，需要配置错误文案等字段，如下所示：
+异步校验的 json 配置示例，需要配置错误文案等字段，如下所示：
 
 ```json title="unitedSchema.json"
 {
-  "validateTime": "submit",
-  "type": "object",
-  "theme": "drip-theme",
-  "schema": [
-    {
-      "type": "string",
-      "title": "文本1",
-      "errMsg": {
-        "_": "必填"
-      },
-      "ui": {
-        "type": "text",
-        "title": {
-          "requiredIcon": true
-        }
-      },
-      "requiredMsg": "必填",
-      "fieldKey": "text_UEA7bW"
-    },
-    {
-      "type": "string",
-      "title": "文本2",
-      "errMsg": {
-        "_": "必填"
-      },
-      "ui": {
-        "type": "text",
-        "title": {
-          "requiredIcon": true
-        }
-      },
-      "requiredMsg": "必填",
-      "fieldKey": "text_VYe65G"
-    }
-  ]
+	"validateTime": "submit",
+	"type": "object",
+	"theme": "drip-theme",
+	"schema": [
+		{
+			"type": "string",
+			"title": "文本1",
+			"errMsg": {
+				"_": "必填"
+			},
+			"ui": {
+				"type": "text",
+				"title": {
+					"requiredIcon": true
+				}
+			},
+			"requiredMsg": "必填",
+			"fieldKey": "text_UEA7bW"
+		},
+		{
+			"type": "string",
+			"title": "文本2",
+			"errMsg": {
+				"_": "必填"
+			},
+			"ui": {
+				"type": "text",
+				"title": {
+					"requiredIcon": true
+				}
+			},
+			"requiredMsg": "必填",
+			"fieldKey": "text_VYe65G"
+		}
+	]
 }
 ```
 
 **使用 drip-form 的组件**
+
 ```jsx
 import DripForm from '@jdfed/drip-form'
 import dripTheme from '@jdfed/drip-form-theme-antd'
@@ -178,28 +183,28 @@ import unitedSchema from './unitedSchema.json'
 
 // 异步校验
 const onValidate = {
-  name1: {
-    type: 'change',
-    fn: (val) => {
-      //异步校验操作
-      console.log('change 校验name1', val)
-      return '异步校验，发生错误'
-    },
-  },
-  name: {
-    type: 'click',
-    fn: (val) => {
-      console.log('点击name', val)
-      return '点击异步校验，发生错误'
-    },
-  },
+	name1: {
+		type: 'change',
+		fn: (val) => {
+			//异步校验操作
+			console.log('change 校验name1', val)
+			return '异步校验，发生错误'
+		},
+	},
+	name: {
+		type: 'click',
+		fn: (val) => {
+			console.log('点击name', val)
+			return '点击异步校验，发生错误'
+		},
+	},
 }
 //highlight-end
 
-<DripForm
-  unitedSchema={unitedSchema}
-  uiComponents={{'drip-theme': dripTheme}}
-  onValidate={onValidate}
+;<DripForm
+	unitedSchema={unitedSchema}
+	uiComponents={{ 'drip-theme': dripTheme }}
+	onValidate={onValidate}
 />
 ```
 
@@ -211,11 +216,13 @@ drip-form `onValidate prop`用来支持表单的异步校验。
 
 - value 是一个由`type`和`fn`组成的对象
 
-  - type: 'change'|'click'
+  - type: 'change'|'click'|'submit'
 
     change 代表表单数据改变即触发异步校验
 
     click 代表点击确定触发异步校验
+
+    submit 代表点击提交按钮时触发校验或调用 submit 方法时触发校验
 
   - fn 是一个函数，接收当前表单的数据
 
@@ -224,6 +231,7 @@ drip-form `onValidate prop`用来支持表单的异步校验。
     fn 返回一个字符串形式的错误信息。当异步校验正确时，返回空字符串即可。
 
 ## 自定义校验
+
 当存在特殊校验，常规校验两种方式（jsonSchema 和 ajv-keywords）无法满足时，可以使用自定义校验
 
 自定义校验有两种场景
@@ -238,23 +246,23 @@ drip-form `onValidate prop`用来支持表单的异步校验。
 ```jsx
 //highlight-start
 const onValidate = {
-  'key':{
-    type:'change',
-    fn:(val)=>{
-      //自定义校验的代码
-      return '这是自定义校验的错误信息'
-    }
-  }
+	key: {
+		type: 'change',
+		fn: (val) => {
+			//自定义校验的代码
+			return '这是自定义校验的错误信息'
+		},
+	},
 }
 //highlight-end
 
-<DripForm
-  unitedSchema={{unitedSchema}}
-  uiComponents={{
-  	 'drip-theme': dripTheme
-   }}
-  //highlight-next-line
-  onValidate={onValidate}
+;<DripForm
+	unitedSchema={{ unitedSchema }}
+	uiComponents={{
+		'drip-theme': dripTheme,
+	}}
+	//highlight-next-line
+	onValidate={onValidate}
 />
 ```
 
