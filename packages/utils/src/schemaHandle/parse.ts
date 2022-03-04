@@ -30,15 +30,22 @@ function recursiveParse(
 ) {
   // 获取表单项标识符
   const fieldKey = item.fieldKey || idx
+
+  // 获取父级元素的ui类型
+  const fatherUiType = fatherItem.ui?.type || fatherItem['ui:type']
   // 填充typePath（type为dataSchema的类型）
   const currKeyPath = `${fatherPath === '' ? '' : fatherPath + '.'}${fieldKey}`
   typePath[currKeyPath] = {
     fatherKey: fatherPath,
+    unitedSchemaKey: `${
+      typePath[fatherPath]?.unitedSchemaKey
+        ? `${typePath[fatherPath]?.unitedSchemaKey}.`
+        : ''
+    }${containerKey === 'properties' ? 'schema' : 'items'}${
+      idx !== '$container' ? `.${idx}` : ''
+    }`,
     type: item.type,
   }
-
-  // 获取父级元素的ui类型
-  const fatherUiType = fatherItem.ui?.type || fatherItem['ui:type']
   // 如果是数组或对象容器（undefined默认为对象容器），则需要创建order字段用于ui渲染
   if (
     fatherUiType === 'array' ||

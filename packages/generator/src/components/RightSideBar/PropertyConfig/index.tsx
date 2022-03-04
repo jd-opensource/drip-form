@@ -9,7 +9,10 @@ import {
   uiTypeOptionsAtom,
   curTypePropertyConfigSelector,
   curTypeAtom,
+  schemaAtom,
+  curEditFieldKeyAtom,
 } from '@generator/store'
+import { useGetParentType } from '@generator/hooks'
 // import BaseForm from './BaseForm'
 import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
@@ -17,7 +20,7 @@ import { original, produce } from 'immer'
 import type { SetType } from '@jdfed/hooks'
 import { Select, Input, Button } from 'antd'
 import { CopyOutlined } from '@ant-design/icons'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import type { Map } from '@jdfed/utils'
 
 const PropertyConfig = () => {
@@ -27,8 +30,12 @@ const PropertyConfig = () => {
     dataSchema,
     uiSchema,
     uiComponents,
-    fieldKey,
   } = useRightSidebar()
+  const parentType = useGetParentType()
+  const [curEditFieldKey, setCurEditFieldKey] = useRecoilState(
+    curEditFieldKeyAtom(selectedFieldKey)
+  )
+  const setUnitedSchema = useSetRecoilState(schemaAtom)
   const [globalContainerStyle, setGlobalContainerStyle] = useRecoilState(
     globalContainerStyleAtom
   )
@@ -343,6 +350,30 @@ const PropertyConfig = () => {
     }
   }, [curTypePropertyConfig])
 
+  const changeFieldKey = useCallback(
+    (e) => {
+      const value = e?.target?.value.replaceAll('.', '')
+      setCurEditFieldKey(value)
+      // 获取当前选中表单相对unitdSchema的path路径
+      const unitedSchemaPath = generatorContext.current?.getKey(
+        selectedFieldKey || '',
+        'unitedSchema'
+      )
+      // 修改全局unitdSchema
+      unitedSchemaPath &&
+        setUnitedSchema((unitedSchema) =>
+          produce(unitedSchema, (draft) => {
+            setDeepProp(
+              unitedSchemaPath.split('.').concat('fieldKey'),
+              draft,
+              value
+            )
+          })
+        )
+    },
+    [generatorContext, selectedFieldKey, setCurEditFieldKey, setUnitedSchema]
+  )
+
   return (
     <Fragment>
       <div className={styles.panelConfig}>
@@ -373,8 +404,11 @@ const PropertyConfig = () => {
                 <Input.Group compact>
                   <Input
                     className={styles.fieldKey}
-                    defaultValue={fieldKey}
-                    disabled
+                    value={curEditFieldKey}
+                    onChange={changeFieldKey}
+                    placeholder="不可包含字符 ."
+                    // 父元素为数组容器无法修改
+                    disabled={parentType === 'array'}
                   />
                   <Button icon={<CopyOutlined />} />
                 </Input.Group>

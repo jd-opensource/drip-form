@@ -8,7 +8,7 @@ export type Get = (fieldKey?: string) => {
 
 export type GetKey = (
   fieldKey: string,
-  type: 'uiSchema' | 'dataSchema' | 'data'
+  type: 'uiSchema' | 'dataSchema' | 'data' | 'unitedSchema'
 ) => string
 
 export type GetTypeKey = (fieldKey: string) => string | never
