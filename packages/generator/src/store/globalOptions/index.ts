@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-12-17 11:22:05
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-04 16:00:27
+ * @Last Modified time: 2022-03-07 16:44:48
  */
 import { atom, selector } from 'recoil'
 import { curTypeAtom, selectedAtom } from '../unclassified'
@@ -49,6 +49,8 @@ export type Options = {
   viewportConfig: ViewportConfig
   // 新增表单 fieldKey 生成函数
   fieldKeyFn: (unitedSchema: UnitedSchemaAtom) => string
+  // 未选中表单时，点击左侧组件，新增表单的位置
+  addFieldLocation: 'top' | 'bottom'
 }
 
 export const optionsAtom = atom<Options>({
@@ -68,6 +70,7 @@ export const optionsAtom = atom<Options>({
       showDeleteIcon: true,
     },
     fieldKeyFn: (unitedSchema) => `${unitedSchema.ui.type}_${nanoid(6)}`,
+    addFieldLocation: 'bottom',
   },
 })
 

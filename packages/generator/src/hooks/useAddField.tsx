@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-04 16:38:05
+ * @Last Modified time: 2022-03-07 17:16:55
  */
 import { useCallback, useContext } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -27,11 +27,15 @@ type AddField = (param: {
 
 const useAddField = (): AddField => {
   const generatorContext = useContext(GeneratorContext)
-  const { fieldKeyFn } = useRecoilValue(optionsAtom)
+  const { fieldKeyFn, addFieldLocation } = useRecoilValue(optionsAtom)
   const [selectedKey, setSelected] = useRecoilState(selectedAtom)
   const setCurType = useSetRecoilState(curTypeAtom)
   const deleteField = useDeleteField()
   const canEdit = useCanEditJson()
+  // unitedSchema最外层的order
+  const rootOrder = generatorContext.current?.get().uiSchema?.order || []
+  // 最后一个fieldkey
+  const lastFieldKey = String(rootOrder[rootOrder.length - 1])
 
   const addField = useCallback<AddField>(
     ({
@@ -117,7 +121,10 @@ const useAddField = (): AddField => {
         fieldKey: newFieldKey,
         closestEdge,
         unitedSchema,
-        overFieldKey: fieldKey,
+        overFieldKey:
+          !selectedKey && addFieldLocation === 'bottom'
+            ? lastFieldKey
+            : fieldKey,
         shouldDelete,
         cb: () => {
           setSelected(selectKey)
@@ -129,9 +136,12 @@ const useAddField = (): AddField => {
       }
     },
     [
+      addFieldLocation,
       canEdit,
       deleteField,
+      fieldKeyFn,
       generatorContext,
+      lastFieldKey,
       selectedKey,
       setCurType,
       setSelected,
