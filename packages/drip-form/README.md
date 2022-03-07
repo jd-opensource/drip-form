@@ -1,8 +1,8 @@
-# babel-form
+# drip-form
 
 ## 简介
 
-babel-form 是一个自动表单渲染平台，支持以 JSON Schema 数据结构数据自动渲染表单内容。用一个方案去解决表单的复杂性、联动性、多样性、可配置、性能、ui 框架自由。
+drip-form 是一个自动表单渲染平台，支持以 JSON Schema 数据结构数据自动渲染表单内容。用一个方案去解决表单的复杂性、联动性、多样性、可配置、性能、ui 框架自由。
 
 ## 本项目能帮助你解决如下问题
 
@@ -21,22 +21,22 @@ babel-form 是一个自动表单渲染平台，支持以 JSON Schema 数据结�
 
 ## 安装
 
-`jnpm install @jmfe/babel-form`
+`jnpm install @jdfed/drip-form`
 
 #### 主题安装
 
-`jnpm install @jmfe/babel-form-theme-antd`
+`jnpm install @jdfed/drip-form-theme-antd`
 
 ## 引入
 
 ```
-import BabelForm from '@jmfe/babel-form'
-import antd from '@jmfe/babel-form-theme-antd'
-import '@jmfe/babel-form/dist/babel-form.min.css'
-import '@jmfe/babel-form-theme-antd/dist/babel-form-theme-antd.min.css'
+import BabelForm from '@jdfed/drip-form'
+import antd from '@jdfed/drip-form-theme-antd'
+import '@jdfed/drip-form/dist/drip-form.min.css'
+import '@jdfed/drip-form-theme-antd/dist/drip-form-theme-antd.min.css'
 ```
 
-## babel-form 渲染流程
+## drip-form 渲染流程
 
 ![Image text](../../docs/images/babelForm.jpg)
 
@@ -46,7 +46,7 @@ import '@jmfe/babel-form-theme-antd/dist/babel-form-theme-antd.min.css'
 
 #### dataSchema
 
-dataSchema 为 babel-form 表单定义组件唯一 Key，提供校验等功能。
+dataSchema 为 drip-form 表单定义组件唯一 Key，提供校验等功能。
 
 ### 参数说明
 
@@ -66,18 +66,18 @@ dataSchema 为 babel-form 表单定义组件唯一 Key，提供校验等功能�
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "radio1": {
-      "title": "单选框",
-      "type": "boolean",
-      "default": true
-    },
-    "select1": {
-      "title": "选择器",
-      "type": ["string", "number", "array"]
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"radio1": {
+			"title": "单选框",
+			"type": "boolean",
+			"default": true
+		},
+		"select1": {
+			"title": "选择器",
+			"type": ["string", "number", "array"]
+		}
+	}
 }
 ```
 
@@ -96,9 +96,9 @@ dataSchema 为 babel-form 表单定义组件唯一 Key，提供校验等功能�
 
 `properties`中定义组件唯一 key 值，名称可以自定义。
 
-这里定义了`name2`、`erp`、`number1`、`colorPicker`，并且在`erp`和`number1`中定义了 babel-form 提供的校验规则`rangeDelimiter`、以及 ajv 中的校验参数。
+这里定义了`name2`、`erp`、`number1`、`colorPicker`，并且在`erp`和`number1`中定义了 drip-form 提供的校验规则`rangeDelimiter`、以及 ajv 中的校验参数。
 
-### customFormat （babel-form 提供的校验规则）
+### customFormat （drip-form 提供的校验规则）
 
 customFormmat 提供`date-time`和`color`校验
 
@@ -106,20 +106,20 @@ customFormmat 提供`date-time`和`color`校验
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "datePicker": {
-      "title": "datePicker",
-      "type": "string",
-      "customFormat": "date-time"
-    },
-    "colorpicker": {
-      "type": "string",
-      "title": "颜色选择器",
-      "default": "#08c691",
-      "customFormat": "color"
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"datePicker": {
+			"title": "datePicker",
+			"type": "string",
+			"customFormat": "date-time"
+		},
+		"colorpicker": {
+			"type": "string",
+			"title": "颜色选择器",
+			"default": "#08c691",
+			"customFormat": "color"
+		}
+	}
 }
 ```
 
@@ -137,18 +137,18 @@ customFormmat 提供`date-time`和`color`校验
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "erp": {
-      "title": "erp",
-      "type": "string",
-      "rangeDelimiter": {
-        "delimiter": ",",
-        "max": 2,
-        "min": 0
-      }
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"erp": {
+			"title": "erp",
+			"type": "string",
+			"rangeDelimiter": {
+				"delimiter": ",",
+				"max": 2,
+				"min": 0
+			}
+		}
+	}
 }
 ```
 
@@ -195,7 +195,7 @@ customFormmat 提供`date-time`和`color`校验
 | required   | 必填项校验的报错信息，根据 key 值生成       | `object` |
 | properties | 表单子项配置校验的报错信息，根据 key 值生成 | `object` |
 
-babel-form 提供校验（目前支持`data-time`，`color`，`rangeDelimiter`）
+drip-form 提供校验（目前支持`data-time`，`color`，`rangeDelimiter`）
 
 示例
 
@@ -282,30 +282,30 @@ babel-form 提供校验（目前支持`data-time`，`color`，`rangeDelimiter`�
 
 ```json
 {
-  "order": ["babelRadio", "babelSelect"],
-  "theme": "antd",
-  "properties": {
-    "babelRadio": {
-      "type": "radio",
-      "theme": "babel-ui",
-      "options": [
-        { "label": "北京", "value": "0" },
-        { "label": "上海", "value": "1" },
-        { "label": "成都", "value": "2" },
-        { "label": "武汉", "value": "3" }
-      ]
-    },
-    "babelSelect": {
-      "type": "select",
-      "theme": "babel-ui",
-      "options": [
-        { "label": "苹果", "value": "1", "disabled": false },
-        { "label": "橘子", "value": "2", "disabled": true },
-        { "label": "桃子", "value": "3", "disabled": false },
-        { "label": "香蕉", "value": "4", "disabled": false }
-      ]
-    }
-  }
+	"order": ["babelRadio", "babelSelect"],
+	"theme": "antd",
+	"properties": {
+		"babelRadio": {
+			"type": "radio",
+			"theme": "babel-ui",
+			"options": [
+				{ "label": "北京", "value": "0" },
+				{ "label": "上海", "value": "1" },
+				{ "label": "成都", "value": "2" },
+				{ "label": "武汉", "value": "3" }
+			]
+		},
+		"babelSelect": {
+			"type": "select",
+			"theme": "babel-ui",
+			"options": [
+				{ "label": "苹果", "value": "1", "disabled": false },
+				{ "label": "橘子", "value": "2", "disabled": true },
+				{ "label": "桃子", "value": "3", "disabled": false },
+				{ "label": "香蕉", "value": "4", "disabled": false }
+			]
+		}
+	}
 }
 ```
 
@@ -315,33 +315,33 @@ properties 中定义的是组件渲染项，通过 dataSchema 中定义的组件
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "babelRadio": {
-      "title": "单选框",
-      "type": "string",
-      "default": "0"
-    },
-    "babelSelect": {
-      "title": "选择器",
-      "type": ["string", "number", "array"],
-      "default": []
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"babelRadio": {
+			"title": "单选框",
+			"type": "string",
+			"default": "0"
+		},
+		"babelSelect": {
+			"title": "选择器",
+			"type": ["string", "number", "array"],
+			"default": []
+		}
+	}
 }
 ```
 
 ### properties 参数
 
-| 属性         | 说明                                                                         | 类型                                 |
-| ------------ | :--------------------------------------------------------------------------- | :----------------------------------- |
-| type         | 表单项类型                                                                   | `text`                               |
-| disabled     | 是否禁用                                                                     | `boolean`                            |
-| vcontrol     | 控制表单联动展示隐藏部分                                                     | `string`                             |
-| description  | 表单提示                                                                     | `object`                             |
-| style        | 表单样式                                                                     | `object`                             |
-| requestCache | 是否每次都调接口查询表单数据。需要配合 babelForm 的 onQuery 字段使用         | `boolean` 目前 select、cascader 支持 |
-| \*           | 根据类型配置可选的 UI 补充项，根据 babel-ui 组件参数来定义 babel-form 中组件 | \*                                   |
+| 属性         | 说明                                                                        | 类型                                 |
+| ------------ | :-------------------------------------------------------------------------- | :----------------------------------- |
+| type         | 表单项类型                                                                  | `text`                               |
+| disabled     | 是否禁用                                                                    | `boolean`                            |
+| vcontrol     | 控制表单联动展示隐藏部分                                                    | `string`                             |
+| description  | 表单提示                                                                    | `object`                             |
+| style        | 表单样式                                                                    | `object`                             |
+| requestCache | 是否每次都调接口查询表单数据。需要配合 babelForm 的 onQuery 字段使用        | `boolean` 目前 select、cascader 支持 |
+| \*           | 根据类型配置可选的 UI 补充项，根据 babel-ui 组件参数来定义 drip-form 中组件 | \*                                   |
 
 ## vcontrol
 
@@ -359,23 +359,23 @@ dataSchema
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "validateTime": "change",
-  "properties": {
-    "switch1": {
-      "title": "开关",
-      "type": "boolean"
-    },
-    "custom1": {
-      "title": "自定义组件"
-    }
-  },
-  "required": [],
-  "errorMessage": {
-    "required": {},
-    "properties": {}
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"validateTime": "change",
+	"properties": {
+		"switch1": {
+			"title": "开关",
+			"type": "boolean"
+		},
+		"custom1": {
+			"title": "自定义组件"
+		}
+	},
+	"required": [],
+	"errorMessage": {
+		"required": {},
+		"properties": {}
+	}
 }
 ```
 
@@ -401,45 +401,45 @@ component
 
 ```jsx
 import React, { Component, memo, useState } from 'react'
-import BabelForm from '@jmfe/babel-form'
-import BabelUI from '@jmfe/babel-form-theme-babelUI'
-import BabelUIComponent from '@jmfe/babel-ui'
+import BabelForm from '@jdfed/drip-form'
+import BabelUI from '@jdfed/drip-form-theme-babelUI'
+import BabelUIComponent from '@jdfed/babel-ui'
 import dataSchema from './dataSchema.json'
 import uiSchema from './uiSchema.json'
 
-import '@jmfe/babel-form/dist/babel-form.min.css'
+import '@jdfed/drip-form/dist/drip-form.min.css'
 
 const { Button } = BabelUIComponent
 
 const CustomField1 = memo(() => {
-  const [count, setCount] = useState(0)
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <Button onClick={() => setCount(count + 1)}>Click me</Button>
-    </div>
-  )
+	const [count, setCount] = useState(0)
+	return (
+		<div>
+			<p>You clicked {count} times</p>
+			<Button onClick={() => setCount(count + 1)}>Click me</Button>
+		</div>
+	)
 })
 
 const customComponents = {
-  custom1: CustomField1,
+	custom1: CustomField1,
 }
 
 export default class Form extends Component {
-  render() {
-    return (
-      <div>
-        <BabelForm
-          dataSchema={dataSchema}
-          uiSchema={uiSchema}
-          uiComponents={{
-            'babel-ui': BabelUI,
-          }}
-          customComponents={customComponents}
-        />
-      </div>
-    )
-  }
+	render() {
+		return (
+			<div>
+				<BabelForm
+					dataSchema={dataSchema}
+					uiSchema={uiSchema}
+					uiComponents={{
+						'babel-ui': BabelUI,
+					}}
+					customComponents={customComponents}
+				/>
+			</div>
+		)
+	}
 }
 ```
 
@@ -448,8 +448,8 @@ export default class Form extends Component {
 选择的主题包，如选用 antd 主题
 
 ```
-import antd from '@jmfe/babel-form-theme-antd'
-import '@jmfe/babel-form-theme-antd/dist/babel-form-theme-antd.min.css'
+import antd from '@jdfed/drip-form-theme-antd'
+import '@jdfed/drip-form-theme-antd/dist/drip-form-theme-antd.min.css'
 
 ```
 
@@ -516,10 +516,10 @@ const onSubmit = () => {
 #### 示例 1
 
 ```
-import BabelForm from '@jmfe/babel-form'
-import antd from '@jmfe/babel-form-theme-antd'
-import '@jmfe/babel-form-theme-antd/dist/babel-form-theme-antd.min.css'
-import '@jmfe/babel-form/dist/babel-form.min.css'
+import BabelForm from '@jdfed/drip-form'
+import antd from '@jdfed/drip-form-theme-antd'
+import '@jdfed/drip-form-theme-antd/dist/drip-form-theme-antd.min.css'
+import '@jdfed/drip-form/dist/drip-form.min.css'
 
 const dataSchema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -605,7 +605,7 @@ const Demo = () => (
 | cascader 级联选择      |  已支持   |        已支持 |
 | treeSelect 树形选择器  |  已支持   |        待支持 |
 
-## babel-form API
+## drip-form API
 
 | 参数             |      类型      | 是否为必传 | 描述                                         |
 | ---------------- | :------------: | :--------: | :------------------------------------------- |
@@ -619,10 +619,10 @@ const Demo = () => (
 ## 示例 2
 
 ```
-import BabelForm from '@jmfe/babel-form'
-import antd from '@jmfe/babel-form-theme-antd'
-mport '@jmfe/babel-form-theme-antd/dist/babel-form-theme-antd.min.css'
-import '@jmfe/babel-form/dist/babel-form.min.css'
+import BabelForm from '@jdfed/drip-form'
+import antd from '@jdfed/drip-form-theme-antd'
+mport '@jdfed/drip-form-theme-antd/dist/drip-form-theme-antd.min.css'
+import '@jdfed/drip-form/dist/drip-form.min.css'
 
 //表单中组件类型配置项
 const uiSchema = {
@@ -732,19 +732,19 @@ const App = () => {
   /* config.js */
 
   export const uiSchema = {
-    // 默认使用antd主题包
-    theme: 'antd',
-    // 其他配置项
-    properties: {
-      name: {
-        title: '名字',
-        // 针对该子项配置主题，使用babel-ui渲染
-        theme: 'babel-ui',
-        type: 'string',
-        maxLength: 5,
-        transform: ['trim'],
-      },
-    },
+  	// 默认使用antd主题包
+  	theme: 'antd',
+  	// 其他配置项
+  	properties: {
+  		name: {
+  			title: '名字',
+  			// 针对该子项配置主题，使用babel-ui渲染
+  			theme: 'babel-ui',
+  			type: 'string',
+  			maxLength: 5,
+  			transform: ['trim'],
+  		},
+  	},
   }
   ```
 
@@ -755,7 +755,7 @@ const App = () => {
 
   ...
   // 除antd外，导入babel-ui主题包
-  import BabelUI from '@jmfe/babel-form-theme-babelUI'
+  import BabelUI from '@jdfed/drip-form-theme-babelUI'
 
   // 导入多个主题包
   <BabelForm

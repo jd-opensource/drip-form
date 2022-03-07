@@ -247,7 +247,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {...restProps}
     >
       <InboxOutlined />
-      <div className="babel-form--dargupload">点击或拖拽上传图片</div>
+      <div className="drip-form--dargupload">点击或拖拽上传图片</div>
     </Dragger>
   ) : (
     <Upload
