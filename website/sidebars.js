@@ -75,21 +75,24 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'api',
+      label: 'props',
       collapsed: true,
       items: [
-        'generator/api/schema',
-        'generator/api/theme',
-        'generator/api/customComponents',
-        'generator/api/renderLeftHeader',
-        'generator/api/viewportConfig',
+        'generator/props/schema',
+        'generator/props/theme',
+        'generator/props/customComponents',
+        'generator/props/components',
+        'generator/props/options',
       ],
     },
     {
       type: 'category',
       label: '进阶',
       collapsed: true,
-      items: ['generator/expert/custom_component'],
+      items: [
+        'generator/expert/custom_component',
+        'generator/expert/custom_theme',
+      ],
     },
   ],
 }
