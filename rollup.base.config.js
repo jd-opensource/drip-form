@@ -49,7 +49,7 @@ export function getOutput(pkg, argv) {
   }
 
   return {
-    // 因为包是scope的（@jmfe/*）,会在dist下新建一个@jmfe文件夹。用split避免新建@jmfe文件夹
+    // 因为包是scope的（@jdfed/*）,会在dist下新建一个@jmfe文件夹。用split避免新建@jmfe文件夹
     file: path.resolve(
       buildToLib ? pkg.distExports['dist-css'] : pkg.distExports['dist'],
       `index.js`

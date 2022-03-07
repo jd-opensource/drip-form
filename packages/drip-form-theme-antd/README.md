@@ -1,8 +1,8 @@
-# @jmfe/babel-form-theme-antd
+# @jdfed/drip-form-theme-antd
 
 ## 安装
 
-`jnpm install @jmfe/babel-form-theme-antd`
+`jnpm install @jdfed/drip-form-theme-antd`
 
 ## 支持组件
 

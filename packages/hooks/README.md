@@ -1,4 +1,4 @@
-# `@jmfe/hooks`
+# `@jdfed/hooks`
 
 > babelform 通用 hooks
 
@@ -10,7 +10,7 @@
 
 ```
 import React, { useState } form 'react
-import { useClickOne } from '@jmfe/hooks'
+import { useClickOne } from '@jdfed/hooks'
 import { Button } from 'antd'
 
 const Demo = () => {
@@ -38,7 +38,7 @@ const Demo = () => {
 
 ```
 import React, { useState } form 'react
-import { useEventCallback, useField } from '@jmfe/hooks'
+import { useEventCallback, useField } from '@jdfed/hooks'
 import { Button } from 'antd'
 
 const Demo = (fieldData) => {
@@ -79,7 +79,7 @@ useField({ fieldKey , onChange , options })
 
 ```
 import React, { useState } form 'react
-import { useModal } from '@jmfe/hooks'
+import { useModal } from '@jdfed/hooks'
 import { Modal } from 'antd'
 
 const Demo = () => {
@@ -102,7 +102,7 @@ const Demo = () => {
 
 ```
 import React, { useState } form 'react
-import { usePrevious } from '@jmfe/hooks'
+import { usePrevious } from '@jdfed/hooks'
 
 const Demo = () => {
   const [defaultStatus] = useState(false)
