@@ -20,6 +20,8 @@ type Options = Partial<{
 	viewportConfig: ViewportConfig
 	// 新增表单 fieldKey 生成函数
 	fieldKeyFn: (unitedSchema: UnitedSchemaAtom) => string
+	// 未选中表单时，点击左侧组件，新增表单的位置
+	addFieldLocation: 'top' | 'bottom'
 }>
 ```
 
@@ -149,3 +151,15 @@ export default App
 是否展示删除按钮
 
 ## 其它
+
+### fieldKeyFn
+
+自定义新增表单的生成规则函数
+
+### addFieldLocation
+
+自定义未选中任何表单时，点击新增表单的默认位置。
+
+`bottom` 添加到最下方（默认）
+
+`top` 添加到最上方
