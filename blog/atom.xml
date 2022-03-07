@@ -9,11 +9,11 @@
     <icon>https://jdfed.github.io/drip-form/https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg</icon>
     <entry>
         <title type="html"><![CDATA[使用babel-form快速搭建表单]]></title>
-        <id>babel-form-create</id>
-        <link href="https://jdfed.github.io/drip-form/blog/babel-form-create"/>
+        <id>drip-form-create</id>
+        <link href="https://jdfed.github.io/drip-form/blog/drip-form-create"/>
         <updated>2020-08-27T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[如何使用 babel-form 快速搭建表单]]></summary>
-        <content type="html"><![CDATA[<p>如何使用 babel-form 快速搭建表单</p>]]></content>
+        <summary type="html"><![CDATA[如何使用 drip-form 快速搭建表单]]></summary>
+        <content type="html"><![CDATA[<p>如何使用 drip-form 快速搭建表单</p>]]></content>
         <author>
             <name>蒋孝威</name>
         </author>

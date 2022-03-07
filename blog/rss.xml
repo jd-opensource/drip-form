@@ -9,11 +9,11 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[使用babel-form快速搭建表单]]></title>
-            <link>https://jdfed.github.io/drip-form/blog/babel-form-create</link>
-            <guid>babel-form-create</guid>
+            <link>https://jdfed.github.io/drip-form/blog/drip-form-create</link>
+            <guid>drip-form-create</guid>
             <pubDate>Thu, 27 Aug 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[如何使用 babel-form 快速搭建表单]]></description>
-            <content:encoded><![CDATA[<p>如何使用 babel-form 快速搭建表单</p>]]></content:encoded>
+            <description><![CDATA[如何使用 drip-form 快速搭建表单]]></description>
+            <content:encoded><![CDATA[<p>如何使用 drip-form 快速搭建表单</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
