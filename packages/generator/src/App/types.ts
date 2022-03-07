@@ -17,7 +17,7 @@ export type GeneratorType = {
   customComponents?: Array<Field>
   // 组件自定义（自定义左侧组件区域、viewport区域、编辑区域（属性配置、校验配置））
   components?: ComponentsData
-  options?: Options
+  options?: Partial<Options>
   /**
    * v1 废弃API，请使用options代替
    */
