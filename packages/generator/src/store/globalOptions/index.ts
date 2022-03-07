@@ -3,31 +3,34 @@
  * @Author: jiangxiaowei
  * @Date: 2021-12-17 11:22:05
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-02 13:05:11
+ * @Last Modified time: 2022-03-04 16:00:27
  */
 import { atom, selector } from 'recoil'
 import { curTypeAtom, selectedAtom } from '../unclassified'
+import { nanoid } from 'nanoid'
+import type { UnitedSchemaAtom } from '@generator/fields/types'
+
 // form-generator支持的配置
-export type HeaderConfig = {
+export type HeaderConfig = Partial<{
   // 是否展示header区域
-  showHeader?: boolean
+  showHeader: boolean
   // 是否展示logo组件
-  showLogo?: boolean
+  showLogo: boolean
   // 是否展示 导入JSON 按钮
-  showUploadJSON?: boolean
+  showUploadJSON: boolean
   // 是否展示 JSON编辑 按钮
-  showEditJSON?: boolean
+  showEditJSON: boolean
   // 是否展示 表单预览 按钮
-  showPreviewForm?: boolean
+  showPreviewForm: boolean
   // 是否展示 导出JSON 按钮
-  showExportJSON?: boolean
+  showExportJSON: boolean
   // 导出json自定义文案
-  exportText?: string
+  exportText: string
   // 自定义exportjson函数
-  customExport?: (exportJsonFn: () => void) => void
+  customExport: (exportJsonFn: () => void) => void
   // 自定义左侧logo组件
-  renderLeftHeader?: () => JSX.Element
-}
+  renderLeftHeader: () => JSX.Element
+}>
 
 export type ViewportConfigItem =
   | boolean
@@ -39,28 +42,32 @@ export type ViewportConfig = Partial<
   Record<ViewportConfigKey, ViewportConfigItem>
 >
 
-// 头部自定义配置
-export const headerConfigAtom = atom<HeaderConfig>({
-  key: 'headerOptions',
-  default: {
-    showHeader: true,
-    showLogo: true,
-    showUploadJSON: true,
-    showEditJSON: true,
-    showPreviewForm: true,
-    showExportJSON: true,
-    exportText: '导出JSON',
-  },
-})
+export type Options = {
+  // 头部相关配置
+  headerConfig: HeaderConfig
+  // viewport相关配置
+  viewportConfig: ViewportConfig
+  // 新增表单 fieldKey 生成函数
+  fieldKeyFn: (unitedSchema: UnitedSchemaAtom) => string
+}
 
-// vieport区域配置（可能为函数或布尔值）
-export const viewportConfigAtom = atom<ViewportConfig>({
-  key: 'viewportOptions',
+export const optionsAtom = atom<Options>({
+  key: 'globalOptions',
   default: {
-    // 是否展示操作栏 默认true
-    showActionBar: true,
-    // 是否展示删除 默认true
-    showDeleteIcon: true,
+    headerConfig: {
+      showHeader: true,
+      showLogo: true,
+      showUploadJSON: true,
+      showEditJSON: true,
+      showPreviewForm: true,
+      showExportJSON: true,
+      exportText: '导出JSON',
+    },
+    viewportConfig: {
+      showActionBar: true,
+      showDeleteIcon: true,
+    },
+    fieldKeyFn: (unitedSchema) => `${unitedSchema.ui.type}_${nanoid(6)}`,
   },
 })
 
@@ -72,7 +79,7 @@ export const viewportConfigSelector = selector<
   get: ({ get }) => {
     const type = get(curTypeAtom)
     const selectedFieldKey = get(selectedAtom)
-    const viewportConfig = get(viewportConfigAtom)
+    const viewportConfig = get(optionsAtom).viewportConfig
     const viewportConfigValue: Record<string, boolean> = {}
     const getBoolean = (param: ViewportConfigItem): boolean => {
       if (typeof param === 'function') {

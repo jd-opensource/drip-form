@@ -86,15 +86,4 @@ export default {
   type: 'object',
   ui: {},
   theme: 'antd',
-  schema: [
-    {
-      validateTime: 'submit',
-      type: 'array',
-      title: '多选框',
-      ui: {
-        type: 'checkbox',
-      },
-      fieldKey: 'checkbox_1MURwO',
-    },
-  ],
 }

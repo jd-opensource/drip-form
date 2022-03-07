@@ -16,8 +16,7 @@ import {
   schemaAtom,
   DripFormUiComponetsAtom,
   sidebarDataAtom,
-  headerConfigAtom,
-  viewportConfigAtom,
+  optionsAtom,
 } from '@generator/store'
 import '@jdfed/drip-form/dist/index.css'
 import '@jdfed/drip-form-theme-antd/dist/index.css'
@@ -38,47 +37,45 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       headerConfig,
       viewportConfig,
       components,
+      options,
     },
     ref
   ) => {
     const formRef = useRef<DripFormRefType>()
     const unitedSchema = useRecoilValue(schemaAtom)
-    const setHeaderConfig = useSetRecoilState(headerConfigAtom)
-    const setViewportConfig = useSetRecoilState(viewportConfigAtom)
+    const setOptions = useSetRecoilState(optionsAtom)
     const setDripFormUiComonents = useSetRecoilState(DripFormUiComponetsAtom)
     const setSidebarData = useSetRecoilState(sidebarDataAtom)
 
-    // 设置vieport配置
+    // 设置全局配置
     useEffect(() => {
-      if (viewportConfig) {
-        setViewportConfig((oldOption) => {
-          return {
-            ...oldOption,
+      setOptions((oldOption) => {
+        return {
+          ...oldOption,
+          viewportConfig: {
+            ...oldOption.viewportConfig,
             ...viewportConfig,
-          }
-        })
-      }
-    }, [setViewportConfig, viewportConfig])
-
-    // 设置header配置
-    useEffect(() => {
-      if (customExport || exportText || renderLeftHeader || headerConfig) {
-        setHeaderConfig((oldOption) => {
-          return {
-            ...oldOption,
+            ...options?.viewportConfig,
+          },
+          headerConfig: {
+            ...oldOption.headerConfig,
             ...(customExport && { customExport }),
             ...(exportText && { exportText }),
             ...(renderLeftHeader && { renderLeftHeader }),
             ...headerConfig,
-          }
-        })
-      }
+            ...options?.headerConfig,
+          },
+          ...options,
+        }
+      })
     }, [
       customExport,
       exportText,
       headerConfig,
+      options,
       renderLeftHeader,
-      setHeaderConfig,
+      setOptions,
+      viewportConfig,
     ])
 
     // 动态添加图标
