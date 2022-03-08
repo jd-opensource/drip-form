@@ -104,6 +104,7 @@ export type DripFormProps = {
   containerHoc?: ContainerHoc
   onSubmit?: FooterBtnFuncType
   onCancel?: FooterBtnFuncType
+  ajvOptions?: Options
 }
 
 /**
