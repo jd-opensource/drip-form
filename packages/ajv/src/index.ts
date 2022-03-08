@@ -15,7 +15,7 @@ import type { Plugin, Options } from 'ajv/dist/2019'
 /**
  * 生成ajv示例，并加载drip-form官方插件
  */
-function registerAjv(): Ajv {
+function registerAjv(options?: Options): Ajv {
   // 默认使用草案2019
   const ajv = new Ajv2019({
     // 不允许type:['string','number']等联合模式 推荐使用anyOf代替
@@ -32,6 +32,7 @@ function registerAjv(): Ajv {
     discriminator: true,
     // 是否删除数据中Schema未定义的字段
     removeAdditional: false,
+    ...options,
   })
   // 支持草案7
   ajv.addMetaSchema(draft7MetaSchema, 'http://json-schema.org/draft-07/schema#')
