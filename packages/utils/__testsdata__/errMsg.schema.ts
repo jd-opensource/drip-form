@@ -1,6 +1,7 @@
 export const unitedSchema = {
   theme: 'antd',
   validateTime: 'submit',
+  requiredMode: 'default',
   type: 'object',
   ui: {
     mode: 'edit',
@@ -58,6 +59,7 @@ export const unitedSchema = {
 export const parsedSchema = {
   dataSchema: {
     validateTime: 'submit',
+    requiredMode: 'default',
     type: 'object',
     properties: {
       name: {

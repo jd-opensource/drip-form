@@ -1,4 +1,3 @@
-import { produce } from 'immer'
 /*
  * Field表单onChange生成 hooks
  * 该hooks会自动根据
@@ -8,7 +7,9 @@ import { produce } from 'immer'
  * @Last Modified time: yyyy-05-dd 15:10:43
  */
 import moment, { Moment } from 'moment'
+import { produce } from 'immer'
 import useEventCallback from './useEventCallback'
+import useRequiredModeContext from './useRequiredModeContext'
 import { useDebounceFn } from 'ahooks'
 import { isEmpty, typeCheck } from '@jdfed/utils'
 import type { GetKey, Action } from '@jdfed/utils'
@@ -269,6 +270,7 @@ const useField = (
   },
   dispatch: Dispatch<Action>
 ): UseFieldR => {
+  const requiredMode = useRequiredModeContext()
   // onChange 回调 debounce
   const { run } = useDebounceFn(
     (val, dispatch) => {
@@ -373,22 +375,34 @@ const useField = (
         })
       }
       /**
-       * 删除formData中相应表单字段（fix：表单为空之后必填校验失效）
-       * 删除dataSchema中相应default（fix: text默认值后续删除不自动添加）
        * 数组容器中子项为空不删除
        */
       if (
-        (Object.prototype.hasOwnProperty.call(options, 'isDelete')
-          ? options.isDelete
-          : isEmpty(value)) &&
+        (options.isDelete || isEmpty(value)) &&
         getKey(fieldKey, 'dataSchema').split('.').pop() !== 'items'
       ) {
-        dispatch({
-          type: 'setData',
-          action: {
-            deleteKeys: fieldKey,
-          },
-        })
+        // 使用JSON Schema规范的required关键字校验必填
+        if (requiredMode === 'default') {
+          // 删除formData中相应表单字段（fix：表单为空之后必填校验失效）
+          dispatch({
+            type: 'setData',
+            action: {
+              deleteKeys: fieldKey,
+            },
+          })
+        } else {
+          // 通过minLength、minItems控制必填
+          dispatch({
+            type: 'setData',
+            action: {
+              set: {
+                [fieldKey]: value,
+              },
+            },
+          })
+        }
+
+        // 删除dataSchema中相应default（fix: text默认值后续删除不自动添加）
         dispatch({
           type: 'setValidate',
           action: {

@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 15:29:06
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-26 17:19:18
+ * @Last Modified time: 2022-03-09 17:06:58
  */
 import { produce } from 'immer'
 import { setDeepProp, parseUnitedSchema } from '@jdfed/utils'
@@ -73,7 +73,11 @@ const addField = ({
   const { dataSchema: addParentDataSchema, uiSchema: addParentUiSchema } =
     get(addParentPath)
   // 待添加表单的dataSchema、uiSchema
-  const { dataSchema, uiSchema } = parseUnitedSchema(unitedSchema)
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    dataSchema: { validateTime, requiredMode, ...dataSchema },
+    uiSchema,
+  } = parseUnitedSchema(unitedSchema)
   // 待添加表单 父级元素类型 默认对象类型
   let addParentType = 'object'
   if (addParentUiSchema.type === 'array') {

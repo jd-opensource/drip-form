@@ -1,5 +1,6 @@
 export const unitedSchema = {
   validateTime: 'submit',
+  requiredMode: 'default',
   type: 'object',
   theme: 'antd',
   ui: {
@@ -48,6 +49,7 @@ export const parsedSchema = {
     required: ['name'],
     type: 'object',
     validateTime: 'submit',
+    requiredMode: 'default',
   },
   typePath: {
     name: {

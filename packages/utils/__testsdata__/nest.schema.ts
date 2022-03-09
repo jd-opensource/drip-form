@@ -1,10 +1,10 @@
 /**
  * 测试数据
- * @type {{schema: [{ui: {type: string}, fieldKey: string, type: string, title: string, items: {ui: {placeholder: string, type: string}, minLength: number, type: string, title: string, maxLength: number}}, {ui: {type: string}, fieldKey: string, type: string, title: string, items: [{default: null, ui: {type: string}, type: string, title: string}, {ui: {type: string}, type: string, title: string}]}, {schema: [{ui: {type: string}, fieldKey: string, type: string, title: string}, {ui: {type: string}, fieldKey: string, type: string, title: string}, {schema: [{ui: {type: string}, fieldKey: string, type: string, title: string}], min: number, fieldKey: string, type: string, title: string}], ui: {type: string}, fieldKey: string, type: string, title: string}, {ui: {type: string}, fieldKey: string, type: string, title: string, items: {schema: [{ui: {type: string}, fieldKey: string, type: string, title: string}, {ui: {type: string}, fieldKey: string, maximum: number, type: string, title: string, minimum: number}], ui: {type: string}, type: string, title: string}}], validateTime: string, theme: string, title: {placement: string}}}
  */
 export const unitedSchema = {
   theme: 'antd',
   validateTime: 'change',
+  requiredMode: 'default',
   ui: {
     mode: 'edit',
     title: {
@@ -16,7 +16,7 @@ export const unitedSchema = {
     {
       type: 'array',
       fieldKey: 'addSameList',
-      title: "列表添加 ['a', 'b', ...]",
+      title: "允许添加的列表 ['a', 'b', ...]",
       ui: {
         type: 'array',
       },
@@ -27,7 +27,6 @@ export const unitedSchema = {
         maxLength: 4,
         ui: {
           type: 'input',
-          theme: 'custom',
           placeholder: '请输入2-4个字的姓名',
         },
       },
@@ -40,14 +39,14 @@ export const unitedSchema = {
         type: 'array',
       },
       items: [
-        { type: 'string', title: 'ERP', default: null, ui: { type: 'input' } },
+        { type: 'string', title: 'ERP', ui: { type: 'input' } },
         { type: 'number', title: '年龄', ui: { type: 'number' } },
       ],
     },
     {
       type: 'object',
       fieldKey: 'objectItem',
-      title: "普通对象 { erp: 'drip', age: 1,c:{a:1} }",
+      title: "普通对象 { erp: 'drip', age: 1 }",
       ui: {
         type: 'object',
       },
@@ -56,7 +55,7 @@ export const unitedSchema = {
           type: 'string',
           fieldKey: 'erp',
           title: 'ERP',
-          ui: { type: 'text' },
+          ui: { type: 'input' },
         },
         {
           type: 'number',
@@ -64,38 +63,18 @@ export const unitedSchema = {
           title: '年龄',
           ui: { type: 'number' },
         },
-        {
-          type: 'object',
-          fieldKey: 'c',
-          title: '二级嵌套{a:1}',
-          min: 1,
-          ui: { type: 'object' },
-          schema: [
-            {
-              type: 'string',
-              fieldKey: 'a',
-              title: '二级嵌套a',
-              ui: {
-                type: 'text',
-              },
-            },
-          ],
-        },
       ],
     },
     {
       type: 'array',
       fieldKey: 'nestArray',
-      title: "嵌套数组 [{erp: 'drip', age: 1}, {erp: 'jmfe', age: 6}]",
-      ui: {
-        type: 'array',
-      },
+      title:
+        "允许添加的对象数组 [{erp: 'drip', age: 1}, {erp: 'jmfe', age: 6}, ...]",
+      ui: { type: 'array' },
       items: {
         type: 'object',
         title: '',
-        ui: {
-          type: 'object',
-        },
+        ui: { type: 'object' },
         schema: [
           {
             type: 'string',
@@ -119,7 +98,6 @@ export const unitedSchema = {
 
 /**
  * 验证数据
- * @type {{dataSchema: {validateTime: string, type: string, properties: {addSameList: {type: string, title: string, items: {minLength: number, type: string, title: string, maxLength: number}}, objectItem: {type: string, title: string, properties: {erp: {type: string, title: string}, c: {min: number, type: string, title: string, properties: {a: {type: string, title: string}}}, age: {type: string, title: string}}}, nestArray: {type: string, title: string, items: {type: string, title: string, properties: {erp: {type: string, title: string}, age: {maximum: number, type: string, title: string, minimum: number}}}}, tupleItem: {type: string, title: string, items: {'0': {default: null, type: string, title: string}, '1': {type: string, title: string}}}}}, uiSchema: {theme: string, title: {placement: string}, properties: {addSameList: {type: string, properties: {$container: {placeholder: string, type: string}}, order: string[]}, objectItem: {type: string, properties: {erp: {type: string}, c: {properties: {a: {type: string}}, order: string[]}, age: {type: string}}, order: string[]}, nestArray: {type: string, properties: {$container: {type: string, properties: {erp: {type: string}, age: {type: string}}, order: string[]}}, order: string[]}, tupleItem: {type: string, properties: {'0': {type: string}, '1': {type: string}}, order: number[]}}, order: string[]}}}
  */
 export const parsedSchema = {
   uiSchema: {
@@ -137,7 +115,6 @@ export const parsedSchema = {
           $container: {
             type: 'input',
             placeholder: '请输入2-4个字的姓名',
-            theme: 'custom',
           },
         },
       },
@@ -155,22 +132,13 @@ export const parsedSchema = {
       },
       objectItem: {
         type: 'object',
-        order: ['erp', 'age', 'c'],
+        order: ['erp', 'age'],
         properties: {
           erp: {
-            type: 'text',
+            type: 'input',
           },
           age: {
             type: 'number',
-          },
-          c: {
-            type: 'object',
-            order: ['a'],
-            properties: {
-              a: {
-                type: 'text',
-              },
-            },
           },
         },
       },
@@ -196,11 +164,12 @@ export const parsedSchema = {
   },
   dataSchema: {
     validateTime: 'change',
+    requiredMode: 'default',
     type: 'object',
     properties: {
       addSameList: {
         type: 'array',
-        title: "列表添加 ['a', 'b', ...]",
+        title: "允许添加的列表 ['a', 'b', ...]",
         items: {
           type: 'string',
           title: '姓名',
@@ -215,7 +184,6 @@ export const parsedSchema = {
           {
             type: 'string',
             title: 'ERP',
-            default: null,
           },
           {
             type: 'number',
@@ -225,7 +193,7 @@ export const parsedSchema = {
       },
       objectItem: {
         type: 'object',
-        title: "普通对象 { erp: 'drip', age: 1,c:{a:1} }",
+        title: "普通对象 { erp: 'drip', age: 1 }",
         properties: {
           erp: {
             type: 'string',
@@ -235,22 +203,12 @@ export const parsedSchema = {
             type: 'number',
             title: '年龄',
           },
-          c: {
-            type: 'object',
-            title: '二级嵌套{a:1}',
-            min: 1,
-            properties: {
-              a: {
-                type: 'string',
-                title: '二级嵌套a',
-              },
-            },
-          },
         },
       },
       nestArray: {
         type: 'array',
-        title: "嵌套数组 [{erp: 'drip', age: 1}, {erp: 'jmfe', age: 6}]",
+        title:
+          "允许添加的对象数组 [{erp: 'drip', age: 1}, {erp: 'jmfe', age: 6}, ...]",
         items: {
           type: 'object',
           title: '',
@@ -281,7 +239,11 @@ export const parsedSchema = {
       type: 'string',
       unitedSchemaKey: 'schema.0.items',
     },
-    tupleItem: { fatherKey: '', type: 'array', unitedSchemaKey: 'schema.1' },
+    tupleItem: {
+      fatherKey: '',
+      type: 'array',
+      unitedSchemaKey: 'schema.1',
+    },
     'tupleItem.0': {
       fatherKey: 'tupleItem',
       type: 'string',
@@ -306,16 +268,6 @@ export const parsedSchema = {
       fatherKey: 'objectItem',
       type: 'number',
       unitedSchemaKey: 'schema.2.schema.1',
-    },
-    'objectItem.c': {
-      fatherKey: 'objectItem',
-      type: 'object',
-      unitedSchemaKey: 'schema.2.schema.2',
-    },
-    'objectItem.c.a': {
-      fatherKey: 'objectItem.c',
-      type: 'string',
-      unitedSchemaKey: 'schema.2.schema.2.schema.0',
     },
     nestArray: {
       fatherKey: '',
