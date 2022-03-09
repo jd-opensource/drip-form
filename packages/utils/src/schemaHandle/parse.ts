@@ -318,6 +318,7 @@ const parseUnitedSchema = (
   return {
     dataSchema: {
       validateTime: unitedSchema?.validateTime || 'submit',
+      requiredMode: unitedSchema?.requiredMode || 'default',
       type: unitedSchema.type || 'object',
       ...(unitedSchema?.title && { title: unitedSchema.title }),
       ...dataSchema,

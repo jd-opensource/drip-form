@@ -5,6 +5,7 @@
 export const unitedSchema = {
   theme: 'antd',
   validateTime: 'submit',
+  requiredMode: 'default',
   type: 'object',
   ui: {
     mode: 'edit',
@@ -85,7 +86,6 @@ export const unitedSchema = {
 
 /**
  * 验证数据
- * @type {{dataSchema: {validateTime: string, type: string, properties: {nestArray: {type: string, title: string, items: {type: string, title: string, properties: {xxx: {type: string, title: string, items: {type: string}}}}}, nestObject: {type: string, title: string, properties: {address: {type: string, title: string, properties: {location: {type: string, title: string}}}, personInfo: {type: string, title: string, properties: {erp: {type: string, title: string}, age: {type: string, title: string}}}}}}}, uiSchema: {theme: string, properties: {nestArray: {type: string, properties: {$container: {type: string, properties: {xxx: {type: string, properties: {$container: {type: string}}, order: string[]}}, order: string[]}}, order: string[]}, nestObject: {type: string, properties: {address: {type: string, properties: {location: {type: string}}, order: string[]}, personInfo: {type: string, properties: {erp: {type: string}, age: {type: string}}, order: string[]}}, order: string[]}}, order: string[]}}}
  */
 export const parsedSchema = {
   uiSchema: {
@@ -145,6 +145,7 @@ export const parsedSchema = {
   },
   dataSchema: {
     validateTime: 'submit',
+    requiredMode: 'default',
     type: 'object',
     properties: {
       nestObject: {

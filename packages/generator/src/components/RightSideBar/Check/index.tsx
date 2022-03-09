@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-20 19:51:07
+ * @Last Modified time: 2022-03-09 17:36:37
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -18,7 +18,7 @@ import commonSchema from '../../../fields/common/checkConfig/Common'
 import typeMap from './type'
 import { formItemMap } from '@generator/fields'
 import useRightSidebar from '../HeadlessComponents'
-import type { Map } from '@jdfed/utils'
+import type { Map, UnitedSchema } from '@jdfed/utils'
 
 const CheckConfig = (): JSX.Element => {
   const {
@@ -154,7 +154,7 @@ const CheckConfig = (): JSX.Element => {
   ])
 
   // 校验配置schema
-  const unitedSchema = useMemo(() => {
+  const unitedSchema = useMemo<UnitedSchema>(() => {
     return {
       validateTime: 'change',
       theme: 'antd',
@@ -163,13 +163,47 @@ const CheckConfig = (): JSX.Element => {
             {
               fieldKey: 'validateTime',
               type: 'string',
-              title: '检验时机',
+              title: '校验时机',
               default: 'change',
               ui: {
                 type: 'select',
                 options: [
                   { label: '值变化时', value: 'change' },
                   { label: '提交时', value: 'submit' },
+                ],
+              },
+            },
+            {
+              fieldKey: 'requiredMode',
+              type: 'string',
+              title: '必填校验模式',
+              default: 'default',
+              ui: {
+                type: 'radio',
+                description: {
+                  type: 'text',
+                  title: '必填校验模式详细查看文档：',
+                },
+                options: [
+                  {
+                    label: 'default',
+                    description: {
+                      title:
+                        // eslint-disable-next-line quotes
+                        "{a:'',b:[],c:0,d:null}，以上a、b、c、d字段均不会报必填错误",
+                      trigger: 'hover',
+                    },
+                    value: 'default',
+                  },
+                  {
+                    label: 'empty',
+                    description: {
+                      // eslint-disable-next-line quotes
+                      title: `{a:'',b:[],c:0,d:null}，以上c字段不会报必填错误,a、b、d在用户配置最小长度、最少输入多少项后会报必填错误`,
+                      trigger: 'hover',
+                    },
+                    value: 'empty',
+                  },
                 ],
               },
             },
@@ -313,8 +347,8 @@ const CheckConfig = (): JSX.Element => {
     Object.entries(dataSchema).map(([key, value]) => {
       // TODO @jiangxiaowei 针对嵌套做适配
       // TODO @jiangxiaowei 支持自定义转换
-      if (key === 'validateTime') {
-        setDeepProp(['validateTime'], formData, value)
+      if (['validateTime', 'requiredMode'].includes(key)) {
+        setDeepProp(key.split('.'), formData, value)
       } else if (key !== 'errorMessage') {
         setDeepProp(
           [businessKeywords.has(key) ? 'business' : 'common', key],
@@ -339,9 +373,12 @@ const CheckConfig = (): JSX.Element => {
     ({ changeKey, get }) => {
       // 变化的表单数据
       const data = get(changeKey).data
-      if (!selectedFieldKey && changeKey === 'validateTime') {
+      if (
+        !selectedFieldKey &&
+        ['validateTime', 'requiredMode'].includes(changeKey)
+      ) {
         generatorContext.current?.merge('', 'dataSchema', {
-          validateTime: data,
+          [changeKey]: data,
         })
       }
       if (

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-02 21:28:18
+ * @Last Modified time: 2022-03-09 17:33:29
  */
 import React, {
   forwardRef,
@@ -21,7 +21,13 @@ import validate from '../validate'
 import formDataReducer, { FormDataContext } from '../reducers'
 import renderCoreFn from '../render'
 import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
-import { useValidate, useSchema, useGetKey, usePrevious } from '@jdfed/hooks'
+import {
+  useValidate,
+  useSchema,
+  useGetKey,
+  usePrevious,
+  RequiredModeContext,
+} from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
 import type { DripFormRenderProps, DripFormRefType, ControlFuc } from './type'
@@ -443,39 +449,43 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     const globalTheme: Theme = theme
 
     return (
-      <FormDataContext.Provider value={globalFormDataStoreKey}>
-        <div className={'drip-form-root'}>
-          {renderCoreFn({
-            hasDefault,
-            uiComponents,
-            dataSchema,
-            uiSchema,
-            errors,
-            formData,
-            onQuery,
-            onValidate,
-            dispatch,
-            customComponents,
-            containerMap,
-            getKey,
-            get,
-            containerHoc,
-            arrayKey,
-            isRoot: true,
-          })}
-          <Footer
-            uiSchema={uiSchema}
-            uiComponents={uiComponents}
-            onSubmit={onSubmit}
-            submit={submit}
-            submitReturn={submitReturn}
-            onCancel={onCancel}
-            globalTheme={globalTheme}
-            initFormData={initArgs.formData}
-            dispatch={dispatch}
-          />
-        </div>
-      </FormDataContext.Provider>
+      <RequiredModeContext.Provider
+        value={dataSchema?.requiredMode || 'default'}
+      >
+        <FormDataContext.Provider value={globalFormDataStoreKey}>
+          <div className={'drip-form-root'}>
+            {renderCoreFn({
+              hasDefault,
+              uiComponents,
+              dataSchema,
+              uiSchema,
+              errors,
+              formData,
+              onQuery,
+              onValidate,
+              dispatch,
+              customComponents,
+              containerMap,
+              getKey,
+              get,
+              containerHoc,
+              arrayKey,
+              isRoot: true,
+            })}
+            <Footer
+              uiSchema={uiSchema}
+              uiComponents={uiComponents}
+              onSubmit={onSubmit}
+              submit={submit}
+              submitReturn={submitReturn}
+              onCancel={onCancel}
+              globalTheme={globalTheme}
+              initFormData={initArgs.formData}
+              dispatch={dispatch}
+            />
+          </div>
+        </FormDataContext.Provider>
+      </RequiredModeContext.Provider>
     )
   }
 )

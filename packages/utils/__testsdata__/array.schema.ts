@@ -1,10 +1,10 @@
 export const unitedSchema = {
   validateTime: 'change',
+  requiredMode: 'default',
   type: 'object',
   theme: 'antd',
   schema: [
     {
-      validateTime: 'submit',
       type: 'array',
       title: '数组容器',
       ui: {
@@ -17,7 +17,6 @@ export const unitedSchema = {
         minItems: '最小1',
       },
       items: {
-        validateTime: 'submit',
         type: 'string',
         title: '输入框',
         minLength: 2,
@@ -39,10 +38,10 @@ export const unitedSchema = {
 export const parsedSchema = {
   dataSchema: {
     validateTime: 'change',
+    requiredMode: 'default',
     type: 'object',
     properties: {
       array_g6NF65: {
-        validateTime: 'submit',
         type: 'array',
         title: '数组容器',
         minItems: 1,
@@ -50,7 +49,6 @@ export const parsedSchema = {
           minItems: '最小1',
         },
         items: {
-          validateTime: 'submit',
           type: 'string',
           title: '输入框',
           minLength: 2,

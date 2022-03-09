@@ -34,7 +34,7 @@ import { CopyOutlined } from '@ant-design/icons'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { usePrevious } from '@jdfed/hooks'
 import type { SetType } from '@jdfed/hooks'
-import type { Map } from '@jdfed/utils'
+import type { Map, UnitedSchema } from '@jdfed/utils'
 
 const PropertyConfig = () => {
   const {
@@ -357,7 +357,7 @@ const PropertyConfig = () => {
   /**
    * 不同表单项生成不同的联合schema
    */
-  const unitedSchema = useMemo(() => {
+  const unitedSchema = useMemo<UnitedSchema>(() => {
     return {
       validateTime: 'change',
       theme: 'antd',

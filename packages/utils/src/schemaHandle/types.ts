@@ -81,6 +81,7 @@ export type UiSchema = {
 export type DataSchema = {
   type: string
   validateTime: 'submit' | 'change'
+  requiredMode: 'default' | 'empty'
   properties?: Map
   items?: Array<Map> | Map
   required?: Array<string | number>
@@ -97,7 +98,8 @@ export type DataSchema = {
  */
 export type UnitedSchema = {
   theme?: 'antd' | 'babel-ui' | 'drip-design' | string
-  validateTime?: string
+  validateTime?: 'submit' | 'change'
+  requiredMode?: 'default' | 'empty'
   title?: string
   ui?: Map
   schema?: Array<Map>

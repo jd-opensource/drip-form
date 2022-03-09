@@ -1,5 +1,6 @@
 export const unitedSchema = {
   theme: 'antd',
+  requiredMode: 'empty',
   validateTime: 'submit',
   type: 'object',
   '$:customSchema': '位于顶层的自定义属性',
@@ -53,6 +54,7 @@ export const parsedSchema = {
     type: 'object',
     '$:customSchema': '位于顶层的自定义属性',
     validateTime: 'submit',
+    requiredMode: 'empty',
   },
   uiSchema: {
     mode: 'edit',

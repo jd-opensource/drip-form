@@ -1,48 +1,32 @@
 import { parseUnitedSchema } from '../src/index'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test1,
   parsedSchema as verify1,
 } from '../__testsdata__/multinest.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test2,
   parsedSchema as verify2,
 } from '../__testsdata__/nest.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test3,
   parsedSchema as verify3,
 } from '../__testsdata__/nestObject.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test4,
   parsedSchema as verify4,
 } from '../__testsdata__/errMsg.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test5,
   parsedSchema as verify5,
 } from '../__testsdata__/errMsg2.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test6,
   parsedSchema as verify6,
 } from '../__testsdata__/errMsg3.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test7,
   parsedSchema as verify7,
 } from '../__testsdata__/datePicker.schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import {
   unitedSchema as test8,
   parsedSchema as verify8,
