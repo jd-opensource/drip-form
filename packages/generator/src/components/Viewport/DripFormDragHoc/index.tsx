@@ -21,7 +21,6 @@ import {
 // import Placeholder from '../CustomComponents/Placeholder'
 import { useCanDrop } from '@generator/hooks'
 import DragItem from '@generator/components/LeftSideBar/DragAtom/Item'
-import { useContainerStyle } from '@jdfed/hooks'
 import ActiveTools from '../ActiveTools'
 import type { FC } from 'react'
 import type { ContainerStyle, ClosestEdge } from '@jdfed/utils'
@@ -55,7 +54,6 @@ const DripFormDragHoc: FC<Props> = memo(
     parentMode,
     isFirst,
   }) => {
-    const newContainerStyle = useContainerStyle('edit', containerStyle)
     const [ref, setRef] = useState<HTMLElement | null>(null)
     const allField = useRecoilValue(allFieldAtom)
     // 对象、数组容器为空（改变碰撞检测算法实现）
@@ -146,7 +144,7 @@ const DripFormDragHoc: FC<Props> = memo(
           )}
           onClick={onSelect}
           style={{
-            ...newContainerStyle,
+            ...containerStyle,
           }}
         >
           {selectedFieldKey === fieldKey && viewportConfig.showActionBar && (

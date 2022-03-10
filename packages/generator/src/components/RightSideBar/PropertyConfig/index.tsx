@@ -17,7 +17,6 @@ import {
 import cx from 'classnames'
 import { SettingOutlined } from '@ant-design/icons'
 import {
-  globalContainerStyleAtom,
   uiTypeOptionsAtom,
   curTypePropertyConfigSelector,
   curTypeAtom,
@@ -51,9 +50,6 @@ const PropertyConfig = () => {
   const prevSelectedFieldkey = usePrevious(selectedFieldKey)
   const parentType = useGetParentType()
   const setUnitedSchema = useSetRecoilState(schemaAtom)
-  const [globalContainerStyle, setGlobalContainerStyle] = useRecoilState(
-    globalContainerStyleAtom
-  )
   const uiTypeOptions = useRecoilValue(uiTypeOptionsAtom)
   // 当前选中的组件UI类型
   const [type, setType] = useRecoilState(curTypeAtom)
@@ -107,7 +103,8 @@ const PropertyConfig = () => {
           formData.containerStyle.width = Number(
             String(
               formData.containerStyle.width ||
-                globalContainerStyle?.width ||
+                generatorContext.current?.get().uiSchema?.containerStyle
+                  ?.width ||
                 100
             ).split(/%|(vw)|(px)/)[0]
           )
@@ -132,7 +129,7 @@ const PropertyConfig = () => {
     },
     [
       dataSchema?.title,
-      globalContainerStyle?.width,
+      generatorContext,
       uiSchema.footer,
       uiSchema?.showTitle,
       uiSchema.title,
@@ -192,9 +189,6 @@ const PropertyConfig = () => {
         key = 'ui.options'
       }
       if (changeKey === 'containerStyle.width') {
-        if (type === 'root') {
-          setGlobalContainerStyle({ width: data })
-        }
         // TODO @jiangxiaowei 后续支持px、vw
         data = data + '%'
       }
@@ -266,14 +260,7 @@ const PropertyConfig = () => {
         )
       }
     },
-    [
-      generatorContext,
-      selectedFieldKey,
-      setGlobalContainerStyle,
-      type,
-      uiSchema?.max,
-      uiSchema?.min,
-    ]
+    [generatorContext, selectedFieldKey, type, uiSchema?.max, uiSchema?.min]
   )
 
   /**

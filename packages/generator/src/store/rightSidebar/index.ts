@@ -1,17 +1,9 @@
-import { atom, selector } from 'recoil'
+import { selector } from 'recoil'
 import { sidebarDataAtom } from '../leftSidebar'
 import { curTypeAtom } from '../unclassified'
 import { baseMap } from '@generator/fields'
 import rootConfig from '@generator/fields/container/root.field'
 import type { UnitedSchema } from '@jdfed/utils'
-
-// 全局containerStyle样式
-export const globalContainerStyleAtom = atom<null | { width: string | number }>(
-  {
-    key: 'rootContainerStyle',
-    default: null,
-  }
-)
 
 // 所有组件的属性配置
 export const allPropertyConfigSchemaSelector = selector<
