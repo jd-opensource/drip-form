@@ -69,6 +69,7 @@ export type UiSchema = {
   mode: 'add' | 'normal' | 'collapse' | 'tuple' | 'fixed'
   theme: Theme
   type: string
+  containerStyle?: ContainerStyle
   properties: Properties
   order: Array<string | number>
   title?: TitleUi

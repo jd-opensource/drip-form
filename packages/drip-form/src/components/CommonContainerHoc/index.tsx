@@ -11,7 +11,7 @@ import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
 import DescriptionAndError from '../DescriptionAndError'
 import Title, { titlePlacementCls } from '../Title'
-import { useTitle, useContainer, useContainerStyle } from '@jdfed/hooks'
+import { useTitle, useContainer } from '@jdfed/hooks'
 import type { CommonContainer, CommonContainerHocType } from './type'
 import './index.styl'
 
@@ -37,7 +37,6 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
       containerStyle,
       uiProp,
     } = props
-    const newContainerStyle = useContainerStyle(formMode, containerStyle)
     useContainer({ fieldKey, dispatch })
     const newTitleUi = useTitle(titleUi)
     return (
@@ -47,7 +46,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
           ...(['array', 'object'].includes(uiProp.type as string)
             ? (uiProp?.style as CSSProperties)
             : null),
-          ...newContainerStyle,
+          ...(formMode !== 'generator' && containerStyle),
         }}
       >
         <div

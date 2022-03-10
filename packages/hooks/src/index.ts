@@ -20,7 +20,6 @@ export { default as useArray } from './useArray'
 export { default as useContainer } from './useContainer'
 export { default as useSchema } from './useSchema'
 export { default as useGetKey } from './useGetKey'
-export { default as useContainerStyle } from './useContainerStyle'
 export { default as useTitle } from './useTitle'
 export {
   default as useRequiredModeContext,
