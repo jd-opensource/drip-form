@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 17:36:37
+ * @Last Modified time: 2022-03-09 18:17:49
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -181,8 +181,10 @@ const CheckConfig = (): JSX.Element => {
               ui: {
                 type: 'radio',
                 description: {
-                  type: 'text',
-                  title: '必填校验模式详细查看文档：',
+                  type: 'icon',
+                  trigger: 'hover',
+                  title:
+                    '必填校验模式详细查看文档：<a href="https://jdfed.github.io/drip-form/faq/#%E5%BF%85%E5%A1%AB%E6%A0%A1%E9%AA%8C%E6%A8%A1%E5%BC%8F">必填校验模式</a>',
                 },
                 options: [
                   {
