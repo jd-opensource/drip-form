@@ -38,6 +38,15 @@ const unitedSchema = {
         placeholder: '形如0 30px 20px 0 | 0 30px',
       },
     },
+    {
+      fieldKey: 'padding',
+      type: 'string',
+      title: '组件内边距',
+      ui: {
+        type: 'text',
+        placeholder: '形如0 10px 0 10px | 0 10px',
+      },
+    },
   ],
 }
 

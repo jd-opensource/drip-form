@@ -140,7 +140,7 @@ const PropertyConfig = () => {
    * 监听配置区修改，实时更新到渲染区
    */
   const onChangeSchema = useCallback(
-    ({ changeKey, get }) => {
+    ({ changeKey, get, set }) => {
       // 当chengKey为空字符串时，认为为ajv校验或初始化执行的操作，不做实时更新
       if (changeKey === '') return
       // 当前修改的字段处理为为可映射到渲染区schema的路径
@@ -189,6 +189,10 @@ const PropertyConfig = () => {
         key = 'ui.options'
       }
       if (changeKey === 'containerStyle.width') {
+        // 更改全局布局宽度时，如果选用多列并且未设置padding，则自动设置
+        if (type === 'root' && data !== 100 && !get().data.padding) {
+          set('containerStyle.padding', 'data', '0 10px 0 0')
+        }
         // TODO @jiangxiaowei 后续支持px、vw
         data = data + '%'
       }

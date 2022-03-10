@@ -20,6 +20,12 @@ export type ContainerStyle = Partial<{
   marginLeft: number | string
   // 容器margin
   margin: string
+  // 容器padding
+  padding: string
+  paddingTop: number | string
+  paddingBottom: number | string
+  paddingRigth: number | string
+  paddingLeft: number | string
 }> | null
 export type Description = {
   type: 'icon' | 'text'

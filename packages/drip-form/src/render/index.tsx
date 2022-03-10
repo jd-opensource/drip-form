@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-02 16:35:49
+ * @Last Modified time: 2022-03-10 18:22:15
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -36,7 +36,7 @@ const Render = ({
     theme = 'antd',
     title: globalTitleUi = {},
     formMode = 'edit',
-    containerStyle: globalContainerStyle = { width: '100%' },
+    containerStyle: globalContainerStyle,
   } = uiSchema
   // 当前父级UiSchema
   const currentUiSchema = parentUiSchemaKey.reduce((prev, cur) => {
@@ -160,7 +160,7 @@ const Render = ({
       type === 'object' && properties[item]?.mode === 'collapse'
         ? { marginBottom: 20 }
         : {},
-      isRoot ? globalContainerStyle : {},
+      isRoot ? { width: '100%', ...globalContainerStyle } : {},
       properties[item]?.containerStyle || {}
     )
     // 当前Field所接收的ui props
