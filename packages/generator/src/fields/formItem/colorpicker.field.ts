@@ -35,6 +35,14 @@ const config: Field = {
           type: 'switch',
         },
       },
+      {
+        fieldKey: 'defaultValue',
+        type: 'string',
+        title: '默认颜色',
+        ui: {
+          type: 'colorPicker',
+        },
+      },
     ],
   },
 }
