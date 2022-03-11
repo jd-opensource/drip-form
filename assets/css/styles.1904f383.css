@@ -13703,6 +13703,9 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 .object-container-err {
   color: #f00;
 }
+.drip-form_objectContainer--collapse>div>div {
+  background-color: #eff6ff;
+}
 
 .array-item--field {
   position: relative;
@@ -41087,17 +41090,18 @@ Add the correct display in Chrome and Safari.
 /* purgecss start ignore */
 
 .rightSideBarGlobal .object-container .object-container__collapse-custom {
-        margin-bottom: 0
+        margin-bottom: 0;
       }
 
 .rightSideBarGlobal .array-field--container {
-      margin-bottom: 0
+      margin-bottom: 0;
     }
 
 .index-module_container__fH7Q7 {
   height: 100%;
   width: 25%;
-  padding: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   min-width: 350px;
   overflow: hidden scroll;
 }
@@ -41162,7 +41166,7 @@ Add the correct display in Chrome and Safari.
 
 .index-module_jsonbtn__2rLQr:hover {
   --tw-text-opacity: 1;
-  color: rgba(59, 130, 246, var(--tw-text-opacity))
+  color: rgba(59, 130, 246, var(--tw-text-opacity));
 }
 
 .index-module_panelConfig__owq5k {
