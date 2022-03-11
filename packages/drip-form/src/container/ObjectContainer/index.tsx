@@ -3,12 +3,13 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-19 18:23:10
+ * @Last Modified time: 2022-03-11 13:55:35
  */
 import React, { useMemo, memo } from 'react'
 import { useTitle } from '@jdfed/hooks'
 import renderCoreFn from '../../render'
 import { Title, CommonContainerHoc } from '@form/components/index'
+import cx from 'classnames'
 import type { RenderFnProps, ContainerType } from '../../render/type'
 import type { Props } from '../type'
 import './index.styl'
@@ -83,7 +84,7 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
         panelProp: panelPropMap,
       }
     }, [props])
-    const newTitleUi = useTitle(titleUi)
+    const newTitleUi = useTitle(titleUi, 'object')
     const Collapse = uiComponents[theme]?.Collapse
     const Panel = uiComponents[theme]?.Collapse.Panel
     // 是否渲染为折叠面板模式
@@ -97,7 +98,13 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
     return (
       <>
         {isCollapse ? (
-          <Collapse defaultActiveKey={defaultActiveKey} {...collapseProp}>
+          <Collapse
+            defaultActiveKey={defaultActiveKey}
+            {...collapseProp}
+            className={cx({
+              'drip-form_objectContainer--collapse': uiProp['$:dripStyle'],
+            })}
+          >
             <Panel
               header={
                 <>

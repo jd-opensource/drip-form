@@ -98,8 +98,11 @@ const unitedSchema = [
     ui: {
       type: 'object',
       mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
       containerStyle: {
-        marginBottom: 0,
+        padding: 0,
+        marginBottom: 5,
       },
     },
     schema: [
@@ -219,8 +222,11 @@ const unitedSchema = [
     ui: {
       mode: 'collapse',
       type: 'object',
+      '$:dripStyle': true,
+      ghost: true,
       containerStyle: {
-        marginBottom: 0,
+        padding: 0,
+        marginBottom: 5,
       },
     },
     schema: [
@@ -270,8 +276,11 @@ const unitedSchema = [
     ui: {
       type: 'object',
       mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
       containerStyle: {
-        marginBottom: 0,
+        padding: 0,
+        marginBottom: 5,
       },
     },
     schema: [
@@ -324,6 +333,12 @@ const unitedSchema = [
         ui: {
           type: 'object',
           mode: 'collapse',
+          '$:dripStyle': true,
+          ghost: true,
+          containerStyle: {
+            padding: 0,
+            marginBottom: 5,
+          },
           vcontrol: 'return props.formData.footer.showFooter == true',
         },
         default: {
@@ -341,6 +356,12 @@ const unitedSchema = [
         ui: {
           type: 'object',
           mode: 'collapse',
+          '$:dripStyle': true,
+          ghost: true,
+          containerStyle: {
+            padding: 0,
+            marginBottom: 5,
+          },
           vcontrol: 'return props.formData.footer.showFooter == true',
         },
         default: {

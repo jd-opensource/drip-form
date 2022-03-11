@@ -2,17 +2,17 @@
   .rightSideBarGlobal {
     .object-container {
       .object-container__collapse-custom {
-        margin-bottom: 0
+        margin-bottom: 0;
       }
     }
     .array-field--container {
-      margin-bottom: 0
+      margin-bottom: 0;
     }
   }
 }
 
 .container {
-  @apply w-1/4 p-3 h-full;
+  @apply w-1/4 h-full pt-2 pb-2;
   min-width: 350px;
   overflow: hidden scroll;
 }

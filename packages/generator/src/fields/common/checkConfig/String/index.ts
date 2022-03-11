@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:31:04
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-20 19:46:55
+ * @Last Modified time: 2022-03-11 11:33:44
  */
 // dataSchema2019-09支持的字符串校验关键字
 const stringJsonSchema = {
@@ -222,8 +222,11 @@ const dripFormPluginKeywords = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
       containerStyle: {
-        marginBottom: 0,
+        padding: 0,
+        marginBottom: 5,
       },
       description: {
         type: 'icon',
@@ -264,8 +267,11 @@ const dripFormPluginKeywords = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
       containerStyle: {
-        marginBottom: 0,
+        padding: 0,
+        marginBottom: 5,
       },
       description: {
         type: 'icon',
