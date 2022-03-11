@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 18:17:49
+ * @Last Modified time: 2022-03-11 11:12:39
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -158,6 +158,11 @@ const CheckConfig = (): JSX.Element => {
     return {
       validateTime: 'change',
       theme: 'antd',
+      ui: {
+        containerStyle: {
+          padding: '0 16px',
+        },
+      },
       schema: !selectedFieldKey
         ? [
             {
@@ -240,8 +245,11 @@ const CheckConfig = (): JSX.Element => {
               ui: {
                 type: 'object',
                 mode: 'collapse',
+                '$:dripStyle': true,
+                ghost: true,
                 containerStyle: {
-                  marginBottom: 0,
+                  marginBottom: 5,
+                  padding: 0,
                 },
               },
               schema: CommonSchema.concat(curTypeSchema),
@@ -255,8 +263,11 @@ const CheckConfig = (): JSX.Element => {
                     ui: {
                       type: 'object',
                       mode: 'collapse',
+                      '$:dripStyle': true,
+                      ghost: true,
                       containerStyle: {
-                        marginBottom: 0,
+                        padding: 0,
+                        marginBottom: 5,
                       },
                     },
                     schema: bussinessSchema,
@@ -270,8 +281,11 @@ const CheckConfig = (): JSX.Element => {
               ui: {
                 type: 'object',
                 mode: 'collapse',
+                '$:dripStyle': true,
+                ghost: true,
                 containerStyle: {
-                  marginBottom: 0,
+                  padding: 0,
+                  marginBottom: 5,
                 },
               },
               schema: [

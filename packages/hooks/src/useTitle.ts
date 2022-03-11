@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 20:49:16
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-18 21:30:37
+ * @Last Modified time: 2022-03-11 11:02:32
  */
 import { useState, useEffect, useMemo } from 'react'
 import { typeCheck } from '@jdfed/utils'
@@ -89,7 +89,13 @@ export function calcTitleMargin(
 
 export type TitleWidth = string | number
 
-const useTitle = (titleUi: TitleUi): TitleUi => {
+/**
+ *
+ * @param titleUi ui中的title字段
+ * @param type ui的type类型
+ * @returns
+ */
+const useTitle = (titleUi: TitleUi, type?: string): TitleUi => {
   // title的margin样式
   const [titleMargin, onChangeTitleMargin] = useState(() => {
     return calcTitleMargin(titleUi, titleUi?.placement)
@@ -100,10 +106,11 @@ const useTitle = (titleUi: TitleUi): TitleUi => {
 
   // 标题宽度
   const titleWidth = useMemo(() => {
+    if (type === 'object') return '100%'
     return typeCheck(titleUi?.width || 82) === 'Number'
       ? `${titleUi?.width || 82}px`
       : titleUi?.width || '82px'
-  }, [titleUi?.width])
+  }, [titleUi?.width, type])
   return {
     ...titleUi,
     margin: titleMargin.style,

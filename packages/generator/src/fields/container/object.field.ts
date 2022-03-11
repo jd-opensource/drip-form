@@ -12,6 +12,12 @@ const config: Field = {
     ui: {
       type: 'object',
       mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
+      containerStyle: {
+        padding: 0,
+        marginBottom: 5,
+      },
       active: false,
       title: {
         verticalAlign: 'top',
@@ -109,6 +115,19 @@ const config: Field = {
         ui: {
           type: 'switch',
           vcontrol: 'return props.formData.ui.mode==="collapse"',
+        },
+      },
+      {
+        fieldKey: '$:dripStyle',
+        type: 'boolean',
+        title: '是否开启水滴样式',
+        ui: {
+          description: {
+            type: 'icon',
+            trigger: 'hover',
+            title: '开启之后，标题为淡蓝色',
+          },
+          type: 'switch',
         },
       },
     ],

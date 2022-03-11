@@ -109,8 +109,11 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          '$:dripStyle': true,
+          ghost: true,
           containerStyle: {
-            marginBottom: 0,
+            padding: 0,
+            marginBottom: 20,
           },
           style: {
             paddingBottom: '20px',
@@ -138,8 +141,11 @@ const config: Field = {
         ui: {
           type: 'object',
           mode: 'collapse',
+          '$:dripStyle': true,
+          ghost: true,
           containerStyle: {
-            marginBottom: 0,
+            padding: 0,
+            marginBottom: 5,
           },
           vcontrol: 'return props.formData.ui.hasConfirm',
         },
