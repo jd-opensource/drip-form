@@ -169,6 +169,19 @@ const PropertyConfig = () => {
             }
           }
           break
+        case 'colorPicker':
+          if (key === 'ui.defaultValue') {
+            setFormData = true
+            fieldData = get('ui.defaultValue').data
+            generatorContext.current?.set(
+              selectedFieldKey || '',
+              'dataSchema',
+              (draft) => {
+                setDeepProp(['default'], draft as Map, data)
+              }
+            )
+          }
+          break
         case 'timePicker':
         case 'datePicker':
           if (changeKey.startsWith('ui.placeholder__range')) {
@@ -239,7 +252,7 @@ const PropertyConfig = () => {
           data = {}
         }
       }
-      if (changeKey.includes('ui.default')) {
+      if (key === 'ui.default') {
         changeSchema = 'dataSchema'
         // 在ajv校验时，如果formData中已经有值，则不再生成新的formData，需要set formData
         setFormData = true
