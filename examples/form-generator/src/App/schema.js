@@ -83,7 +83,26 @@
 
 export default {
   validateTime: 'change',
+  requiredMode: 'default',
   type: 'object',
   ui: {},
   theme: 'antd',
+  schema: [
+    {
+      type: 'string',
+      title: '日期选择框',
+      ui: {
+        type: 'datePicker',
+      },
+      fieldKey: 'datePicker_rNWNDU',
+    },
+    {
+      type: 'string',
+      title: '时间选择框',
+      ui: {
+        type: 'timePicker',
+      },
+      fieldKey: 'timePicker_DhrlL-',
+    },
+  ],
 }

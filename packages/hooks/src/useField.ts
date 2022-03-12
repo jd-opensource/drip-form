@@ -12,7 +12,7 @@ import useEventCallback from './useEventCallback'
 import useRequiredModeContext from './useRequiredModeContext'
 import { useDebounceFn } from 'ahooks'
 import { isEmpty, typeCheck } from '@jdfed/utils'
-import type { GetKey, Action } from '@jdfed/utils'
+import type { GetKey, Action, OnChange } from '@jdfed/utils'
 import type { Dispatch } from 'react'
 type FormatMomentDataProps = {
   value: string | [Moment, Moment]
@@ -215,29 +215,6 @@ const myComponent = ({fieldKey,onChange})=>{
 }
 */
 
-/**
- * @param {string} fieldKey 必填 表单change触发，更改formData的key值
- * @param {function} onChange 可选 表单触发change事件后的回调
- * @param {object} options 可选 表单字段特殊处理配置。注意：options中只能有一个字段的值是true。否则不会对特殊数据进行格式化
- * @param {func} dispatch 操作context
- */
-type CustomFunc = ({
-  val,
-  dispatch,
-  fieldKey,
-  getKey,
-  prevFieldData,
-  // 注意目前只有select表单支持这个字段（看后续是否有场景其它表单也需要）
-  fieldData,
-}: {
-  val: any
-  dispatch: Dispatch<Action>
-  getKey: GetKey
-  fieldKey: string
-  prevFieldData: any
-  // 注意目前只有select表单支持这个字段（看后续是否有场景其它表单也需要）
-  fieldData: any
-}) => void
 type SpecialFormatKeys = keyof typeof formatMap | 'isDelete'
 type UseFieldR = (...args: any[]) => void
 type Options = Partial<
@@ -259,7 +236,7 @@ const useField = (
   }: {
     fieldKey: string
     getKey: GetKey
-    onChange?: string | CustomFunc
+    onChange?: OnChange
     options?: Options
     asyncValidate?: {
       type: 'change' | 'click'

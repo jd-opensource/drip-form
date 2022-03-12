@@ -1,5 +1,6 @@
 import type { Map } from '../common/type'
-
+import { GetKey, Action } from '../type'
+import type { Dispatch } from 'react'
 /**
  * 在联合Schema中，某个节点的类型
  */
@@ -68,6 +69,32 @@ type Properties = {
 }
 
 /**
+ * @param {string} fieldKey 必填 表单change触发，更改formData的key值
+ * @param {function} onChange 可选 表单触发change事件后的回调
+ * @param {object} options 可选 表单字段特殊处理配置。注意：options中只能有一个字段的值是true。否则不会对特殊数据进行格式化
+ * @param {func} dispatch 操作context
+ */
+export type OnChange =
+  | (({
+      val,
+      dispatch,
+      fieldKey,
+      getKey,
+      prevFieldData,
+      // 注意目前只有select表单支持这个字段（看后续是否有场景其它表单也需要）
+      fieldData,
+    }: {
+      val: any
+      dispatch: Dispatch<Action>
+      getKey: GetKey
+      fieldKey: string
+      prevFieldData: any
+      // 注意目前只有select表单支持这个字段（看后续是否有场景其它表单也需要）
+      fieldData: any
+    }) => void)
+  | string
+
+/**
  * UiSchema的最小原子
  */
 export type UiSchema = {
@@ -79,6 +106,7 @@ export type UiSchema = {
   properties: Properties
   order: Array<string | number>
   title?: TitleUi
+  onChange?: OnChange
   [propName: string]: unknown
 }
 
