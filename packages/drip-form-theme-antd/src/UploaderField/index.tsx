@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-10 17:29:06
+ * @Last Modified time: 2022-03-13 12:29:52
  */
 import React, { memo, FC } from 'react'
 import './index.styl'
@@ -60,3 +60,4 @@ const UploaderField: FC<UploaderFieldProps> = (props) => {
 }
 
 export const uploader = memo(UploaderField)
+export { default as config } from './config'

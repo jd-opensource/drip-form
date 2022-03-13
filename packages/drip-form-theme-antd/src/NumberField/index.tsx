@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 20:18:36
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-12 15:40:45
+ * @Last Modified time: 2022-03-13 12:29:10
  */
 import React, { memo } from 'react'
 import { InputNumber } from 'antd'
@@ -38,3 +38,4 @@ const NumberField = ({
 }
 
 export const numberField = memo(NumberField)
+export { default as config } from './config'

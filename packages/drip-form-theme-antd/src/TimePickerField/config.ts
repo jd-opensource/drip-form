@@ -1,4 +1,3 @@
-import { Field } from '../types'
 import { OnChange } from '@jdfed/utils'
 
 const changeUse12Hours: OnChange = ({ dispatch, val, getKey }) => {
@@ -44,7 +43,7 @@ const changeUse12Hours: OnChange = ({ dispatch, val, getKey }) => {
 /**
  * 时间选择器
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-clock',
   title: '时间选择器',
   unitedSchema: {

@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 上传组件
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-cloud-storage',
   title: '上传组件',
   unitedSchema: {

@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 树形选择器
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-treeselect',
   title: '树选择',
   unitedSchema: {

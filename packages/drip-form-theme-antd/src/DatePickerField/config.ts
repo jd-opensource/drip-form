@@ -1,4 +1,3 @@
-import { Field } from '../types'
 import type { OnChange } from '@jdfed/utils'
 
 const formatList = {
@@ -89,7 +88,7 @@ const changePicker: OnChange = ({ dispatch, getKey, val }) => {
 /**
  * 日期选择器
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-datepicker',
   title: '日期选择框',
   unitedSchema: {

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-11 14:44:22
+ * @Last Modified time: 2022-03-13 12:29:35
  */
 import React, { memo, FC } from 'react'
 import { Switch } from 'antd'
@@ -36,3 +36,4 @@ const SwitchField: FC<CommonProps> = ({
 }
 
 export const switchField = memo(SwitchField)
+export { default as config } from './config'

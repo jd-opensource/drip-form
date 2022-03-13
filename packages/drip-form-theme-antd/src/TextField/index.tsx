@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-12 15:41:44
+ * @Last Modified time: 2022-03-13 12:21:55
  */
 import React, { memo, FC } from 'react'
 import { Input } from 'antd'
@@ -61,3 +61,5 @@ const TextField: FC<TextFieldProps> = ({
 }
 
 export const text = memo(TextField)
+
+export { default as config } from './config'

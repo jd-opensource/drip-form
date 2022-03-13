@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 输入框
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-input',
   title: '输入框',
   unitedSchema: {

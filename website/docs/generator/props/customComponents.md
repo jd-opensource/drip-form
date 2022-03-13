@@ -1,7 +1,11 @@
 ---
 id: customComponents
-title: customComponents
+title: customComponents（业务组件）
 ---
+
+:::note 提示
+不推荐使用，推荐使用 [components](./components) 定制 generator
+:::
 
 # 自定义业务组件
 

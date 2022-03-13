@@ -80,18 +80,9 @@ module.exports = {
       items: [
         'generator/props/schema',
         'generator/props/theme',
-        'generator/props/customComponents',
         'generator/props/components',
         'generator/props/options',
-      ],
-    },
-    {
-      type: 'category',
-      label: '进阶',
-      collapsed: true,
-      items: [
-        'generator/expert/custom_component',
-        'generator/expert/custom_theme',
+        'generator/props/customComponents',
       ],
     },
   ],

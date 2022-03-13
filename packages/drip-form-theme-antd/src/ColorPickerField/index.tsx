@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-21 11:25:34
+ * @Last Modified time: 2022-03-13 12:28:56
  */
 import React, { memo, useState } from 'react'
 // import PropTypes from 'prop-types'
@@ -111,3 +111,4 @@ const ColorPickerField = ({
 }
 
 export const colorPicker = memo(ColorPickerField)
+export { default as config } from './config'

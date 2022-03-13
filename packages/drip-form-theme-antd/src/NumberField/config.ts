@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 数组输入框
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-number',
   title: '数字输入框',
   unitedSchema: {

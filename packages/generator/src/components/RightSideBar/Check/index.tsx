@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-11 11:12:39
+ * @Last Modified time: 2022-03-13 18:53:18
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -16,7 +16,6 @@ import {
 import DripForm from '@jdfed/drip-form'
 import commonSchema from '../../../fields/common/checkConfig/Common'
 import typeMap from './type'
-import { formItemMap } from '@generator/fields'
 import useRightSidebar from '../HeadlessComponents'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
@@ -25,7 +24,7 @@ const CheckConfig = (): JSX.Element => {
     generatorContext,
     selectedFieldKey,
     dataSchema,
-    uiSchema,
+    // uiSchema,
     uiComponents,
   } = useRightSidebar()
   // 业务关键字(包含的关键字被转换为formData.bussiness)
@@ -54,9 +53,9 @@ const CheckConfig = (): JSX.Element => {
     [dataSchema.type]
   )
   // 当前表单uiSchmea的type类型
-  const uiType = uiSchema.type as keyof typeof formItemMap
+  // const uiType = uiSchema.type as keyof typeof formItemMap
   // 当前表单是否配置需要展示的校验关键字
-  const keywords = formItemMap[uiType]?.checkConfig
+  // const keywords = formItemMap[uiType]?.checkConfig
 
   // 隐藏未配置错误类型的错误文案
   const vcontrol = useCallback<
@@ -82,7 +81,10 @@ const CheckConfig = (): JSX.Element => {
       }
     })
     // 优先使用用户配置的关键字
-    return (keywords?.common || Object.keys(common)).reduce((prev, cur) => {
+    return Object.keys(
+      // keywords?.common||
+      common
+    ).reduce((prev, cur) => {
       commonErrTipSchema.push({
         type: 'string',
         title: common[cur].title,
@@ -96,13 +98,7 @@ const CheckConfig = (): JSX.Element => {
       injectVcontrol(common[cur])
       return prev.concat(common[cur] as unknown as ConcatArray<never>)
     }, [])
-  }, [
-    commonErrTipSchema,
-    commonKeywords,
-    keywords?.common,
-    keywordsMap.common,
-    vcontrol,
-  ])
+  }, [commonErrTipSchema, commonKeywords, keywordsMap.common, vcontrol])
 
   // 所有类型通用校验配置
   const CommonSchema = useMemo(() => {
@@ -131,7 +127,10 @@ const CheckConfig = (): JSX.Element => {
       }
     })
     // 优先使用用户配置的关键字
-    return (keywords?.business || Object.keys(business)).reduce((prev, cur) => {
+    return Object.keys(
+      // keywords?.business ||
+      business
+    ).reduce((prev, cur) => {
       businessErrTipSchema.push({
         type: 'string',
         title: business[cur].title,
@@ -145,13 +144,7 @@ const CheckConfig = (): JSX.Element => {
       injectVcontrol(business[cur])
       return prev.concat(business[cur] as unknown as ConcatArray<never>)
     }, [])
-  }, [
-    businessErrTipSchema,
-    businessKeywords,
-    keywords?.business,
-    keywordsMap.business,
-    vcontrol,
-  ])
+  }, [businessErrTipSchema, businessKeywords, keywordsMap.business, vcontrol])
 
   // 校验配置schema
   const unitedSchema = useMemo<UnitedSchema>(() => {
