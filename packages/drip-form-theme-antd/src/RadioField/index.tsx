@@ -55,3 +55,4 @@ const RadioField = ({
 }
 
 export const radio = memo(RadioField)
+export { default as config } from './config'

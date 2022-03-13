@@ -1,6 +1,6 @@
 ---
 id: components
-title: components
+title: components（自定义组件区）
 ---
 
 # 自定义组件
@@ -80,4 +80,32 @@ type Map = {
 
 ---
 
-## 示例
+## 自定义组建区
+
+```typescript
+import React, { memo } from 'react'
+import DripFormGenerator, { containerConfig } from '@jdfed/form-generator'
+import { config as antdConfig } from '@jdfed/drip-form-theme-antd'
+import '@jdfed/form-generator/dist/index.css'
+
+const App = memo(() => {
+	return (
+		<DripFormGenerator
+			components={{
+				order: ['container', 'antd'],
+				category: {
+					container: containerConfig,
+					antd: antdConfig,
+				},
+			}}
+		/>
+	)
+})
+
+App.displayName = 'GeneratorApp'
+
+export default App
+```
+
+`containerConfig` 为内部容器组件的配置。
+`antdConfig` 为 antd 主题的配置

@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 纯文本组件
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-sort-alphabetically',
   title: '文本',
   unitedSchema: {

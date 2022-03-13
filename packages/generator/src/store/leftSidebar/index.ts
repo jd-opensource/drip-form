@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil'
-import { containerMap, formItemMap, auxiliaryMap } from '@generator/fields'
+import { containerConfig, antdConfig } from '@generator/fields'
 import type {
   FieldItemMap,
   Field,
@@ -26,35 +26,10 @@ export type ComponentsData = {
 export const sidebarDataAtom = atom<ComponentsData>({
   key: 'sidebardata',
   default: {
-    order: ['formItem', 'auxiliary', 'container', 'business'],
+    order: ['container', 'antd', 'business'],
     category: {
-      formItem: {
-        title: '表单组件',
-        order: [
-          'checkbox',
-          'colorPicker',
-          'datePicker',
-          'text',
-          'number',
-          'radio',
-          'select',
-          'slider',
-          'switch',
-          'timePicker',
-          'uploader',
-        ],
-        fields: formItemMap,
-      },
-      auxiliary: {
-        title: '辅助组件',
-        order: ['null'],
-        fields: auxiliaryMap,
-      },
-      container: {
-        title: '容器组件',
-        order: ['array', 'object'],
-        fields: containerMap,
-      },
+      antd: antdConfig,
+      container: containerConfig,
       business: {
         title: '业务组件',
         order: [],

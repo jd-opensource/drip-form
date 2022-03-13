@@ -85,3 +85,5 @@ const CascaderField = ({
 }
 
 export const cascader = memo(CascaderField)
+
+export { default as config } from './config'

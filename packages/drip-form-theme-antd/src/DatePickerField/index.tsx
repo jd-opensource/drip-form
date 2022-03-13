@@ -134,3 +134,4 @@ const DatePickerField = ({
 }
 
 export const datePicker = memo(DatePickerField)
+export { default as config } from './config'

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-12 15:41:03
+ * @Last Modified time: 2022-03-13 12:29:22
  */
 import React, { memo, FC } from 'react'
 import { Select } from 'antd'
@@ -82,3 +82,4 @@ const SelectField: FC<SelectFieldProps> = ({
 }
 
 export const select = memo(SelectField)
+export { default as config } from './config'

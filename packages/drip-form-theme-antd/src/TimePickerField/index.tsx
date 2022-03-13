@@ -109,3 +109,4 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
 }
 
 export const timePicker = memo(TimePickerField)
+export { default as config } from './config'

@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 级联选择器配置
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-cascader',
   title: '级联选择',
   unitedSchema: {

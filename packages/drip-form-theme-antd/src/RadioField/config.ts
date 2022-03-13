@@ -1,16 +1,18 @@
-import { Field } from '../types'
-
 /**
- * 多选框配置
+ * 单选框
  */
-const config: Field = {
-  icon: 'iconfont icon-checked-box',
-  title: '多选框',
+const config = {
+  icon: 'iconfont icon-radio',
+  title: '单选',
   unitedSchema: {
-    type: 'array',
-    title: '多选框',
+    type: 'string',
+    title: '单选',
     ui: {
-      type: 'checkbox',
+      type: 'radio',
+      options: [
+        { label: '是', value: '1' },
+        { label: '否', value: '0' },
+      ],
     },
   },
   propertyConfig: {
@@ -20,21 +22,20 @@ const config: Field = {
         type: 'boolean',
         title: '是否禁用',
         default: false,
-        ui: {
-          type: 'switch',
-        },
+        ui: { type: 'switch' },
+      },
+      {
+        fieldKey: 'default',
+        type: 'string',
+        title: '默认选中项',
+        ui: { type: 'text' },
       },
       {
         fieldKey: 'options',
         type: 'array',
         title: '选项',
         default: [],
-        ui: {
-          type: 'array',
-          style: {
-            marginBottom: '20px',
-          },
-        },
+        ui: { type: 'array' },
         items: {
           type: 'object',
           title: '',
@@ -59,18 +60,6 @@ const config: Field = {
               },
             },
           ],
-        },
-      },
-      {
-        fieldKey: 'default',
-        type: 'array',
-        title: '默认选中项',
-        default: [],
-        ui: { type: 'array' },
-        items: {
-          type: 'string',
-          title: '选中项的值',
-          ui: { type: 'text' },
         },
       },
     ],

@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 滑动输入条
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-sliders',
   title: '滑动输入条',
   unitedSchema: {

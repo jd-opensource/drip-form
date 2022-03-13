@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 颜色选择器配置
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-colorpicker',
   title: '颜色选择框',
   unitedSchema: {

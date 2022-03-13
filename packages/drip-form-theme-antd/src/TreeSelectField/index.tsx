@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-28 14:46:06
+ * @Last Modified time: 2022-03-13 12:29:48
  */
 import React, { memo, FC, useEffect } from 'react'
 import { TreeSelect } from 'antd'
@@ -143,3 +143,4 @@ export const TreeSelectField: FC<TreeSelectFieldProps> = memo(
 )
 
 TreeSelectField.displayName = 'TreeSelectField'
+export { default as config } from './config'

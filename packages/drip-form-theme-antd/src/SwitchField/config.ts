@@ -1,9 +1,7 @@
-import { Field } from '../types'
-
 /**
  * 开关
  */
-const config: Field = {
+const config = {
   icon: 'iconfont icon-switch',
   title: '开关',
   unitedSchema: {

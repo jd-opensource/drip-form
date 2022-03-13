@@ -103,3 +103,4 @@ const CheckboxField = ({
 }
 
 export const checkbox = memo(CheckboxField)
+export { default as config } from './config'

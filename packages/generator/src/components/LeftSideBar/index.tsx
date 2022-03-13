@@ -16,39 +16,41 @@ const LeftSideBar: React.FC = () => {
       <div className={styles.componentstyle}>
         {order.map((key) => {
           return (
-            <Fragment key={key}>
-              <div>
-                <div className={styles.subtitle}>{category[key].title}</div>
-                <div
-                  className={cx(
-                    styles.container,
-                    !fold && styles.containeropen
-                  )}
-                >
-                  <React.Suspense fallback={<div>loading...</div>}>
-                    {category[key].order.map((type) => {
-                      return (
-                        category[key].fields[type] && (
-                          <DragAtom
-                            // TODO @drag
-                            key={JSON.stringify(
-                              category[key].fields[type].unitedSchema
-                            )}
-                            icon={category[key].fields[type].icon}
-                            unitedSchema={
-                              category[key].fields[type].unitedSchema
-                            }
-                            customBarStyle={
-                              category[key].fields[type].customBarStyle || {}
-                            }
-                          />
+            category[key].order.length > 0 && (
+              <Fragment key={key}>
+                <div>
+                  <div className={styles.subtitle}>{category[key].title}</div>
+                  <div
+                    className={cx(
+                      styles.container,
+                      !fold && styles.containeropen
+                    )}
+                  >
+                    <React.Suspense fallback={<div>loading...</div>}>
+                      {category[key].order.map((type) => {
+                        return (
+                          category[key].fields[type] && (
+                            <DragAtom
+                              // TODO @drag
+                              key={JSON.stringify(
+                                category[key].fields[type].unitedSchema
+                              )}
+                              icon={category[key].fields[type].icon}
+                              unitedSchema={
+                                category[key].fields[type].unitedSchema
+                              }
+                              customBarStyle={
+                                category[key].fields[type].customBarStyle || {}
+                              }
+                            />
+                          )
                         )
-                      )
-                    })}
-                  </React.Suspense>
+                      })}
+                    </React.Suspense>
+                  </div>
                 </div>
-              </div>
-            </Fragment>
+              </Fragment>
+            )
           )
         })}
       </div>

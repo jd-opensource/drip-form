@@ -100,12 +100,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
     // 设置左侧组件
     useEffect(() => {
       if (components) {
-        setSidebarData((oldSidebarData) => {
-          return {
-            ...oldSidebarData,
-            ...components,
-          }
-        })
+        setSidebarData(components)
       } else {
         if (customComponents) {
           setSidebarData((oldSidebarData) => {

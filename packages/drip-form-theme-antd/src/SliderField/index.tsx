@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2021-08-11 14:44:05
+ * @Last Modified time: 2022-03-13 12:29:33
  */
 import React, { memo, FC, useMemo } from 'react'
 import { Slider, InputNumber } from 'antd'
@@ -86,3 +86,4 @@ const SliderField: FC<SliderFieldProps> = ({
 }
 
 export const slider = memo(SliderField)
+export { default as config } from './config'
