@@ -1,4 +1,45 @@
 import { Field } from '../types'
+import { OnChange } from '@jdfed/utils'
+
+const changeUse12Hours: OnChange = ({ dispatch, val, getKey }) => {
+  dispatch({
+    type: 'setUi',
+    action: {
+      set: {
+        [getKey('ui.default', 'uiSchema') + '.use12Hours']: val,
+        [getKey('ui.default', 'uiSchema') + '.format']: val
+          ? 'h:mm:ss a'
+          : 'HH:mm:ss',
+        [getKey('ui.default__range.0', 'uiSchema') + '.use12Hours']: val,
+        [getKey('ui.default__range.1', 'uiSchema') + '.use12Hours']: val,
+        [getKey('ui.default__range.0', 'uiSchema') + '.format']: val
+          ? 'h:mm:ss a'
+          : 'HH:mm:ss',
+        [getKey('ui.default__range.1', 'uiSchema') + '.format']: val
+          ? 'h:mm:ss a'
+          : 'HH:mm:ss',
+      },
+    },
+  })
+  dispatch({
+    type: 'setValidate',
+    action: {
+      set: {
+        [getKey('ui.default', 'dataSchema') + '.default']: '',
+      },
+    },
+  })
+  dispatch({
+    type: 'setData',
+    action: {
+      set: {
+        'ui.default': '',
+        'ui.default__range': [],
+        'ui.format': val ? 'h:mm:ss a' : 'HH:mm:ss',
+      },
+    },
+  })
+}
 
 /**
  * 时间选择器
@@ -41,7 +82,7 @@ const config: Field = {
         type: 'boolean',
         title: '是否采用12小时制',
         default: false,
-        ui: { type: 'switch' },
+        ui: { type: 'switch', onChange: changeUse12Hours },
       },
       {
         fieldKey: 'showNow',
@@ -106,8 +147,7 @@ const config: Field = {
         type: 'string',
         title: '默认值',
         ui: {
-          type: 'text',
-          placeholder: '11:11:11',
+          type: 'timePicker',
           vcontrol: 'return !props.formData.ui.range',
         },
       },
@@ -128,16 +168,14 @@ const config: Field = {
             type: 'string',
             title: '起始时间',
             ui: {
-              type: 'text',
-              placeholder: '11:11:11',
+              type: 'timePicker',
             },
           },
           {
             type: 'string',
             title: '终止时间',
             ui: {
-              type: 'text',
-              placeholder: '12:12:12',
+              type: 'timePicker',
             },
           },
         ],

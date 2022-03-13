@@ -48,8 +48,8 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       onChange,
       asyncValidate,
       options: {
-        isMoment: use12Hours ? false : true,
-        format: range ? format : use12Hours ? 'h:mm:ss a' : 'HH:mm:ss',
+        isMoment: true,
+        format,
       },
     },
     dispatch
@@ -64,26 +64,23 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       } else {
         if (range) {
           setValid(
-            moment(fieldData[0], 'HH:mm:ss').isValid() &&
-              moment(fieldData[1], 'HH:mm:ss').isValid()
+            moment(fieldData[0], format).isValid() &&
+              moment(fieldData[1], format).isValid()
           )
         } else {
-          setValid(moment(fieldData, 'HH:mm:ss').isValid())
+          setValid(moment(fieldData, format).isValid())
         }
       }
     } catch (error) {
       setValid(false)
     }
-  }, [fieldData, range])
+  }, [fieldData, format, range])
   return range ? (
     <RangePicker
       {...(isValid
         ? {
             value: fieldData
-              ? [
-                  moment(fieldData[0], 'HH:mm:ss'),
-                  moment(fieldData[1], 'HH:mm:ss'),
-                ]
+              ? [moment(fieldData[0], format), moment(fieldData[1], format)]
               : null,
           }
         : null)}
@@ -98,7 +95,7 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       allowClear={allowClear}
       {...(isValid
         ? {
-            value: fieldData ? moment(fieldData, 'HH:mm:ss') : null,
+            value: fieldData ? moment(fieldData, format) : null,
           }
         : null)}
       disabled={disabled}
