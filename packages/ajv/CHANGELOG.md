@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
+
+
+### Features
+
+* add ajvOptions prop to customize ajv configurationn ([#148](https://github.com/jdfed/drip-form/issues/148)) ([cfe27e9](https://github.com/jdfed/drip-form/commit/cfe27e9f9a1be5a183e4810200020caba77f7c3a))
+* unitedSchema JSON add requiredMode configuration ([#150](https://github.com/jdfed/drip-form/issues/150)) ([7e717ef](https://github.com/jdfed/drip-form/commit/7e717ef9431228809fd5f2d3908a274f181225ec))
+
+
+
 ## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
 
 **Note:** Version bump only for package @jdfed/ajv

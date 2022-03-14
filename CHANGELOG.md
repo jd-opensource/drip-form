@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
+
+
+### Features
+
+* add generator configuration for antd theme ([#156](https://github.com/jdfed/drip-form/issues/156)) ([bec30a0](https://github.com/jdfed/drip-form/commit/bec30a05d16678514a5bee1fe1921dc46eb3454d))
+* **generator:** colorPicker add defaultValue configuration ([b896ef0](https://github.com/jdfed/drip-form/commit/b896ef032a122673190b3958dcbde97aff921141))
+* **generator:** datepicker add default configuration ([a238424](https://github.com/jdfed/drip-form/commit/a238424c1aed9382735d1e2de1ec60890dd851c4))
+* **generator:** restore default when the fieldKey out of focus ([#145](https://github.com/jdfed/drip-form/issues/145)) ([f36c099](https://github.com/jdfed/drip-form/commit/f36c09996c3871a9e3f467beef3504704ec8f7e9))
+* **generator:** support change fieldKey in the property configuration panel ([#144](https://github.com/jdfed/drip-form/issues/144)) ([9681f62](https://github.com/jdfed/drip-form/commit/9681f62083c8c4feba7c4b1538b3ae99838545a3))
+* **generator:** timePicker add default configuration ([bac3e72](https://github.com/jdfed/drip-form/commit/bac3e7271e6094045b86800aa79693edc61291ad))
+* add ajvOptions prop to customize ajv configurationn ([#148](https://github.com/jdfed/drip-form/issues/148)) ([cfe27e9](https://github.com/jdfed/drip-form/commit/cfe27e9f9a1be5a183e4810200020caba77f7c3a))
+* containerStyle configuration add padding prop ([27cefed](https://github.com/jdfed/drip-form/commit/27cefeda6cf880cc1d113a70624eea6789683937))
+* onValidate prop support submit type ([#143](https://github.com/jdfed/drip-form/issues/143)) ([ceae921](https://github.com/jdfed/drip-form/commit/ceae921b42ea239b1b8833d4ff2e51aef627d42a))
+* unitedSchema JSON add requiredMode configuration ([#150](https://github.com/jdfed/drip-form/issues/150)) ([7e717ef](https://github.com/jdfed/drip-form/commit/7e717ef9431228809fd5f2d3908a274f181225ec))
+* viewportConfig support function type ([#142](https://github.com/jdfed/drip-form/issues/142)) ([2499c39](https://github.com/jdfed/drip-form/commit/2499c39772f1ef050602de59e4dca13257948a0d))
+* **generator:** viewport区域操作栏支持配置显隐 ([#141](https://github.com/jdfed/drip-form/issues/141)) ([fcf53cd](https://github.com/jdfed/drip-form/commit/fcf53cdaa1690ae47f54586b8661fbb1e229471d))
+* **generator:** 更改组件类型时,如果已经修改了预设title,则保留 ([#136](https://github.com/jdfed/drip-form/issues/136)) ([c39710b](https://github.com/jdfed/drip-form/commit/c39710b838bad6085a5a470c2bf584c0cca06dac))
+
+
+### Bug Fixes
+
+* **generator:** the forms in visual area and preview area are inconsistent ([#152](https://github.com/jdfed/drip-form/issues/152)) ([4f90853](https://github.com/jdfed/drip-form/commit/4f90853b1823f268cdcb5376bc9a7eaf6088856c))
+* 修复存在parse prop时重置失效问题 ([#134](https://github.com/jdfed/drip-form/issues/134)) ([239f7e0](https://github.com/jdfed/drip-form/commit/239f7e022b59bd6171515edde0401f316431bf72))
+* **generator:** 修复导入json, viewport区域不更新问题 ([#135](https://github.com/jdfed/drip-form/issues/135)) ([76de430](https://github.com/jdfed/drip-form/commit/76de4302c3a71f06cae8e65db686e3579ae60b8f))
+* **generator:** 修复属性配置区域数组对象结构展示标题导致样式错乱 ([#132](https://github.com/jdfed/drip-form/issues/132)) ([7b7040e](https://github.com/jdfed/drip-form/commit/7b7040e5170a3c4cf3522a17c4ad729011117d86))
+
+
+### style
+
+* **generator:** update objectContainer default style ([#154](https://github.com/jdfed/drip-form/issues/154)) ([d1590df](https://github.com/jdfed/drip-form/commit/d1590df17c8fbd003f29af800b6cfde091bf081a))
+
+
+
 ## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
 
 ### Features

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
+
+
+### Features
+
+* **generator:** datepicker add default configuration ([a238424](https://github.com/jdfed/drip-form/commit/a238424c1aed9382735d1e2de1ec60890dd851c4))
+* unitedSchema JSON add requiredMode configuration ([#150](https://github.com/jdfed/drip-form/issues/150)) ([7e717ef](https://github.com/jdfed/drip-form/commit/7e717ef9431228809fd5f2d3908a274f181225ec))
+* **generator:** support change fieldKey in the property configuration panel ([#144](https://github.com/jdfed/drip-form/issues/144)) ([9681f62](https://github.com/jdfed/drip-form/commit/9681f62083c8c4feba7c4b1538b3ae99838545a3))
+* onValidate prop support submit type ([#143](https://github.com/jdfed/drip-form/issues/143)) ([ceae921](https://github.com/jdfed/drip-form/commit/ceae921b42ea239b1b8833d4ff2e51aef627d42a))
+
+
+### style
+
+* **generator:** update objectContainer default style ([#154](https://github.com/jdfed/drip-form/issues/154)) ([d1590df](https://github.com/jdfed/drip-form/commit/d1590df17c8fbd003f29af800b6cfde091bf081a))
+
+
+
 ## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
 
 

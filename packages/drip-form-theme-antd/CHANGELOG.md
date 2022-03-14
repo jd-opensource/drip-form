@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
+
+
+### Features
+
+* add generator configuration for antd theme ([#156](https://github.com/jdfed/drip-form/issues/156)) ([bec30a0](https://github.com/jdfed/drip-form/commit/bec30a05d16678514a5bee1fe1921dc46eb3454d))
+* **generator:** timePicker add default configuration ([bac3e72](https://github.com/jdfed/drip-form/commit/bac3e7271e6094045b86800aa79693edc61291ad))
+
+
+
 ## [0.6.0](https://github.com/jdfed/drip-form/compare/v0.5.0...v0.6.0) (2022-01-24)
 
 
