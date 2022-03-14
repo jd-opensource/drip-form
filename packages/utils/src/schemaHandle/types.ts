@@ -133,7 +133,7 @@ export type DataSchema = {
  */
 export type UnitedSchema = {
   theme?: 'antd' | 'babel-ui' | 'drip-design' | string
-  validateTime?: 'submit' | 'change'
+  validateTime?: string
   requiredMode?: 'default' | 'empty'
   title?: string
   ui?: Map
