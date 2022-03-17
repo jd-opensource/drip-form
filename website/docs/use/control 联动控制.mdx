@@ -2,12 +2,13 @@
 id: control
 title: control 联动控制
 ---
-import useBaseUrl from '@docusaurus/useBaseUrl'
 
+import useBaseUrl from '@docusaurus/useBaseUrl'
 
 ## vcontrol 显隐控制
 
 ### 介绍
+
 对于表单而言，我们经常会通过某些表单项的操作，触发另一些表单项的显隐。
 
 Drip-Form 为每个表单项内置了`vcontrol`字段，用于表单项之间产生**UI 显隐**的控制关联。
@@ -16,28 +17,28 @@ Drip-Form 为每个表单项内置了`vcontrol`字段，用于表单项之间产
 
 ```json title="unitedSchema.json"
 {
-  "validateTime": "submit",
-  "type": "object",
-  "theme": "drip-theme",
-  "schema": [
-    {
-      "title": "开关",
-      "type": "string",
-      "ui": {
-        "type": "switch",
-      },
-      "fieldKey": "switchItem"
-    },
-    {
-      "type": "string",
-      "title": "自定义组件",
-      "ui": {
-        "type": "custom2",
-        "vcontrol": "return props.formData.switchItem"
-      },
-      "fieldKey": "custom2"
-    }
-  ]
+	"validateTime": "submit",
+	"type": "object",
+	"theme": "drip-theme",
+	"schema": [
+		{
+			"title": "开关",
+			"type": "string",
+			"ui": {
+				"type": "switch"
+			},
+			"fieldKey": "switchItem"
+		},
+		{
+			"type": "string",
+			"title": "自定义组件",
+			"ui": {
+				"type": "custom2",
+				"vcontrol": "return props.formData.switchItem"
+			},
+			"fieldKey": "custom2"
+		}
+	]
 }
 ```
 
@@ -51,11 +52,11 @@ Drip-Form 为每个表单项内置了`vcontrol`字段，用于表单项之间产
 
 `vcontrol`基于`new Function`实现，因此在书写的函数体内，我们可以使用如下三个参数：
 
-| 参数        | 类型   | 说明               |
-| :--------- | :----- | :----------------- |
-| formData   | Object | 当前最新的表单数据       |
-| fieldKey   | string | 当前操作表单项的fieldKey |
-| fieldData  | Object | 当前操作表单项的数据      |
+| 参数      | 类型   | 说明                      |
+| :-------- | :----- | :------------------------ |
+| formData  | Object | 当前最新的表单数据        |
+| fieldKey  | string | 当前操作表单项的 fieldKey |
+| fieldData | Object | 当前操作表单项的数据      |
 
 在上文中，我们使用 `props.formData.switchItem` 获取到了**switch 开关** 当前的状态，并根据其是否开启的来判断是否展示 custom2 自定义组件。
 
@@ -70,35 +71,38 @@ import '@jdfed/drip-form-theme-antd/dist/index.css'
 import '@jdfed/drip-form/dist/index.css'
 
 const CustomField1 = memo(() => {
-  const [count, setCount] = useState(0)
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <div onClick={() => setCount(count + 1)}>Click me</div>
-    </div>
-  )
+	const [count, setCount] = useState(0)
+	return (
+		<div>
+			<p>You clicked {count} times</p>
+			<div onClick={() => setCount(count + 1)}>Click me</div>
+		</div>
+	)
 })
 
 const customComponents = {
-  custom1: CustomField1
+	custom1: CustomField1,
 }
 
 export default class Form extends Component {
-  render() {
-    return (
-      <div>
-        <DripForm
-          unitedSchema={unitedSchema}
-          uiComponents={{ 'drip-theme': dripTheme }}
-          customComponents={customComponents}
-        />
-      </div>
-    )
-  }
+	render() {
+		return (
+			<div>
+				<DripForm
+					unitedSchema={unitedSchema}
+					uiComponents={{ 'drip-theme': dripTheme }}
+					customComponents={customComponents}
+				/>
+			</div>
+		)
+	}
 }
 ```
 
-<img src='https://storage.360buyimg.com/imgtools/741a0f9e3a-89b6f7c0-4cf9-11ec-9620-6d9821f0161f.gif' alt="图片加载出错"/>
+<img
+	src="https://storage.360buyimg.com/imgtools/741a0f9e3a-89b6f7c0-4cf9-11ec-9620-6d9821f0161f.gif"
+	alt="图片加载出错"
+/>
 
 ## onChange 数据联动
 
@@ -108,28 +112,28 @@ export default class Form extends Component {
 
 ```json title="unitedSchema.json" {10}
 {
-  "validateTime": "submit",
-  "type": "object",
-  "theme": "drip-theme",
-  "schema": [
-    {
-      "title": "开关",
-      "type": "string",
-      "ui": {
-        "type": "switch",
-        "onChange": "val && dispatch({type: 'setFormData', custom2: '触发了开关开启'})"
-      },
-      "fieldKey": "switchItem"
-    },
-    {
-      "type": "string",
-      "title": "自定义组件",
-      "ui": {
-        "type": "custom2"
-      },
-      "fieldKey": "custom2"
-    }
-  ]
+	"validateTime": "submit",
+	"type": "object",
+	"theme": "drip-theme",
+	"schema": [
+		{
+			"title": "开关",
+			"type": "string",
+			"ui": {
+				"type": "switch",
+				"onChange": "val && dispatch({type: 'setData',action:{set:{custom2: '触发了开关开启'}}})"
+			},
+			"fieldKey": "switchItem"
+		},
+		{
+			"type": "string",
+			"title": "自定义组件",
+			"ui": {
+				"type": "custom2"
+			},
+			"fieldKey": "custom2"
+		}
+	]
 }
 ```
 
@@ -152,7 +156,6 @@ export default class Form extends Component {
 
 如果你需要复杂的数据联动处理，请使用[函数占位符](customFunc)处理。
 :::
-
 
 ## control 全局控制
 
@@ -178,8 +181,7 @@ const Form = memo(() => {
 
 `control`支持四个参数：
 
-| 参数       | 类型              | 说明               |
-| :--------- | :---------------- | :----------------- |
-| formData   | object            | 当前表单数据       |
-| dispatch   | (options) => void | 触发表单修改的函数 |
-
+| 参数     | 类型              | 说明               |
+| :------- | :---------------- | :----------------- |
+| formData | object            | 当前表单数据       |
+| dispatch | (options) => void | 触发表单修改的函数 |
