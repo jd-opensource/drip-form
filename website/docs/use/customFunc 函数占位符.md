@@ -9,33 +9,33 @@ title: customFunc 函数占位符
 
 因此我们可以使用**函数占位符**来解决这一问题，用 `$$` 对该项进行特殊标识：
 
-- **JSON配置**
+- **JSON 配置**
 
   ```json title="unitedSchema.json" {7,11}
   {
-    "validateTime": "submit",
-    "type": "object",
-    "theme": "drip-theme",
-    "schema": [
-      {
-        "title": "开关",
-        "type": "string",
-        "ui": {
-          "type": "switch",
-          "onChange": "$$switchChange"
-        },
-        "fieldKey": "switchItem"
-      },
-      {
-        "type": "string",
-        "title": "自定义组件",
-        "ui": {
-          "type": "text",
-          "vcontrol": "$$textVcontrol"
-        },
-        "fieldKey": "text1"
-      }
-    ]
+  	"validateTime": "submit",
+  	"type": "object",
+  	"theme": "drip-theme",
+  	"schema": [
+  		{
+  			"title": "开关",
+  			"type": "string",
+  			"ui": {
+  				"type": "switch",
+  				"onChange": "$$switchChange"
+  			},
+  			"fieldKey": "switchItem"
+  		},
+  		{
+  			"type": "string",
+  			"title": "自定义组件",
+  			"ui": {
+  				"type": "text",
+  				"vcontrol": "$$textVcontrol"
+  			},
+  			"fieldKey": "text1"
+  		}
+  	]
   }
   ```
 
@@ -51,8 +51,12 @@ title: customFunc 函数占位符
       return {
           '$$switchChange': (val, dispatch, fieldKey) => {
               dispatch({
-                  type: 'setFormData',
-                  [fieldKey]: val
+                  type: 'setData',
+  								action:{
+  									set:{
+  										[fieldKey]: val
+  									}
+  								}
               })
           },
           '$$textVcontrol': (formData, uiSchema, dataSchema) => {
