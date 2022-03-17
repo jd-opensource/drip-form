@@ -32,6 +32,8 @@ import { Select, Input, Button } from 'antd'
 import { CopyOutlined } from '@ant-design/icons'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { usePrevious } from '@jdfed/hooks'
+import copy from 'copy-to-clipboard'
+
 import type { SetType } from '@jdfed/hooks'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
@@ -410,6 +412,11 @@ const PropertyConfig = () => {
     [prevEditFieldKey, setCurEditFieldKey]
   )
 
+  // copy fieldKey
+  const copyFieldKeyFn = useCallback(() => {
+    copy(curEditFieldKey)
+  }, [curEditFieldKey])
+
   return (
     <Fragment>
       <div className={styles.panelConfig}>
@@ -447,7 +454,7 @@ const PropertyConfig = () => {
                     // 父元素为数组容器无法修改
                     disabled={parentType === 'array'}
                   />
-                  <Button icon={<CopyOutlined />} />
+                  <Button icon={<CopyOutlined />} onClick={copyFieldKeyFn} />
                 </Input.Group>
               </div>
             </div>
