@@ -44,6 +44,7 @@
 		"@monaco-editor/react": "^4.2.2",
 		"antd": "^4.16.13",
 		"classnames": "^2.3.1",
+		"copy-to-clipboard": "^3.3.1",
 		"file-saver": "^2.0.5",
 		"immer": "^9.0.6",
 		"nanoid": "^3.1.23",
