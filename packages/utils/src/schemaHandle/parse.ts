@@ -321,6 +321,7 @@ const parseUnitedSchema = (
       requiredMode: unitedSchema?.requiredMode || 'default',
       type: unitedSchema.type || 'object',
       ...(unitedSchema?.title && { title: unitedSchema.title }),
+      ...(unitedSchema?.default && { default: unitedSchema.default }),
       ...dataSchema,
       ...firstLevelProps,
     } as DataSchema,
