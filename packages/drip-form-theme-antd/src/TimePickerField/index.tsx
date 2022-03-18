@@ -9,6 +9,7 @@ import { TimePicker } from 'antd'
 import { useField } from '@jdfed/hooks'
 import moment from 'moment'
 import locale from 'antd/es/date-picker/locale/zh_CN'
+import { typeCheck } from '@jdfed/utils'
 const { RangePicker } = TimePicker
 import { CommonProps } from '../global'
 
@@ -34,6 +35,7 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
   asyncValidate,
   format = 'HH:mm:ss',
   getKey,
+  formMode,
   ...restProps
 }) => {
   /**
@@ -75,6 +77,14 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
       setValid(false)
     }
   }, [fieldData, format, range])
+
+  // view 模式
+  if (formMode === 'view')
+    return fieldData
+      ? typeCheck(fieldData) === 'Array'
+        ? fieldData.join(' ~ ')
+        : fieldData
+      : null
   return range ? (
     <RangePicker
       {...(isValid

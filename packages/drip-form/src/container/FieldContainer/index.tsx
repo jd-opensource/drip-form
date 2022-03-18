@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-28 18:19:59
+ * @Last Modified time: 2022-03-17 15:42:52
  */
 import React, { memo, useMemo, useCallback, useContext } from 'react'
 import cx from 'classnames'
@@ -21,6 +21,7 @@ const fieldContainer = memo<Props>(
     fieldKey,
     type,
     uiProp,
+    formMode,
     fieldData,
     queryFunc,
     customComponents,
@@ -52,6 +53,7 @@ const fieldContainer = memo<Props>(
         <Component
           fieldKey={fieldKey}
           fieldData={fieldData}
+          formMode={formMode}
           dispatch={dispatch}
           getKey={getKey}
           globalformdatastorekey={globalformdatastorekey}
@@ -65,6 +67,7 @@ const fieldContainer = memo<Props>(
       customComponents,
       fieldKey,
       fieldData,
+      formMode,
       dispatch,
       getKey,
       globalformdatastorekey,

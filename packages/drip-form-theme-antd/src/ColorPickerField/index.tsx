@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-13 12:28:56
+ * @Last Modified time: 2022-03-18 11:28:30
  */
 import React, { memo, useState } from 'react'
 // import PropTypes from 'prop-types'
@@ -33,6 +33,7 @@ const ColorPickerField = ({
   asyncValidate,
   defaultValue,
   getKey,
+  formMode,
   ...restProps
 }: ColorPickerFieldProps) => {
   const [initColor] = useState(defaultValue || '#000000')
@@ -58,7 +59,7 @@ const ColorPickerField = ({
 
   return (
     <div className="drip-form--colorpicker">
-      {disabled ? (
+      {formMode === 'view' || disabled ? (
         <div
           className={cx('colorpicker--show', {
             'colorpicker--show--disabled': disabled,
@@ -101,11 +102,13 @@ const ColorPickerField = ({
       )}
       <Input
         value={fieldData}
-        disabled={disabled}
+        disabled={formMode === 'view' || disabled}
         onChange={_onChange}
         style={{ width: 120, marginRight: 5 }}
       />
-      {!disabled && <Button onClick={_changeInitColor}>恢复默认</Button>}
+      {!disabled && formMode !== 'view' && (
+        <Button onClick={_changeInitColor}>恢复默认</Button>
+      )}
     </div>
   )
 }

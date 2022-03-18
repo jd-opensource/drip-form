@@ -1,5 +1,4 @@
 import React, { memo } from 'react'
-// import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
 import { useField } from '@jdfed/hooks'
 import { isEmpty, typeCheck } from '@jdfed/utils'
@@ -31,6 +30,7 @@ const CheckboxField = ({
   onChange,
   asyncValidate,
   getKey,
+  formMode,
   ...restProps
 }: CheckboxFieldProps) => {
   const _onChange = useField(
@@ -78,6 +78,22 @@ const CheckboxField = ({
       }
     })
   }
+  // view 模式
+  if (formMode === 'view') {
+    const curOption = options
+      .filter((item: any) =>
+        (fieldData || []).includes(
+          typeCheck(item) === 'String' ? item : item.value
+        )
+      )
+      .reduce((prev, cur) => {
+        return prev
+          ? `${prev}; ${typeof cur === 'string' ? cur : cur?.label}`
+          : `${typeof cur === 'string' ? cur : cur?.label}`
+      }, '') as any
+    return curOption || null
+  }
+
   // needCheckAll: 特殊props，用于判断是否使用全选
   return needCheckAll ? (
     <div className="check-all-wrapper">

@@ -17,12 +17,20 @@ const RadioField = ({
   onChange,
   asyncValidate,
   getKey,
+  formMode,
   ...restProps
 }: RadioFieldProps) => {
   const _onChange = useField(
     { getKey, fieldKey, onChange, asyncValidate, options: { isDelete: false } },
     dispatch
   )
+  // view 模式
+  if (formMode === 'view') {
+    const curOption: Array<Record<string, any>> = options.filter(
+      (item: any) => item.value === fieldData
+    )
+    return curOption[0]?.label || null
+  }
 
   return (
     <Radio.Group

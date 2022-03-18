@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-13 12:21:55
+ * @Last Modified time: 2022-03-18 10:22:51
  */
 import React, { memo, FC } from 'react'
 import { Input } from 'antd'
@@ -27,6 +27,7 @@ const TextField: FC<TextFieldProps> = ({
   style,
   asyncValidate,
   getKey,
+  formMode,
   ...restProps
 }) => {
   const _onChange = useField(
@@ -39,7 +40,10 @@ const TextField: FC<TextFieldProps> = ({
     },
     dispatch
   )
+  // view 模式
+  if (formMode === 'view') return fieldData || null
 
+  // edit、generator模式
   return autoSize && autoSize !== 1 ? (
     <TextArea
       {...(typeof autoSize === 'number' ? { rows: autoSize } : null)}

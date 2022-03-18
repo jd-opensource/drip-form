@@ -7,6 +7,7 @@ const config = {
   unitedSchema: {
     type: 'string',
     title: '单选',
+    default: '1',
     ui: {
       type: 'radio',
       options: [
@@ -17,6 +18,25 @@ const config = {
   },
   propertyConfig: {
     styleSchema: [
+      {
+        type: 'string',
+        title: '表单模式',
+        default: 'edit',
+        ui: {
+          type: 'radio',
+          options: [
+            {
+              value: 'edit',
+              label: '编辑',
+            },
+            {
+              value: 'view',
+              label: '查看',
+            },
+          ],
+        },
+        fieldKey: 'formMode',
+      },
       {
         fieldKey: 'disabled',
         type: 'boolean',

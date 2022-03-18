@@ -8,13 +8,31 @@ const config = {
     type: 'string',
     title: '颜色选择框',
     format: 'color',
-    default: '#1e74f4',
     ui: {
       type: 'colorPicker',
     },
   },
   propertyConfig: {
     styleSchema: [
+      {
+        type: 'string',
+        title: '表单模式',
+        default: 'edit',
+        ui: {
+          type: 'radio',
+          options: [
+            {
+              value: 'edit',
+              label: '编辑',
+            },
+            {
+              value: 'view',
+              label: '查看',
+            },
+          ],
+        },
+        fieldKey: 'formMode',
+      },
       {
         fieldKey: 'disabled',
         type: 'boolean',
