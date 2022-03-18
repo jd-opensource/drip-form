@@ -56,6 +56,25 @@ const config = {
   propertyConfig: {
     styleSchema: [
       {
+        type: 'string',
+        title: '表单模式',
+        default: 'edit',
+        ui: {
+          type: 'radio',
+          options: [
+            {
+              value: 'edit',
+              label: '编辑',
+            },
+            {
+              value: 'view',
+              label: '查看',
+            },
+          ],
+        },
+        fieldKey: 'formMode',
+      },
+      {
         fieldKey: 'range',
         type: 'boolean',
         title: '是否为范围选择器',

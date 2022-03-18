@@ -12,6 +12,7 @@ import moment from 'moment'
 import locale from 'antd/es/date-picker/locale/zh_CN'
 import { CommonProps } from '../global'
 import { TimePickerProps } from 'antd/lib/time-picker'
+import { typeCheck } from '@jdfed/utils'
 const { RangePicker } = DatePicker
 
 interface ShowTimeProps
@@ -39,6 +40,7 @@ const DatePickerField = ({
   asyncValidate,
   showTime,
   getKey,
+  formMode,
   ...restProps
 }: DatePickerFieldProps) => {
   /**
@@ -80,6 +82,14 @@ const DatePickerField = ({
       setValid(false)
     }
   }, [fieldData, format, range])
+
+  // view 模式
+  if (formMode === 'view')
+    return fieldData
+      ? typeCheck(fieldData) === 'Array'
+        ? fieldData.join(' ~ ')
+        : fieldData
+      : null
 
   return range ? (
     <RangePicker

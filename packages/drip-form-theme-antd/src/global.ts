@@ -5,11 +5,12 @@ export declare type Dispatch = DispatchR<Action>
 
 export declare type CommonProps = Partial<{
   // 是否禁用表单
-  disabled?: boolean
-  style?: CSSProperties
-  onChange?: string
-  queryFunc?: (...args: any[]) => any
-  requestCache?: boolean
+  disabled: boolean
+  style: CSSProperties
+  onChange: string
+  queryFunc: (...args: any[]) => any
+  requestCache: boolean
+  formMode: 'edit' | 'generator' | 'view'
 }> & {
   fieldKey: string
   dispatch: Dispatch

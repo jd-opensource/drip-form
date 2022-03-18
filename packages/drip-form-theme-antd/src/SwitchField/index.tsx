@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-13 12:29:35
+ * @Last Modified time: 2022-03-18 11:16:43
  */
 import React, { memo, FC } from 'react'
 import { Switch } from 'antd'
@@ -18,15 +18,17 @@ const SwitchField: FC<CommonProps> = ({
   style,
   asyncValidate,
   getKey,
+  formMode,
   ...restProps
 }) => {
   const _onChange = useField(
     { fieldKey, getKey, onChange, asyncValidate, fieldData: !fieldData },
     dispatch
   )
+
   return (
     <Switch
-      disabled={disabled}
+      disabled={formMode === 'view' ? true : disabled}
       onChange={_onChange}
       checked={!!fieldData}
       style={style}
