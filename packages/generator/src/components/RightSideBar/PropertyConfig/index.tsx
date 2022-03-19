@@ -102,14 +102,10 @@ const PropertyConfig = () => {
         // 布局特殊处理
         if (key === 'containerStyle') {
           // TODO @jiangxiaowei 暂不支持解析vw、px写法 (vw、px默认转换为百分比)
-          formData.containerStyle.width = Number(
-            String(
-              formData.containerStyle.width ||
-                generatorContext.current?.get().uiSchema?.containerStyle
-                  ?.width ||
-                100
-            ).split(/%|(vw)|(px)/)[0]
-          )
+          formData.containerStyle.width =
+            formData.containerStyle.width ||
+            generatorContext.current?.get().uiSchema?.containerStyle?.width ||
+            '100%'
         }
         // 标题特殊处理
         if (key === 'title') {
@@ -208,8 +204,9 @@ const PropertyConfig = () => {
         if (type === 'root' && data !== 100 && !get().data.padding) {
           set('containerStyle.padding', 'data', '0 10px 0 0')
         }
-        // TODO @jiangxiaowei 后续支持px、vw
-        data = data + '%'
+        if (type === 'root') {
+          data = data + '%'
+        }
       }
       if (changeKey === 'description.hasDesc') {
         // 如果展示description，则获取当前配置的全部信息进行填充
