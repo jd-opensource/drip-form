@@ -39,6 +39,7 @@ const Footer: FC<
   // 底部按钮容器样式
   const footerStyle = useMemo(() => {
     return {
+      ...(uiSchema?.footer as Map)?.style,
       justifyContent:
         justifyContent[
           ((uiSchema?.footer as Map)?.justifyContent ||
