@@ -331,6 +331,13 @@ const unitedSchema = [
             title: '宽度',
             ui: {
               type: 'text',
+              placeholder: '形如100px、100%等',
+              description: {
+                type: 'icon',
+                trigger: 'hover',
+                title:
+                  '<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width" target="_blank">具体配置</>',
+              },
               style: {
                 width: '100%',
               },
