@@ -318,6 +318,29 @@ const unitedSchema = [
         },
       },
       {
+        type: 'object',
+        title: 'style配置',
+        ui: {
+          type: 'object',
+          mode: 'normal',
+          showTitle: false,
+        },
+        schema: [
+          {
+            type: 'string',
+            title: '宽度',
+            ui: {
+              type: 'text',
+              style: {
+                width: '100%',
+              },
+            },
+            fieldKey: 'width',
+          },
+        ],
+        fieldKey: 'style',
+      },
+      {
         fieldKey: 'margin',
         title: '按钮间隔',
         default: 10,
