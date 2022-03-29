@@ -5,7 +5,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-19 17:33:23
+ * @Last Modified time: 2022-03-29 09:39:05
  */
 import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
@@ -41,7 +41,11 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
     const newTitleUi = useTitle(titleUi)
     return (
       <div
-        className="form-container"
+        className={cx('form-container', {
+          'form-container-view': formMode === 'view',
+          'form-container-generator': formMode === 'generator',
+          'form-container-edit': formMode === 'edit',
+        })}
         style={{
           ...(['array', 'object'].includes(uiProp.type as string)
             ? (uiProp?.style as CSSProperties)

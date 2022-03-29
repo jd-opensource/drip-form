@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-10 18:22:15
+ * @Last Modified time: 2022-03-29 09:36:23
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -252,7 +252,7 @@ const Render = ({
     }
     // 所有容器均需要传递
     const common = {
-      formMode,
+      formMode: uiProp.formMode || formMode,
       // 当前表单标题
       title,
       // 当前表单使用主题
