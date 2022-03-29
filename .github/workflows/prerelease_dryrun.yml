@@ -69,7 +69,7 @@ jobs:
           npm set "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}"
 
       - name: 'lerna command forcePublish'
-        if: ${{github.event.inputs.forcePublish}}
+        if: ${{github.event.inputs.forcePublish=='true'}}
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
@@ -78,7 +78,7 @@ jobs:
           cat lerna.json
           cat CHANGELOG.md
       - name: 'lerna command'
-        if: ${{!github.event.inputs.forcePublish}}
+        if: ${{github.event.inputs.forcePublish=='false'}}
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
