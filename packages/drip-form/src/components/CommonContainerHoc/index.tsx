@@ -5,7 +5,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-29 09:39:05
+ * @Last Modified time: 2022-03-30 22:30:33
  */
 import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
@@ -50,7 +50,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
           ...(['array', 'object'].includes(uiProp.type as string)
             ? (uiProp?.style as CSSProperties)
             : null),
-          ...(formMode !== 'generator' && containerStyle),
+          ...containerStyle,
         }}
       >
         <div

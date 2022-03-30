@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-29 09:36:23
+ * @Last Modified time: 2022-03-30 22:17:52
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -270,7 +270,7 @@ const Render = ({
       // 是否展示错误
       showError,
       // 容器样式
-      containerStyle,
+      ...(formMode != 'generator' && { containerStyle }),
       // 当前渲染表单类型
       type,
       // 容器key值
