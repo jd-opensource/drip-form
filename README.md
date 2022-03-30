@@ -77,6 +77,12 @@ const Form = memo(() => (
 
 [Thanks goes to these wonderful people](./CONTRIBUTORS.md)
 
+## 开发路线图
+
+:sparkle: View the [DripForm roadmap](https://github.com/orgs/JDFED/projects/2/views/7)
+
+在 DripForm 开发路线图中，您可以了解我们正在开发哪些功能、它们处于什么阶段以及我们希望何时将它们带给您。对路线图上的项目有任何问题或意见吗？通过[GitHub discussions](https://github.com/JDFED/drip-form/discussions)反馈讨论分享您的反馈。
+
 ## 🌟 感谢支持
 
 如果 Drip-Form 解决了您的开发痛点，对您有帮助的话，请不要吝惜您的 `star` 🌟 哦！

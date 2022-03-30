@@ -77,6 +77,12 @@ Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before maki
 
 [Thanks goes to these wonderful people](./CONTRIBUTORS.md)
 
+## RoadMap
+
+:sparkle: View the [DripForm roadmap](https://github.com/orgs/JDFED/projects/2/views/7)
+
+Our product roadmap is where you can learn about what features we're working on, what stage they're in, and when we expect to bring them to you. Have any questions or comments about items on the roadmap? Share your feedback via [GitHub discussions](https://github.com/JDFED/drip-form/discussions).
+
 ## 🌟 Thank you for your support
 
 If Drip-Form solves your development pain points and is helpful to you, please don't begrudge your `star`🌟!
