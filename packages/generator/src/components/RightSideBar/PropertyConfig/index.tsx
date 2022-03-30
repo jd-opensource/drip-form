@@ -253,7 +253,10 @@ const PropertyConfig = () => {
       }
       // 针对数组的default情况，变化的是ui.defualt.0，而不是ui.default；同时要避免ui.default_value，所以需要正则匹配
       const changeKeyMap = changeKey.split('.')
-      if (changeKeyMap[0] === 'ui' && changeKeyMap[1] === 'default') {
+      if (
+        changeKeyMap[0] === 'ui' &&
+        ['default', 'default__range'].includes(changeKeyMap[1])
+      ) {
         changeSchema = 'dataSchema'
         // 在ajv校验时，如果formData中已经有值，则不再生成新的formData，需要set formData
         setFormData = true
