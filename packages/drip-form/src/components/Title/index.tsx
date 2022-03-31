@@ -25,6 +25,8 @@ const Title = memo<TitleType>(
             alignItems: Align[titleUi?.verticalAlign],
           }),
           ...(titleUi?.margin && { margin: titleUi.margin }),
+          ...(titleUi?.fontSize && { fontSize: titleUi.fontSize }),
+          ...(titleUi?.color && { color: titleUi.color }),
         }}
       >
         {titleUi?.requiredIcon &&

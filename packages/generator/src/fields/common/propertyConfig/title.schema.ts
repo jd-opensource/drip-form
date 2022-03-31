@@ -86,6 +86,31 @@ const unitedSchema = {
       },
     },
     {
+      type: 'number',
+      title: '标题字体大小',
+      ui: {
+        type: 'number',
+        description: {
+          title: '单位为px',
+          type: 'icon',
+          trigger: 'hover',
+        },
+        vcontrol: 'return props.formData.title.followRootConfig == false',
+      },
+      default: '12',
+      fieldKey: 'fontSize',
+    },
+    {
+      type: 'string',
+      title: '标题字体颜色',
+      ui: {
+        type: 'colorPicker',
+        vcontrol: 'return props.formData.title.followRootConfig == false',
+      },
+      default: '#000000',
+      fieldKey: 'color',
+    },
+    {
       fieldKey: 'textAlign',
       type: 'string',
       title: '标签水平对齐方式',
