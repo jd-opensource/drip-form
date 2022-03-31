@@ -54,6 +54,8 @@ export type TitleUi = Partial<{
   // 是否展示必填*号
   requiredIcon: boolean
   placement: TitlePlacement
+  color: string
+  fontSize: number | string
 }> | null
 
 type Properties = {

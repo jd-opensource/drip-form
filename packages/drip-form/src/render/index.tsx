@@ -127,19 +127,6 @@ const Render = ({
       }
     }
 
-    // 当前Field的标题样式, property的样式会覆盖全局标题样式
-    const titleUi = Object.assign(
-      {
-        placement: 'left',
-        width: '82px',
-        textAlign: 'left',
-        verticalAlign: 'center',
-        requiredFields: false,
-      },
-      globalTitleUi,
-      properties[item]?.title || {}
-    )
-
     // 当前Field的query函数
     const queryFunc = onQuery?.[item]
     const asyncValidate = onValidate?.[item]
@@ -169,6 +156,25 @@ const Render = ({
       title: uiTitle,
       ...uiProp
     } = properties[item]
+
+    // 当前Field的标题样式, property的样式会覆盖全局标题样式
+    const titleUi = Object.assign(
+      {
+        placement: 'left',
+        width: '82px',
+        textAlign: 'left',
+        verticalAlign: 'center',
+        requiredFields: false,
+        fontSize: 12,
+        color:
+          (uiProp.formMode || formMode) === 'view'
+            ? 'rgba(0,0,0,0.45)'
+            : '#000000',
+      },
+      globalTitleUi,
+      properties[item]?.title || {}
+    )
+
     // 当前Field的提示信息
     const description = uiProp.description || null
     // Field控制函数体
