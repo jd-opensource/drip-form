@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-30 22:17:52
+ * @Last Modified time: 2022-03-31 11:01:34
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -36,6 +36,7 @@ const Render = ({
     theme = 'antd',
     title: globalTitleUi = {},
     formMode = 'edit',
+    style: globalStyle,
     containerStyle: globalContainerStyle,
   } = uiSchema
   // 当前父级UiSchema
@@ -154,8 +155,14 @@ const Render = ({
     const {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       title: uiTitle,
-      ...uiProp
+      style,
+      ...oldUiProp
     } = properties[item]
+
+    const uiProp = {
+      ...oldUiProp,
+      style: { ...globalStyle, ...style },
+    }
 
     // 当前Field的标题样式, property的样式会覆盖全局标题样式
     const titleUi = Object.assign(

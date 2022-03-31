@@ -240,6 +240,50 @@ const unitedSchema = [
   },
   {
     type: 'object',
+    title: '全局样式',
+    ui: {
+      type: 'object',
+      mode: 'collapse',
+      '$:dripStyle': true,
+      ghost: true,
+      containerStyle: {
+        padding: 0,
+        marginBottom: 5,
+      },
+      description: {
+        type: 'icon',
+        trigger: 'hover',
+        title: '全局组件样式',
+      },
+      active: false,
+    },
+    schema: [
+      {
+        type: 'number',
+        title: '字体大小',
+        ui: {
+          type: 'number',
+          description: {
+            title: '单位为px',
+            type: 'icon',
+            trigger: 'hover',
+          },
+        },
+        fieldKey: 'fontSize',
+      },
+      {
+        type: 'string',
+        title: '字体颜色',
+        ui: {
+          type: 'colorPicker',
+        },
+        fieldKey: 'color',
+      },
+    ],
+    fieldKey: 'style',
+  },
+  {
+    type: 'object',
     fieldKey: 'containerStyle',
     title: '全局布局',
     ui: {
