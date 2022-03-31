@@ -149,6 +149,29 @@ const unitedSchema = [
         },
       },
       {
+        type: 'number',
+        title: '标题字体大小',
+        ui: {
+          type: 'number',
+          description: {
+            title: '单位为px',
+            type: 'icon',
+            trigger: 'hover',
+          },
+        },
+        default: '12',
+        fieldKey: 'fontSize',
+      },
+      {
+        type: 'string',
+        title: '标题字体颜色',
+        ui: {
+          type: 'colorPicker',
+        },
+        default: '#000000',
+        fieldKey: 'color',
+      },
+      {
         fieldKey: 'textAlign',
         type: 'string',
         title: '标题水平对齐方式',
