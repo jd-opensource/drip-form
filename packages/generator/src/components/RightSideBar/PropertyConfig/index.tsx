@@ -69,6 +69,7 @@ const PropertyConfig = () => {
     return {
       title: uiSchema.title || {},
       containerStyle: uiSchema.containerStyle || {},
+      style: uiSchema.style || {},
       description: uiSchema.description || {},
       ...(type === 'root' && { footer: {} }),
       validateTime: dataSchema?.validateTime || 'change',

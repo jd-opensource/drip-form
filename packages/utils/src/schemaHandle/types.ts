@@ -1,6 +1,6 @@
 import type { Map } from '../common/type'
 import { GetKey, Action } from '../type'
-import type { Dispatch } from 'react'
+import type { Dispatch, CSSProperties } from 'react'
 /**
  * 在联合Schema中，某个节点的类型
  */
@@ -104,6 +104,7 @@ export type UiSchema = {
   mode: 'add' | 'normal' | 'collapse' | 'tuple' | 'fixed'
   theme: Theme
   type: string
+  style: CSSProperties
   containerStyle?: ContainerStyle
   properties: Properties
   order: Array<string | number>

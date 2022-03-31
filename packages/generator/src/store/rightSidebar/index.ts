@@ -43,8 +43,55 @@ export const allPropertyConfigSchemaSelector = selector<
                   },
                 },
                 title: '样式',
-                schema:
-                  field?.propertyConfig?.styleSchema || field?.styleSchema,
+                schema: [
+                  {
+                    type: 'object',
+                    title: 'style配置',
+                    ui: {
+                      type: 'object',
+                      mode: 'collapse',
+                      '$:dripStyle': true,
+                      ghost: true,
+                      containerStyle: {
+                        padding: 0,
+                        marginBottom: 5,
+                      },
+                      description: {
+                        type: 'icon',
+                        trigger: 'hover',
+                        title: '组件style配置',
+                      },
+                      active: false,
+                    },
+                    schema: [
+                      {
+                        type: 'number',
+                        title: '字体大小',
+                        ui: {
+                          type: 'number',
+                          description: {
+                            title: '单位为px',
+                            type: 'icon',
+                            trigger: 'hover',
+                          },
+                        },
+                        fieldKey: 'fontSize',
+                      },
+                      {
+                        type: 'string',
+                        title: '字体颜色',
+                        ui: {
+                          type: 'colorPicker',
+                        },
+                        fieldKey: 'color',
+                      },
+                    ],
+                    fieldKey: 'style',
+                  },
+                  ...(field?.propertyConfig?.styleSchema ||
+                    field?.styleSchema ||
+                    []),
+                ],
               },
             ] as UnitedSchema['schema'])
           allPropertyConfig[id] = propertyConfig
