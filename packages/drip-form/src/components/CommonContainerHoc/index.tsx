@@ -5,7 +5,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-31 15:31:22
+ * @Last Modified time: 2022-03-30 22:30:33
  */
 import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
@@ -74,17 +74,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
                 title={title}
               />
             )}
-          <div
-            className="form-container--content"
-            style={{
-              ...((uiProp?.style as CSSProperties)?.fontSize && {
-                fontSize: (uiProp.style as CSSProperties).fontSize,
-              }),
-              ...((uiProp?.style as CSSProperties)?.color && {
-                color: (uiProp.style as CSSProperties).color,
-              }),
-            }}
-          >
+          <div className="form-container--content">
             <Component {...props} />
           </div>
         </div>
