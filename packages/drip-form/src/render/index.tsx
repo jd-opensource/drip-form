@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-31 11:01:34
+ * @Last Modified time: 2022-04-01 11:36:25
  */
 import React from 'react'
 import type { RenderFnProps } from './type'
@@ -173,10 +173,7 @@ const Render = ({
         verticalAlign: 'center',
         requiredFields: false,
         fontSize: 12,
-        color:
-          (uiProp.formMode || formMode) === 'view'
-            ? 'rgba(0,0,0,0.45)'
-            : '#000000',
+        color: '#000000',
       },
       globalTitleUi,
       properties[item]?.title || {}
