@@ -23,6 +23,11 @@ export const schemaAtom = atom<UnitedSchema>({
   },
 })
 
+export const editJsonAtom = atom({
+  key: 'editJson',
+  default: schemaAtom,
+})
+
 /**
  * 当前鼠标hover所在的元素的FieldKey
  */
@@ -52,14 +57,6 @@ export const selectedAtom = atom<string | null>({
  */
 export const previewVisibleAtom = atom<boolean>({
   key: 'previewVisible',
-  default: false,
-})
-
-/**
- * 导出模块的可视化状态
- */
-export const exportVisibleAtom = atom<boolean>({
-  key: 'exportVisible',
   default: false,
 })
 

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useCallback } from 'react'
 import styles from './index.module.css'
 import { SaveOutlined, LogoutOutlined } from '@ant-design/icons'
 import { message } from 'antd'
@@ -6,9 +6,10 @@ import {
   componentsFoldAtom,
   schemaAtom,
   IsSavedAtom,
-  versionAtom,
+  editJsonAtom,
 } from '@generator/store'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useSaveJson } from '@generator/hooks'
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
 import MonacoEdit from './MonacoEdit'
 import { OnChange } from '@monaco-editor/react'
 const defaultValue = JSON.stringify({
@@ -19,23 +20,20 @@ const defaultValue = JSON.stringify({
 
 const EditJSON = () => {
   const setFold = useSetRecoilState(componentsFoldAtom)
-  const [unitedSchema, setUnitedSchema] = useRecoilState(schemaAtom)
+  const unitedSchema = useRecoilValue(schemaAtom)
   const [isSaved, setIsSaved] = useRecoilState(IsSavedAtom)
-  const setVersion = useSetRecoilState(versionAtom)
   const [json, setJson] = useState(unitedSchema)
-
+  const setEditJson = useSetRecoilState(editJsonAtom)
+  const saveJson = useSaveJson()
   useEffect(() => {
     setJson(unitedSchema)
   }, [unitedSchema])
   /**
    * 保存json
    */
-  const saveJson = () => {
-    setUnitedSchema(json)
-    setVersion((number) => number + 1)
-    setIsSaved(true)
-    message.success('保存成功，真棒👍🏻', 2)
-  }
+  const saveJsonFn = useCallback(() => {
+    saveJson(json)
+  }, [json, saveJson])
 
   const quitEdit = () => {
     // 保存成功
@@ -48,7 +46,10 @@ const EditJSON = () => {
 
   const handleEditorChange: OnChange = (value) => {
     try {
-      value && setJson(JSON.parse(value))
+      if (value) {
+        setJson(JSON.parse(value))
+        setEditJson(JSON.parse(value))
+      }
     } catch (error) {
       console.error(error)
     }
@@ -60,7 +61,7 @@ const EditJSON = () => {
       <div className={styles.title}>
         代码编辑区
         <div className={styles.btncontainer}>
-          <div className={styles.jsonbtn} onClick={saveJson}>
+          <div className={styles.jsonbtn} onClick={saveJsonFn}>
             <SaveOutlined />
             <span className="ml-2">保存</span>
           </div>
