@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-17 15:42:52
+ * @Last Modified time: 2022-04-02 09:12:30
  */
 import React, { memo, useMemo, useCallback, useContext } from 'react'
 import cx from 'classnames'
@@ -36,16 +36,26 @@ const fieldContainer = memo<Props>(
      * 表单组件
      */
     const FieldMemo = useMemo(() => {
+      let errTip = '组件未加载'
+      const style = { color: 'red' }
       // 当前Field使用的组件 默认antd
       let Component: any
       if (type === 'custom' && customComponents) {
         Component = customComponents[fieldKey]
+        if (!Component) {
+          errTip = `无法找到自定义组件${fieldKey}，请确认是否导入`
+        }
       } else {
         const [customTheme, customType] = type.split('::')
         if (customType) {
           Component = uiComponents[customTheme]?.[customType]
         } else {
           Component = uiComponents[theme]?.[type]
+        }
+        if (!Component) {
+          errTip = `无法找到主题${customType ? customTheme : theme}中的${
+            customType || type
+          }组件，请确认是否导入`
         }
       }
 
@@ -61,7 +71,9 @@ const fieldContainer = memo<Props>(
           {...(queryFunc ? { queryFunc } : null)}
           {...(asyncValidate ? { asyncValidate } : null)}
         />
-      ) : null
+      ) : (
+        <span style={style}>{errTip}</span>
+      )
     }, [
       type,
       customComponents,
