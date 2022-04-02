@@ -1,29 +1,31 @@
 import React, { Fragment, memo } from 'react'
 import styles from './index.module.css'
 import cx from 'classnames'
-import { Upload, message } from 'antd'
+import { Upload, message, Modal } from 'antd'
 import {
   UploadOutlined,
   DownloadOutlined,
   EditOutlined,
   CompressOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons'
 import {
   componentsFoldAtom,
   previewVisibleAtom,
-  exportVisibleAtom,
   schemaAtom,
   versionAtom,
   optionsAtom,
+  IsSavedAtom,
+  editJsonAtom,
 } from '@generator/store'
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
+import { useSetRecoilState, useRecoilValue, useRecoilCallback } from 'recoil'
+import { useSaveJson } from '@generator/hooks'
 import FileSaver from 'file-saver'
 import type { RcFile } from 'rc-upload/lib/interface'
-
+const { confirm } = Modal
 const Header = () => {
   const setFold = useSetRecoilState(componentsFoldAtom)
   const setPreviewVisible = useSetRecoilState(previewVisibleAtom)
-  const setExportVisible = useSetRecoilState(exportVisibleAtom)
   const {
     headerConfig: {
       customExport,
@@ -36,9 +38,9 @@ const Header = () => {
       showExportJSON,
     },
   } = useRecoilValue(optionsAtom)
-  const [unitedSchema, setUnitedSchema] = useRecoilState(schemaAtom)
+  const setUnitedSchema = useSetRecoilState(schemaAtom)
   const setVersion = useSetRecoilState(versionAtom)
-
+  const saveJson = useSaveJson()
   const importJson = (file: RcFile) => {
     return new Promise<void>(() => {
       const reader = new FileReader()
@@ -68,27 +70,47 @@ const Header = () => {
     setPreviewVisible(true)
   }
 
-  const rawExport = () => {
-    setExportVisible(true)
-    FileSaver.saveAs(
-      new Blob([JSON.stringify(unitedSchema)], {
-        type: 'application/json;charset=utf-8',
-      }),
-      'unitedSchema.json'
-    )
-  }
-
   /**
    * 导出json
    */
-  const exportJson = () => {
-    // todo: 如果有自定义导出，则执行自定义，但后续应移除该方法
-    if (customExport) {
-      customExport(rawExport)
-    } else {
-      rawExport()
-    }
-  }
+  const exportJson = useRecoilCallback(
+    ({ snapshot }) =>
+      async () => {
+        const editJson = await snapshot.getPromise(editJsonAtom)
+        const isSaved = await snapshot.getPromise(IsSavedAtom)
+        const exportJson = () => {
+          const rawExport = (): void => {
+            FileSaver.saveAs(
+              new Blob([JSON.stringify(editJson)], {
+                type: 'application/json;charset=utf-8',
+              }),
+              'unitedSchema.json'
+            )
+          }
+          saveJson(editJson)
+          if (customExport) {
+            customExport(rawExport)
+          } else {
+            rawExport()
+          }
+        }
+        if (!isSaved) {
+          confirm({
+            title: '当前JSON正在编辑',
+            icon: <ExclamationCircleOutlined />,
+            content: `是否保存JSON后${exportText}`,
+            onOk() {
+              exportJson()
+            },
+            okText: exportText === '保存' ? exportText : `保存并${exportText}`,
+            cancelText: '取消',
+          })
+        } else {
+          exportJson()
+        }
+      },
+    [customExport, exportText, saveJson]
+  )
 
   return (
     <div className={styles.header}>
