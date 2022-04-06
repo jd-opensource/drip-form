@@ -100,7 +100,14 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
     // 设置左侧组件
     useEffect(() => {
       if (components) {
-        setSidebarData(components)
+        // 过滤order
+        setSidebarData(
+          produce(components, (draft) => {
+            draft.order = draft.order.filter((item) =>
+              Object.keys(draft.category).includes(item)
+            )
+          })
+        )
       } else {
         if (customComponents) {
           setSidebarData((oldSidebarData) => {
