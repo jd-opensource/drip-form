@@ -91,4 +91,5 @@ export const parsedSchema = {
       unitedSchemaKey: 'schema.0.items',
     },
   },
+  customProps: [],
 }

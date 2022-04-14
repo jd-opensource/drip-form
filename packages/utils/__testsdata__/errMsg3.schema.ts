@@ -74,4 +74,5 @@ export const parsedSchema = {
     },
     theme: 'antd',
   },
+  customProps: [],
 }
