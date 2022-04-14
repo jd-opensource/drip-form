@@ -3,10 +3,18 @@ export const unitedSchema = {
   validateTime: 'submit',
   requiredMode: 'default',
   type: 'object',
+  footer: {},
+  formMode: 'edit',
+  containerStyle: {},
+  'ui:a1': 1,
   ui: {
     mode: 'edit',
+    a1: 2,
+    b: 2,
     '$:type': 'drip',
   },
+  'ui:a': 1,
+  'ui:b': 1,
   schema: [
     {
       fieldKey: 'name',
@@ -80,7 +88,13 @@ export const parsedSchema = {
   },
   uiSchema: {
     theme: 'antd',
+    footer: {},
+    formMode: 'edit',
+    containerStyle: {},
     mode: 'edit',
+    a: 1,
+    a1: 2,
+    b: 2,
     order: ['name', 'babelRadio'],
     '$:type': 'drip',
     properties: {

@@ -246,4 +246,5 @@ export const parsedSchema = {
       unitedSchemaKey: 'schema.1.items.schema.0.items',
     },
   },
+  customProps: [],
 }

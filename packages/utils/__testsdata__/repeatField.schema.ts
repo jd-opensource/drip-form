@@ -24,33 +24,18 @@ export const unitedSchema = {
       },
     },
     {
-      title: '下拉输入',
-      type: 'object',
-      fieldKey: 'babelRadio',
+      fieldKey: 'name',
+      title: '名字',
+      type: 'string',
+      requiredMsg: '该项必填',
       ui: {
-        type: 'selectText',
-        placeholder: '请选择',
-        allowClear: true,
-        multiple: true,
-        requestCache: true,
-        options: [
-          {
-            label: '北京',
-            value: '0',
-          },
-          {
-            label: '上海',
-            value: '1',
-          },
-          {
-            label: '成都',
-            value: '2',
-          },
-          {
-            label: '武汉',
-            value: '3',
-          },
-        ],
+        type: 'text',
+        placeholder: '请输入name，当name1有值时，该表单隐藏',
+        description: {
+          type: 'icon',
+          title: 'hover触发提示',
+          trigger: 'hover',
+        },
       },
     },
   ],
@@ -66,10 +51,6 @@ export const parsedSchema = {
         title: '名字',
         type: 'string',
       },
-      babelRadio: {
-        title: '下拉输入',
-        type: 'object',
-      },
     },
     required: ['name'],
     errorMessage: {
@@ -81,7 +62,7 @@ export const parsedSchema = {
   uiSchema: {
     theme: 'antd',
     mode: 'edit',
-    order: ['name', 'babelRadio'],
+    order: ['name'],
     '$:type': 'drip',
     properties: {
       name: {
@@ -93,43 +74,13 @@ export const parsedSchema = {
           trigger: 'hover',
         },
       },
-      babelRadio: {
-        type: 'selectText',
-        placeholder: '请选择',
-        allowClear: true,
-        multiple: true,
-        requestCache: true,
-        options: [
-          {
-            label: '北京',
-            value: '0',
-          },
-          {
-            label: '上海',
-            value: '1',
-          },
-          {
-            label: '成都',
-            value: '2',
-          },
-          {
-            label: '武汉',
-            value: '3',
-          },
-        ],
-      },
     },
   },
   typePath: {
-    babelRadio: {
-      fatherKey: '',
-      type: 'object',
-      unitedSchemaKey: 'schema.1',
-    },
     name: {
       fatherKey: '',
       type: 'string',
-      unitedSchemaKey: 'schema.0',
+      unitedSchemaKey: 'schema.1',
     },
   },
   customProps: [],

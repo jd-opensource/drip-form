@@ -31,7 +31,8 @@
 		"url": "https://github.com/JDFED/drip-form/"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.10.2"
+		"@babel/runtime": "^7.10.2",
+		"lodash": "^4.17.21"
 	},
 	"gitHead": "1416735284b5c9f0d76c7271117fb8723a2300ec"
 }

@@ -142,7 +142,7 @@ export const parsedSchema = {
       },
       tupleItem: {
         type: 'array',
-        order: [0, 1],
+        order: ['0', '1'],
         properties: {
           0: {
             type: 'input',
@@ -338,4 +338,5 @@ export const parsedSchema = {
       unitedSchemaKey: 'schema.3.items.schema.1',
     },
   },
+  customProps: [],
 }

@@ -1,4 +1,4 @@
-import { parseUnitedSchema } from '../src/index'
+import { parseUnitedSchema, UnitedSchema } from '../src/index'
 import {
   unitedSchema as test1,
   parsedSchema as verify1,
@@ -31,45 +31,79 @@ import {
   unitedSchema as test8,
   parsedSchema as verify8,
 } from '../__testsdata__/array.schema'
+import {
+  unitedSchema as test9,
+  parsedSchema as verify9,
+} from '../__testsdata__/errMsg4.schema'
+import {
+  unitedSchema as test10,
+  parsedSchema as verify10,
+} from '../__testsdata__/root.schema'
+import {
+  unitedSchema as test11,
+  parsedSchema as verify11,
+} from '../__testsdata__/test.schema'
+import {
+  unitedSchema as test12,
+  parsedSchema as verify12,
+} from '../__testsdata__/repeatField.schema'
 
 describe('parseUnitedSchema', () => {
   test('test datePicker.schema.js', () => {
-    const data = parseUnitedSchema(test7)
+    const data = parseUnitedSchema(test7 as UnitedSchema)
     expect(data).toStrictEqual(verify7)
   })
 
   test('test multinest.schema.js', () => {
-    const data = parseUnitedSchema(test1)
+    const data = parseUnitedSchema(test1 as UnitedSchema)
     expect(data).toStrictEqual(verify1)
   })
 
   test('test nest.schema.js', () => {
-    const data = parseUnitedSchema(test2)
+    const data = parseUnitedSchema(test2 as UnitedSchema)
     expect(data).toStrictEqual(verify2)
   })
 
   test('test nestObject.schema.js', () => {
-    const data = parseUnitedSchema(test3)
+    const data = parseUnitedSchema(test3 as UnitedSchema)
     expect(data).toStrictEqual(verify3)
   })
 
   test('test errMsg.schema.js', () => {
-    const data = parseUnitedSchema(test4)
+    const data = parseUnitedSchema(test4 as UnitedSchema)
     expect(data).toStrictEqual(verify4)
   })
 
   test('test errMsg.schema2.js', () => {
-    const data = parseUnitedSchema(test5)
+    const data = parseUnitedSchema(test5 as UnitedSchema)
     expect(data).toStrictEqual(verify5)
   })
 
   test('test errMsg.schema3.js', () => {
-    const data = parseUnitedSchema(test6)
+    const data = parseUnitedSchema(test6 as UnitedSchema)
     expect(data).toStrictEqual(verify6)
   })
 
+  test('test errMsg4.schema.js', () => {
+    const data = parseUnitedSchema(test9 as UnitedSchema)
+    expect(data).toStrictEqual(verify9)
+  })
+
   test('test array.schema.js', () => {
-    const data = parseUnitedSchema(test8)
+    const data = parseUnitedSchema(test8 as UnitedSchema)
     expect(data).toStrictEqual(verify8)
+  })
+  test('test root.schema.js', () => {
+    const data = parseUnitedSchema(test10 as UnitedSchema)
+    expect(data).toStrictEqual(verify10)
+  })
+
+  test('test test.schema.js', () => {
+    const data = parseUnitedSchema(test11 as UnitedSchema)
+    expect(data).toStrictEqual(verify11)
+  })
+  test('test repeatField.schema.js', () => {
+    const data = parseUnitedSchema(test12 as UnitedSchema)
+    expect(data).toStrictEqual(verify12)
   })
 })
