@@ -17,6 +17,7 @@ import {
   allFieldAtom,
   curTypeAtom,
   viewportConfigSelector,
+  optionsAtom,
 } from '@generator/store'
 // import Placeholder from '../CustomComponents/Placeholder'
 import { useCanDrop } from '@generator/hooks'
@@ -126,6 +127,7 @@ const DripFormDragHoc: FC<Props> = memo(
     )
 
     const viewportConfig = useRecoilValue(viewportConfigSelector)
+    const options = useRecoilValue(optionsAtom)
 
     return (
       <>
@@ -151,7 +153,9 @@ const DripFormDragHoc: FC<Props> = memo(
             <ActiveTools isFirst={isFirst} />
           )}
           <div
-            className="draggable"
+            className={cx({
+              draggable: options.viewportConfig.pointerEvents === 'none',
+            })}
             {...listeners}
             {...attributes}
             ref={setDragRef}

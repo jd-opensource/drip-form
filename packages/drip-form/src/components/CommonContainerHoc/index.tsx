@@ -41,6 +41,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
     const newTitleUi = useTitle(titleUi)
     return (
       <div
+        // form-container需要和packages/generator/src/components/Viewport/DripFormDragHoc/index.module.css中同步修改
         className={cx('form-container', {
           'form-container-view': formMode === 'view',
           'form-container-generator': formMode === 'generator',

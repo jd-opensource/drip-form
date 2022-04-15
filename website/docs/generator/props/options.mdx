@@ -47,7 +47,11 @@ type HeaderConfig = Partial<{
 	renderLeftHeader: () => JSX.Element
 }>
 
-type ViewportConfig = Partial<Record<ViewportConfigKey, ViewportConfigItem>>
+type ViewportConfig = Partial<
+  Record<ViewportConfigKey, ViewportConfigItem> & {
+    pointerEvents: 'none' | 'auto'
+  }
+>
 
 type ViewportConfigItem =
 	| boolean
@@ -98,16 +102,24 @@ type ViewportConfigKey = 'showActionBar' | 'showDeleteIcon'
 
 ## 可视区配置
 
-`viewportConfig`用来配置 **viewport 区域操作栏**（图片红色区域）
+### pointerEvents
+
+viewport区域表单是否可以点击
+
+'none'（默认）: 不可点击
+'auto': 可以点击
+
+### showActionBar
+
+是否展示操作栏
+
+用来配置 **viewport 区域操作栏**（图片红色区域）
 
 <img
 	src="https://img11.360buyimg.com/imagetools/jfs/t1/134505/27/23809/10562/62172e31E7e74b668/3b10505918437cd1.png"
 	alt="操作栏"
 />
 
-### showActionBar
-
-是否展示操作栏
 
 <Tabs>
   <TabItem value="example" label="配置示例" default>
