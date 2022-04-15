@@ -41397,11 +41397,11 @@ Add the correct display in Chrome and Safari.
     position: relative;
   }
 
-.drip-form_container--droppable .field-container {
+.drip-form_container--droppable .form-container {
     width: 100% !important;
   }
 
-.draggable .field-container {
+.draggable .form-container {
       pointer-events:none;
     }
 
