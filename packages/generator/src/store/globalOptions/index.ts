@@ -39,7 +39,9 @@ export type ViewportConfigItem =
 type ViewportConfigKey = 'showActionBar' | 'showDeleteIcon'
 
 export type ViewportConfig = Partial<
-  Record<ViewportConfigKey, ViewportConfigItem>
+  Record<ViewportConfigKey, ViewportConfigItem> & {
+    pointerEvents: 'none' | 'auto'
+  }
 >
 
 export type Options = {
@@ -68,6 +70,7 @@ export const optionsAtom = atom<Options>({
     viewportConfig: {
       showActionBar: true,
       showDeleteIcon: true,
+      pointerEvents: 'none',
     },
     fieldKeyFn: (unitedSchema) => `${unitedSchema.ui.type}_${nanoid(6)}`,
     addFieldLocation: 'bottom',
@@ -91,7 +94,9 @@ export const viewportConfigSelector = selector<
       return param
     }
     Object.entries(viewportConfig).map(([key, value]) => {
-      viewportConfigValue[key] = getBoolean(value)
+      if (['showActionBar', 'showDeleteIcon'].includes(key)) {
+        viewportConfigValue[key] = getBoolean(value as ViewportConfigItem)
+      }
     })
     return viewportConfigValue
   },

@@ -3,11 +3,11 @@
     user-select: none;
     position: relative;
   }
-  .drip-form_container--droppable .field-container {
+  .drip-form_container--droppable .form-container {
     width: 100% !important;
   }
   .draggable {
-    & .field-container {
+    & .form-container {
       pointer-events:none;
     }
   }
