@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { Align, TitleType } from './type'
+import questionCircle from '../QuestionCircle'
 import './index.styl'
 
 const Title = memo<TitleType>(
@@ -12,7 +13,7 @@ const Title = memo<TitleType>(
     theme,
     title,
   }) => {
-    const QuestionCircle = uiComponents[theme]?.QuestionCircle
+    const QuestionCircle = uiComponents[theme]?.QuestionCircle || questionCircle
     return (
       <div
         className="form-container__title"

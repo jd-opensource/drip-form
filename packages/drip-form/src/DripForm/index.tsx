@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 17:33:29
+ * @Last Modified time: 2022-04-18 17:30:53
  */
 import React, {
   forwardRef,
@@ -20,6 +20,7 @@ import './index.styl'
 import validate from '../validate'
 import formDataReducer, { FormDataContext } from '../reducers'
 import renderCoreFn from '../render'
+import Tooltip from 'react-tooltip'
 import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
 import {
   useValidate,
@@ -472,6 +473,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
               arrayKey,
               isRoot: true,
             })}
+            <Tooltip clickable={true} />
             <Footer
               uiSchema={uiSchema}
               uiComponents={uiComponents}

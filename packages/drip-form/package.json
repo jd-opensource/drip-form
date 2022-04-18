@@ -54,6 +54,7 @@
 		"ajv": "^8.6.2",
 		"classnames": "^2.2.6",
 		"immer": "^9.0.5",
+		"react-tooltip": "^4.2.21",
 		"use-immer": "^0.6.0"
 	},
 	"peerDependencies": {
