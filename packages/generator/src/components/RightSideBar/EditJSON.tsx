@@ -7,6 +7,7 @@ import {
   schemaAtom,
   IsSavedAtom,
   editJsonAtom,
+  selectedAtom,
 } from '@generator/store'
 import { useSaveJson } from '@generator/hooks'
 import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil'
@@ -19,6 +20,7 @@ const defaultValue = JSON.stringify({
 })
 
 const EditJSON = () => {
+  const setSelectedFieldKey = useSetRecoilState(selectedAtom)
   const setFold = useSetRecoilState(componentsFoldAtom)
   const unitedSchema = useRecoilValue(schemaAtom)
   const [isSaved, setIsSaved] = useRecoilState(IsSavedAtom)
@@ -35,14 +37,15 @@ const EditJSON = () => {
     saveJson(json)
   }, [json, saveJson])
 
-  const quitEdit = () => {
+  const quitEdit = useCallback(() => {
     // 保存成功
     if (isSaved) {
+      setSelectedFieldKey(null)
       setFold(false)
     } else {
       message.warning('请先保存JSON编辑结果，再退出！', 2)
     }
-  }
+  }, [isSaved, setFold, setSelectedFieldKey])
 
   const handleEditorChange: OnChange = (value) => {
     try {
