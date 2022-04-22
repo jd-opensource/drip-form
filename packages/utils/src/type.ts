@@ -14,7 +14,14 @@ export type GetKey = (
 export type GetTypeKey = (fieldKey: string) => string | never
 
 export type State = {
-  typePath: Map
+  typePath: Record<
+    string,
+    {
+      type: string
+      unitedSchemaKey: string
+      fatherKey: string
+    }
+  >
   uiSchema: UiSchema
   dataSchema: DataSchema
   // 表单数据

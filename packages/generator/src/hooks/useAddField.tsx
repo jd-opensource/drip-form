@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-07 17:16:55
+ * @Last Modified time: 2022-04-21 14:06:29
  */
 import { useCallback, useContext } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -22,6 +22,7 @@ type AddField = (param: {
   unitedSchema: UnitedSchemaAtom
   fieldKey?: string
   closestEdge?: ClosestEdge
+  // viewport区域拖拽，正在拖拽的表单fielKey
   oldFieldKey?: string
 }) => void
 
