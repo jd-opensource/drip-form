@@ -97,10 +97,7 @@ function DndWrapper({ children }: DndWrapperType) {
         ) {
           const { dataSchema, uiSchema } =
             generatorContext.current?.get(activeKey)
-          const unitedSchema = combine(
-            dataSchema as DataSchema,
-            uiSchema as UiSchema
-          ) as UnitedSchemaAtom
+          const unitedSchema = combine(dataSchema, uiSchema) as UnitedSchemaAtom
           addField({
             unitedSchema,
             fieldKey: over?.data.current?.fieldKey,
