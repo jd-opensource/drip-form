@@ -1,8 +1,8 @@
 /*
  * @Author: jiangxiaowei
  * @Date: 2022-03-02 13:04:51
- * @Last Modified by:   jiangxiaowei
- * @Last Modified time: 2022-03-02 13:04:51
+ * @Last Modified by: jiangxiaowei
+ * @Last Modified time: 2022-04-22 14:13:13
  */
 import React, { memo } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -25,6 +25,7 @@ const ActiveTools = memo<{
       <Item icon="xiangxia" />
       <Item icon="fuzhi1" /> */}
       {showDeleteIcon && (
+        // undefined避免传递event
         <Item icon="shanchu" onClick={deleteField.bind(this, undefined)} />
       )}
     </div>

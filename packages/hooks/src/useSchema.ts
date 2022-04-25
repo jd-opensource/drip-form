@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-06 15:33:25
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-02-11 14:12:02
+ * @Last Modified time: 2022-04-22 11:31:56
  */
 import { typeCheck } from '@jdfed/utils'
 import { useCallback } from 'react'
@@ -34,7 +34,7 @@ export type Set = (
   type: SetType,
   value: SetFn | StaticValue
 ) => void
-export type DeleteField = (fieldKey: string) => void
+export type DeleteField = (fieldKey: string, cb?: () => void) => void
 export type AddField = (params: {
   fieldKey: string
   closestEdge: ClosestEdge
@@ -324,7 +324,7 @@ const useSchema = ({
    * 删除一个表单项（同步删除uiSchema、dataSchema中的配置）
    */
   const deleteField = useCallback(
-    (key) => {
+    (key, cb) => {
       dispatch({
         type: 'deleteField',
         action: {
@@ -334,6 +334,7 @@ const useSchema = ({
           getTypeKey,
         },
       })
+      cb && cb()
     },
     [dispatch, get, getKey, getTypeKey]
   )
