@@ -3,6 +3,7 @@
   right: 0;
   top: -22px;
   z-index: 999;
+  pointer-events:auto;
   @apply flex;
 }
 
@@ -11,5 +12,6 @@
   right: 0;
   bottom: -22px;
   z-index: 999;
+  pointer-events:auto;
   @apply flex;
 }
