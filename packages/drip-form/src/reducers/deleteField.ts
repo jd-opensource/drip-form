@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 14:10:37
+ * @Last Modified time: 2022-04-24 18:33:29
  */
 import { produce, original } from 'immer'
 import { deleteDeepProp, setDeepProp } from '@jdfed/utils'
@@ -70,72 +70,21 @@ const deleteField = ({
     }
     case 'object': {
       const order: Array<string> = deleteParentUiSchema.order || []
-      // 祖父容器类型
-      let grandUiType = 'object'
-      // 祖父容器路径
-      let grandParentPath = ''
-      const deleteParenPathArr = deleteParentPath.split('.')
-      if (deleteParenPathArr.length > 1) {
-        grandParentPath = deleteParenPathArr
-          .slice(0, deleteParenPathArr.length - 1)
-          .join('.')
-        // 待添加的组父级表单
-        const { uiSchema: addGrandParentUiSchema } = get(grandParentPath)
-        // 待添加表单 祖父级元素类型 默认对象类型
-        if (addGrandParentUiSchema.type === 'array') {
-          if (['normal', 'tuple'].includes(addGrandParentUiSchema.mode)) {
-            grandUiType = 'tuple'
-            // 元祖
-          } else {
-            // 自增数组
-            grandUiType = 'array'
-          }
-        }
+      const index = order.findIndex((item) => item == fieldKey.split('.').pop())
+      // 删除order
+      if (index != -1) {
+        deleteDeepProp(orderPath.concat(index), state.uiSchema)
       }
-      // 祖父是数组容器时，删除对象容器最后一个属性，需要同时删除对象容器
-      if (grandUiType === 'array' && order.length === 1) {
-        const deleteUiSchemaPath = getKey(
-          `${grandParentPath}.0`,
-          'uiSchema'
-        ).split('.')
-        const deleteDataSchemaPath = getKey(
-          `${grandParentPath}.0`,
-          'dataSchema'
-        ).split('.')
-        // 删除order
-        deleteDeepProp(
-          getKey(grandParentPath, 'uiSchema').split('.').concat('order'),
-          state.uiSchema
-        )
-        // 删除uiSchema
-        deleteDeepProp(deleteUiSchemaPath, state.uiSchema)
-        // 删除dataSchema
-        deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
-        // 删除typePath
-        Object.keys(state.typePath).map((item) => {
-          if (item.startsWith(getTypeKey(`${grandParentPath}.0`))) {
-            delete state.typePath[item]
-          }
-        })
-      } else {
-        const index = order.findIndex(
-          (item) => item == fieldKey.split('.').pop()
-        )
-        // 删除order
-        if (index != -1) {
-          deleteDeepProp(orderPath.concat(index), state.uiSchema)
+      // 删除uiSchema
+      deleteDeepProp(deleteUiSchemaPath, state.uiSchema)
+      // 删除dataSchema
+      deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
+      // 删除typePath
+      Object.keys(state.typePath).map((item) => {
+        if (item.startsWith(getTypeKey(fieldKey))) {
+          delete state.typePath[item]
         }
-        // 删除uiSchema
-        deleteDeepProp(deleteUiSchemaPath, state.uiSchema)
-        // 删除dataSchema
-        deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
-        // 删除typePath
-        Object.keys(state.typePath).map((item) => {
-          if (item.startsWith(getTypeKey(fieldKey))) {
-            delete state.typePath[item]
-          }
-        })
-      }
+      })
       // TODO 删除formData
       // TODO 删除dataSchema的其它等字段
       break
@@ -152,7 +101,15 @@ const deleteField = ({
         }
       })
       // 删除dataSchema
-      deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
+      if (order.length === 1) {
+        // 元祖中删除最后一个元素时，需要同步删除父级的items，否则jsonSchema会报错
+        deleteDeepProp(
+          deleteDataSchemaPath.slice(0, deleteDataSchemaPath.length - 1),
+          state.dataSchema
+        )
+      } else {
+        deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
+      }
       const oldProperties: Record<string, any> = deleteParentUiSchema.properties
       const newProperties = produce(oldProperties, (draft) => {
         const index = order.findIndex(
