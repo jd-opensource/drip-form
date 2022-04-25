@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-11 13:55:35
+ * @Last Modified time: 2022-04-24 18:50:14
  */
 import React, { useMemo, memo } from 'react'
 import { useTitle } from '@jdfed/hooks'
@@ -150,26 +150,32 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
             </Panel>
           </Collapse>
         ) : (
-          renderCoreFn({
-            hasDefault,
-            uiComponents,
-            dataSchema,
-            uiSchema,
-            errors,
-            formData,
-            onQuery,
-            onValidate,
-            dispatch,
-            containerMap,
-            parentUiSchemaKey,
-            parentDataSchemaKey,
-            parentFormDataKey: fieldKey,
-            customComponents,
-            get,
-            getKey,
-            containerHoc,
-            arrayKey,
-          })
+          <div
+            className={cx({
+              'drip-form_objectContainer': formMode === 'generator',
+            })}
+          >
+            {renderCoreFn({
+              hasDefault,
+              uiComponents,
+              dataSchema,
+              uiSchema,
+              errors,
+              formData,
+              onQuery,
+              onValidate,
+              dispatch,
+              containerMap,
+              parentUiSchemaKey,
+              parentDataSchemaKey,
+              parentFormDataKey: fieldKey,
+              customComponents,
+              get,
+              getKey,
+              containerHoc,
+              arrayKey,
+            })}
+          </div>
         )}
       </>
     )
