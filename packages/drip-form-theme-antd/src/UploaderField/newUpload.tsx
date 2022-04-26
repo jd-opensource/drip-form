@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-10 17:11:29
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-28 18:20:14
+ * @Last Modified time: 2022-04-26 09:53:59
  */
 
 import React, { memo, FC, useMemo, useCallback } from 'react'
@@ -107,7 +107,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   ...restProps
 }) => {
   // 如果是string类型，则需要处理为对象形式
-  const newFieldData = useMemo(() => {
+  const newFieldData = useMemo<Array<UploadFile>>(() => {
     if (exportToString && typeof fieldData === 'string') {
       return [
         {
@@ -118,8 +118,18 @@ const UploaderField: FC<UploaderFieldProps> = ({
           url: fieldData,
         },
       ]
+    } else if (Array.isArray(fieldData)) {
+      return fieldData.map((item) => {
+        return {
+          name: '',
+          percent: 100,
+          status: 'done',
+          uid: '',
+          url: item,
+        }
+      })
     } else {
-      return fieldData || []
+      return []
     }
   }, [exportToString, fieldData])
 
