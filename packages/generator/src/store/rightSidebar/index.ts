@@ -16,7 +16,7 @@ export const allPropertyConfigSchemaSelector = selector<
       root: rootConfig,
     }
     order.map((key) => {
-      category[key].order.map((id) => {
+      Object.keys(category[key].fields).map((id) => {
         const field = category[key].fields[id]
         if (id != 'root') {
           const propertyConfig =
