@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-27 14:32:51
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-24 10:20:18
+ * @Last Modified time: 2022-04-27 15:42:31
  */
 
 import { useContext } from 'react'
@@ -14,10 +14,14 @@ import useCanEditJson from './useCanEditJson'
 
 type DeleteField = (fieldKey?: string) => void
 
-const useDeleteField = (): DeleteField => {
+/**
+ *
+ * @param setSelected 删除后是否设置选中项。默认选中
+ * @returns
+ */
+const useDeleteField = (setSelected = true): DeleteField => {
   const generatorContext = useContext(GeneratorContext)
   const canEdit = useCanEditJson()
-
   const deleteField = useRecoilCallback<[string | undefined], void>(
     ({ snapshot, set }) =>
       async (fieldKey) => {
@@ -50,20 +54,23 @@ const useDeleteField = (): DeleteField => {
             const index = order.findIndex(
               (item) => String(item) === keyPath.slice(-1).join()
             )
-            // 存在上一个相邻元素
-            if (index > 0) {
-              set(
-                selectedAtom,
-                `${parentKey ? parentKey + '.' : ''}${order[index - 1]}`
-              )
-            } else {
-              //不存在上一个相邻元素，自动选中父级
-              set(selectedAtom, parentKey)
+            // 删除后，自动选中
+            if (setSelected) {
+              if (index > 0) {
+                // 存在上一个相邻元素
+                set(
+                  selectedAtom,
+                  `${parentKey ? parentKey + '.' : ''}${order[index - 1]}`
+                )
+              } else {
+                //不存在上一个相邻元素，自动选中父级
+                set(selectedAtom, parentKey)
+              }
             }
           }
         )
       },
-    [canEdit, generatorContext]
+    [canEdit, generatorContext, setSelected]
   )
   return deleteField
 }

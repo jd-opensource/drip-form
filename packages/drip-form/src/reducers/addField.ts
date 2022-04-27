@@ -3,10 +3,10 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 15:29:06
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 17:06:58
+ * @Last Modified time: 2022-04-27 17:17:08
  */
-import { produce } from 'immer'
-import { setDeepProp, parseUnitedSchema } from '@jdfed/utils'
+import { produce, current } from 'immer'
+import { setDeepProp, parseUnitedSchema, combine } from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const addField = ({
@@ -134,13 +134,6 @@ const addField = ({
       if (isSortMode) {
         break
       }
-      // 设置typePath
-      state.typePath[
-        addParenTypePath ? `${addParenTypePath}.${fieldKey}` : fieldKey
-      ] = {
-        type: dataSchema.type,
-        parentKey: addParenTypePath,
-      }
       // 设置uiSchema
       setDeepProp(
         addParentSchemaPath.ui.concat(['properties', fieldKey]),
@@ -173,12 +166,7 @@ const addField = ({
           }
         })
         container = produce(container, (draft) => {
-          state.typePath[`${addParenTypePath}.$container.${oldFieldKey}`] = {
-            type: draft.type,
-            parentKey: `${addParenTypePath}.$container`,
-          }
           // 嵌套数组+嵌套数组 特殊逻辑
-          delete state.typePath[`${addParenTypePath}.$container.$container`]
           return {
             type: 'object',
             order: ['left', 'top'].includes(closestEdge)
@@ -190,21 +178,6 @@ const addField = ({
             },
           }
         })
-        state.typePath[`${addParenTypePath}.$container`] = {
-          type: 'object',
-          parentKey: addParenTypePath,
-        }
-        state.typePath[`${addParenTypePath}.$container.${fieldKey}`] = {
-          type: dataSchema.type,
-          parentKey: `${addParenTypePath}.$container`,
-        }
-      } else {
-        state.typePath[
-          `${addParenTypePath ? addParenTypePath : overFieldKey}.$container`
-        ] = {
-          type: dataSchema.type,
-          parentKey: addParenTypePath,
-        }
       }
       // 设置order
       setDeepProp(addParentSchemaPath.ui.concat(['order']), state.uiSchema, [
@@ -239,7 +212,8 @@ const addField = ({
           : produce(items, (draft) => {
               draft.splice(index, 0, dataSchema)
             })
-      const newOrder = closestEdge === 'over' ? ['0'] : [...order, String(order.length)]
+      const newOrder =
+        closestEdge === 'over' ? ['0'] : [...order, String(order.length)]
       const properties: Record<string, any> = addParentUiSchema.properties || {}
       const newProperties =
         closestEdge === 'over'
@@ -251,22 +225,11 @@ const addField = ({
               arr.map((key) => {
                 if (+key === index) {
                   draft[key] = uiSchema
-                }else{
+                } else {
                   draft[key] = draft[+key - 1]
-                }
-                  state.typePath[`${addParenTypePath}.${key}`] = {
-                    type: dataSchema.type,
-                    parentKey: addParenTypePath,
-                  }
                 }
               })
             })
-      if (closestEdge === 'over') {
-        state.typePath[`${addParenTypePath}.0`] = {
-          type: dataSchema.type,
-          parentKey: addParenTypePath,
-        }
-      }
       // 设置order
       setDeepProp(
         addParentSchemaPath.ui.concat(['order']),
@@ -291,6 +254,9 @@ const addField = ({
     default:
       break
   }
+  state.typePath = parseUnitedSchema(
+    combine(current(state.dataSchema), current(state.uiSchema))
+  ).typePath
 }
 
 export default addField
