@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-21 14:06:29
+ * @Last Modified time: 2022-04-27 18:02:10
  */
 import { useCallback, useContext } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -31,7 +31,7 @@ const useAddField = (): AddField => {
   const { fieldKeyFn, addFieldLocation } = useRecoilValue(optionsAtom)
   const [selectedKey, setSelected] = useRecoilState(selectedAtom)
   const setCurType = useSetRecoilState(curTypeAtom)
-  const deleteField = useDeleteField()
+  const deleteField = useDeleteField(false)
   const canEdit = useCanEditJson()
   // unitedSchema最外层的order
   const rootOrder = generatorContext.current?.get().uiSchema?.order || []
@@ -71,6 +71,7 @@ const useAddField = (): AddField => {
       }
       switch (type) {
         case 'object':
+          // vieport区域拖拽
           if (oldFieldKey) {
             const lastFieldKey = oldFieldKey.split('.').pop() as string
             if (closestEdge != 'over') {
@@ -98,6 +99,12 @@ const useAddField = (): AddField => {
           selectKey = `${parentKey ? `${parentKey}.` : ''}${newFieldKey}`
           break
         case 'array':
+          if (closestEdge != 'over') {
+            // viewport区域拖拽
+            if (oldFieldKey) {
+              newFieldKey = oldFieldKey.split('.').pop() as string
+            }
+          }
           selectKey = `${parentKey}${
             closestEdge != 'over' ? `.0.${newFieldKey}` : '.0'
           }`
@@ -111,7 +118,7 @@ const useAddField = (): AddField => {
               : ['left', 'top'].includes(closestEdge)
               ? +curKey
               : +curKey + 1
-
+          newFieldKey = `${index}`
           selectKey = `${parentKey}.${index}`
           break
         }
@@ -123,7 +130,7 @@ const useAddField = (): AddField => {
         closestEdge,
         unitedSchema,
         overFieldKey:
-          !selectedKey && addFieldLocation === 'bottom'
+          !selectedKey && addFieldLocation === 'bottom' && closestEdge != 'over'
             ? lastFieldKey
             : fieldKey,
         shouldDelete,

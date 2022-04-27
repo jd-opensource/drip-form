@@ -4,10 +4,15 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-24 18:33:29
+ * @Last Modified time: 2022-04-27 17:17:48
  */
-import { produce, original } from 'immer'
-import { deleteDeepProp, setDeepProp } from '@jdfed/utils'
+import { produce, current } from 'immer'
+import {
+  deleteDeepProp,
+  setDeepProp,
+  parseUnitedSchema,
+  combine,
+} from '@jdfed/utils'
 import type { State } from '@jdfed/utils'
 
 const deleteField = ({
@@ -58,12 +63,6 @@ const deleteField = ({
       deleteDeepProp(deleteUiSchemaPath, state.uiSchema)
       // 删除dataSchema
       deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
-      // 删除typePath
-      Object.keys(state.typePath).map((item) => {
-        if (item.startsWith(getTypeKey(fieldKey))) {
-          delete state.typePath[item]
-        }
-      })
       // TODO 删除formData
       // TODO 删除dataSchema的其它等字段
       break
@@ -79,12 +78,6 @@ const deleteField = ({
       deleteDeepProp(deleteUiSchemaPath, state.uiSchema)
       // 删除dataSchema
       deleteDeepProp(deleteDataSchemaPath, state.dataSchema)
-      // 删除typePath
-      Object.keys(state.typePath).map((item) => {
-        if (item.startsWith(getTypeKey(fieldKey))) {
-          delete state.typePath[item]
-        }
-      })
       // TODO 删除formData
       // TODO 删除dataSchema的其它等字段
       break
@@ -94,12 +87,6 @@ const deleteField = ({
       const newOrder = order.slice(0, order.length - 1)
       // 设置order
       setDeepProp(orderPath, state.uiSchema, newOrder)
-      // 删除typePath
-      Object.keys(state.typePath).map((item) => {
-        if (item.startsWith(getTypeKey(fieldKey))) {
-          delete state.typePath[item]
-        }
-      })
       // 删除dataSchema
       if (order.length === 1) {
         // 元祖中删除最后一个元素时，需要同步删除父级的items，否则jsonSchema会报错
@@ -127,11 +114,6 @@ const deleteField = ({
           const parentTypePath = parentTypePathArr
             .slice(0, parentTypePathArr.length - 1)
             .join('.')
-          state.typePath[`${parentTypePath}.${+key - 1}`] =
-            state.typePath[`${parentTypePath}.${+key}`]
-          if (index === arr.length - 1) {
-            delete state.typePath[`${parentTypePath}.${+key}`]
-          }
         })
       })
       // 设置uiSchema
@@ -147,6 +129,9 @@ const deleteField = ({
     default:
       break
   }
+  state.typePath = parseUnitedSchema(
+    combine(current(state.dataSchema), current(state.uiSchema))
+  ).typePath
 }
 
 export default deleteField
