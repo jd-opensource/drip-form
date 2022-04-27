@@ -239,7 +239,7 @@ const addField = ({
           : produce(items, (draft) => {
               draft.splice(index, 0, dataSchema)
             })
-      const newOrder = closestEdge === 'over' ? ['0'] : [...order, order.length]
+      const newOrder = closestEdge === 'over' ? ['0'] : [...order, String(order.length)]
       const properties: Record<string, any> = addParentUiSchema.properties || {}
       const newProperties =
         closestEdge === 'over'
@@ -249,14 +249,11 @@ const addField = ({
                 .filter((key) => +key >= index)
                 .sort((a, b) => +b - +a)
               arr.map((key) => {
-                draft[+key + 1] = draft[key]
-                // 设置typePath
-                state.typePath[`${addParenTypePath}.${+key + 1}`] = {
-                  type: dataSchema.type,
-                  parentKey: addParenTypePath,
-                }
                 if (+key === index) {
                   draft[key] = uiSchema
+                }else{
+                  draft[key] = draft[+key - 1]
+                }
                   state.typePath[`${addParenTypePath}.${key}`] = {
                     type: dataSchema.type,
                     parentKey: addParenTypePath,
