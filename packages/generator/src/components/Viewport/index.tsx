@@ -149,6 +149,7 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
      */
     useEffect(() => {
       schema && !isObjectEmpty(schema) && setUnitedSchema(schema)
+      setVersion((version) => version + 1)
       // 此处请不要添加依赖，schema仅在初始化时进行操作
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
