@@ -56,6 +56,21 @@ const unitedSchema = {
       },
     },
     {
+      fieldKey: 'showColon',
+      type: 'boolean',
+      title: '是否展示:号',
+      default: false,
+      ui: {
+        type: 'switch',
+        description: {
+          title: '开启后，形式为标题:',
+          type: 'icon',
+          trigger: 'hover',
+        },
+        vcontrol: 'return props.formData.title.followRootConfig == false',
+      },
+    },
+    {
       fieldKey: 'width',
       type: 'number',
       title: '标签宽度',

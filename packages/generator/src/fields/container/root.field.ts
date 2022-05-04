@@ -133,6 +133,20 @@ const unitedSchema = [
         },
       },
       {
+        fieldKey: 'showColon',
+        type: 'boolean',
+        title: '是否展示:号',
+        default: false,
+        ui: {
+          type: 'switch',
+          description: {
+            title: '开启后，形式为标题:',
+            type: 'icon',
+            trigger: 'hover',
+          },
+        },
+      },
+      {
         fieldKey: 'placement',
         type: 'object',
         title: '标题位置',

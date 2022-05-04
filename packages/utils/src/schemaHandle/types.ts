@@ -56,6 +56,7 @@ export type TitleUi = Partial<{
   placement: TitlePlacement
   color: string
   fontSize: number | string
+  showColon?: boolean
 }> | null
 
 type Properties = {

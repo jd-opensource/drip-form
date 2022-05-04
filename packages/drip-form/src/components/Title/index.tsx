@@ -37,6 +37,7 @@ const Title = memo<TitleType>(
           ''
         )}
         {title}
+        {titleUi?.showColon && ':'}
         {description &&
           description?.type === 'icon' &&
           description?.title &&
