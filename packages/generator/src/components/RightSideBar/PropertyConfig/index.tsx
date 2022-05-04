@@ -105,7 +105,7 @@ const PropertyConfig = () => {
           formData.containerStyle.width =
             formData.containerStyle.width ||
             generatorContext.current?.get().uiSchema?.containerStyle?.width ||
-            '100%'
+            (type != 'root' ? '100%' : 100)
         }
         // 标题特殊处理
         if (key === 'title') {
@@ -128,6 +128,7 @@ const PropertyConfig = () => {
     [
       dataSchema?.title,
       generatorContext,
+      type,
       uiSchema.footer,
       uiSchema?.showTitle,
       uiSchema.title,
