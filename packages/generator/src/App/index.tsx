@@ -52,6 +52,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
       setOptions((oldOption) => {
         return {
           ...oldOption,
+          ...options,
           viewportConfig: {
             ...oldOption.viewportConfig,
             ...viewportConfig,
@@ -65,7 +66,6 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
             ...headerConfig,
             ...options?.headerConfig,
           },
-          ...options,
         }
       })
     }, [
