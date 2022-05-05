@@ -31,6 +31,18 @@ import {
   unitedSchema as verify8,
   parsedSchema as test8,
 } from '../__testsdata__/array.schema'
+import {
+  unitedSchema as verify9,
+  parsedSchema as test9,
+} from '../__testsdata__/test$fieldKey.schema'
+import {
+  unitedSchema as verify10,
+  parsedSchema as test10,
+} from '../__testsdata__/root.schema'
+import {
+  unitedSchema as verify11,
+  parsedSchema as test11,
+} from '../__testsdata__/test.schema'
 
 describe('combine', () => {
   test('test dataPicker.schema', () => {
@@ -74,5 +86,17 @@ describe('combine', () => {
   test('test array.schema.js', () => {
     const data = combine(test8.dataSchema, test8.uiSchema)
     expect(data).toStrictEqual(verify8)
+  })
+  test('test errMsg4.schema.js', () => {
+    const data = combine(test9.dataSchema, test9.uiSchema, { $fieldKey: true })
+    expect(data).toStrictEqual(verify9)
+  })
+  test('test root.schema.js', () => {
+    const data = combine(test10.dataSchema, test10.uiSchema)
+    expect(data).toStrictEqual(verify10)
+  })
+  test('test test.schema.js', () => {
+    const data = combine(test11.dataSchema, test11.uiSchema)
+    expect(data).toStrictEqual(verify11)
   })
 })

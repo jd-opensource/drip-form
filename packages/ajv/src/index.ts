@@ -51,6 +51,8 @@ function registerAjv(options?: Options): Ajv {
     'validateTime',
     'requiredMode',
     '$container',
+    // 用于绑定generator 切换的fieldKey
+    '$fieldKey',
     'customFormat',
     // v1需要过滤该字段
     'transformToObject',

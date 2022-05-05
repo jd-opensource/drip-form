@@ -132,7 +132,7 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
      */
     const onSyncFormChange = useCallback(
       ({ uiSchema, dataSchema }) => {
-        const unitedSchema = combine(dataSchema, uiSchema)
+        const unitedSchema = combine(dataSchema, uiSchema, { $fieldKey: true })
         delete unitedSchema?.ui?.mode
         setUnitedSchema(
           produce(unitedSchema, (draft) => {

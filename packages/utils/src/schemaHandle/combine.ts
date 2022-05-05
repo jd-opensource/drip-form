@@ -2,6 +2,11 @@ import { UiSchema, DataSchema, UnitedSchema } from './types'
 import { deepClone, isEmpty } from '../common'
 import type { Map } from '../common/type'
 
+type Options = Partial<{
+  // 是否开启$fieldKey值转换为fieldKey（默认不开启，generator中viewport区域需要开启）
+  $fieldKey: boolean
+}>
+
 const needToHandledKeywords = [
   'required',
   'errorMessage',
@@ -64,12 +69,19 @@ function valueClone({
  * @param schema
  * @param fromRoot
  */
-function recursionCombine(
-  dataSchema: DataSchema,
-  uiSchema: UiSchema,
-  schema: Map,
-  fromRoot = false
-) {
+function recursionCombine({
+  dataSchema,
+  uiSchema,
+  schema,
+  fromRoot,
+  options,
+}: {
+  dataSchema: DataSchema
+  uiSchema: UiSchema
+  schema: Map
+  fromRoot?: boolean
+  options?: Options
+}) {
   // 先拷贝ui和data的值类型属性或非特殊对象类型属性，比如title, containerStyle
   valueClone({
     targetObj: schema,
@@ -142,7 +154,7 @@ function recursionCombine(
     }
 
     // 遍历order的fieldKey
-    for (const fieldKey of uiSchema.order) {
+    for (let fieldKey of uiSchema.order) {
       // 根据fieldKey获取子项的schema
       const subUiSchema = uiSchema.properties[fieldKey]
       // 初始化子项的dataSchema
@@ -161,11 +173,12 @@ function recursionCombine(
       // 初始化待填充的表单项
       const fieldItem = {} as Map
       // 开始递归
-      recursionCombine(
-        subDataSchema as DataSchema,
-        subUiSchema as UiSchema,
-        fieldItem
-      )
+      recursionCombine({
+        dataSchema: subDataSchema as DataSchema,
+        uiSchema: subUiSchema as UiSchema,
+        schema: fieldItem,
+        options,
+      })
 
       if (msgMap[fieldKey]) {
         Object.assign(fieldItem, msgMap[fieldKey])
@@ -189,6 +202,14 @@ function recursionCombine(
           // 对于容器类型的子项，需要填充fieldKey
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
+          if (
+            Object.prototype.hasOwnProperty.call(subDataSchema, '$fieldKey') &&
+            options &&
+            options['$fieldKey']
+          ) {
+            fieldKey = (subDataSchema as Map)['$fieldKey']
+            delete fieldItem['$fieldKey']
+          }
           fieldItem.fieldKey = fieldKey
         }
 
@@ -207,10 +228,20 @@ function recursionCombine(
 /**
  * 融合dataSchema和uiSchema为联合Schema
  */
-function combine(dataSchema: DataSchema, uiSchema: UiSchema): UnitedSchema {
+function combine(
+  dataSchema: DataSchema,
+  uiSchema: UiSchema,
+  options?: Options
+): UnitedSchema {
   const unitedSchema = {}
 
-  recursionCombine(dataSchema, uiSchema, unitedSchema, true)
+  recursionCombine({
+    dataSchema,
+    uiSchema,
+    schema: unitedSchema,
+    fromRoot: true,
+    options,
+  })
 
   return unitedSchema
 }
