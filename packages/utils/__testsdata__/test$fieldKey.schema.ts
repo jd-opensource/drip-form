@@ -12,7 +12,7 @@ export const unitedSchema = {
     {
       type: 'string',
       title: '展示模式',
-      fieldKey: 'viewMode',
+      fieldKey: 'viewMode1',
       default: 'all',
       ui: {
         type: 'select',
@@ -34,7 +34,7 @@ export const unitedSchema = {
     {
       type: 'object',
       title: '通用校验',
-      fieldKey: 'common',
+      fieldKey: 'common1',
       ui: {
         type: 'object',
         mode: 'collapse',
@@ -49,7 +49,7 @@ export const unitedSchema = {
         {
           type: 'boolean',
           title: '是否必填',
-          fieldKey: 'required',
+          fieldKey: 'required1',
           ui: {
             type: 'switch',
             vcontrol:
@@ -58,7 +58,7 @@ export const unitedSchema = {
         },
         {
           type: 'number',
-          fieldKey: 'minLength',
+          fieldKey: 'minLength1',
           title: '最小长度',
           ui: {
             type: 'number',
@@ -68,7 +68,7 @@ export const unitedSchema = {
         },
         {
           type: 'number',
-          fieldKey: 'maxLength',
+          fieldKey: 'maxLength1',
           title: '最大长度',
           ui: {
             type: 'number',
@@ -79,7 +79,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '正则表达式不带标志',
-          fieldKey: 'pattern',
+          fieldKey: 'pattern1',
           ui: {
             type: 'text',
             vcontrol:
@@ -88,7 +88,7 @@ export const unitedSchema = {
         },
         {
           type: 'string',
-          fieldKey: 'format',
+          fieldKey: 'format1',
           title: '常见正则',
           ui: {
             type: 'select',
@@ -208,7 +208,7 @@ export const unitedSchema = {
         },
         {
           type: 'string',
-          fieldKey: 'regexp',
+          fieldKey: 'regexp1',
           title: '正则表达带标志·',
           ui: {
             description: {
@@ -223,7 +223,7 @@ export const unitedSchema = {
         },
         {
           type: 'array',
-          fieldKey: 'transform',
+          fieldKey: 'transform1',
           title: '格式化',
           ui: {
             type: 'select',
@@ -262,7 +262,7 @@ export const unitedSchema = {
     {
       type: 'object',
       title: '业务校验',
-      fieldKey: 'business',
+      fieldKey: 'business1',
       ui: {
         type: 'object',
         mode: 'collapse',
@@ -276,7 +276,7 @@ export const unitedSchema = {
       schema: [
         {
           type: 'object',
-          fieldKey: 'rangeDelimiter',
+          fieldKey: 'rangeDelimiter1',
           title: '分隔符范围',
           ui: {
             type: 'object',
@@ -297,7 +297,7 @@ export const unitedSchema = {
           schema: [
             {
               type: 'string',
-              fieldKey: 'delimiter',
+              fieldKey: 'delimiter1',
               title: '自定义分隔符',
               ui: {
                 type: 'text',
@@ -305,7 +305,7 @@ export const unitedSchema = {
             },
             {
               type: 'number',
-              fieldKey: 'max',
+              fieldKey: 'max1',
               title: '最多',
               ui: {
                 type: 'number',
@@ -313,7 +313,7 @@ export const unitedSchema = {
             },
             {
               type: 'number',
-              fieldKey: 'min',
+              fieldKey: 'min1',
               title: '最少',
               ui: {
                 type: 'number',
@@ -323,7 +323,7 @@ export const unitedSchema = {
         },
         {
           type: 'object',
-          fieldKey: 'gbkLength',
+          fieldKey: 'gbkLength1',
           title: '中英文长度',
           ui: {
             type: 'object',
@@ -344,7 +344,7 @@ export const unitedSchema = {
           schema: [
             {
               type: 'number',
-              fieldKey: 'max',
+              fieldKey: 'max1',
               title: '最多',
               ui: {
                 type: 'number',
@@ -352,7 +352,7 @@ export const unitedSchema = {
             },
             {
               type: 'number',
-              fieldKey: 'min',
+              fieldKey: 'min1',
               title: '最少',
               ui: {
                 type: 'number',
@@ -365,7 +365,7 @@ export const unitedSchema = {
     {
       type: 'object',
       title: '校验错误文案配置',
-      fieldKey: 'errorMessage',
+      fieldKey: 'errorMessage1',
       ui: {
         type: 'object',
         mode: 'collapse',
@@ -380,7 +380,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '错误兜底文案',
-          fieldKey: '_',
+          fieldKey: '_1',
           ui: {
             type: 'text',
             description: {
@@ -393,7 +393,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '是否必填',
-          fieldKey: 'required',
+          fieldKey: 'required1',
           ui: {
             type: 'text',
             vcontrol:
@@ -403,7 +403,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '最小长度',
-          fieldKey: 'minLength',
+          fieldKey: 'minLength1',
           ui: {
             type: 'text',
             vcontrol:
@@ -413,7 +413,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '最大长度',
-          fieldKey: 'maxLength',
+          fieldKey: 'maxLength1',
           ui: {
             type: 'text',
             vcontrol:
@@ -423,7 +423,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '正则表达式不带标志',
-          fieldKey: 'pattern',
+          fieldKey: 'pattern1',
           ui: {
             type: 'text',
             vcontrol:
@@ -433,7 +433,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '常见正则',
-          fieldKey: 'format',
+          fieldKey: 'format1',
           ui: {
             type: 'text',
             vcontrol:
@@ -443,7 +443,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '正则表达带标志·',
-          fieldKey: 'regexp',
+          fieldKey: 'regexp1',
           ui: {
             type: 'text',
             vcontrol:
@@ -453,7 +453,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '格式化',
-          fieldKey: 'transform',
+          fieldKey: 'transform1',
           ui: {
             type: 'text',
             vcontrol:
@@ -463,7 +463,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '分隔符范围',
-          fieldKey: 'rangeDelimiter',
+          fieldKey: 'rangeDelimiter1',
           ui: {
             type: 'text',
             vcontrol:
@@ -473,7 +473,7 @@ export const unitedSchema = {
         {
           type: 'string',
           title: '中英文长度',
-          fieldKey: 'gbkLength',
+          fieldKey: 'gbkLength1',
           ui: {
             type: 'text',
             vcontrol:
@@ -494,74 +494,91 @@ export const parsedSchema = {
         type: 'string',
         title: '展示模式',
         default: 'all',
+        $fieldKey: 'viewMode1',
       },
       common: {
         type: 'object',
         title: '通用校验',
+        $fieldKey: 'common1',
         properties: {
           required: {
             type: 'boolean',
             title: '是否必填',
+            $fieldKey: 'required1',
           },
           minLength: {
             type: 'number',
             title: '最小长度',
+            $fieldKey: 'minLength1',
           },
           maxLength: {
             type: 'number',
             title: '最大长度',
+            $fieldKey: 'maxLength1',
           },
           pattern: {
             type: 'string',
             title: '正则表达式不带标志',
+            $fieldKey: 'pattern1',
           },
           format: {
             type: 'string',
             title: '常见正则',
+            $fieldKey: 'format1',
           },
           regexp: {
             type: 'string',
             title: '正则表达带标志·',
+            $fieldKey: 'regexp1',
           },
           transform: {
             type: 'array',
             title: '格式化',
+            $fieldKey: 'transform1',
           },
         },
       },
       business: {
         type: 'object',
         title: '业务校验',
+        $fieldKey: 'business1',
         properties: {
           rangeDelimiter: {
             type: 'object',
             title: '分隔符范围',
+            $fieldKey: 'rangeDelimiter1',
             properties: {
               delimiter: {
                 type: 'string',
                 title: '自定义分隔符',
+                $fieldKey: 'delimiter1',
               },
               max: {
                 type: 'number',
                 title: '最多',
+                $fieldKey: 'max1',
               },
               min: {
                 type: 'number',
                 title: '最少',
+                $fieldKey: 'min1',
               },
             },
           },
           gbkLength: {
             type: 'object',
             title: '中英文长度',
+            $fieldKey: 'gbkLength1',
             properties: {
               max: {
                 type: 'number',
                 title: '最多',
+                $fieldKey: 'max1',
               },
               min: {
                 type: 'number',
                 title: '最少',
+                $fieldKey: 'min1',
               },
             },
           },
@@ -570,46 +587,57 @@ export const parsedSchema = {
       errorMessage: {
         type: 'object',
         title: '校验错误文案配置',
+        $fieldKey: 'errorMessage1',
         properties: {
           _: {
             type: 'string',
             title: '错误兜底文案',
+            $fieldKey: '_1',
           },
           required: {
             type: 'string',
             title: '是否必填',
+            $fieldKey: 'required1',
           },
           minLength: {
             type: 'string',
             title: '最小长度',
+            $fieldKey: 'minLength1',
           },
           maxLength: {
             type: 'string',
             title: '最大长度',
+            $fieldKey: 'maxLength1',
           },
           pattern: {
             type: 'string',
             title: '正则表达式不带标志',
+            $fieldKey: 'pattern1',
           },
           format: {
             type: 'string',
             title: '常见正则',
+            $fieldKey: 'format1',
           },
           regexp: {
             type: 'string',
             title: '正则表达带标志·',
+            $fieldKey: 'regexp1',
           },
           transform: {
             type: 'string',
             title: '格式化',
+            $fieldKey: 'transform1',
           },
           rangeDelimiter: {
             type: 'string',
             title: '分隔符范围',
+            $fieldKey: 'rangeDelimiter1',
           },
           gbkLength: {
             type: 'string',
             title: '中英文长度',
+            $fieldKey: 'gbkLength1',
           },
         },
       },
