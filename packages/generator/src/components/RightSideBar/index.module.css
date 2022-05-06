@@ -64,8 +64,3 @@
 .panelConfig::-webkit-scrollbar {
   display: none;
 }
-
-.fieldKey {
-  width: calc(100% - 32px) !important;
-  font-size: 14px;
-}
