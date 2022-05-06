@@ -22,6 +22,23 @@ export const allPropertyConfigSchemaSelector = selector<
           const propertyConfig =
             field?.propertyConfig?.schema ||
             ([
+              {
+                type: 'string',
+                title: 'fieldKey',
+                fieldKey: '$fieldKey',
+                ui: {
+                  type: 'inputCopy',
+                  theme: 'generatorTheme',
+                  placeholder: '不可包含字符 .',
+                  disabled_input: ['\\.'],
+                  containerStyle: {
+                    padding: '0 0 0 16px',
+                  },
+                  title: {
+                    width: '66px',
+                  },
+                },
+              },
               // 标题配置
               baseMap.title,
               // 提示配置

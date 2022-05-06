@@ -1,11 +1,4 @@
-import React, {
-  Fragment,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { Fragment, memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
 import {
   typeCheck,
@@ -20,20 +13,13 @@ import {
   uiTypeOptionsAtom,
   curTypePropertyConfigSelector,
   curTypeAtom,
-  schemaAtom,
-  curEditFieldKeyAtom,
 } from '@generator/store'
-import { useGetParentType } from '@generator/hooks'
-// import BaseForm from './BaseForm'
 import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
 import { original, produce } from 'immer'
-import { Select, Input, Button } from 'antd'
-import { CopyOutlined } from '@ant-design/icons'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { usePrevious } from '@jdfed/hooks'
-import copy from 'copy-to-clipboard'
-
+import { Select } from 'antd'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import generatorTheme from '@generator/components/GeneratorFormTheme'
 import type { SetType } from '@jdfed/hooks'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
@@ -44,14 +30,8 @@ const PropertyConfig = () => {
     dataSchema,
     uiSchema,
     uiComponents,
+    fieldKey,
   } = useRightSidebar()
-  const [curEditFieldKey, setCurEditFieldKey] = useRecoilState(
-    curEditFieldKeyAtom(selectedFieldKey)
-  )
-  const [prevEditFieldKey, setPrevEditFieldKey] = useState(curEditFieldKey)
-  const prevSelectedFieldkey = usePrevious(selectedFieldKey)
-  const parentType = useGetParentType()
-  const setUnitedSchema = useSetRecoilState(schemaAtom)
   const uiTypeOptions = useRecoilValue(uiTypeOptionsAtom)
   // 当前选中的组件UI类型
   const [type, setType] = useRecoilState(curTypeAtom)
@@ -67,6 +47,7 @@ const PropertyConfig = () => {
    */
   const formData = useMemo(() => {
     return {
+      $fieldKey: dataSchema.$fieldKey || fieldKey,
       title: uiSchema.title || {},
       containerStyle: uiSchema.containerStyle || {},
       description: uiSchema.description || {},
@@ -82,7 +63,14 @@ const PropertyConfig = () => {
           }),
       },
     }
-  }, [dataSchema?.validateTime, dataSchema.default, type, uiSchema])
+  }, [
+    dataSchema.$fieldKey,
+    dataSchema?.validateTime,
+    dataSchema.default,
+    fieldKey,
+    uiSchema,
+    type,
+  ])
 
   /**
    * 将数据填充进右侧配置面板前进行处理
@@ -153,6 +141,10 @@ const PropertyConfig = () => {
       let changeSchema = 'uiSchema'
       // 处理全局属性
       if (changeKey === 'validateTime') {
+        changeSchema = 'dataSchema'
+      }
+      // 更改表单fieldKey
+      if (key === '$fieldKey') {
         changeSchema = 'dataSchema'
       }
 
@@ -374,51 +366,12 @@ const PropertyConfig = () => {
     }
   }, [curTypePropertyConfig])
 
-  const changeFieldKey = useCallback(
-    (e) => {
-      const value = e?.target?.value.replaceAll('.', '')
-      setCurEditFieldKey(value)
-      // 获取当前选中表单相对unitdSchema的path路径
-      const unitedSchemaPath = generatorContext.current?.getKey(
-        selectedFieldKey || '',
-        'unitedSchema'
-      )
-      // 修改全局unitdSchema
-      unitedSchemaPath &&
-        value &&
-        setUnitedSchema((unitedSchema) =>
-          produce(unitedSchema, (draft) => {
-            setDeepProp(
-              unitedSchemaPath.split('.').concat('fieldKey'),
-              draft,
-              value
-            )
-          })
-        )
-    },
-    [generatorContext, selectedFieldKey, setCurEditFieldKey, setUnitedSchema]
-  )
-
-  useEffect(() => {
-    if (prevSelectedFieldkey !== selectedFieldKey) {
-      setPrevEditFieldKey(curEditFieldKey)
+  const newUiComponents = useMemo(() => {
+    return {
+      ...uiComponents,
+      generatorTheme,
     }
-  }, [curEditFieldKey, prevSelectedFieldkey, selectedFieldKey])
-
-  // fieldKey必填，所以失焦后自动恢复默认key
-  const onBlur = useCallback(
-    (e) => {
-      if (!e?.target?.value) {
-        setCurEditFieldKey(prevEditFieldKey)
-      }
-    },
-    [prevEditFieldKey, setCurEditFieldKey]
-  )
-
-  // copy fieldKey
-  const copyFieldKeyFn = useCallback(() => {
-    copy(curEditFieldKey)
-  }, [curEditFieldKey])
+  }, [uiComponents])
 
   return (
     <Fragment>
@@ -441,26 +394,6 @@ const PropertyConfig = () => {
                 />
               </div>
             </div>
-            <div className={cx(styles.propertyConfig)}>
-              <div className={styles.propertyConfigTitle}>
-                <SettingOutlined className={cx(styles.icon)} />
-                <span>fieldKey</span>
-              </div>
-              <div className={styles.propertyConfigContent}>
-                <Input.Group compact>
-                  <Input
-                    className={styles.fieldKey}
-                    value={curEditFieldKey}
-                    onChange={changeFieldKey}
-                    onBlur={onBlur}
-                    placeholder="不可包含字符 ."
-                    // 父元素为数组容器无法修改
-                    disabled={parentType === 'array'}
-                  />
-                  <Button icon={<CopyOutlined />} onClick={copyFieldKeyFn} />
-                </Input.Group>
-              </div>
-            </div>
           </>
         )}
         <DripForm
@@ -469,7 +402,7 @@ const PropertyConfig = () => {
           parse={onParse}
           control={onChangeSchema}
           unitedSchema={unitedSchema}
-          uiComponents={uiComponents}
+          uiComponents={newUiComponents}
         />
       </div>
     </Fragment>

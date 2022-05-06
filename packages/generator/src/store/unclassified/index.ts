@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react'
-import { atom, atomFamily } from 'recoil'
+import { atom } from 'recoil'
 import { UnitedSchema } from '@jdfed/utils'
 import antd from '@jdfed/drip-form-theme-antd'
 import type { DripFormRefType, UiComponents } from '@jdfed/drip-form'
@@ -95,11 +95,9 @@ export const curTypeAtom = atom<string>({
 })
 
 /**
- * 当前编辑器fieldKey
+ * 由于fieldKey修改的是dataSchmea中的$fiedlKey，所以viewport区域的title部分的filedKey获取的是之前的值，添加version用于更新
  */
-export const curEditFieldKeyAtom = atomFamily<string, string | null>({
-  key: 'curEditFieldKey',
-  default: (param) => {
-    return param?.split('.').pop() || ''
-  },
+export const viewportTitleHeaderVersion = atom<number>({
+  key: 'viewportTitleHeaderVersion',
+  default: 0,
 })
