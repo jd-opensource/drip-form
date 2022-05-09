@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 15:29:06
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-27 17:17:08
+ * @Last Modified time: 2022-05-09 10:15:48
  */
 import { produce, current } from 'immer'
 import { setDeepProp, parseUnitedSchema, combine } from '@jdfed/utils'
@@ -24,8 +24,8 @@ const addField = ({
     overFieldKey,
     get,
     getKey,
-    getTypeKey,
     shouldDelete,
+    getTypeKey,
   } = action
 
   const keyPath = overFieldKey.split('.')
@@ -89,10 +89,6 @@ const addField = ({
       addParentType = 'array'
     }
   }
-  const curKey =
-    keyPath.slice(keyPath.length - 1).join() === ''
-      ? overFieldKey
-      : keyPath.slice(keyPath.length - 1).join()
   const order: Array<string> = addParentUiSchema.order || []
   switch (addParentType) {
     case 'object': {
@@ -198,20 +194,29 @@ const addField = ({
       break
     }
     case 'tuple': {
-      // 当前插入位置
-      const index =
+      const curKey = overFieldKey.split('.').pop() as string
+      // items、order当前插入位置
+      const addIndex =
         closestEdge === 'over'
           ? 0
           : ['left', 'top'].includes(closestEdge)
           ? +curKey
           : +curKey + 1
+      // items需要删除的老的元素位置
+      const delIndex = Number(fieldKey)
       const items: Record<string, any> = addParentDataSchema.items || []
       const newItems =
         closestEdge === 'over'
           ? [dataSchema]
           : produce(items, (draft) => {
-              draft.splice(index, 0, dataSchema)
+              // 插入
+              draft.splice(addIndex, 0, dataSchema)
+              // 如果是排序删除老的
+              if (!shouldDelete) {
+                draft.splice(addIndex > delIndex ? delIndex : delIndex + 1, 1)
+              }
             })
+      // 设置order
       const newOrder =
         closestEdge === 'over' ? ['0'] : [...order, String(order.length)]
       const properties: Record<string, any> = addParentUiSchema.properties || {}
@@ -219,23 +224,49 @@ const addField = ({
         closestEdge === 'over'
           ? { '0': uiSchema }
           : produce(properties, (draft) => {
-              const arr = newOrder
-                .filter((key) => +key >= index)
-                .sort((a, b) => +b - +a)
-              arr.map((key) => {
-                if (+key === index) {
-                  draft[key] = uiSchema
-                } else {
-                  draft[key] = draft[+key - 1]
-                }
-              })
+              // 排序模式，互相替换位置
+              if (!shouldDelete) {
+                let changeProp: Record<string, unknown>
+                let direction: 'topToBottom' | 'bottomToTop'
+                order
+                  .filter((key) => {
+                    if (addIndex > +fieldKey) {
+                      direction = 'topToBottom'
+                      return +key < addIndex && +key >= +fieldKey
+                    } else {
+                      direction = 'bottomToTop'
+                      return +key <= +fieldKey && +key >= addIndex
+                    }
+                  })
+                  .sort((a, b) => +a - +b)
+                  .map((key, index) => {
+                    if (index === 0) {
+                      changeProp = draft[key]
+                    }
+                    draft[key] = draft[String(+key + 1)]
+                    if (direction == 'topToBottom') {
+                      if (+key === addIndex - 1) {
+                        draft[key] = changeProp
+                      }
+                    } else {
+                      if (+key === +fieldKey) {
+                        draft[key] = changeProp
+                      }
+                    }
+                  })
+              } else {
+                const arr = newOrder
+                  .filter((key) => +key >= addIndex)
+                  .sort((a, b) => +b - +a)
+                arr.map((key) => {
+                  if (+key === addIndex) {
+                    draft[key] = uiSchema
+                  } else {
+                    draft[key] = draft[String(+key - 1)]
+                  }
+                })
+              }
             })
-      // 设置order
-      setDeepProp(
-        addParentSchemaPath.ui.concat(['order']),
-        state.uiSchema,
-        newOrder
-      )
       // 设置uiSchema
       setDeepProp(
         addParentSchemaPath.ui.concat(['properties']),
@@ -248,6 +279,14 @@ const addField = ({
         state.dataSchema,
         newItems
       )
+      // 非排序模式
+      if (shouldDelete) {
+        setDeepProp(
+          addParentSchemaPath.ui.concat(['order']),
+          state.uiSchema,
+          newOrder
+        )
+      }
 
       break
     }

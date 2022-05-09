@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-26 19:25:56
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-27 17:17:48
+ * @Last Modified time: 2022-05-07 19:17:18
  */
 import { produce, current } from 'immer'
 import {
@@ -31,8 +31,7 @@ const deleteField = ({
   // 待删除的父级路径 元祖 deleteParentKey 对象
   // const deleteParentPath = deleteParentKey
   // 待删除的父级表单
-  const { dataSchema: deleteParentDataSchema, uiSchema: deleteParentUiSchema } =
-    get(deleteParentPath)
+  const { uiSchema: deleteParentUiSchema } = get(deleteParentPath)
   // 待删除表单 父级元素类型 默认对象类型
   let deleteParentType = 'object'
   if (deleteParentUiSchema.type === 'array') {
@@ -55,7 +54,6 @@ const deleteField = ({
       : getKey(deleteParentPath, 'uiSchema').split('.').concat('order')
   switch (deleteParentType) {
     case 'array': {
-      const order: Array<string> = deleteParentUiSchema.order || []
       const index = 0
       // 删除order
       deleteDeepProp(orderPath.concat(index), state.uiSchema)
@@ -104,17 +102,12 @@ const deleteField = ({
         )
         if (index != -1) {
           delete draft[index]
-          draft[index] = draft[index + 1]
-          delete draft[Object.keys(draft).length - 1]
+          newOrder
+            .filter((item) => +item >= index)
+            .map((item) => {
+              draft[item] = draft[String(+item + 1)]
+            })
         }
-        const arr = order.filter((key) => +key > index).sort((a, b) => +a - +b)
-        arr.map((key, index) => {
-          // 设置typePath
-          const parentTypePathArr = getTypeKey(fieldKey).split('.')
-          const parentTypePath = parentTypePathArr
-            .slice(0, parentTypePathArr.length - 1)
-            .join('.')
-        })
       })
       // 设置uiSchema
       setDeepProp(
