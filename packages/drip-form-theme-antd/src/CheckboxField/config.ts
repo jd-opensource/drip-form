@@ -42,6 +42,15 @@ const config = {
         },
       },
       {
+        fieldKey: 'needCheckAll',
+        type: 'boolean',
+        title: '支持全选',
+        default: false,
+        ui: {
+          type: 'switch',
+        },
+      },
+      {
         fieldKey: 'options',
         type: 'array',
         title: '选项',
