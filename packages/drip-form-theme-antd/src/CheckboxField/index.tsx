@@ -99,7 +99,9 @@ const CheckboxField = ({
     <div className="check-all-wrapper">
       <Checkbox
         indeterminate={
-          fieldData.length !== 0 && fieldData.length < options.length
+          fieldData &&
+          fieldData.length !== 0 &&
+          fieldData.length < options.length
         }
         onChange={_onChange.bind(CheckboxField, allCheckboxValue)}
         checked={isAllChecked}
