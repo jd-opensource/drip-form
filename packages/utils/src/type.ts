@@ -216,6 +216,8 @@ type SetArrayKey = {
     order?: number
     // 是否删除 默认添加
     isDelete?: boolean
+    // 切换数组的顺序
+    move?: [number, number]
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-02-11 14:19:51
+ * @Last Modified time: 2022-05-17 18:15:31
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -25,6 +25,21 @@ export const generateReg = (arr: Array<string>): RegExp => {
     }
   }, '')
   return new RegExp(`^${regStr}$`, 'ig')
+}
+
+/**
+ * 用于删除、切换数组排序的arraykey
+ * @param arr
+ * @returns
+ */
+export const generateArrayKeyReg = (arr: Array<string>): RegExp => {
+  const regStr = arr.reduce((prev: string, cur: string, index) => {
+    if (index === arr.length - 1) {
+      return `${prev})\\.(\\d)+`
+    }
+    return `${index !== 0 ? `${prev}\\.` : ''}${cur}`
+  })
+  return new RegExp(`^(${regStr}(\\..+)+`, 'ig')
 }
 
 /**
