@@ -78,6 +78,16 @@ const config: Field = {
         },
       },
       {
+        fieldKey: 'canDrag',
+        type: 'boolean',
+        title: '支持拖拽排序',
+        default: false,
+        ui: {
+          type: 'switch',
+          vcontrol: 'return props.formData.ui.mode==="add"',
+        },
+      },
+      {
         fieldKey: 'addTitle',
         type: 'string',
         title: '新增按钮文案',
