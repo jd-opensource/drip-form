@@ -1,5 +1,5 @@
 import { selector } from 'recoil'
-import { sidebarDataAtom } from '../leftSidebar'
+import { sidebarDataAtom, uiTypeOptionsAtom } from '../leftSidebar'
 import { curTypeAtom } from '../unclassified'
 import { baseMap } from '@generator/fields'
 import rootConfig from '@generator/fields/container/root.field'
@@ -12,6 +12,7 @@ export const allPropertyConfigSchemaSelector = selector<
   key: 'propertyConfigSchema',
   get: ({ get }) => {
     const { category, order } = get(sidebarDataAtom)
+    const uiTypeOptions = get(uiTypeOptionsAtom)
     const allPropertyConfig: Record<string, UnitedSchema['schema']> = {
       root: rootConfig,
     }
@@ -22,6 +23,25 @@ export const allPropertyConfigSchemaSelector = selector<
           const propertyConfig =
             field?.propertyConfig?.schema ||
             ([
+              {
+                type: 'string',
+                title: '组件类型',
+                fieldKey: 'type',
+                ui: {
+                  type: 'uiTypeChange',
+                  theme: 'generatorTheme',
+                  options: uiTypeOptions,
+                  style: {
+                    width: '100%',
+                  },
+                  title: {
+                    width: '66px',
+                  },
+                  containerStyle: {
+                    padding: '0 0 0 16px',
+                  },
+                },
+              },
               {
                 type: 'string',
                 title: 'fieldKey',
