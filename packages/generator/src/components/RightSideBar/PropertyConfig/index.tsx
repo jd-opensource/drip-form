@@ -1,23 +1,10 @@
-import React, { Fragment, memo, useCallback, useEffect, useMemo } from 'react'
+import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
-import {
-  typeCheck,
-  deepClone,
-  deleteDeepProp,
-  isEmpty,
-  setDeepProp,
-} from '@jdfed/utils'
-import cx from 'classnames'
-import { SettingOutlined } from '@ant-design/icons'
-import {
-  uiTypeOptionsAtom,
-  curTypePropertyConfigSelector,
-  curTypeAtom,
-} from '@generator/store'
+import { typeCheck, deepClone, isEmpty, setDeepProp } from '@jdfed/utils'
+import { curTypePropertyConfigSelector, curTypeAtom } from '@generator/store'
 import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
-import { original, produce } from 'immer'
-import { Select } from 'antd'
+import { produce } from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import generatorTheme from '@generator/components/GeneratorFormTheme'
 import type { SetType } from '@jdfed/hooks'
@@ -32,7 +19,6 @@ const PropertyConfig = () => {
     uiComponents,
     fieldKey,
   } = useRightSidebar()
-  const uiTypeOptions = useRecoilValue(uiTypeOptionsAtom)
   // 当前选中的组件UI类型
   const [type, setType] = useRecoilState(curTypeAtom)
   //当前类型的样式配置schema
@@ -47,6 +33,7 @@ const PropertyConfig = () => {
    */
   const formData = useMemo(() => {
     return {
+      type,
       $fieldKey: dataSchema.$fieldKey || fieldKey,
       title: uiSchema.title || {},
       containerStyle: uiSchema.containerStyle || {},
@@ -278,84 +265,6 @@ const PropertyConfig = () => {
   )
 
   /**
-   * 切换属性配置
-   */
-  const onReplace = useCallback((draft, schema) => {
-    // 待删除的key
-    const needToDelete = Object.keys(original(draft) as Map)
-
-    for (const key in schema) {
-      setDeepProp([key], draft as Map, schema[key])
-      // 已填充的字段不应该被删除
-      const idxInDraft = needToDelete.findIndex((val) => val === key)
-      if (idxInDraft >= 0) {
-        needToDelete.splice(idxInDraft, 1)
-      }
-    }
-
-    for (const key of needToDelete) {
-      deleteDeepProp([key], draft as Map)
-    }
-  }, [])
-
-  /**
-   * 修改ui类型
-   */
-  const onChangeUiType = useCallback(
-    (val) => {
-      let dataSchema: Map = {},
-        uiSchema: Map = {}
-      // 获取修改组件类型前，该组件的schema
-      const preSchema = generatorContext.current?.get(selectedFieldKey || '')
-      const preType = preSchema?.uiSchema.type
-      const preTitle = preSchema?.dataSchema.title
-      // 检查组件title是否是预设的title，默认是
-      let isPresetTitle = true
-      uiTypeOptions.some((item) => {
-        // 找到原组件对应的初始schema，比较title
-        if (item.value === preType) {
-          isPresetTitle = preTitle === item.schema.title
-          return true
-        }
-        return false
-      })
-      uiTypeOptions.some((item) => {
-        // 找到新组件对应的初始schema，替换原组件
-        if (item.value === val) {
-          uiSchema = deepClone(item.schema.ui)
-          dataSchema = deepClone(item.schema)
-          // 如果不是预设的title，意味着用户已经自行修改过，此时需要保留原值
-          if (!isPresetTitle) {
-            dataSchema.title = preTitle
-          }
-          // 移除uiSchema配置
-          Reflect.deleteProperty(dataSchema, 'ui')
-          return true
-        }
-        return false
-      })
-
-      generatorContext.current?.set(
-        selectedFieldKey || '',
-        'dataSchema',
-        (draft) => {
-          onReplace(draft, dataSchema)
-        }
-      )
-      generatorContext.current?.set(
-        selectedFieldKey || '',
-        'uiSchema',
-        (draft) => {
-          onReplace(draft, uiSchema)
-        }
-      )
-      // 更新类型
-      setType(val)
-    },
-    [generatorContext, onReplace, selectedFieldKey, setType, uiTypeOptions]
-  )
-
-  /**
    * 不同表单项生成不同的联合schema
    */
   const unitedSchema = useMemo<UnitedSchema>(() => {
@@ -374,38 +283,16 @@ const PropertyConfig = () => {
   }, [uiComponents])
 
   return (
-    <Fragment>
-      <div className={styles.panelConfig}>
-        {type !== 'root' && (
-          <>
-            <div className={cx(styles.propertyConfig)}>
-              <div className={styles.propertyConfigTitle}>
-                <SettingOutlined className={cx(styles.icon)} />
-                <span>组件类型</span>
-              </div>
-              <div className={styles.propertyConfigContent}>
-                <Select
-                  style={{
-                    width: '100%',
-                  }}
-                  value={type}
-                  onChange={onChangeUiType}
-                  options={uiTypeOptions}
-                />
-              </div>
-            </div>
-          </>
-        )}
-        <DripForm
-          key={selectedFieldKey}
-          formData={formData}
-          parse={onParse}
-          control={onChangeSchema}
-          unitedSchema={unitedSchema}
-          uiComponents={newUiComponents}
-        />
-      </div>
-    </Fragment>
+    <div className={styles.panelConfig}>
+      <DripForm
+        key={selectedFieldKey}
+        formData={formData}
+        parse={onParse}
+        control={onChangeSchema}
+        unitedSchema={unitedSchema}
+        uiComponents={newUiComponents}
+      />
+    </div>
   )
 }
 

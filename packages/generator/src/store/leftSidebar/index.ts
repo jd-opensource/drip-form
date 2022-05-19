@@ -52,6 +52,10 @@ export const allFieldAtom = selector<FieldItemMap>({
   },
 })
 
+export type SelectOption = Record<'value' | 'label', string> & {
+  schema: UnitedSchemaAtom
+}
+
 /**
  * 组件类型，用于切换表单的ui类型
  */
@@ -59,9 +63,7 @@ export const uiTypeOptionsAtom = selector({
   key: 'uiTypeOptions',
   get: ({ get }) => {
     // 生成组件类型options
-    const options: (Record<'value' | 'label', string> & {
-      schema: UnitedSchemaAtom
-    })[] = []
+    const options: SelectOption[] = []
     const allField = get(allFieldAtom)
     Object.entries(allField).forEach(([key, value]) => {
       options.push({
