@@ -6,6 +6,7 @@ import type {
   DripFormRefType,
   Dispatch,
   UiComponents,
+  ControlFuc,
 } from './DripForm/type'
 import type { RenderFnProps, ContainerHoc } from './render/type'
 import type { ContainerStyle } from '@jdfed/utils'
@@ -20,4 +21,5 @@ export type {
   ContainerStyle,
   UiComponents,
   ContainerHoc,
+  ControlFuc,
 }

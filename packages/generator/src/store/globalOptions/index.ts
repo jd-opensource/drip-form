@@ -3,13 +3,13 @@
  * @Author: jiangxiaowei
  * @Date: 2021-12-17 11:22:05
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-07 16:44:48
+ * @Last Modified time: 2022-05-23 11:12:03
  */
 import { atom, selector } from 'recoil'
 import { curTypeAtom, selectedAtom } from '../unclassified'
 import { nanoid } from 'nanoid'
 import type { UnitedSchemaAtom } from '@generator/fields/types'
-
+import type { ControlFuc } from '@jdfed/drip-form'
 // form-generator支持的配置
 export type HeaderConfig = Partial<{
   // 是否展示header区域
@@ -53,6 +53,11 @@ export type Options = {
   fieldKeyFn: (unitedSchema: UnitedSchemaAtom) => string
   // 未选中表单时，点击左侧组件，新增表单的位置
   addFieldLocation: 'top' | 'bottom'
+  // 属性配置
+  propertyConfig: Partial<{
+    // 属性配置联动
+    control: ControlFuc
+  }>
 }
 
 export const optionsAtom = atom<Options>({
@@ -72,6 +77,7 @@ export const optionsAtom = atom<Options>({
       showDeleteIcon: true,
       pointerEvents: 'none',
     },
+    propertyConfig: {},
     fieldKeyFn: (unitedSchema) => `${unitedSchema.ui.type}_${nanoid(6)}`,
     addFieldLocation: 'bottom',
   },
@@ -99,5 +105,14 @@ export const viewportConfigSelector = selector<
       }
     })
     return viewportConfigValue
+  },
+})
+
+// propertyConfig配置
+export const propertyConfigSelector = selector({
+  key: 'propertyConfigSelector',
+  get: ({ get }) => {
+    const propertyConfig = get(optionsAtom).propertyConfig
+    return propertyConfig
   },
 })

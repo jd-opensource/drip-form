@@ -1,7 +1,11 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
 import { typeCheck, deepClone, isEmpty, setDeepProp } from '@jdfed/utils'
-import { curTypePropertyConfigSelector, curTypeAtom } from '@generator/store'
+import {
+  curTypePropertyConfigSelector,
+  curTypeAtom,
+  propertyConfigSelector,
+} from '@generator/store'
 import useRightSidebar from '../HeadlessComponents'
 import styles from '../index.module.css'
 import { produce } from 'immer'
@@ -23,6 +27,7 @@ const PropertyConfig = () => {
   const [type, setType] = useRecoilState(curTypeAtom)
   //当前类型的样式配置schema
   const curTypePropertyConfig = useRecoilValue(curTypePropertyConfigSelector)
+  const propertyConfigOptions = useRecoilValue(propertyConfigSelector)
 
   useEffect(() => {
     setType((uiSchema.type as string) || 'root')
@@ -271,9 +276,14 @@ const PropertyConfig = () => {
     return {
       validateTime: 'change',
       theme: 'antd',
+      ui: {
+        ...(propertyConfigOptions.control && {
+          change: propertyConfigOptions.control,
+        }),
+      },
       schema: curTypePropertyConfig,
     }
-  }, [curTypePropertyConfig])
+  }, [curTypePropertyConfig, propertyConfigOptions.control])
 
   const newUiComponents = useMemo(() => {
     return {
