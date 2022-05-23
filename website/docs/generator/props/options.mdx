@@ -162,6 +162,44 @@ export default App
 
 是否展示删除按钮
 
+## 编辑区属性配置
+可自定义属性配置的展示
+
+除了在[components中配置属性配置](./components)之外，支持用户不修改components的基础上直接修改属性配置
+### control
+由于属性配置区域也是一个drip-form表单。所以，用户可以配置全局联动来配置属性配置
+
+<Tabs>
+  <TabItem value="preview" label="禁用切换组件类型和编辑fieldKey">
+
+```tsx
+<DripFormGenerator
+	options={{
+		propertyConfig: {
+			control: ({ merge, formData }) => {
+				// 当组件的fieldKey是abc时
+				if (formData?.$fieldKey === 'abc') {
+					//禁止修改fieldKey
+					merge('$fieldKey', 'uiSchema', { disabled: true })
+					//禁止切换组件类型
+					merge('type', 'uiSchema', { disabled: true })
+				}
+				// 当组件是输入框时
+				if (formData?.type === 'text') {
+					//禁止修改fieldKey
+					merge('$fieldKey', 'uiSchema', { disabled: true })
+					//禁止切换组件类型
+					merge('type', 'uiSchema', { disabled: true })
+				}
+			},
+		},
+	}}
+/>
+```
+
+  </TabItem>
+</Tabs>
+
 ## 其它
 
 ### fieldKeyFn
