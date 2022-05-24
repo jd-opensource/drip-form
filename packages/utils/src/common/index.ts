@@ -1,8 +1,9 @@
+import { CSSProperties } from 'react'
 /*
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-17 18:15:31
+ * @Last Modified time: 2022-05-24 13:41:16
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -397,4 +398,27 @@ export function upgradeTips(oldApiName: string, newApiName: string): void {
 // 转换数组
 export function toArray(param: string | Array<string>): Array<string> {
   return Array.isArray(param) ? param : [param]
+}
+
+// 处理容器宽度
+export const handleMargin = (style: CSSProperties): void => {
+  const { margin, width } = style
+  let marginRight: number | string = '0px'
+  let marginLeft: number | string = '0px'
+  if (width) {
+    if (margin) {
+      if (typeof margin === 'string') {
+        const marginArr = margin.split(' ')
+        if (marginArr.length === 1) {
+          marginRight = margin
+          marginLeft = margin
+        }
+        if (marginArr.length === 2 || marginArr.length === 3) {
+          marginRight = marginArr[1]
+          marginLeft = marginArr[1]
+        }
+      }
+    }
+    style.width = `calc(${style.width} - ${marginRight} - ${marginLeft})`
+  }
 }

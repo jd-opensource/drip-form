@@ -3,9 +3,10 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-01 14:29:45
+ * @Last Modified time: 2022-05-24 11:27:55
  */
 import React from 'react'
+import { handleMargin } from '@jdfed/utils'
 import type { RenderFnProps } from './type'
 import type { Map, Theme } from '@jdfed/utils'
 
@@ -150,6 +151,7 @@ const Render = ({
       isRoot ? { width: '100%', ...globalContainerStyle } : {},
       properties[item]?.containerStyle || {}
     )
+    handleMargin(containerStyle)
     // 当前Field所接收的ui props
     const {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
