@@ -38,7 +38,7 @@ const config = {
         fieldKey: 'multiple',
         type: 'boolean',
         title: '是否可以多选',
-        default: true,
+        default: false,
         ui: {
           type: 'switch',
         },

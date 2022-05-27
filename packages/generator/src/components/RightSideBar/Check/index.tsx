@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-13 18:53:18
+ * @Last Modified time: 2022-05-27 13:54:52
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -162,7 +162,7 @@ const CheckConfig = (): JSX.Element => {
               fieldKey: 'validateTime',
               type: 'string',
               title: '校验时机',
-              default: 'change',
+              default: 'submit',
               ui: {
                 type: 'select',
                 options: [
