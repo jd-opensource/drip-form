@@ -137,6 +137,17 @@ const PropertyConfig = () => {
       // 当前修改的字段处理为为可映射到渲染区schema的路径
       let key = changeKey
       let data = get(key).data
+      const keyArr = key.split('.')
+      keyArr.pop()
+      const parentKey = keyArr.join('.')
+      // 父元素是数组的，需要考虑数组的删除。所以修改父级数据
+      if (parentKey) {
+        const parentType = get(parentKey).dataSchema.type
+        if (parentType === 'array') {
+          key = parentKey
+          data = get(parentKey).data
+        }
+      }
       // 是否设置formData，默认不设置
       let setFormData = false
       // 需要设置的表单数据
@@ -192,10 +203,6 @@ const PropertyConfig = () => {
           }
       }
 
-      if (changeKey.startsWith('ui.options.')) {
-        data = get('ui.options').data
-        key = 'ui.options'
-      }
       if (changeKey === 'containerStyle.width') {
         // 更改全局布局宽度时，如果选用多列并且未设置padding，则自动设置
         if (type === 'root' && data !== 100 && !get().data.padding) {
