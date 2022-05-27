@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil'
+import { getThemeAndType } from '@jdfed/utils'
 import { containerConfig, antdConfig } from '@generator/fields'
 import type {
   FieldItemMap,
@@ -39,15 +40,21 @@ export const sidebarDataAtom = atom<ComponentsData>({
   },
 })
 
-// TODO @jiangxiaowei2 主题绑定 左侧所有表单
+// 左侧所有表单
 export const allFieldAtom = selector<FieldItemMap>({
   key: 'allfield',
   get: ({ get }) => {
     const { category } = get(sidebarDataAtom)
-    let allField = {}
-    for (const i in category) {
-      allField = { ...allField, ...category[i].fields }
-    }
+    const allField: FieldItemMap = {}
+    Object.values(category).map(({ fields }) => {
+      Object.values(fields).map((field) => {
+        const { unitedSchema } = field
+        const { ui } = unitedSchema
+        if (ui) {
+          allField[getThemeAndType(ui)] = field
+        }
+      })
+    })
     return allField
   },
 })

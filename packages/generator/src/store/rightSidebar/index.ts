@@ -1,6 +1,7 @@
 import { selector } from 'recoil'
+import { getThemeAndType } from '@jdfed/utils'
 import { sidebarDataAtom, uiTypeOptionsAtom } from '../leftSidebar'
-import { curTypeAtom } from '../unclassified'
+import { curThemeAndTypeAtom } from '../unclassified'
 import { baseMap } from '@generator/fields'
 import rootConfig from '@generator/fields/container/root.field'
 import type { UnitedSchema } from '@jdfed/utils'
@@ -11,16 +12,17 @@ export const allPropertyConfigSchemaSelector = selector<
 >({
   key: 'propertyConfigSchema',
   get: ({ get }) => {
-    const { category, order } = get(sidebarDataAtom)
+    const { category } = get(sidebarDataAtom)
     const uiTypeOptions = get(uiTypeOptionsAtom)
     const allPropertyConfig: Record<string, UnitedSchema['schema']> = {
       root: rootConfig,
     }
-    order.map((key) => {
-      Object.keys(category[key].fields).map((id) => {
-        const field = category[key].fields[id]
-        if (id != 'root') {
-          const propertyConfig =
+    Object.values(category).map(({ fields }) => {
+      Object.values(fields).map((field) => {
+        const { unitedSchema } = field
+        const { ui } = unitedSchema
+        if (ui) {
+          allPropertyConfig[getThemeAndType(ui)] =
             field?.propertyConfig?.schema ||
             ([
               {
@@ -84,7 +86,6 @@ export const allPropertyConfigSchemaSelector = selector<
                   field?.propertyConfig?.styleSchema || field?.styleSchema,
               },
             ] as UnitedSchema['schema'])
-          allPropertyConfig[id] = propertyConfig
         }
       })
     })
@@ -96,7 +97,7 @@ export const allPropertyConfigSchemaSelector = selector<
 export const curTypePropertyConfigSelector = selector<UnitedSchema['schema']>({
   key: 'curTypePropertyConfig',
   get: ({ get }) => {
-    const curType = get(curTypeAtom)
-    return get(allPropertyConfigSchemaSelector)[curType]
+    const curThemeAndType = get(curThemeAndTypeAtom)
+    return get(allPropertyConfigSchemaSelector)[curThemeAndType]
   },
 })

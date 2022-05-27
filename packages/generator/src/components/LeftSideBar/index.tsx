@@ -31,7 +31,6 @@ const LeftSideBar: React.FC = () => {
                         return (
                           category[key].fields[type] && (
                             <DragAtom
-                              // TODO @drag
                               key={JSON.stringify(
                                 category[key].fields[type].unitedSchema
                               )}

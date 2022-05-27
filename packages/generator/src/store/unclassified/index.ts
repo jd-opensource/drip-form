@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react'
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 import { UnitedSchema } from '@jdfed/utils'
 import antd from '@jdfed/drip-form-theme-antd'
 import type { DripFormRefType, UiComponents } from '@jdfed/drip-form'
@@ -87,11 +87,23 @@ export const versionAtom = atom<number>({
 })
 
 /**
- * 当前选中的表单类型
+ * 当前选中的表单主题::控件类型
+ * 未选中任何表单 为 root
+ * 选中表单 为 theme::type
  */
-export const curTypeAtom = atom<string>({
-  key: 'curType',
+export const curThemeAndTypeAtom = atom<string>({
+  key: 'curThemeAndType',
   default: 'root',
+})
+
+//当前选中的表单控件类型
+export const curTypeAtom = selector<string>({
+  key: 'curType',
+  get: ({ get }) => {
+    const themeAndType = get(curThemeAndTypeAtom)
+    const [theme, type] = themeAndType.split('::')
+    return type || theme
+  },
 })
 
 /**

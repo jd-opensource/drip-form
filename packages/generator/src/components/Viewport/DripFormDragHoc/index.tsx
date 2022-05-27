@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-09 14:28:24
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-02 13:04:29
+ * @Last Modified time: 2022-05-26 14:24:08
  */
 import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -15,7 +15,7 @@ import {
   selectedAtom,
   closestEdgeAtom,
   allFieldAtom,
-  curTypeAtom,
+  curThemeAndTypeAtom,
   viewportConfigSelector,
   optionsAtom,
 } from '@generator/store'
@@ -34,6 +34,7 @@ type Props = {
   parentType: string
   parentMode: string
   isFirst: boolean
+  theme: string
 }
 
 // over对应边classname
@@ -54,6 +55,7 @@ const DripFormDragHoc: FC<Props> = memo(
     parentType,
     parentMode,
     isFirst,
+    theme,
   }) => {
     const [ref, setRef] = useState<HTMLElement | null>(null)
     const allField = useRecoilValue(allFieldAtom)
@@ -98,8 +100,11 @@ const DripFormDragHoc: FC<Props> = memo(
 
     // 当前选中的field
     const [selectedFieldKey, setSelectedFieldKey] = useRecoilState(selectedAtom)
-    const setCurType = useSetRecoilState(curTypeAtom)
-
+    const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
+    // 当前拖拽的组件them::type类型
+    const curThemeAndType = useMemo(() => {
+      return type.split('::').length > 1 ? type : `${theme}::${type}`
+    }, [theme, type])
     /**
      * 选中field的事件
      */
@@ -107,9 +112,9 @@ const DripFormDragHoc: FC<Props> = memo(
       (e) => {
         e.stopPropagation()
         setSelectedFieldKey(fieldKey as string)
-        setCurType(type)
+        setThemeAndType(curThemeAndType)
       },
-      [fieldKey, setCurType, setSelectedFieldKey, type]
+      [curThemeAndType, fieldKey, setThemeAndType, setSelectedFieldKey]
     )
 
     useEffect(() => {
@@ -171,8 +176,8 @@ const DripFormDragHoc: FC<Props> = memo(
           createPortal(
             <DragOverlay>
               <DragItem
-                icon={allField[type].icon}
-                unitedSchema={allField[type].unitedSchema}
+                icon={allField[curThemeAndType].icon}
+                unitedSchema={allField[curThemeAndType].unitedSchema}
               />
             </DragOverlay>,
             document.body,

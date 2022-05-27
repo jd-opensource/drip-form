@@ -3,14 +3,15 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-09 10:14:55
+ * @Last Modified time: 2022-05-26 17:09:39
  */
 import { useCallback, useContext } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { getThemeAndType } from '@jdfed/utils'
 import {
   selectedAtom,
   GeneratorContext,
-  curTypeAtom,
+  curThemeAndTypeAtom,
   optionsAtom,
 } from '@generator/store'
 import useDeleteField from './useDeleteField'
@@ -30,7 +31,7 @@ const useAddField = (): AddField => {
   const generatorContext = useContext(GeneratorContext)
   const { fieldKeyFn, addFieldLocation } = useRecoilValue(optionsAtom)
   const [selectedKey, setSelected] = useRecoilState(selectedAtom)
-  const setCurType = useSetRecoilState(curTypeAtom)
+  const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
   const deleteField = useDeleteField(false)
   const canEdit = useCanEditJson()
   // unitedSchema最外层的order
@@ -170,7 +171,7 @@ const useAddField = (): AddField => {
           // 设置选中的表单
           setSelected(selectKey)
           // 设置选中的表单类型
-          setCurType(unitedSchema.ui.type)
+          setThemeAndType(getThemeAndType(unitedSchema.ui))
         },
       })
       // // viewport区域拖拽且非排序模式，需要删除原来位置的表单
@@ -186,7 +187,7 @@ const useAddField = (): AddField => {
       generatorContext,
       lastFieldKey,
       selectedKey,
-      setCurType,
+      setThemeAndType,
       setSelected,
     ]
   )
