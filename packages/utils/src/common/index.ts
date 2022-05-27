@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-24 13:41:16
+ * @Last Modified time: 2022-05-26 17:01:05
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -421,4 +421,20 @@ export const handleMargin = (style: CSSProperties): void => {
     }
     style.width = `calc(${style.width} - ${marginRight} - ${marginLeft})`
   }
+}
+
+/**
+ * 根据uiSchema，获取当前schem相对的主题和组件类型
+ * @param uiSchema
+ * @returns
+ */
+export const getThemeAndType = (
+  uiSchema: {
+    type: string
+    theme?: string
+  } & Map
+): string => {
+  const { type, theme } = uiSchema
+  const [, newType] = type.split('::')
+  return newType ? type : `${theme}::${type}`
 }

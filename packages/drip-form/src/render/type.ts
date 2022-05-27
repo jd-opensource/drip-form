@@ -34,6 +34,7 @@ export type ContainerHoc = (
     // 是否是第一个表单
     isFirst: boolean
     uiProp: Record<string, any>
+    theme: string
   }
 ) => JSX.Element
 

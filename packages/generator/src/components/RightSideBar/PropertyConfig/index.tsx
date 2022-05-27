@@ -1,8 +1,15 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import DripForm from '@jdfed/drip-form'
-import { typeCheck, deepClone, isEmpty, setDeepProp } from '@jdfed/utils'
+import {
+  typeCheck,
+  deepClone,
+  isEmpty,
+  setDeepProp,
+  getThemeAndType,
+} from '@jdfed/utils'
 import {
   curTypePropertyConfigSelector,
+  curThemeAndTypeAtom,
   curTypeAtom,
   propertyConfigSelector,
 } from '@generator/store'
@@ -12,7 +19,7 @@ import { produce } from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import generatorTheme from '@generator/components/GeneratorFormTheme'
 import type { SetType } from '@jdfed/hooks'
-import type { Map, UnitedSchema } from '@jdfed/utils'
+import type { Map, UnitedSchema, UiSchema } from '@jdfed/utils'
 
 const PropertyConfig = () => {
   const {
@@ -23,22 +30,26 @@ const PropertyConfig = () => {
     uiComponents,
     fieldKey,
   } = useRightSidebar()
-  // 当前选中的组件UI类型
-  const [type, setType] = useRecoilState(curTypeAtom)
+  // 当前选中的组件
+  const [themeAndType, setThemeAndType] = useRecoilState(curThemeAndTypeAtom)
+  // 当前选中的组件类型
+  const type = useRecoilValue(curTypeAtom)
   //当前类型的样式配置schema
   const curTypePropertyConfig = useRecoilValue(curTypePropertyConfigSelector)
   const propertyConfigOptions = useRecoilValue(propertyConfigSelector)
 
   useEffect(() => {
-    setType((uiSchema.type as string) || 'root')
-  }, [setType, uiSchema.type])
+    setThemeAndType(
+      uiSchema.type ? getThemeAndType(uiSchema as UiSchema) : 'root'
+    )
+  }, [setThemeAndType, uiSchema, uiSchema.type])
 
   /**
    * 初始化配置数据
    */
   const formData = useMemo(() => {
     return {
-      type,
+      type: themeAndType,
       $fieldKey: dataSchema.$fieldKey || fieldKey,
       title: uiSchema.title || {},
       containerStyle: uiSchema.containerStyle || {},
@@ -56,6 +67,7 @@ const PropertyConfig = () => {
       },
     }
   }, [
+    themeAndType,
     dataSchema.$fieldKey,
     dataSchema?.validateTime,
     dataSchema.default,

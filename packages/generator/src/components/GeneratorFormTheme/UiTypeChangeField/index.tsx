@@ -3,14 +3,14 @@
  * @Author: jiangxiaowei
  * @Date: 2022-05-19 10:22:53
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-19 14:46:15
+ * @Last Modified time: 2022-05-26 14:22:40
  */
 import React, { memo, FC, useCallback, useContext } from 'react'
 import { Select } from 'antd'
 import { CommonProps } from '../global'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import {
-  curTypeAtom,
+  curThemeAndTypeAtom,
   GeneratorContext,
   selectedAtom,
   SelectOption,
@@ -25,7 +25,7 @@ const UiTypeChangeField: FC<CommonProps> = ({
   disabled,
   style,
 }) => {
-  const setType = useSetRecoilState(curTypeAtom)
+  const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
   const generatorContext = useContext(GeneratorContext)
   const selectedFieldKey = useRecoilValue(selectedAtom)
 
@@ -99,9 +99,9 @@ const UiTypeChangeField: FC<CommonProps> = ({
         }
       )
       // 更新类型
-      setType(value)
+      setThemeAndType(value)
     },
-    [generatorContext, onReplace, options, selectedFieldKey, setType]
+    [generatorContext, onReplace, options, selectedFieldKey, setThemeAndType]
   )
 
   return (
