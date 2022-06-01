@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* **form:** array container supports sorting ([#206](https://github.com/jdfed/drip-form/issues/206)) ([7a60b0b](https://github.com/jdfed/drip-form/commit/7a60b0b3e2eb9af8d6b479356ceee659bba86947))
+* **generator:** delete element automatically selects the neighboring previous element or the parent ([945196a](https://github.com/jdfed/drip-form/commit/945196ab0903b6b5276a6630df7c89d6ca8b1cb1))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 

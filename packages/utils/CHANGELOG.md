@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* **form:** array container supports sorting ([#206](https://github.com/jdfed/drip-form/issues/206)) ([7a60b0b](https://github.com/jdfed/drip-form/commit/7a60b0b3e2eb9af8d6b479356ceee659bba86947))
+* **generator:** support the same type for different themes ([#211](https://github.com/jdfed/drip-form/issues/211)) ([23cf581](https://github.com/jdfed/drip-form/commit/23cf581dca35b93b6d33640f67250fcd37c32009))
+* combine method supports configuring the  configuration to transform fieldkeys ([f3fef68](https://github.com/jdfed/drip-form/commit/f3fef681cccc7f5b900e65fa796e995090d316b2))
+* title add showColon configuration ([#199](https://github.com/jdfed/drip-form/issues/199)) ([d8d32ef](https://github.com/jdfed/drip-form/commit/d8d32ef06f77015a4c76a37254daae5eedb28379))
+* **utils:** parseUnitedSchema supports transparent DataSchema keywords ([#190](https://github.com/jdfed/drip-form/issues/190)) ([a1062c3](https://github.com/jdfed/drip-form/commit/a1062c3195bf9000d1c7e0016131965d55d6d77d))
+* customize component fontSize and fontColor ([#178](https://github.com/jdfed/drip-form/issues/178)) ([3199e29](https://github.com/jdfed/drip-form/commit/3199e29e7338cb78cd8c6d702b3c55df9562c157))
+* title support fontSize、color configuration ([#177](https://github.com/jdfed/drip-form/issues/177)) ([d83836c](https://github.com/jdfed/drip-form/commit/d83836ce1827bf0af082e345e0710391b6f963ff))
+
+
+### Bug Fixes
+
+* margin affect the number of layout columns ([#210](https://github.com/jdfed/drip-form/issues/210)) ([e5ebb44](https://github.com/jdfed/drip-form/commit/e5ebb44591ccea9bccd261becac251737dce6b8e))
+* **generator:** default configuration is not effective ([7e97006](https://github.com/jdfed/drip-form/commit/7e9700633a66b8221bbe43782fc998b564e044a4))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 

@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* **form:** array container supports sorting ([#206](https://github.com/jdfed/drip-form/issues/206)) ([7a60b0b](https://github.com/jdfed/drip-form/commit/7a60b0b3e2eb9af8d6b479356ceee659bba86947))
+* **generator:** delete element automatically selects the neighboring previous element or the parent ([945196a](https://github.com/jdfed/drip-form/commit/945196ab0903b6b5276a6630df7c89d6ca8b1cb1))
+* **generator:** options add pointerEvents to configure whether the ViewPort area form is clickable ([#192](https://github.com/jdfed/drip-form/issues/192)) ([9d42ae2](https://github.com/jdfed/drip-form/commit/9d42ae281efa87630a970f348c998342651c8a10))
+* **generator:** options add propertyConfig configuration ([#209](https://github.com/jdfed/drip-form/issues/209)) ([0c29221](https://github.com/jdfed/drip-form/commit/0c29221e63dd53bec7ca5db27d133da68b04660b))
+* **generator:** support the same type for different themes ([#211](https://github.com/jdfed/drip-form/issues/211)) ([23cf581](https://github.com/jdfed/drip-form/commit/23cf581dca35b93b6d33640f67250fcd37c32009))
+* combine method supports configuring the  configuration to transform fieldkeys ([f3fef68](https://github.com/jdfed/drip-form/commit/f3fef681cccc7f5b900e65fa796e995090d316b2))
+* customize component fontSize and fontColor ([#178](https://github.com/jdfed/drip-form/issues/178)) ([3199e29](https://github.com/jdfed/drip-form/commit/3199e29e7338cb78cd8c6d702b3c55df9562c157))
+* title add showColon configuration ([#199](https://github.com/jdfed/drip-form/issues/199)) ([d8d32ef](https://github.com/jdfed/drip-form/commit/d8d32ef06f77015a4c76a37254daae5eedb28379))
+* **generator:** prompt for unsaved JSON when exporting JSON ([#184](https://github.com/jdfed/drip-form/issues/184)) ([ef77401](https://github.com/jdfed/drip-form/commit/ef77401df863ba47b69f27d0cc6238cdca18be29))
+* footer element support customize style ([#167](https://github.com/jdfed/drip-form/issues/167)) ([6ad9ba6](https://github.com/jdfed/drip-form/commit/6ad9ba6970821e6b9719dba8c61ad00eaa373783))
+* title support fontSize、color configuration ([#177](https://github.com/jdfed/drip-form/issues/177)) ([d83836c](https://github.com/jdfed/drip-form/commit/d83836ce1827bf0af082e345e0710391b6f963ff))
+* **generator:** support customize layout width ([97eddeb](https://github.com/jdfed/drip-form/commit/97eddeb3f49d3b348338fdf0389bedc786a7bdb7))
+
+
+### Bug Fixes
+
+* **generator:** add components,typePath missing unitedSchemaPath ([d2f0058](https://github.com/jdfed/drip-form/commit/d2f0058e57a7768352048d4c45731f6c56098e29))
+* **generator:** after schema prop is configured, the exported JSON schemas are inconsistent ([#201](https://github.com/jdfed/drip-form/issues/201)) ([3fe38d7](https://github.com/jdfed/drip-form/commit/3fe38d718f6fff68f24b68fca895093c1da77968))
+* **generator:** change the default values for part of the property configuration ([#212](https://github.com/jdfed/drip-form/issues/212)) ([cdf5389](https://github.com/jdfed/drip-form/commit/cdf53899bcebcf14824dd44245bf919b91fd4bd2))
+* **generator:** child element cannot be selected ([d9de73d](https://github.com/jdfed/drip-form/commit/d9de73d2ec34fe11a1e5f235f82b93aee9aeb1ef))
+* **generator:** copy fieldKey is not effective ([#159](https://github.com/jdfed/drip-form/issues/159)) ([857fe65](https://github.com/jdfed/drip-form/commit/857fe6555465a31fe0b75acfd49a80b1118e4ed0))
+* **generator:** default configuration is not effective ([7e97006](https://github.com/jdfed/drip-form/commit/7e9700633a66b8221bbe43782fc998b564e044a4))
+* **generator:** fix  error where value in order is not in category ([#187](https://github.com/jdfed/drip-form/issues/187)) ([a5290f8](https://github.com/jdfed/drip-form/commit/a5290f846eaa97833538b1e79c5573a4140d1034))
+* **generator:** fixed default options configuration not taking effect ([#202](https://github.com/jdfed/drip-form/issues/202)) ([4789f6f](https://github.com/jdfed/drip-form/commit/4789f6f112f47eba717d81b04d15bc423f532a94))
+* **generator:** fixed dragging and sorting child elements in tuple containers ([e9f700f](https://github.com/jdfed/drip-form/commit/e9f700f11ee9e175e6b1e11278f55ec386230234))
+* **generator:** fixed edit JSON crash after modifying fieldKey ([052190d](https://github.com/jdfed/drip-form/commit/052190dfb0ec508e70a44cf1adfd2b074453d06b))
+* **generator:** fixed the default width of the global ContainerStyle ([#200](https://github.com/jdfed/drip-form/issues/200)) ([cf9cad1](https://github.com/jdfed/drip-form/commit/cf9cad15e7f15e887faff0632318a784a1cef364))
+* **generator:** timePicker、datePicker range default configuration is not effective ([#174](https://github.com/jdfed/drip-form/issues/174)) ([08cc571](https://github.com/jdfed/drip-form/commit/08cc5716ae5cd6933647cf19a85580e21f2e6bb8))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 

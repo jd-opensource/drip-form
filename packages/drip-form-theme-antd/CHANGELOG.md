@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* **thema:** checkbox supports select all ([#205](https://github.com/jdfed/drip-form/issues/205)) ([b80e38a](https://github.com/jdfed/drip-form/commit/b80e38a37588f283282c8d124c21a99fb065d910))
+* form support view mode ([bf61f3f](https://github.com/jdfed/drip-form/commit/bf61f3f958343d47d8a20af30a4f7e2e4d2f9026))
+* nullField add styleType configuration ([#158](https://github.com/jdfed/drip-form/issues/158)) ([dca0687](https://github.com/jdfed/drip-form/commit/dca0687a89200278cdd4018dbc49f683a4ec0906))
+
+
+### Bug Fixes
+
+* **generator:** change the default values for part of the property configuration ([#212](https://github.com/jdfed/drip-form/issues/212)) ([cdf5389](https://github.com/jdfed/drip-form/commit/cdf53899bcebcf14824dd44245bf919b91fd4bd2))
+* **theme:** upload component cannot preview images after exportToString is enabled ([#197](https://github.com/jdfed/drip-form/issues/197)) ([a02a78a](https://github.com/jdfed/drip-form/commit/a02a78a65217966287a40518fd8af6806780aa4f))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 

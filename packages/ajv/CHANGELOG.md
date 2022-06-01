@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* combine method supports configuring the  configuration to transform fieldkeys ([f3fef68](https://github.com/jdfed/drip-form/commit/f3fef681cccc7f5b900e65fa796e995090d316b2))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 

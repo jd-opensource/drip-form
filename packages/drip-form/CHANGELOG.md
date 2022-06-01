@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
+
+
+### Features
+
+* **form:** array container supports sorting ([#206](https://github.com/jdfed/drip-form/issues/206)) ([7a60b0b](https://github.com/jdfed/drip-form/commit/7a60b0b3e2eb9af8d6b479356ceee659bba86947))
+* **generator:** delete element automatically selects the neighboring previous element or the parent ([945196a](https://github.com/jdfed/drip-form/commit/945196ab0903b6b5276a6630df7c89d6ca8b1cb1))
+* **generator:** options add pointerEvents to configure whether the ViewPort area form is clickable ([#192](https://github.com/jdfed/drip-form/issues/192)) ([9d42ae2](https://github.com/jdfed/drip-form/commit/9d42ae281efa87630a970f348c998342651c8a10))
+* **generator:** options add propertyConfig configuration ([#209](https://github.com/jdfed/drip-form/issues/209)) ([0c29221](https://github.com/jdfed/drip-form/commit/0c29221e63dd53bec7ca5db27d133da68b04660b))
+* **generator:** support the same type for different themes ([#211](https://github.com/jdfed/drip-form/issues/211)) ([23cf581](https://github.com/jdfed/drip-form/commit/23cf581dca35b93b6d33640f67250fcd37c32009))
+* add className for different form modes ([c577ae1](https://github.com/jdfed/drip-form/commit/c577ae1d2bf22a7f2fbe1d309ad3fe3770d9dbb2))
+* customize component fontSize and fontColor ([#178](https://github.com/jdfed/drip-form/issues/178)) ([3199e29](https://github.com/jdfed/drip-form/commit/3199e29e7338cb78cd8c6d702b3c55df9562c157))
+* footer element support customize style ([#167](https://github.com/jdfed/drip-form/issues/167)) ([6ad9ba6](https://github.com/jdfed/drip-form/commit/6ad9ba6970821e6b9719dba8c61ad00eaa373783))
+* form support view mode ([bf61f3f](https://github.com/jdfed/drip-form/commit/bf61f3f958343d47d8a20af30a4f7e2e4d2f9026))
+* title add showColon configuration ([#199](https://github.com/jdfed/drip-form/issues/199)) ([d8d32ef](https://github.com/jdfed/drip-form/commit/d8d32ef06f77015a4c76a37254daae5eedb28379))
+* title support fontSize、color configuration ([#177](https://github.com/jdfed/drip-form/issues/177)) ([d83836c](https://github.com/jdfed/drip-form/commit/d83836ce1827bf0af082e345e0710391b6f963ff))
+
+
+### Bug Fixes
+
+* margin affect the number of layout columns ([#210](https://github.com/jdfed/drip-form/issues/210)) ([e5ebb44](https://github.com/jdfed/drip-form/commit/e5ebb44591ccea9bccd261becac251737dce6b8e))
+* **generator:** add components,typePath missing unitedSchemaPath ([d2f0058](https://github.com/jdfed/drip-form/commit/d2f0058e57a7768352048d4c45731f6c56098e29))
+* **generator:** fix the viewport area form width in non-generator mode ([#175](https://github.com/jdfed/drip-form/issues/175)) ([e5bf6eb](https://github.com/jdfed/drip-form/commit/e5bf6eb30efe475ffca170c99bf489c2ffe33529))
+* **generator:** fixed dragging and sorting child elements in tuple containers ([e9f700f](https://github.com/jdfed/drip-form/commit/e9f700f11ee9e175e6b1e11278f55ec386230234))
+* **generator:** fixed dragging and sorting child elements in tuple containers ([14257d0](https://github.com/jdfed/drip-form/commit/14257d046bc2588303d2c55ee577d2583daf3cf4))
+* fixed custom component tooltip not displayed ([#193](https://github.com/jdfed/drip-form/issues/193)) ([2078d0f](https://github.com/jdfed/drip-form/commit/2078d0fdbd8ae692e2209ccb3fbe02e6f66f3cde))
+
+
+### style
+
+* **form:** in generator mode, the minimum height of the object container is 30px ([2b4a030](https://github.com/jdfed/drip-form/commit/2b4a03003311c273636206cce1c5af52e7ad81ad))
+* add error message for unloaded component ([#182](https://github.com/jdfed/drip-form/issues/182)) ([cf44e9a](https://github.com/jdfed/drip-form/commit/cf44e9a9a8361b9c5d5b073b4d1e22fd47fe9db4))
+* default text color of the form in the view mode is gray ([5033cac](https://github.com/jdfed/drip-form/commit/5033cacd958fe01588955156d2ad1c8b98ad86fd))
+* 标题颜色所有模式默认[#000000](https://github.com/jdfed/drip-form/issues/000000) ([#179](https://github.com/jdfed/drip-form/issues/179)) ([d1727bc](https://github.com/jdfed/drip-form/commit/d1727bc9e9f7762c8fbda333dcc9ba4bd47ad553))
+
+
+
 ## [0.7.0](https://github.com/jdfed/drip-form/compare/v0.6.0...v0.7.0) (2022-03-14)
 
 
