@@ -14,7 +14,6 @@ import {
   propertyConfigSelector,
 } from '@generator/store'
 import useRightSidebar from '../HeadlessComponents'
-import styles from '../index.module.css'
 import { produce } from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import generatorTheme from '@generator/components/GeneratorFormTheme'
@@ -312,16 +311,14 @@ const PropertyConfig = () => {
   }, [uiComponents])
 
   return (
-    <div className={styles.panelConfig}>
-      <DripForm
-        key={selectedFieldKey}
-        formData={formData}
-        parse={onParse}
-        control={onChangeSchema}
-        unitedSchema={unitedSchema}
-        uiComponents={newUiComponents}
-      />
-    </div>
+    <DripForm
+      key={selectedFieldKey}
+      formData={formData}
+      parse={onParse}
+      control={onChangeSchema}
+      unitedSchema={unitedSchema}
+      uiComponents={newUiComponents}
+    />
   )
 }
 

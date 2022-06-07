@@ -1,7 +1,6 @@
 .viewport {
   @apply px-3 flex-grow;
   overflow: hidden scroll;
-  max-width: 55%;
 }
 
 .formstyle {

@@ -1,13 +1,12 @@
 .left {
-  @apply transition-all w-1/5 h-full;
+  @apply transition-all h-full flex-shrink-0 flex-grow-0;
   overflow-y: scroll;
-  min-width: 320px;
+  width: calc(120px + 120px + 3.5rem);
 }
 
 .leftClose {
-  width: 10%;
-  min-width: 160px;
-  @apply transition-all;
+  width: calc(120px + 2.5rem);
+  @apply transition-all flex-shrink-0 flex-grow-0;
 }
 
 .title {
