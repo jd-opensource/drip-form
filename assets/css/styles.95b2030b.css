@@ -41139,17 +41139,26 @@ Add the correct display in Chrome and Safari.
       margin-bottom: 0;
     }
 
+.rightSideBarGlobal .drip-form-root {
+      max-height: calc(100vh - 95px);
+      overflow: scroll;
+      padding-bottom: 1rem;
+    }
+
 .index-module_container__fH7Q7 {
   height: 100%;
-  width: 25%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  overflow-y: hidden;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  min-width: 350px;
-  overflow: hidden scroll;
+  width:350px;
 }
 
 .index-module_containerjson__HBRtr {
-  width: 41.666667%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width:calc(350px + 120px + 1rem);
 }
 
 .index-module_propertyConfig__1pNtS {
@@ -41211,17 +41220,9 @@ Add the correct display in Chrome and Safari.
   color: rgba(59, 130, 246, var(--tw-text-opacity));
 }
 
-.index-module_panelConfig__owq5k {
-  height: calc(100vh - 160px);
-  overflow: scroll;
-  padding-bottom: 1rem;
-}
-
-.index-module_panelConfig__owq5k::-webkit-scrollbar {
-  display: none;
-}
-
 /* purgecss end ignore */
+
+
 
 /* purgecss start ignore */
 
@@ -41251,17 +41252,19 @@ Add the correct display in Chrome and Safari.
 
 .index-module_left__Z14ZB {
   height: 100%;
-  width: 20%;
+  flex-shrink: 0;
+  flex-grow: 0;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   overflow-y: scroll;
-  min-width: 320px;
+  width: calc(120px + 120px + 3.5rem);
 }
 
 .index-module_leftClose__3VAnO {
-  width: 10%;
-  min-width: 160px;
+  width: calc(120px + 2.5rem);
+  flex-shrink: 0;
+  flex-grow: 0;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -41321,6 +41324,7 @@ Add the correct display in Chrome and Safari.
 }
 
 /* purgecss end ignore */
+
 /* purgecss start ignore */
 
 .leftsidebar-item {
@@ -41411,7 +41415,6 @@ Add the correct display in Chrome and Safari.
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   overflow: hidden scroll;
-  max-width: 55%;
 }
 
 .index-module_formstyle__29kGK {
