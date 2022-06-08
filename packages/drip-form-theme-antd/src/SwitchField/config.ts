@@ -9,6 +9,7 @@ const config = {
     title: '开关',
     ui: {
       type: 'switch',
+      theme: 'antd',
     },
   },
   propertyConfig: {

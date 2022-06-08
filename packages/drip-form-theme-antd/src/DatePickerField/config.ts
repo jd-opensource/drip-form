@@ -97,6 +97,7 @@ const config = {
     ui: {
       type: 'datePicker',
       showTime: true,
+      theme: 'antd',
     },
   },
   propertyConfig: {

@@ -10,6 +10,7 @@ const config = {
     default: '1',
     ui: {
       type: 'radio',
+      theme: 'antd',
       options: [
         { label: '是', value: '1' },
         { label: '否', value: '0' },

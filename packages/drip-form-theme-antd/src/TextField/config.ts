@@ -10,6 +10,7 @@ const config = {
     ui: {
       type: 'text',
       style: { width: '100%' },
+      theme: 'antd',
     },
   },
   propertyConfig: {

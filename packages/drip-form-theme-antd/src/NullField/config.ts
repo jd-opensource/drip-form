@@ -9,6 +9,7 @@ const config = {
     title: '文本',
     ui: {
       type: 'null',
+      theme: 'antd',
       text: '这是一个不会绑定数据的空表单。只用作特殊场景下展示文字使用',
     },
   },

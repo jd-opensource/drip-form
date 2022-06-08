@@ -10,6 +10,7 @@ const config = {
     format: 'color',
     ui: {
       type: 'colorPicker',
+      theme: 'antd',
     },
   },
   propertyConfig: {

@@ -9,6 +9,7 @@ const config = {
     title: '级联选择',
     ui: {
       type: 'cascader',
+      theme: 'antd',
     },
   },
   propertyConfig: {

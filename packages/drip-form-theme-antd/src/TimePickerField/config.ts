@@ -51,6 +51,7 @@ const config = {
     title: '时间选择框',
     ui: {
       type: 'timePicker',
+      theme: 'antd',
     },
   },
   propertyConfig: {

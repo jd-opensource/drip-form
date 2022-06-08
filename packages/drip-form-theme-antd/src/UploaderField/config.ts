@@ -9,6 +9,7 @@ const config = {
     title: '上传组件',
     ui: {
       type: 'uploader',
+      theme: 'antd',
       listType: 'picture',
       canDrag: false,
       exportToString: true,

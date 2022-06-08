@@ -9,6 +9,7 @@ const config = {
     title: '滑动输入条',
     ui: {
       type: 'slider',
+      theme: 'antd',
     },
   },
   propertyConfig: {

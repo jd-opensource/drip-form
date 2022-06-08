@@ -10,6 +10,7 @@ const config = {
     ui: {
       type: 'treeSelect',
       style: { width: 120 },
+      theme: 'antd',
     },
   },
   propertyConfig: {
