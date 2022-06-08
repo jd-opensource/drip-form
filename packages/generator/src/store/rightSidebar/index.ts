@@ -1,7 +1,11 @@
 import { selector } from 'recoil'
 import { getThemeAndType } from '@jdfed/utils'
 import { sidebarDataAtom, uiTypeOptionsAtom } from '../leftSidebar'
-import { curThemeAndTypeAtom } from '../unclassified'
+import {
+  curThemeAndTypeAtom,
+  curTypeAtom,
+  globalThemeAtom,
+} from '../unclassified'
 import { baseMap } from '@generator/fields'
 import rootConfig from '@generator/fields/container/root.field'
 import type { UnitedSchema } from '@jdfed/utils'
@@ -98,6 +102,12 @@ export const curTypePropertyConfigSelector = selector<UnitedSchema['schema']>({
   key: 'curTypePropertyConfig',
   get: ({ get }) => {
     const curThemeAndType = get(curThemeAndTypeAtom)
-    return get(allPropertyConfigSchemaSelector)[curThemeAndType]
+    const curType = get(curTypeAtom)
+    const globalTheme = get(globalThemeAtom)
+    // 优先获取当前主题，未获取到则获取全局主题
+    return (
+      get(allPropertyConfigSchemaSelector)[curThemeAndType] ||
+      get(allPropertyConfigSchemaSelector)[`${globalTheme}::${curType}`]
+    )
   },
 })

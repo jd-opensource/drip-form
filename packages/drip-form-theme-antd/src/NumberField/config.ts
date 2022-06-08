@@ -9,6 +9,7 @@ const config = {
     title: '数字输入框',
     ui: {
       type: 'number',
+      theme: 'antd',
     },
   },
   propertyConfig: {

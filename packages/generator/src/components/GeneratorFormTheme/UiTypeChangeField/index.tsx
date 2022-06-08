@@ -5,7 +5,7 @@
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: 2022-05-26 14:22:40
  */
-import React, { memo, FC, useCallback, useContext } from 'react'
+import React, { memo, FC, useCallback, useContext, useMemo } from 'react'
 import { Select } from 'antd'
 import { CommonProps } from '../global'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
@@ -14,6 +14,8 @@ import {
   GeneratorContext,
   selectedAtom,
   SelectOption,
+  globalThemeAtom,
+  curTypeAtom,
 } from '@generator/store'
 import { deepClone, deleteDeepProp, setDeepProp } from '@jdfed/utils'
 import { original } from 'immer'
@@ -28,6 +30,8 @@ const UiTypeChangeField: FC<CommonProps> = ({
   const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
   const generatorContext = useContext(GeneratorContext)
   const selectedFieldKey = useRecoilValue(selectedAtom)
+  const globalTheme = useRecoilValue(globalThemeAtom)
+  const curType = useRecoilValue(curTypeAtom)
 
   /**
    * 切换属性配置
@@ -104,11 +108,22 @@ const UiTypeChangeField: FC<CommonProps> = ({
     [generatorContext, onReplace, options, selectedFieldKey, setThemeAndType]
   )
 
+  // 兼容未设置theme的数据（未设置的默认使用全局主题）
+  const newFieldData = useMemo(() => {
+    if (
+      options.findIndex((item: SelectOption) => item.value === fieldData) != -1
+    ) {
+      return fieldData
+    } else {
+      return `${globalTheme}::${curType}`
+    }
+  }, [curType, fieldData, globalTheme, options])
+
   return (
     <Select
       style={style}
       options={options}
-      value={fieldData}
+      value={newFieldData}
       onChange={change}
       allowClear={false}
       disabled={disabled}

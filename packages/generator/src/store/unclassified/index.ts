@@ -86,6 +86,14 @@ export const versionAtom = atom<number>({
   default: 0,
 })
 
+// 全局主题
+export const globalThemeAtom = selector<string | undefined>({
+  key: 'globalTheme',
+  get: ({ get }) => {
+    return get(schemaAtom).theme
+  },
+})
+
 /**
  * 当前选中的表单主题::控件类型
  * 未选中任何表单 为 root

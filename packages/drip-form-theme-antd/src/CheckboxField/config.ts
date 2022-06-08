@@ -9,6 +9,7 @@ const config = {
     title: '多选框',
     ui: {
       type: 'checkbox',
+      theme: 'antd',
     },
   },
   propertyConfig: {

@@ -9,6 +9,7 @@ const config = {
     title: '选择器',
     ui: {
       type: 'select',
+      theme: 'antd',
       style: { width: 120 },
       options: [],
     },
