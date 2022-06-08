@@ -38,10 +38,18 @@ const PropertyConfig = () => {
   const propertyConfigOptions = useRecoilValue(propertyConfigSelector)
 
   useEffect(() => {
+    const globalTheme = generatorContext.current?.get('').uiSchema.theme
     setThemeAndType(
-      uiSchema.type ? getThemeAndType(uiSchema as UiSchema) : 'root'
+      uiSchema.type
+        ? getThemeAndType({
+            ...(!['object', 'array'].includes(uiSchema.type as string) && {
+              theme: globalTheme,
+            }),
+            ...uiSchema,
+          } as UiSchema)
+        : 'root'
     )
-  }, [setThemeAndType, uiSchema, uiSchema.type])
+  }, [generatorContext, setThemeAndType, uiSchema, uiSchema.type])
 
   /**
    * 初始化配置数据
