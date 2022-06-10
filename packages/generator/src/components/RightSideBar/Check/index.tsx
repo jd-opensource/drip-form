@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-27 13:54:52
+ * @Last Modified time: 2022-06-10 13:39:58
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -444,7 +444,7 @@ const CheckConfig = (): JSX.Element => {
                 ['errorMessage', 'required', requiredKey],
                 draft as Map
               )
-              if (index) {
+              if (index != -1) {
                 deleteDeepProp(['required', String(index)], draft as Map)
               }
             })
