@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react'
-import { atom, selector } from 'recoil'
+import { atom, selector, DefaultValue } from 'recoil'
 import { UnitedSchema } from '@jdfed/utils'
 import antd from '@jdfed/drip-form-theme-antd'
 import type { DripFormRefType, UiComponents } from '@jdfed/drip-form'
@@ -95,13 +95,41 @@ export const globalThemeAtom = selector<string | undefined>({
 })
 
 /**
+ * 当前的主题和组件类型
+ * root：未选中任何一个表单
+ * object：选中的是对象容器
+ * array：选中的是数组容器
+ * theme::type  选中的theme主题下的type组件
+ * 注意：由于v0未区分容器和组件概念，所以使用curThemeAndTypeAtom处理容器
+ */
+const themeAndTypeAtom = atom<string>({
+  key: 'themeAndType',
+  default: 'root',
+})
+
+/**
  * 当前选中的表单主题::控件类型
  * 未选中任何表单 为 root
  * 选中表单 为 theme::type
  */
-export const curThemeAndTypeAtom = atom<string>({
+export const curThemeAndTypeAtom = selector<string>({
   key: 'curThemeAndType',
-  default: 'root',
+  get: ({ get }) => {
+    return get(themeAndTypeAtom)
+  },
+  set: ({ set }, newValue) => {
+    if (newValue instanceof DefaultValue) {
+      set(themeAndTypeAtom, newValue)
+    } else {
+      // 如果用户输入的theme::type中type是root、object、array。则默认设置为root、object、array。v0不建议用户使用object、array、root的类型。文档体现
+      const [, type] = newValue.split('::')
+      if (type && ['root', 'array', 'object'].includes(type)) {
+        set(themeAndTypeAtom, type)
+      } else {
+        set(themeAndTypeAtom, newValue)
+      }
+    }
+  },
 })
 
 //当前选中的表单控件类型

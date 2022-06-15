@@ -104,10 +104,11 @@ export const curTypePropertyConfigSelector = selector<UnitedSchema['schema']>({
     const curThemeAndType = get(curThemeAndTypeAtom)
     const curType = get(curTypeAtom)
     const globalTheme = get(globalThemeAtom)
-    // 优先获取当前主题，未获取到则获取全局主题
-    return (
-      get(allPropertyConfigSchemaSelector)[curThemeAndType] ||
-      get(allPropertyConfigSchemaSelector)[`${globalTheme}::${curType}`]
-    )
+    // 优先获取当前主题，只有当前没有设置theme的时候，才未获取到则获取全局主题
+    // 目前v0版本没有区分容器和组件，都是使用type进行区分。所有不推荐自定义组件的type为root、object、array
+    return ['root', 'array', 'object'].includes(curType) ||
+      curThemeAndType.split('::').length > 1
+      ? get(allPropertyConfigSchemaSelector)[curThemeAndType]
+      : get(allPropertyConfigSchemaSelector)[`${globalTheme}::${curType}`]
   },
 })
