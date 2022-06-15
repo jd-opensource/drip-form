@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-24 18:50:14
+ * @Last Modified time: 2022-06-15 14:53:37
  */
 import React, { useMemo, memo } from 'react'
 import { useTitle } from '@jdfed/hooks'
@@ -90,10 +90,21 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
     // 是否渲染为折叠面板模式
     const isCollapse = Collapse && Panel && mode === 'collapse' && showTitle
 
+    // 如果父元素是数组，则activeKey默认使用数组的key值
+    const curKey = useMemo(() => {
+      const parArr = fieldKey.split('.')
+      const currentArrayKey = parArr.pop()
+      const parFieldKey = parArr.join('.')
+      return currentArrayKey &&
+        arrayKey[parFieldKey] &&
+        arrayKey[parFieldKey][+currentArrayKey]
+        ? arrayKey[parFieldKey][+currentArrayKey]
+        : fieldKey
+    }, [arrayKey, fieldKey])
     const defaultActiveKey = useMemo(() => {
       // 用户配置了active||generator viewport区域需要展开折叠面板
-      return formMode === 'generator' || active ? [fieldKey] : []
-    }, [formMode, fieldKey, active])
+      return formMode === 'generator' || active ? [curKey] : []
+    }, [formMode, curKey, active])
 
     return (
       <>
@@ -123,7 +134,7 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
                 </>
               }
               extra
-              key={fieldKey}
+              key={curKey}
               forceRender={forceRender}
               {...panelProp}
             >
