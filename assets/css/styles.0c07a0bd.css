@@ -13667,7 +13667,8 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   flex-direction: row-reverse;
 }
 .form-container--content {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 /*
