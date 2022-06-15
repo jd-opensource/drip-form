@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-26 17:01:05
+ * @Last Modified time: 2022-06-15 13:44:02
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -436,5 +436,10 @@ export const getThemeAndType = (
 ): string => {
   const { type, theme } = uiSchema
   const [, newType] = type.split('::')
-  return newType ? type : `${theme}::${type}`
+  // v0未区分容器和组件概念，需要做判断
+  if (['root', 'object', 'array'].includes(newType || type)) {
+    return newType || type
+  } else {
+    return newType ? type : `${theme}::${type}`
+  }
 }

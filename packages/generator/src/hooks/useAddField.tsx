@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-08 10:20:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-26 17:09:39
+ * @Last Modified time: 2022-06-15 14:08:29
  */
 import { useCallback, useContext } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -171,7 +171,12 @@ const useAddField = (): AddField => {
           // 设置选中的表单
           setSelected(selectKey)
           // 设置选中的表单类型
-          setThemeAndType(getThemeAndType(unitedSchema.ui))
+          setThemeAndType(
+            getThemeAndType({
+              ...(unitedSchema?.theme && { theme: unitedSchema.theme }),
+              ...unitedSchema.ui,
+            })
+          )
         },
       })
       // // viewport区域拖拽且非排序模式，需要删除原来位置的表单
