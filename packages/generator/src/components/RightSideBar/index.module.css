@@ -10,7 +10,10 @@
     }
     .drip-form-root {
       max-height: calc(100vh - 95px);
-      @apply pb-4 overflow-scroll;
+      @apply pb-4 overflow-y-scroll;
+    }
+    .drip-form-root::-webkit-scrollbar {
+      display: none;
     }
   }
 }
