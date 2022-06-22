@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-15 13:44:02
+ * @Last Modified time: 2022-06-22 18:23:08
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -403,8 +403,8 @@ export function toArray(param: string | Array<string>): Array<string> {
 // 处理容器宽度
 export const handleMargin = (style: CSSProperties): void => {
   const { margin, width } = style
-  let marginRight: number | string = '0px'
-  let marginLeft: number | string = '0px'
+  let marginRight = style.marginRight || '0px'
+  let marginLeft = style.marginLeft || '0px'
   if (width) {
     if (margin) {
       if (typeof margin === 'string') {
@@ -416,6 +416,10 @@ export const handleMargin = (style: CSSProperties): void => {
         if (marginArr.length === 2 || marginArr.length === 3) {
           marginRight = marginArr[1]
           marginLeft = marginArr[1]
+        }
+        if (marginArr.length === 4) {
+          marginRight = marginArr[1]
+          marginLeft = marginArr[3]
         }
       }
     }
