@@ -41142,8 +41142,12 @@ Add the correct display in Chrome and Safari.
 
 .rightSideBarGlobal .drip-form-root {
       max-height: calc(100vh - 95px);
-      overflow: scroll;
+      overflow-y: scroll;
       padding-bottom: 1rem;
+    }
+
+.rightSideBarGlobal .drip-form-root::-webkit-scrollbar {
+      display: none;
     }
 
 .index-module_container__fH7Q7 {
@@ -41260,6 +41264,10 @@ Add the correct display in Chrome and Safari.
   transition-duration: 150ms;
   overflow-y: scroll;
   width: calc(120px + 120px + 3.5rem);
+}
+
+.index-module_left__Z14ZB::-webkit-scrollbar {
+  display: none;
 }
 
 .index-module_leftClose__3VAnO {
@@ -41416,6 +41424,10 @@ Add the correct display in Chrome and Safari.
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   overflow: hidden scroll;
+}
+
+.index-module_viewport__2Fip7::-webkit-scrollbar {
+  display: none;
 }
 
 .index-module_formstyle__29kGK {
