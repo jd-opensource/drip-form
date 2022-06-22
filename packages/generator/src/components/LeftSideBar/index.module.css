@@ -4,6 +4,10 @@
   width: calc(120px + 120px + 3.5rem);
 }
 
+.left::-webkit-scrollbar {
+  display: none;
+}
+
 .leftClose {
   width: calc(120px + 2.5rem);
   @apply transition-all flex-shrink-0 flex-grow-0;
