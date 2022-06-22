@@ -38,7 +38,7 @@ export function getOutput(pkg, argv) {
         item,
         `index.js`
       ),
-      exports: 'default',
+      exports: pkg.distExports.exports || 'default',
       format: item,
       name: `${name}`,
       globals: {
