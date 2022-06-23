@@ -3,10 +3,11 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-15 14:53:37
+ * @Last Modified time: 2022-06-23 15:22:54
  */
-import React, { useMemo, memo } from 'react'
+import React, { useMemo, memo, useEffect } from 'react'
 import { useTitle } from '@jdfed/hooks'
+import ReactTooltip from 'react-tooltip'
 import renderCoreFn from '../../render'
 import { Title, CommonContainerHoc } from '@form/components/index'
 import cx from 'classnames'
@@ -105,6 +106,10 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
       // 用户配置了active||generator viewport区域需要展开折叠面板
       return formMode === 'generator' || active ? [curKey] : []
     }, [formMode, curKey, active])
+
+    useEffect(() => {
+      ReactTooltip.rebuild()
+    })
 
     return (
       <>
