@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-22 18:23:08
+ * @Last Modified time: 2022-06-23 17:53:28
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -423,6 +423,8 @@ export const handleMargin = (style: CSSProperties): void => {
         }
       }
     }
+    marginRight = marginRight === '0' ? '0px' : marginRight
+    marginLeft = marginLeft === '0' ? '0px' : marginLeft
     style.width = `calc(${style.width} - ${marginRight} - ${marginLeft})`
   }
 }
