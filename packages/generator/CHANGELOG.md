@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.1](https://github.com/jdfed/drip-form/compare/v0.8.0...v0.8.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **generator:** compatibility with old data ([#214](https://github.com/jdfed/drip-form/issues/214)) ([8aec201](https://github.com/jdfed/drip-form/commit/8aec201eac85cbeca24d218aa37c3a0c3216d091))
+* **generator:** compatibility with old data ([#215](https://github.com/jdfed/drip-form/issues/215)) ([3ac1ab9](https://github.com/jdfed/drip-form/commit/3ac1ab9a5c794d216e9e6117fcc96fffb69b5a40)), closes [#214](https://github.com/jdfed/drip-form/issues/214)
+* **generator:** compatibility with old data ([#217](https://github.com/jdfed/drip-form/issues/217)) ([ece5bfc](https://github.com/jdfed/drip-form/commit/ece5bfc9755d53c598ad2a577100a79abd4119d9))
+* **generator:** turn off the required validation, the required field is not properly deleted ([#216](https://github.com/jdfed/drip-form/issues/216)) ([fcd64c4](https://github.com/jdfed/drip-form/commit/fcd64c4b1b91d37b3849e12fa891ea76f9232d94))
+
+
+### style
+
+* **generator:** add fixed width to the component area and configuration area ([#213](https://github.com/jdfed/drip-form/issues/213)) ([663bc68](https://github.com/jdfed/drip-form/commit/663bc682b5f3b0b06e4bb9315f58fae475903821))
+* **generator:** hide scroll bar in webKit browser ([#220](https://github.com/jdfed/drip-form/issues/220)) ([9b958e4](https://github.com/jdfed/drip-form/commit/9b958e4bfe0911d18f12459f4a4f446f26ccff32))
+
+
+
 ## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
 
 

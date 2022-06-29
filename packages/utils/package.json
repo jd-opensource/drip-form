@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/utils",
-	"version": "0.8.0",
+	"version": "0.8.1",
 	"description": "drip-form通用方法",
 	"keywords": [
 		"utils",
@@ -21,7 +21,7 @@
 	"distExports": {
 		"dist": "./dist",
 		"build-info": "./build-info",
-		"exports":"named",
+		"exports": "named",
 		"format": [
 			"esm",
 			"cjs"

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.1](https://github.com/jdfed/drip-form/compare/v0.8.0...v0.8.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **form:** collapsed object container in array container is not displayed after deletion ([#218](https://github.com/jdfed/drip-form/issues/218)) ([9454c8b](https://github.com/jdfed/drip-form/commit/9454c8bc028e5e4c707adf4e498aa8b22fe7fe0c))
+* **form:** when collapse is folded, tooltip does not show ([#223](https://github.com/jdfed/drip-form/issues/223)) ([adf9d43](https://github.com/jdfed/drip-form/commit/adf9d43a6bee0c8bdbca145b39d7be0154ed9457))
+
+
+### style
+
+* **form:** prevent component from spilling outside its container ([#219](https://github.com/jdfed/drip-form/issues/219)) ([ef4c92f](https://github.com/jdfed/drip-form/commit/ef4c92f9197f4a324b54ad77b9fa66077597efb2))
+
+
+
 ## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
 
 

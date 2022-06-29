@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.1](https://github.com/jdfed/drip-form/compare/v0.8.0...v0.8.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **generator:** compatibility with old data ([#215](https://github.com/jdfed/drip-form/issues/215)) ([3ac1ab9](https://github.com/jdfed/drip-form/commit/3ac1ab9a5c794d216e9e6117fcc96fffb69b5a40)), closes [#214](https://github.com/jdfed/drip-form/issues/214)
+
+
+
 ## [0.8.0](https://github.com/jdfed/drip-form/compare/v0.7.0...v0.8.0) (2022-06-01)
 
 

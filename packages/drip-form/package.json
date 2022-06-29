@@ -1,6 +1,6 @@
 {
 	"name": "@jdfed/drip-form",
-	"version": "0.8.0",
+	"version": "0.8.1",
 	"description": "drip-form表单渲染core",
 	"keywords": [
 		"drip-form",
@@ -49,8 +49,8 @@
 		"@dnd-kit/sortable": "^5.0.0",
 		"@dnd-kit/utilities": "^3.0.0",
 		"@jdfed/ajv": "^0.8.0",
-		"@jdfed/hooks": "^0.8.0",
-		"@jdfed/utils": "^0.8.0",
+		"@jdfed/hooks": "^0.8.1",
+		"@jdfed/utils": "^0.8.1",
 		"ajv": "^8.6.2",
 		"classnames": "^2.2.6",
 		"immer": "^9.0.5",
