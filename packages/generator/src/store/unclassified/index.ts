@@ -117,14 +117,23 @@ export const curThemeAndTypeAtom = selector<string>({
   get: ({ get }) => {
     return get(themeAndTypeAtom)
   },
-  set: ({ set }, newValue) => {
+  set: ({ set, get }, newValue) => {
     if (newValue instanceof DefaultValue) {
       set(themeAndTypeAtom, newValue)
     } else {
       // 如果用户输入的theme::type中type是root、object、array。则默认设置为root、object、array。v0不建议用户使用object、array、root的类型。文档体现
-      const [, type] = newValue.split('::')
-      if (type && ['root', 'array', 'object'].includes(type)) {
-        set(themeAndTypeAtom, type)
+      const [theme, type] = newValue.split('::')
+      if (type) {
+        if (['root', 'array', 'object'].includes(type)) {
+          // 选中全局、非对象容器、非数组容器
+          set(themeAndTypeAtom, type)
+        } else if (theme === 'undefined') {
+          // 未设置theme，使用全局主题
+          const globalTheme = get(globalThemeAtom)
+          set(themeAndTypeAtom, `${globalTheme}::${type}`)
+        } else {
+          set(themeAndTypeAtom, newValue)
+        }
       } else {
         set(themeAndTypeAtom, newValue)
       }
