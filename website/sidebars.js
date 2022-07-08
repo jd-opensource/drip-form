@@ -25,6 +25,7 @@ module.exports = {
         'use/formData',
         'use/parse',
         'use/transform',
+        'use/onEvent',
       ],
     },
     {
