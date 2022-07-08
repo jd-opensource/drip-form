@@ -31,7 +31,12 @@ import {
 } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
-import type { DripFormRenderProps, DripFormRefType, ControlFuc } from './type'
+import type {
+  DripFormRenderProps,
+  DripFormRefType,
+  ControlFuc,
+  DripFormEventFuncType,
+} from './type'
 import type { State, Action, Theme, UiSchema } from '@jdfed/utils'
 
 /**
@@ -55,6 +60,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       onCancel,
       parse,
       reload = true,
+      onEvent,
     },
     ref
   ) => {
@@ -333,6 +339,11 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       })
     }, [dispatch, resetArgs])
 
+    const fireEvent = useCallback<DripFormEventFuncType>(
+      async (event) => onEvent && (await onEvent(event)),
+      [onEvent]
+    )
+
     // 向外抛出表单数据
     useImperativeHandle<DripFormRefType, DripFormRefType>(
       ref,
@@ -453,7 +464,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       <RequiredModeContext.Provider
         value={dataSchema?.requiredMode || 'default'}
       >
-        <FormDataContext.Provider value={globalFormDataStoreKey}>
+        <FormDataContext.Provider value={{ globalFormDataStoreKey, fireEvent }}>
           <div className={'drip-form-root'}>
             {renderCoreFn({
               hasDefault,

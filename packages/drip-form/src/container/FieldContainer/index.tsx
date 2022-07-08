@@ -30,7 +30,7 @@ const fieldContainer = memo<Props>(
     dispatch,
     getKey,
   }) => {
-    const globalformdatastorekey = useContext(FormDataContext)
+    const { globalFormDataStoreKey, fireEvent } = useContext(FormDataContext)
 
     /**
      * 表单组件
@@ -66,7 +66,8 @@ const fieldContainer = memo<Props>(
           formMode={formMode}
           dispatch={dispatch}
           getKey={getKey}
-          globalformdatastorekey={globalformdatastorekey}
+          fireEvent={fireEvent}
+          globalformdatastorekey={globalFormDataStoreKey}
           {...uiProp}
           {...(queryFunc ? { queryFunc } : null)}
           {...(asyncValidate ? { asyncValidate } : null)}
@@ -82,12 +83,13 @@ const fieldContainer = memo<Props>(
       formMode,
       dispatch,
       getKey,
-      globalformdatastorekey,
+      globalFormDataStoreKey,
       uiProp,
       queryFunc,
       asyncValidate,
       uiComponents,
       theme,
+      fireEvent,
     ])
 
     const asyncValidateFn = useCallback(() => {

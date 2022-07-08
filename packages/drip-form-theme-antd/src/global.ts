@@ -3,6 +3,13 @@ import type { GetKey } from '@jdfed/hooks'
 import type { Action } from '@jdfed/utils'
 export declare type Dispatch = DispatchR<Action>
 
+declare type DripFormEventType = {
+  type: string
+  name: string
+  payload: any
+}
+
+declare type DripFormEventFuncType = (event: DripFormEventType) => any
 export declare type CommonProps = Partial<{
   // 是否禁用表单
   disabled: boolean
@@ -11,6 +18,7 @@ export declare type CommonProps = Partial<{
   queryFunc: (...args: any[]) => any
   requestCache: boolean
   formMode: 'edit' | 'generator' | 'view'
+  fireEvent?: DripFormEventFuncType
 }> & {
   fieldKey: string
   dispatch: Dispatch
