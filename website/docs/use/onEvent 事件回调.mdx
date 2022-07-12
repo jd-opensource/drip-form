@@ -12,7 +12,6 @@ title: onEvent 事件回调
 ```ts
 type DripFormEventType = {
 	type: string
-	name: string
 	payload: any
 }
 type DripFormEventFuncType = (event: DripFormEventType) => any
@@ -22,8 +21,7 @@ type DripFormEventFuncType = (event: DripFormEventType) => any
 const ButtonField = ({ fireEvent, ...restProps }) => {
 	const onClick = () => {
 		fireEvent({
-			type: 'custom',
-			name: 'btnClicked',
+			type: 'customBtnClicked',
 			// 任何想要在事件中抛出的信息
 			payload: null,
 		})
@@ -36,7 +34,7 @@ const ButtonField = ({ fireEvent, ...restProps }) => {
 const Form = () => {
 	const [visible, setVisible] = useState(false)
 	const onEvent = useCallback((event) => {
-		if (event.type === 'custom' && event.name === 'btnClicked') {
+		if (event.type === 'customBtnClicked') {
 			setVisible(true)
 		}
 	}, [])

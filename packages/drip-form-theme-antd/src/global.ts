@@ -5,7 +5,6 @@ export declare type Dispatch = DispatchR<Action>
 
 declare type DripFormEventType = {
   type: string
-  name: string
   payload: any
 }
 

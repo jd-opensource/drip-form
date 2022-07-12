@@ -81,7 +81,6 @@ type FooterBtnFuncType = ({
 
 export type DripFormEventType = {
   type: string
-  name: string
   payload: any
 }
 
