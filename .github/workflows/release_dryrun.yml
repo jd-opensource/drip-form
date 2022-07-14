@@ -3,6 +3,12 @@ on:
   # schedule:
   #   - cron: '0 20 * * 1'
   workflow_dispatch:
+    inputs:
+      forcePublish:
+            description: '是否强制发布，跳过版本比较'
+            default: true
+            type: boolean
+            required: true
 
 env:
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -54,6 +60,16 @@ jobs:
           npm set "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}"
 
       - name: 'lerna command'
+        if: ${{github.event.inputs.forcePublish=='true'}}
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+        run: |
+          npx lerna version --yes --conventional-commits --force-publish --force-git-tag --create-release github --no-private --amend
+          cat lerna.json
+          cat CHANGELOG.md
+
+      - name: 'lerna command'
+        if: ${{github.event.inputs.forcePublish=='false'}}
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
