@@ -28,6 +28,7 @@ const unitedSchema = {
       fieldKey: 'margin',
       type: 'string',
       title: '组件外边距',
+      transform: ['trim'],
       ui: {
         type: 'text',
         placeholder: '形如0 30px 20px 0 | 0 30px',
@@ -37,6 +38,7 @@ const unitedSchema = {
       fieldKey: 'padding',
       type: 'string',
       title: '组件内边距',
+      transform: ['trim'],
       ui: {
         type: 'text',
         placeholder: '形如0 10px 0 10px | 0 10px',
