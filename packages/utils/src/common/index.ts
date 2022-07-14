@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-23 17:53:28
+ * @Last Modified time: 2022-07-14 13:25:05
  */
 import type { TreeItems, TreeItem } from '../tree/types'
 import type { Map } from './type'
@@ -408,7 +408,7 @@ export const handleMargin = (style: CSSProperties): void => {
   if (width) {
     if (margin) {
       if (typeof margin === 'string') {
-        const marginArr = margin.split(' ')
+        const marginArr = margin.trim().split(' ')
         if (marginArr.length === 1) {
           marginRight = margin
           marginLeft = margin
