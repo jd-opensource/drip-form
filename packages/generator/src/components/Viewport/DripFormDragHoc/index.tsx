@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-10-09 14:28:24
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-26 14:24:08
+ * @Last Modified time: 2022-07-14 11:22:52
  */
 import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -103,7 +103,11 @@ const DripFormDragHoc: FC<Props> = memo(
     const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
     // 当前拖拽的组件them::type类型
     const curThemeAndType = useMemo(() => {
-      return type.split('::').length > 1 ? type : `${theme}::${type}`
+      if (['root', 'array', 'object'].includes(type)) {
+        return type
+      } else {
+        return type.split('::').length > 1 ? type : `${theme}::${type}`
+      }
     }, [theme, type])
     /**
      * 选中field的事件
