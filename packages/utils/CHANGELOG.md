@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.2](https://github.com/jdfed/drip-form/compare/v0.8.1...v0.8.2) (2022-07-15)
+
+
+### Bug Fixes
+
+* inaccurate width calculation when margin contains extra spaces ([#233](https://github.com/jdfed/drip-form/issues/233)) ([22f4eeb](https://github.com/jdfed/drip-form/commit/22f4eeb96f5a0f2b39eae69705f0a2e65e1e8ee1))
+
+
+
 ### [0.8.1](https://github.com/jdfed/drip-form/compare/v0.8.0...v0.8.1) (2022-06-29)
 
 

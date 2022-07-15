@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.2](https://github.com/jdfed/drip-form/compare/v0.8.1...v0.8.2) (2022-07-15)
+
+
+### Bug Fixes
+
+* inaccurate width calculation when margin contains extra spaces ([#233](https://github.com/jdfed/drip-form/issues/233)) ([22f4eeb](https://github.com/jdfed/drip-form/commit/22f4eeb96f5a0f2b39eae69705f0a2e65e1e8ee1))
+* **generator:** drag the array, object container report an error ([#230](https://github.com/jdfed/drip-form/issues/230)) ([c79db5c](https://github.com/jdfed/drip-form/commit/c79db5c601fec7d0825b128e29a32147a216b15c))
+* **generator:** when the theme is not set, the property configuration will not be displayed ([#225](https://github.com/jdfed/drip-form/issues/225)) ([d4c1de4](https://github.com/jdfed/drip-form/commit/d4c1de4244114a055a9b180c497abf965de16fb7))
+
+
+
 ### [0.8.1](https://github.com/jdfed/drip-form/compare/v0.8.0...v0.8.1) (2022-06-29)
 
 
