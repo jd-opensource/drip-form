@@ -460,11 +460,19 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     ])
     const globalTheme: Theme = theme
 
+    const formDataContextState = useMemo(
+      () => ({
+        globalFormDataStoreKey,
+        fireEvent,
+      }),
+      [fireEvent, globalFormDataStoreKey]
+    )
+
     return (
       <RequiredModeContext.Provider
         value={dataSchema?.requiredMode || 'default'}
       >
-        <FormDataContext.Provider value={{ globalFormDataStoreKey, fireEvent }}>
+        <FormDataContext.Provider value={formDataContextState}>
           <div className={'drip-form-root'}>
             {renderCoreFn({
               hasDefault,
