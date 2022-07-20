@@ -79,6 +79,13 @@ type FooterBtnFuncType = ({
   checking: boolean
 }) => void
 
+export type DripFormEventType = {
+  type: string
+  payload: any
+}
+
+export type DripFormEventFuncType = (event: DripFormEventType) => any
+
 /**
  * 供DripFormContainer和DripForm使用的通用Props
  */
@@ -105,6 +112,8 @@ export type DripFormProps = {
   onSubmit?: FooterBtnFuncType
   onCancel?: FooterBtnFuncType
   ajvOptions?: Options
+  // 公共事件回调机制
+  onEvent?: DripFormEventFuncType
 }
 
 /**

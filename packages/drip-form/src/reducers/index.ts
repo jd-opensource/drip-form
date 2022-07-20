@@ -17,8 +17,14 @@ import addField from './addField'
 import deleteField from './deleteField'
 import { upgradeTips, toArray } from '@jdfed/utils'
 import type { Action, State, SetErrType } from '@jdfed/utils'
+import { DripFormEventFuncType } from '../DripForm/type'
 
-export const FormDataContext = createContext('')
+export const FormDataContext = createContext<{
+  globalFormDataStoreKey: string
+  fireEvent?: DripFormEventFuncType
+}>({
+  globalFormDataStoreKey: '',
+})
 
 const formDataReducer = (state: State, action: Action): void => {
   const type = action.type
