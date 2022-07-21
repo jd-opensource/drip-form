@@ -2,10 +2,10 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-10 17:11:29
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-26 09:53:59
+ * @Last Modified time: 2022-07-21 17:11:42
  */
 
-import React, { memo, FC, useMemo, useCallback } from 'react'
+import React, { memo, FC, useMemo, useCallback, useEffect } from 'react'
 import { useImmer as useState } from 'use-immer'
 import { Upload, Button } from 'antd'
 import { UploadOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons'
@@ -134,6 +134,10 @@ const UploaderField: FC<UploaderFieldProps> = ({
   }, [exportToString, fieldData])
 
   const [initValue, setValue] = useState<Array<UploadFile>>(newFieldData)
+
+  useEffect(() => {
+    setValue(newFieldData)
+  }, [newFieldData])
 
   let jdOssDomain: string, jsfBusinessName: string
   // 如果传入了jdAction，则解析其配置
