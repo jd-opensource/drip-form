@@ -33,8 +33,6 @@ export type State = {
   customErrors: Record<string, string>
   // 是否正在校验
   checking: boolean
-  // ajv是否已经将dataSchema中的默认值添加到formData中
-  hasDefault: boolean
   // 当前可见的表单
   visibleFieldKey: Array<string>
   // 当前正在变动的表单
@@ -199,13 +197,6 @@ type SetVisibleKeyAction = {
   }
 }
 
-type SetDefaultSuccessAction = {
-  type: 'setDefaultSuccess'
-  action: {
-    hasDefault: boolean
-  }
-}
-
 // 数组容器设置映射的组件唯一key（避免删除导致的组件渲染问题）
 type SetArrayKey = {
   type: 'setArrayKey'
@@ -240,5 +231,4 @@ export type Action =
   | DeleteErrorAction
   | SetCheckingAction
   | SetVisibleKeyAction
-  | SetDefaultSuccessAction
   | SetArrayKey

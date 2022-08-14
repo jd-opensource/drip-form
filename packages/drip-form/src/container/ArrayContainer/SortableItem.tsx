@@ -31,7 +31,6 @@ const SortableItem: FC<
     uiComponents,
     dispatch,
     fieldData = [],
-    hasDefault,
     dataSchema,
     uiSchema,
     errors,
@@ -133,7 +132,6 @@ const SortableItem: FC<
         </div>
         <div className="array-item--case">
           {renderCoreFn({
-            hasDefault,
             uiComponents,
             dataSchema,
             uiSchema,

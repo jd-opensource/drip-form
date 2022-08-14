@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-23 15:22:54
+ * @Last Modified time: 2022-08-14 08:56:53
  */
 import React, { useMemo, memo, useEffect } from 'react'
 import { useTitle } from '@jdfed/hooks'
@@ -42,7 +42,6 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
     customComponents,
     uiComponents,
     dispatch,
-    hasDefault,
     dataSchema,
     uiSchema,
     errors,
@@ -144,7 +143,6 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
               {...panelProp}
             >
               {renderCoreFn({
-                hasDefault,
                 uiComponents,
                 dataSchema,
                 uiSchema,
@@ -172,7 +170,6 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
             })}
           >
             {renderCoreFn({
-              hasDefault,
               uiComponents,
               dataSchema,
               uiSchema,

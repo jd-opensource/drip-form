@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-26 16:29:38
+ * @Last Modified time: 2022-08-14 09:32:35
  */
 import React from 'react'
 import { handleMargin } from '@jdfed/utils'
@@ -12,7 +12,6 @@ import type { Map, Theme } from '@jdfed/utils'
 
 /*TODO 优化renderprops和container编写 区分component prop和container prop*/
 const Render = ({
-  hasDefault,
   uiComponents,
   dataSchema,
   uiSchema,
@@ -178,10 +177,9 @@ const Render = ({
     const description = uiProp.description || null
     // Field控制函数体
     const vcontrol = properties[item].vcontrol
-    const vcontrolDefault = properties[item].vcontrolDefault
     let controlFuc
     // 是否展示当前Field
-    let isShow = vcontrolDefault || false
+    let isShow = false
     // 解析联动控制函数函数体
     if (vcontrol) {
       try {
@@ -190,23 +188,15 @@ const Render = ({
         } else {
           controlFuc = new Function('props', vcontrol as string)
         }
-        //
-        /* TODO 优化初始化是否渲染逻辑
-         * 添加全局key用来判断当前表单是否渲染函数已经调用完成；需等待所有是否渲染逻辑调用完成之后，再展示所有表单
-         * 当前实现是使用vcontroalDefault:boolean 来控制默认展示还是隐藏
-         */
-        // ajv已经将dataSchema中默认值添加到formData中，避免bug（fix: 组件渲染和formData生成的顺序问题以及checkbox全不选时的默认值问题 #C2020092276661）
-        if (hasDefault) {
-          isShow = controlFuc({
-            formData,
-            uiSchema,
-            dataSchema,
-            get,
-            getKey,
-            fieldKey: currentFieldKey,
-            fieldData,
-          })
-        }
+        isShow = controlFuc({
+          formData,
+          uiSchema,
+          dataSchema,
+          get,
+          getKey,
+          fieldKey: currentFieldKey,
+          fieldData,
+        })
       } catch (error) {
         console.error(`${item}：vcontrol函数体错误，请确认`)
         console.error(error)
@@ -229,8 +219,6 @@ const Render = ({
     // 非FieldContaienr基础容器均需要透传，并且render函数也需要传递
     const render = {
       containerHoc,
-      // 是否已经将dataSchema中default设置到formData中
-      hasDefault,
       // 全局dataSchema
       dataSchema,
       // 全局uiSchema
