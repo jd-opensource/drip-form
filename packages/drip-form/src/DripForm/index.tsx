@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-18 17:30:53
+ * @Last Modified time: 2022-08-14 08:56:37
  */
 import React, {
   forwardRef,
@@ -152,8 +152,6 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             ajv,
             customProps,
           }).formData || {},
-        // ajv是否已经将dataSchema中的默认值添加到formData中
-        hasDefault: false,
         // 下个版本废弃，改用ajvErros和customErrors
         errors: {},
         customErrors: {},
@@ -228,7 +226,6 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       ajvErrors,
       customErrors,
       checking,
-      hasDefault,
       visibleFieldKey,
       changeKey,
       arrayKey,
@@ -475,7 +472,6 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         <FormDataContext.Provider value={formDataContextState}>
           <div className={'drip-form-root'}>
             {renderCoreFn({
-              hasDefault,
               uiComponents,
               dataSchema,
               uiSchema,

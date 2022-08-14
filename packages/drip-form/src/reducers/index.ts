@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-05-17 18:12:55
+ * @Last Modified time: 2022-08-14 08:55:35
  */
 import { createContext } from 'react'
 import {
@@ -342,10 +342,6 @@ const formDataReducer = (state: State, action: Action): void => {
           (item) => !deleteKeys?.includes(item)
         )
       }
-      break
-    }
-    case 'setDefaultSuccess': {
-      state.hasDefault = action.action.hasDefault
       break
     }
     case 'setArrayKey': {

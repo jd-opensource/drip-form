@@ -39,8 +39,6 @@ export type ContainerHoc = (
 ) => JSX.Element
 
 export type RenderFnProps = {
-  // ajv是否已经设置了默认值
-  hasDefault: boolean
   dataSchema: DataSchema
   uiSchema: UiSchema
   // 错误信息

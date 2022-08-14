@@ -71,12 +71,6 @@ const useValidate = (validate: Validate): ((arg0: Params) => void) => {
         type: 'setChecking',
         checking: false,
       })
-      dispatch({
-        type: 'setDefaultSuccess',
-        action: {
-          hasDefault: true,
-        },
-      })
     },
     { wait: 500 }
   )
