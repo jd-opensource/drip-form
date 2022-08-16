@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-06-10 13:39:58
+ * @Last Modified time: 2022-08-16 14:32:57
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -32,15 +32,17 @@ const CheckConfig = (): JSX.Element => {
   // 通用关键字(包含的关键字被转换为formData.common)
   const commonKeywords = useMemo(() => new Set(), [])
 
-  // 业务关键字错误文案配置schema
+  // 业务关键字错误文案配置schema(表单切换，需要重置)
   const businessErrTipSchema = useMemo<Array<Record<string, unknown>>>(
     () => [],
-    []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedFieldKey]
   )
-  // 通用关键字错误文案配置schema
+  // 通用关键字错误文案配置schema(表单切换，需要重置)
   const commonErrTipSchema = useMemo<Array<Record<string, unknown>>>(
     () => [],
-    []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedFieldKey]
   )
 
   // 当前数据类型的校验配置（通用+业务）
