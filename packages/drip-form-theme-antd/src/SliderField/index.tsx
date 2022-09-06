@@ -57,8 +57,13 @@ const SliderField: FC<SliderFieldProps> = ({
     return Object.assign({}, defaultStyle, style)
   }, [vertical, style])
 
+  const wrapperStyle = useMemo(
+    () => ({ display: vertical ? 'unset' : 'flex' }),
+    [vertical]
+  )
+
   return (
-    <>
+    <div style={wrapperStyle}>
       <Slider
         style={sliderStyle}
         disabled={disabled}
@@ -81,7 +86,7 @@ const SliderField: FC<SliderFieldProps> = ({
           style={{ marginLeft: '8px' }}
         />
       )}
-    </>
+    </div>
   )
 }
 
