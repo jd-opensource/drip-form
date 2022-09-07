@@ -36,6 +36,10 @@ import {
   cascader as CascaderField,
   config as cascaderCofig,
 } from './CascaderField'
+import {
+  transfer as TransferField,
+  config as transferConfig,
+} from './TransferField'
 import { selectText as SelectTextField } from './SelectTextField'
 import { TreeSelectField } from './TreeSelectField'
 import { default as QuestionCircle } from './Shared/QuestionCircle'
@@ -56,6 +60,7 @@ const antdTheme: {
   switch: SwitchField,
   slider: SliderField,
   timePicker: TimePickerField,
+  transfer: TransferField,
   datePicker: DatePickerField,
   colorPicker: ColorPickerField,
   checkbox: CheckboxField,
@@ -88,6 +93,7 @@ export const config = {
     'timePicker',
     'uploader',
     'cascader',
+    'transfer',
     'null',
   ],
   fields: {
@@ -103,6 +109,7 @@ export const config = {
     timePicker: timepickerConfig,
     uploader: uploadConfig,
     cascader: cascaderCofig,
+    transfer: transferConfig,
     null: nullConfig,
   },
 }
