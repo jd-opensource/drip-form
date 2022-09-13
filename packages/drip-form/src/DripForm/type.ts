@@ -114,6 +114,8 @@ export type DripFormProps = {
   ajvOptions?: Options
   // 公共事件回调机制
   onEvent?: DripFormEventFuncType
+  // 透传到每个组件的全局数据
+  globalData?: Record<string, unknown>
 }
 
 /**

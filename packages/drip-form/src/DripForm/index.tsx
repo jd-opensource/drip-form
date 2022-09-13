@@ -61,6 +61,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       parse,
       reload = true,
       onEvent,
+      globalData,
     },
     ref
   ) => {
@@ -461,8 +462,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       () => ({
         globalFormDataStoreKey,
         fireEvent,
+        ...(globalData ? { globalData } : null),
       }),
-      [fireEvent, globalFormDataStoreKey]
+      [fireEvent, globalFormDataStoreKey, globalData]
     )
 
     return (

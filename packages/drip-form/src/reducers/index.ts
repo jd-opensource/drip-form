@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-08-14 08:55:35
+ * @Last Modified time: 2022-09-13 15:02:43
  */
 import { createContext } from 'react'
 import {
@@ -22,6 +22,7 @@ import { DripFormEventFuncType } from '../DripForm/type'
 export const FormDataContext = createContext<{
   globalFormDataStoreKey: string
   fireEvent?: DripFormEventFuncType
+  globalData?: Record<string, unknown>
 }>({
   globalFormDataStoreKey: '',
 })

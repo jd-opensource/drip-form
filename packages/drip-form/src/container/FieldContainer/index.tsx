@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-02 09:12:30
+ * @Last Modified time: 2022-09-13 15:00:32
  */
 import React, { memo, useMemo, useCallback, useContext } from 'react'
 import cx from 'classnames'
@@ -30,7 +30,8 @@ const fieldContainer = memo<Props>(
     dispatch,
     getKey,
   }) => {
-    const { globalFormDataStoreKey, fireEvent } = useContext(FormDataContext)
+    const { globalFormDataStoreKey, fireEvent, globalData } =
+      useContext(FormDataContext)
 
     /**
      * 表单组件
@@ -68,6 +69,7 @@ const fieldContainer = memo<Props>(
           getKey={getKey}
           fireEvent={fireEvent}
           globalformdatastorekey={globalFormDataStoreKey}
+          {...(globalData ? { globalData } : null)}
           {...uiProp}
           {...(queryFunc ? { queryFunc } : null)}
           {...(asyncValidate ? { asyncValidate } : null)}
@@ -90,6 +92,7 @@ const fieldContainer = memo<Props>(
       uiComponents,
       theme,
       fireEvent,
+      globalData,
     ])
 
     const asyncValidateFn = useCallback(() => {
