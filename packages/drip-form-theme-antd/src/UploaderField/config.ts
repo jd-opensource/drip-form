@@ -129,6 +129,12 @@ const config = {
         },
       },
       {
+        fieldKey: 'uploadLabel',
+        type: 'string',
+        title: '上传按钮文案',
+        ui: { type: 'text' },
+      },
+      {
         fieldKey: 'dimension',
         type: 'object',
         title: '图片尺寸限制',
