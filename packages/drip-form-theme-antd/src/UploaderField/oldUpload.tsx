@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-01-28 18:20:26
+ * @Last Modified time: 2022-09-15 17:27:38
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
@@ -42,6 +42,7 @@ type UploaderFieldProps = CommonProps &
       file: any
       fileList: any
     }
+    uploadLabel: string
     // 针对京东图片服务的配置
     jdAction: {
       // 上传的地址，具体参考：drip-design例子
@@ -87,6 +88,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   jdAction,
   dimension,
   size,
+  uploadLabel,
   ...restProps
 }) => {
   const [initValue, setValue] = useState(fieldData)
@@ -344,7 +346,9 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {...restProps}
     >
       <InboxOutlined />
-      <div className="drip-form--dargupload">点击或拖拽上传图片</div>
+      <div className="drip-form--dargupload">
+        {uploadLabel || '点击或拖拽上传图片'}
+      </div>
     </Dragger>
   ) : (
     <Upload
@@ -367,11 +371,11 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {listType === 'picture-card' ? (
         <div>
           <PlusOutlined />
-          <div>点击上传图片</div>
+          <div>{uploadLabel || '点击上传图片'}</div>
         </div>
       ) : (
         <Button icon={<UploadOutlined />} disabled={disabled}>
-          上传图片
+          {uploadLabel || '上传图片'}
         </Button>
       )}
     </Upload>

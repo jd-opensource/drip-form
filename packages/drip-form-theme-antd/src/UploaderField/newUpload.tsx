@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-10 17:11:29
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-07-21 17:11:42
+ * @Last Modified time: 2022-09-15 17:26:21
  */
 
 import React, { memo, FC, useMemo, useCallback, useEffect } from 'react'
@@ -61,6 +61,7 @@ type UploaderFieldProps = CommonProps &
     canDrag: boolean
     customUpload: (...args: any[]) => Promise<any>
     exportToString: boolean
+    uploadLabel: string
     // 针对京东图片服务的配置
     jdAction: {
       // 上传的地址，具体参考：drip-design例子
@@ -104,6 +105,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   dimension,
   size,
   exportToString,
+  uploadLabel,
   ...restProps
 }) => {
   // 如果是string类型，则需要处理为对象形式
@@ -261,7 +263,9 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {...restProps}
     >
       <InboxOutlined />
-      <div className="drip-form--dargupload">点击或拖拽上传图片</div>
+      <div className="drip-form--dargupload">
+        {uploadLabel || '点击或拖拽上传图片'}
+      </div>
     </Dragger>
   ) : (
     <Upload
@@ -277,11 +281,11 @@ const UploaderField: FC<UploaderFieldProps> = ({
       {listType === 'picture-card' ? (
         <div>
           <PlusOutlined />
-          <div>点击上传图片</div>
+          <div>{uploadLabel || '点击上传图片'}</div>
         </div>
       ) : (
         <Button icon={<UploadOutlined />} disabled={disabled}>
-          上传图片
+          {uploadLabel || '上传图片'}
         </Button>
       )}
     </Upload>
