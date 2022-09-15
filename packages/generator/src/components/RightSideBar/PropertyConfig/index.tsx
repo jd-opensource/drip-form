@@ -18,7 +18,7 @@ import { produce } from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import generatorTheme from '@generator/components/GeneratorFormTheme'
 import type { SetType } from '@jdfed/hooks'
-import type { Map, UnitedSchema, UiSchema } from '@jdfed/utils'
+import type { Map, UnitedSchema, UiSchema, Description } from '@jdfed/utils'
 
 const PropertyConfig = () => {
   const {
@@ -85,10 +85,32 @@ const PropertyConfig = () => {
       Object.keys(formData).map((key) => {
         // 提示特殊处理
         if (key === 'description') {
-          formData.description.hasDesc =
-            Object.keys(formData.description).filter(
-              (item) => item !== 'hasDesc'
-            ).length > 0
+          const newDescription: {
+            iconTitle?: string
+            textTitle?: string
+          } = {
+            iconTitle: '',
+            textTitle: '',
+          }
+          const description = formData.description as Description
+          if (Array.isArray(description)) {
+            description.map((item) => {
+              if (item?.type === 'icon') {
+                newDescription.iconTitle = item?.title
+              }
+              if (item?.type === 'text') {
+                newDescription.textTitle = item?.title
+              }
+            })
+          } else if (typeof description === 'object') {
+            if (description?.type === 'icon') {
+              newDescription.iconTitle = description?.title
+            }
+            if (description?.type === 'text') {
+              newDescription.textTitle = description?.title
+            }
+          }
+          formData.description = newDescription
         }
         // 布局特殊处理
         if (key === 'containerStyle') {
@@ -211,17 +233,83 @@ const PropertyConfig = () => {
           data = data + '%'
         }
       }
-      if (changeKey === 'description.hasDesc') {
-        // 如果展示description，则获取当前配置的全部信息进行填充
-        if (data === true) {
-          key = 'description'
-          // description所有配置
-          data = produce(get(key).data, (draft: Map) => {
-            delete draft.hasDesc
-          })
-        } else {
-          key = 'description'
-          data = {}
+      // 提示
+      if (changeKey.startsWith('description.')) {
+        const newKey = changeKey.split('description.')[1]
+        key = 'description'
+        const oldDesc =
+          generatorContext.current?.get(selectedFieldKey || '').uiSchema
+            ?.description || []
+        switch (newKey) {
+          case 'iconTitle':
+            if (Array.isArray(oldDesc)) {
+              data = data
+                ? oldDesc
+                    .filter((item) => item.type != 'icon')
+                    .concat({
+                      type: 'icon',
+                      title: data,
+                    })
+                : oldDesc.filter((item) => item.type != 'icon')
+            } else {
+              if ((oldDesc as Map)?.type === 'text') {
+                data = [
+                  {
+                    type: 'text',
+                    title: (oldDesc as Map)?.title,
+                  },
+                  {
+                    type: 'icon',
+                    title: data,
+                  },
+                ]
+              }
+              if ((oldDesc as Map)?.type === 'icon') {
+                data = [
+                  {
+                    type: 'icon',
+                    title: data,
+                  },
+                ]
+              }
+            }
+            break
+
+          case 'textTitle':
+            if (Array.isArray(oldDesc)) {
+              data = data
+                ? oldDesc
+                    .filter((item) => item.type != 'text')
+                    .concat({
+                      type: 'text',
+                      title: data,
+                    })
+                : oldDesc.filter((item) => item.type != 'text')
+            } else {
+              if ((oldDesc as Map)?.type === 'icon') {
+                data = [
+                  {
+                    type: 'icon',
+                    title: (oldDesc as Map)?.title,
+                  },
+                  {
+                    type: 'text',
+                    title: data,
+                  },
+                ]
+              }
+              if ((oldDesc as Map)?.type === 'text') {
+                data = [
+                  {
+                    type: 'text',
+                    title: data,
+                  },
+                ]
+              }
+            }
+            break
+          default:
+            break
         }
       }
       // 标题需要设置到dataSchema中呢

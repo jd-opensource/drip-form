@@ -28,10 +28,19 @@ export type ContainerStyle = Partial<{
   paddingRigth: number | string
   paddingLeft: number | string
 }> | null
-export type Description = {
-  type: 'icon' | 'text'
-  title: string
-} | null
+
+type DescriptionItem =
+  | {
+      type: 'icon'
+      title: string
+      trigger?: 'click' | 'hover'
+    }
+  | {
+      type: 'text'
+      title: string
+    }
+  | null
+export type Description = DescriptionItem | Array<DescriptionItem>
 export type TitlePlacement = 'left' | 'right' | 'bottom' | 'top'
 export type Theme = 'antd' | 'babel-ui' | 'drip-design' | string
 export type TitleUi = Partial<{
