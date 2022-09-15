@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import cx from 'classnames'
 import type { TitlePlacement } from '@jdfed/utils'
-import type { DescriptionAndErrorType } from './type'
+import type { DescriptionAndErrorType, textDesc } from './type'
 import './index.styl'
 /**
  * 计算tips和error父组件的padding
@@ -36,6 +36,21 @@ function calcOtherPadding(
 const DescriptionAndError = memo<DescriptionAndErrorType>(
   ({ titleUi, showTitle, description, showError, error }) => {
     const { width, placement, margin } = titleUi || {}
+    const textDesc = useMemo<textDesc>(() => {
+      if (Array.isArray(description)) {
+        let iconDesc: textDesc
+        ;(description || []).map((item) => {
+          if (item?.type === 'text') {
+            iconDesc = item
+          }
+        })
+        return iconDesc
+      } else if (typeof description === 'object') {
+        return description?.type === 'text' ? description : undefined
+      } else {
+        return undefined
+      }
+    }, [description])
     return (
       <div
         className="form-container__other"
@@ -48,8 +63,8 @@ const DescriptionAndError = memo<DescriptionAndErrorType>(
           ),
         }}
       >
-        {description?.type === 'text' && description?.title && (
-          <div className="form-container__tips">{description?.title}</div>
+        {textDesc?.type === 'text' && textDesc?.title && (
+          <div className="form-container__tips">{textDesc?.title}</div>
         )}
         <div
           className={cx('form-container__error', {

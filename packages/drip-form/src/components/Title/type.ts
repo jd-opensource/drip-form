@@ -25,3 +25,11 @@ export type TitleType = {
   // 表单标题
   title?: string
 }
+
+export type IconDesc =
+  | {
+      type: 'icon'
+      title: string
+      trigger?: 'click' | 'hover'
+    }
+  | undefined

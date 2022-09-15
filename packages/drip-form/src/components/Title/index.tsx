@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import { Align, TitleType } from './type'
+import React, { memo, useMemo } from 'react'
+import { Align, TitleType, IconDesc } from './type'
 import questionCircle from '../QuestionCircle'
 import './index.styl'
 
@@ -14,6 +14,21 @@ const Title = memo<TitleType>(
     title,
   }) => {
     const QuestionCircle = uiComponents[theme]?.QuestionCircle || questionCircle
+    const iconDesc = useMemo<IconDesc>(() => {
+      if (Array.isArray(description)) {
+        let iconDesc: IconDesc
+        ;(description || []).map((item) => {
+          if (item?.type === 'icon') {
+            iconDesc = item
+          }
+        })
+        return iconDesc
+      } else if (typeof description === 'object') {
+        return description?.type === 'icon' ? description : undefined
+      } else {
+        return undefined
+      }
+    }, [description])
     return (
       <div
         className="form-container__title"
@@ -38,10 +53,10 @@ const Title = memo<TitleType>(
         )}
         {title}
         {titleUi?.showColon && ':'}
-        {description &&
-          description?.type === 'icon' &&
-          description?.title &&
-          QuestionCircle && <QuestionCircle {...description} />}
+        {iconDesc &&
+          iconDesc?.type === 'icon' &&
+          iconDesc?.title &&
+          QuestionCircle && <QuestionCircle {...iconDesc} />}
       </div>
     )
   }

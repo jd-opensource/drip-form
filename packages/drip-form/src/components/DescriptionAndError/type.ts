@@ -8,3 +8,10 @@ export type DescriptionAndErrorType = {
   showError: boolean
   error: string
 }
+
+export type textDesc =
+  | {
+      type: 'text'
+      title: string
+    }
+  | undefined

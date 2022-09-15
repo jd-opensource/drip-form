@@ -17,54 +17,28 @@ const unitedSchema = {
   },
   schema: [
     {
-      fieldKey: 'hasDesc',
-      type: 'boolean',
-      title: '有无提示',
-      default: false,
-      ui: {
-        type: 'switch',
-      },
-    },
-    {
-      fieldKey: 'title',
       type: 'string',
-      title: '提示文案',
-      default: '',
+      title: '图标悬浮文案',
       ui: {
         type: 'text',
-        multiline: true,
-        allowClear: true,
-        vcontrol: 'return props.formData.description.hasDesc',
+        style: {
+          width: '100%',
+        },
+        theme: 'antd',
       },
+      fieldKey: 'iconTitle',
     },
     {
-      fieldKey: 'type',
       type: 'string',
-      title: '提示方式',
-      default: 'icon',
+      title: '下方展示文案',
       ui: {
-        type: 'radio',
-        options: [
-          { label: '图标悬浮', value: 'icon' },
-          { label: '下方展示', value: 'text' },
-        ],
-        vcontrol: 'return props.formData.description.hasDesc',
+        type: 'text',
+        style: {
+          width: '100%',
+        },
+        theme: 'antd',
       },
-    },
-    {
-      fieldKey: 'trigger',
-      type: 'string',
-      title: '触发形式',
-      default: 'hover',
-      ui: {
-        type: 'radio',
-        options: [
-          { label: '点击', value: 'click' },
-          { label: '悬浮', value: 'hover' },
-        ],
-        vcontrol:
-          'return props.formData.description.hasDesc && (props.formData.description.trigger === "icon")',
-      },
+      fieldKey: 'textTitle',
     },
   ],
 }
