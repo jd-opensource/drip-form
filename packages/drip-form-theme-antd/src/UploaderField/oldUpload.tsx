@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-15 17:27:38
+ * @Last Modified time: 2022-09-16 11:44:14
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
@@ -69,6 +69,10 @@ type UploaderFieldProps = CommonProps &
       max: number
       min: number
     }>
+    errMsg: Partial<{
+      dimension: string
+      size: string
+    }>
   }>
 
 const UploaderField: FC<UploaderFieldProps> = ({
@@ -89,6 +93,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   dimension,
   size,
   uploadLabel,
+  errMsg,
   ...restProps
 }) => {
   const [initValue, setValue] = useState(fieldData)
@@ -303,7 +308,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   // 上传前diemension、size校验
   const beforeUpload: UploadProps['beforeUpload'] = async (file) => {
     try {
-      const { isOk, errors } = await checkImg({ file, dimension, size })
+      const { isOk, errors } = await checkImg({ file, dimension, size, errMsg })
       if (isOk) {
         dispatch({
           type: 'setErr',
