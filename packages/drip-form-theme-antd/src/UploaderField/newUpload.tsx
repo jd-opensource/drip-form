@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-10 17:11:29
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-15 17:26:21
+ * @Last Modified time: 2022-09-16 11:39:57
  */
 
 import React, { memo, FC, useMemo, useCallback, useEffect } from 'react'
@@ -88,6 +88,10 @@ type UploaderFieldProps = CommonProps &
       max: number
       min: number
     }>
+    errMsg: Partial<{
+      dimension: string
+      size: string
+    }>
   }>
 
 const UploaderField: FC<UploaderFieldProps> = ({
@@ -106,6 +110,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   size,
   exportToString,
   uploadLabel,
+  errMsg,
   ...restProps
 }) => {
   // 如果是string类型，则需要处理为对象形式
@@ -220,7 +225,7 @@ const UploaderField: FC<UploaderFieldProps> = ({
   // 上传前diemension、size校验
   const beforeUpload: UploadProps['beforeUpload'] = async (file) => {
     try {
-      const { isOk, errors } = await checkImg({ file, dimension, size })
+      const { isOk, errors } = await checkImg({ file, dimension, size, errMsg })
       if (isOk) {
         dispatch({
           type: 'setErr',

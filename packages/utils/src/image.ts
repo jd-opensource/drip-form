@@ -60,10 +60,15 @@ export async function checkImg({
   file,
   dimension,
   size,
+  errMsg,
 }: {
   file: File
   dimension?: ImgDimension
   size?: ImgSize
+  errMsg?: Partial<{
+    dimension: string
+    size: string
+  }>
 }): Promise<{ isOk: boolean; errors: Array<string> }> {
   let isOk: string | boolean = true
   const errors: Array<string> = []
@@ -112,7 +117,7 @@ export async function checkImg({
       if (widthHeightEqual === true && naturalHeight === naturalWidth) count--
 
       if (count !== 0) {
-        errors.push('图片尺寸校验未通过')
+        errors.push(errMsg?.dimension || '图片尺寸校验未通过')
         isOk = false
       }
     }
@@ -121,7 +126,7 @@ export async function checkImg({
   }
   // 大小校验
   if ((min && min >= file.size) || (max && max <= file.size)) {
-    errors.push('图片大小校验未通过')
+    errors.push(errMsg?.size || '图片大小校验未通过')
     isOk = false
   }
   return { isOk, errors }

@@ -266,6 +266,78 @@ const config = {
           },
         ],
       },
+      {
+        type: 'object',
+        title: '图片报错文案',
+        ui: {
+          type: 'object',
+          mode: 'collapse',
+          '$:dripStyle': true,
+          ghost: true,
+          containerStyle: {
+            padding: 0,
+            marginBottom: 5,
+          },
+          active: false,
+          title: {
+            verticalAlign: 'top',
+          },
+        },
+        default: {},
+        schema: [
+          {
+            type: 'string',
+            title: '尺寸限制报错文案',
+            default: '图片尺寸校验未通过',
+            ui: {
+              type: 'text',
+              style: {
+                width: '100%',
+              },
+              theme: 'antd',
+              description: [
+                {
+                  type: 'icon',
+                  title: '当上传的图片尺寸限制不通过时，提示该文案',
+                },
+              ],
+            },
+            fieldKey: 'dimension',
+          },
+          {
+            type: 'string',
+            title: '图片大小报错文案',
+            default: '图片大小校验未通过',
+            ui: {
+              type: 'text',
+              style: {
+                width: '100%',
+              },
+              theme: 'antd',
+              title: {
+                showTitle: true,
+                requiredIcon: false,
+                showColon: false,
+                width: 82,
+                placement: 'left',
+                fontSize: '12',
+                color: '#000000',
+                textAlign: 'left',
+                verticalAlign: 'top',
+                title: '图片大小报错文案',
+              },
+              description: [
+                {
+                  type: 'icon',
+                  title: '当上传的图片大小不通过时，提示该文案',
+                },
+              ],
+            },
+            fieldKey: 'size',
+          },
+        ],
+        fieldKey: 'errMsg',
+      },
     ],
   },
 }
