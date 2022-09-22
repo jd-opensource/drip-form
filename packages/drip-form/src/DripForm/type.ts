@@ -1,6 +1,13 @@
 import type { ElementType, Dispatch as DispatchR } from 'react'
 import type { UnitedSchema, Action, Map, Get, Theme } from '@jdfed/utils'
-import type { Set, Merge, DeleteField, GetKey, AddField } from '@jdfed/hooks'
+import type {
+  Set,
+  Merge,
+  DeleteField,
+  GetKey,
+  AddField,
+  GlobalOptions,
+} from '@jdfed/hooks'
 import type { ContainerHoc } from '../render/type'
 import type { Plugin, Options } from 'ajv/dist/2019'
 import type Ajv from 'ajv/dist/2019'
@@ -100,7 +107,7 @@ export type DripFormProps = {
   customFunc?: Record<string, CustomFunc | JSX.Element>
   control?: ControlFuc
   onQuery?: FuncType
-  // v2 默认状态 formData、unitedSchema变化会触发reducer的reload（一般情况无需设置）
+  // 同 option.reload
   reload?: boolean
   onValidate?: OnValidate
   // 首轮外渲染时都会触发对formData的解析
@@ -112,6 +119,7 @@ export type DripFormProps = {
   onSubmit?: FooterBtnFuncType
   onCancel?: FooterBtnFuncType
   ajvOptions?: Options
+  options?: GlobalOptions
   // 公共事件回调机制
   onEvent?: DripFormEventFuncType
   // 透传到每个组件的全局数据
