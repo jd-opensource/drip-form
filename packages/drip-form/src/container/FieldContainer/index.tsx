@@ -3,14 +3,14 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-15 17:19:59
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-13 15:00:32
+ * @Last Modified time: 2022-09-22 13:38:27
  */
 import React, { memo, useMemo, useCallback, useContext } from 'react'
 import cx from 'classnames'
 // 配置
 import { FormDataContext } from '../../reducers'
 import { CommonContainerHoc } from '@form/components/index'
-
+import { useGlobalOptions, UndefinedComponentFn } from '@jdfed/hooks'
 import './index.styl'
 import type { Props } from '../type'
 
@@ -32,19 +32,24 @@ const fieldContainer = memo<Props>(
   }) => {
     const { globalFormDataStoreKey, fireEvent, globalData } =
       useContext(FormDataContext)
-
+    const undefinedComponent = useGlobalOptions().undefinedComponent
     /**
      * 表单组件
      */
     const FieldMemo = useMemo(() => {
-      let errTip = '组件未加载'
-      const style = { color: 'red' }
+      let errTip
+      const getErrTip: UndefinedComponentFn = (params) =>
+        typeof undefinedComponent?.value == 'function'
+          ? undefinedComponent.value(params)
+          : undefinedComponent?.value || ''
       // 当前Field使用的组件 默认antd
       let Component: any
       if (type === 'custom' && customComponents) {
         Component = customComponents[fieldKey]
         if (!Component) {
-          errTip = `无法找到自定义组件${fieldKey}，请确认是否导入`
+          errTip = getErrTip({
+            fieldKey,
+          })
         }
       } else {
         const [customTheme, customType] = type.split('::')
@@ -54,9 +59,27 @@ const fieldContainer = memo<Props>(
           Component = uiComponents[theme]?.[type]
         }
         if (!Component) {
-          errTip = `无法找到主题${customType ? customTheme : theme}中的${
-            customType || type
-          }组件，请确认是否导入`
+          errTip = getErrTip({
+            theme: customType ? customTheme : theme,
+            type: customType || type,
+            fieldKey,
+          })
+        }
+      }
+
+      if (undefinedComponent?.type === 'console') {
+        switch (undefinedComponent.consoleType) {
+          case 'log':
+            console.log(errTip)
+            break
+          case 'warn':
+            console.warn(errTip)
+            break
+          case 'error':
+            console.error(errTip)
+            break
+          default:
+            break
         }
       }
 
@@ -74,9 +97,9 @@ const fieldContainer = memo<Props>(
           {...(queryFunc ? { queryFunc } : null)}
           {...(asyncValidate ? { asyncValidate } : null)}
         />
-      ) : (
-        <span style={style}>{errTip}</span>
-      )
+      ) : undefinedComponent?.type == 'tips' && errTip ? (
+        <span style={{ color: 'red' }}>{errTip}</span>
+      ) : null
     }, [
       type,
       customComponents,
@@ -85,14 +108,15 @@ const fieldContainer = memo<Props>(
       formMode,
       dispatch,
       getKey,
+      fireEvent,
       globalFormDataStoreKey,
+      globalData,
       uiProp,
       queryFunc,
       asyncValidate,
+      undefinedComponent,
       uiComponents,
       theme,
-      fireEvent,
-      globalData,
     ])
 
     const asyncValidateFn = useCallback(() => {

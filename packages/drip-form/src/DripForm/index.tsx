@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-08-14 08:56:37
+ * @Last Modified time: 2022-09-22 13:38:52
  */
 import React, {
   forwardRef,
@@ -28,6 +28,8 @@ import {
   useGetKey,
   usePrevious,
   RequiredModeContext,
+  globalOptionsContext,
+  defaultGlobalOptions,
 } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
@@ -59,12 +61,22 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       onSubmit,
       onCancel,
       parse,
-      reload = true,
+      reload,
+      options,
       onEvent,
       globalData,
     },
     ref
   ) => {
+    // 全局配置
+    const globalOptions = useMemo(
+      () => ({
+        ...defaultGlobalOptions,
+        reload,
+        ...options,
+      }),
+      [options, reload]
+    )
     const prevUnitedSchema = usePrevious(unitedSchema)
     const prevFormData = usePrevious(initFormData)
     const parseFormData = useMemo(() => {
@@ -195,7 +207,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           (prevFormData &&
             Object.keys(prevFormData).length > 0 &&
             prevFormData !== initFormData)) &&
-        reload
+        globalOptions.reload
       ) {
         dispatch({
           type: 'reset',
@@ -215,8 +227,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       initUiSchema,
       prevUnitedSchema,
       unitedSchema,
-      reload,
       resetArgs,
+      globalOptions.reload,
     ])
 
     const {
@@ -468,43 +480,45 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     )
 
     return (
-      <RequiredModeContext.Provider
-        value={dataSchema?.requiredMode || 'default'}
-      >
-        <FormDataContext.Provider value={formDataContextState}>
-          <div className={'drip-form-root'}>
-            {renderCoreFn({
-              uiComponents,
-              dataSchema,
-              uiSchema,
-              errors,
-              formData,
-              onQuery,
-              onValidate,
-              dispatch,
-              customComponents,
-              containerMap,
-              getKey,
-              get,
-              containerHoc,
-              arrayKey,
-              isRoot: true,
-            })}
-            <Tooltip clickable={true} />
-            <Footer
-              uiSchema={uiSchema}
-              uiComponents={uiComponents}
-              onSubmit={onSubmit}
-              submit={submit}
-              submitReturn={submitReturn}
-              onCancel={onCancel}
-              globalTheme={globalTheme}
-              initFormData={initArgs.formData}
-              dispatch={dispatch}
-            />
-          </div>
-        </FormDataContext.Provider>
-      </RequiredModeContext.Provider>
+      <globalOptionsContext.Provider value={globalOptions}>
+        <RequiredModeContext.Provider
+          value={dataSchema?.requiredMode || 'default'}
+        >
+          <FormDataContext.Provider value={formDataContextState}>
+            <div className={'drip-form-root'}>
+              {renderCoreFn({
+                uiComponents,
+                dataSchema,
+                uiSchema,
+                errors,
+                formData,
+                onQuery,
+                onValidate,
+                dispatch,
+                customComponents,
+                containerMap,
+                getKey,
+                get,
+                containerHoc,
+                arrayKey,
+                isRoot: true,
+              })}
+              <Tooltip clickable={true} />
+              <Footer
+                uiSchema={uiSchema}
+                uiComponents={uiComponents}
+                onSubmit={onSubmit}
+                submit={submit}
+                submitReturn={submitReturn}
+                onCancel={onCancel}
+                globalTheme={globalTheme}
+                initFormData={initArgs.formData}
+                dispatch={dispatch}
+              />
+            </div>
+          </FormDataContext.Provider>
+        </RequiredModeContext.Provider>
+      </globalOptionsContext.Provider>
     )
   }
 )

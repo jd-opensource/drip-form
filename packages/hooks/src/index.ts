@@ -2,12 +2,13 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 13:34:38
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-09 17:10:17
+ * @Last Modified time: 2022-09-21 17:34:06
  */
 import type { Set, Merge, SetType, DeleteField, AddField } from './useSchema'
 import type { Get, GetKey } from '@jdfed/utils'
 import type { Validate, ErrorsMap } from './useValidate'
 import type { MarginType, TitleWidth } from './useTitle'
+import type { GlobalOptions, UndefinedComponentFn } from './useGlobalOption'
 export { default as useModal } from './useModal'
 export { default as useRefProp } from './useRefProp'
 export { default as usePrevious } from './usePrevious'
@@ -25,6 +26,11 @@ export {
   default as useRequiredModeContext,
   RequiredModeContext,
 } from './useRequiredModeContext'
+export {
+  default as useGlobalOptions,
+  globalOptionsContext,
+  defaultGlobalOptions,
+} from './useGlobalOption'
 export type {
   Get,
   Set,
@@ -37,4 +43,6 @@ export type {
   ErrorsMap,
   MarginType,
   TitleWidth,
+  GlobalOptions,
+  UndefinedComponentFn,
 }

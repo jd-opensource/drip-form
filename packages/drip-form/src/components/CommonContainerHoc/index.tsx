@@ -5,18 +5,18 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-30 22:30:33
+ * @Last Modified time: 2022-09-22 13:49:08
  */
 import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
 import DescriptionAndError from '../DescriptionAndError'
 import Title, { titlePlacementCls } from '../Title'
-import { useTitle, useContainer } from '@jdfed/hooks'
+import { useTitle, useContainer, useGlobalOptions } from '@jdfed/hooks'
 import type { CommonContainer, CommonContainerHocType } from './type'
 import './index.styl'
 
 const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
-  const { showTitleEle = true, showDesAndErr = true } = props || {
+  let { showTitleEle = true, showDesAndErr = true } = props || {
     showDesAndErr: true,
     showTitleEle: true,
   }
@@ -39,6 +39,11 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
     } = props
     useContainer({ fieldKey, dispatch })
     const newTitleUi = useTitle(titleUi)
+    const { undefinedComponent } = useGlobalOptions()
+    if (!undefinedComponent?.showTitle) {
+      showTitleEle = false
+      showDesAndErr = false
+    }
     return (
       <div
         // form-container需要和packages/generator/src/components/Viewport/DripFormDragHoc/index.module.css中同步修改
