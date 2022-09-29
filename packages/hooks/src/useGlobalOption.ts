@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-09-21 16:41:46
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-22 13:38:06
+ * @Last Modified time: 2022-09-29 17:33:39
  */
 
 import { createContext, useContext } from 'react'
@@ -22,13 +22,11 @@ export type GlobalOptions = Partial<{
     | {
         type: 'tips'
         value: string | UndefinedComponentFn
-        showTitle: boolean
       }
     | {
         type: 'console'
         consoleType: 'log' | 'warn' | 'error'
         value: string | UndefinedComponentFn
-        showTitle: boolean
       }
 }>
 
@@ -37,7 +35,6 @@ export const defaultGlobalOptions: GlobalOptions = {
   reload: true,
   undefinedComponent: {
     type: 'tips',
-    showTitle: true,
     value: ({ theme, type, fieldKey }) => {
       if (theme && type) {
         return `无法找到主题${theme}中的${type}组件，请确认是否导入`
