@@ -2,9 +2,9 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-20 22:17:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-13 12:29:22
+ * @Last Modified time: 2022-09-28 21:45:42
  */
-import React, { memo, FC } from 'react'
+import React, { memo, FC, useEffect } from 'react'
 import { Select } from 'antd'
 import { useField, useQuery } from '@jdfed/hooks'
 import { CommonProps } from '../global'
@@ -45,6 +45,12 @@ const SelectField: FC<SelectFieldProps> = ({
     },
     dispatch
   )
+
+  useEffect(() => {
+    queryOptionsFuc()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // fix：antd 多选情况传空字符串，展示空的选项bug
   if (
     multiple ||
@@ -73,7 +79,6 @@ const SelectField: FC<SelectFieldProps> = ({
       allowClear={allowClear}
       disabled={disabled}
       value={fieldData}
-      onFocus={queryOptionsFuc}
       onChange={_onChange}
       options={options}
       {...restProps}
