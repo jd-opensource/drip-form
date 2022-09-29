@@ -1,3 +1,4 @@
+import { ElementType } from 'react'
 import type { Dispatch, NamedExoticComponent, ComponentType } from 'react'
 import type { Action } from '@jdfed/utils'
 import type { Theme, Description, TitleUi, ContainerStyle } from '@jdfed/utils'
@@ -19,6 +20,8 @@ export type CommonContainer = {
   containerStyle: ContainerStyle
   // 表单UI生成控制项
   uiProp: Record<string, unknown>
+  type: string
+  customComponents: Record<string, ElementType>
 }
 
 export type CommonContainerProps = {

@@ -5,7 +5,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-22 13:49:08
+ * @Last Modified time: 2022-09-29 17:37:17
  */
 import cx from 'classnames'
 import React, { memo, CSSProperties } from 'react'
@@ -16,7 +16,7 @@ import type { CommonContainer, CommonContainerHocType } from './type'
 import './index.styl'
 
 const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
-  let { showTitleEle = true, showDesAndErr = true } = props || {
+  const { showTitleEle = true, showDesAndErr = true } = props || {
     showDesAndErr: true,
     showTitleEle: true,
   }
@@ -36,15 +36,29 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
       formMode,
       containerStyle,
       uiProp,
+      type,
+      customComponents,
     } = props
     useContainer({ fieldKey, dispatch })
     const newTitleUi = useTitle(titleUi)
+
     const { undefinedComponent } = useGlobalOptions()
-    if (!undefinedComponent?.showTitle) {
-      showTitleEle = false
-      showDesAndErr = false
+
+    let Field: any
+    if (type === 'custom' && customComponents) {
+      Field = customComponents[fieldKey]
+    } else {
+      const [customTheme, customType] = type.split('::')
+      if (customType) {
+        Field = uiComponents[customTheme]?.[customType]
+      } else {
+        Field = uiComponents[theme]?.[type]
+      }
     }
-    return (
+
+    const notRender = undefinedComponent?.type === 'console' && !Field
+
+    return !notRender ? (
       <div
         // form-container需要和packages/generator/src/components/Viewport/DripFormDragHoc/index.module.css中同步修改
         className={cx('form-container', {
@@ -97,7 +111,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
             />
           )}
       </div>
-    )
+    ) : null
   })
   commonContainer.displayName = 'commoncontainer'
   return commonContainer
