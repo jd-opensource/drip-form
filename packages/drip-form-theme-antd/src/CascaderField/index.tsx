@@ -1,9 +1,9 @@
 /**
  * 级联选择
  */
-import React, { memo, useMemo } from 'react'
+import React, { memo, useMemo, useEffect } from 'react'
 import { Cascader } from 'antd'
-import { useField } from '@jdfed/hooks'
+import { useField, useQuery } from '@jdfed/hooks'
 import { typeCheck } from '@jdfed/utils'
 import { CommonProps } from '../global'
 
@@ -32,8 +32,26 @@ const CascaderField = ({
   onChange,
   asyncValidate,
   getKey,
+  options = [],
+  queryFunc,
+  requestCache,
   ...restProps
 }: CascaderFieldProps) => {
+  const queryOptionsFuc = useQuery(
+    {
+      getKey,
+      options,
+      queryFunc,
+      requestCache,
+      fieldKey,
+    },
+    dispatch
+  )
+
+  useEffect(() => {
+    queryOptionsFuc()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const _onChange = useField(
     { fieldKey, onChange, asyncValidate, getKey },
     dispatch
@@ -77,6 +95,7 @@ const CascaderField = ({
     <Cascader
       value={fieldData}
       onChange={_onChange}
+      options={options}
       {...(showSearch && { showSearch: _showSearchObj })}
       {...(expandTrigger && { expandTrigger })}
       {...restProps}
