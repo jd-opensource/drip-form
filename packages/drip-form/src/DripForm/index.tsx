@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-22 13:38:52
+ * @Last Modified time: 2022-10-11 15:27:19
  */
 import React, {
   forwardRef,
@@ -61,7 +61,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       onSubmit,
       onCancel,
       parse,
-      reload,
+      reload = true,
       options,
       onEvent,
       globalData,
@@ -204,9 +204,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     useEffect(() => {
       if (
         ((prevUnitedSchema && prevUnitedSchema != unitedSchema) ||
-          (prevFormData &&
-            Object.keys(prevFormData).length > 0 &&
-            prevFormData !== initFormData)) &&
+          (prevFormData && prevFormData !== initFormData)) &&
         globalOptions.reload
       ) {
         dispatch({
