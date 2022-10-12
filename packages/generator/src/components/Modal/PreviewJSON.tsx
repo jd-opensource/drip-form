@@ -3,27 +3,27 @@ import { Modal } from 'antd'
 import DripForm from '@jdfed/drip-form'
 
 import {
-  previewVisibleAtom,
-  schemaAtom,
+  previewAtom,
+  previewSchemaAtom,
   DripFormUiComponetsAtom,
 } from '@generator/store'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 const PreviewJSON = () => {
-  const [previewVisible, setPreviewVisible] = useRecoilState(previewVisibleAtom)
-  const unitedSchema = useRecoilValue(schemaAtom)
+  const [preview, setPreview] = useRecoilState(previewAtom)
+  const unitedSchema = useRecoilValue(previewSchemaAtom)
   const uiComponents = useRecoilValue(DripFormUiComponetsAtom)
 
   return (
     <Modal
       keyboard={false}
       maskClosable={false}
-      visible={previewVisible}
+      visible={preview.visible}
       footer={null}
       width={1000}
       title="表单预览效果"
       onCancel={() => {
-        setPreviewVisible(false)
+        setPreview((old) => ({ ...old, visible: false }))
       }}
     >
       <DripForm unitedSchema={unitedSchema} uiComponents={uiComponents} />

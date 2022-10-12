@@ -30,6 +30,8 @@ export type HeaderConfig = Partial<{
   customExport: (exportJsonFn: () => void) => void
   // 自定义左侧logo组件
   renderLeftHeader: () => JSX.Element
+  // 是否展示联动配置按钮
+  showControl: boolean
 }>
 
 export type ViewportConfigItem =
@@ -71,6 +73,7 @@ export const optionsAtom = atom<Options>({
       showPreviewForm: true,
       showExportJSON: true,
       exportText: '导出JSON',
+      showControl: true,
     },
     viewportConfig: {
       showActionBar: true,

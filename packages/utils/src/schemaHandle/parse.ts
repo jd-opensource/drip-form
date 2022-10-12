@@ -2,7 +2,7 @@
  * 联合Schema解析函数
  */
 import { typeCheck, setDeepProp } from '../common'
-import { UiSchema, UnitedSchema, DataSchema } from './types'
+import { UiSchema, UnitedSchema, DataSchema, TypePath } from './types'
 import _ from 'lodash'
 import type { Map } from '../common/type'
 
@@ -44,6 +44,7 @@ function initParse({
     curTypePath = parentTypePath ? `${parentTypePath}.${idx}` : idx
     typePath[curTypePath] = {
       fatherKey: parentTypePath,
+      title: unitedSchema.title || '',
       type: unitedSchema.type,
       unitedSchemaKey: `${
         typePath[parentTypePath]?.unitedSchemaKey
@@ -257,7 +258,7 @@ const parseUnitedSchema = (
 ): {
   uiSchema: UiSchema
   dataSchema: DataSchema
-  typePath: Map
+  typePath: TypePath
   customProps: string[]
 } => {
   const dataSchema = {} as DataSchema

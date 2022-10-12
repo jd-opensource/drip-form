@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 11:39:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-03-03 18:10:22
+ * @Last Modified time: 2022-08-12 12:46:46
  */
 import { useCallback } from 'react'
 import { generateReg } from '@jdfed/utils'
@@ -22,7 +22,8 @@ const useGetKey = (
         return generateReg(fieldKey.split('.')).test(item)
       })
       if (!fieldKeyToTypeMap) {
-        throw `无法在typeMap中找到与${fieldKey}对应的key`
+        console.error(fieldKey, typeMap)
+        throw `无法在typeMap中找到与${fieldKey}对应的key,`
       }
       return fieldKeyToTypeMap
     },

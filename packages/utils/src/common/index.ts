@@ -1,11 +1,10 @@
-import { CSSProperties } from 'react'
 /*
  * @Author: jiangxiaowei
  * @Date: 2020-05-30 15:05:13
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-07-14 13:25:05
+ * @Last Modified time: 2022-07-22 13:46:08
  */
-import type { TreeItems, TreeItem } from '../tree/types'
+import { CSSProperties } from 'react'
 import type { Map } from './type'
 
 /**
@@ -223,58 +222,6 @@ export function deepClone(target: any, map = new WeakMap()): any {
   }
 }
 
-/**
- * 更新属性，并联动更新与其相关的子元素的对应属性
- * @param items
- * @param fieldKey
- * @param property
- * @param setter
- */
-export function setProperty<T extends keyof TreeItem>(
-  items: TreeItems,
-  fieldKey: string,
-  property: T,
-  setter: (value: TreeItem[T]) => TreeItem[T]
-): TreeItems {
-  return items.map((item) => {
-    const copiedItem = deepClone(item)
-    if (item.fieldKey === fieldKey) {
-      copiedItem[property] = setter(copiedItem[property])
-      return copiedItem
-    }
-
-    if (copiedItem.schema.length) {
-      copiedItem.schema = setProperty(
-        copiedItem.schema,
-        fieldKey,
-        property,
-        setter
-      )
-    }
-
-    return copiedItem
-  })
-}
-
-/**
- * 移除属性，并联动移除与其相关的子元素的对应属性
- * @param schema
- * @param fieldKey
- */
-export function removeItem(schema: TreeItems, fieldKey: string): TreeItems {
-  return schema.reduce((acc: TreeItems, item) => {
-    // 非待删除的数据的id才执行
-    if (item.fieldKey !== fieldKey) {
-      const copiedItem = deepClone(item)
-      if (copiedItem.children.length) {
-        copiedItem.children = removeItem(item.schema, fieldKey)
-      }
-      acc.push(copiedItem)
-    }
-
-    return acc
-  }, [])
-}
 /**
  * 该方法用于快速向check的shcmea中注入vcontol。方便过滤已经设置的表单
  * @param obj 待注入vontrol的uiSchema对象

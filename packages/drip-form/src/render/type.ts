@@ -53,7 +53,7 @@ export type RenderFnProps = {
   // dataSchema父级表单的key
   parentDataSchemaKey?: Array<string>
   // 不同type类型对应渲染的容器 ArrayContainer 和objectContainer特有
-  containerMap?: ContainerType
+  containerMap: ContainerType
   // 允许入参高阶组件，在Container进行包裹
   containerHoc?: ContainerHoc
   get: Get

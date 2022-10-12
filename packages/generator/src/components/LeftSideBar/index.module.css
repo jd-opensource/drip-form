@@ -1,7 +1,7 @@
 .left {
   @apply transition-all h-full flex-shrink-0 flex-grow-0;
   overflow-y: scroll;
-  width: calc(120px + 120px + 3.5rem);
+  width: calc(120px + 120px + 3.5rem + 5px);
 }
 
 .left::-webkit-scrollbar {

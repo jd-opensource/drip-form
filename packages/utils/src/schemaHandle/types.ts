@@ -1,3 +1,4 @@
+import { Flow } from './../flowHandle/type'
 import type { Map } from '../common/type'
 import { GetKey, Action } from '../type'
 import type { Dispatch } from 'react'
@@ -119,6 +120,7 @@ export type UiSchema = {
   order: Array<string | number>
   title?: TitleUi
   onChange?: OnChange
+  flow?: Flow
   [propName: string]: unknown
 }
 
@@ -152,3 +154,12 @@ export type UnitedSchema = {
   schema?: Array<Map>
   items?: Array<Map> | Map
 } & Map
+
+export type TypePathItem = {
+  type: string
+  fatherKey: string
+  title: string
+  unitedSchemaKey: string
+}
+
+export type TypePath = Record<string, TypePathItem>

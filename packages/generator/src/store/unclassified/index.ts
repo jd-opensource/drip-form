@@ -1,8 +1,9 @@
 import React, { MutableRefObject } from 'react'
 import { atom, selector, DefaultValue } from 'recoil'
-import { UnitedSchema } from '@jdfed/utils'
+import { parseUnitedSchema } from '@jdfed/utils'
 import antd from '@jdfed/drip-form-theme-antd'
 import type { DripFormRefType, UiComponents } from '@jdfed/drip-form'
+import type { TypePath, UnitedSchema } from '@jdfed/utils'
 
 export type GeneratorContextType = MutableRefObject<DripFormRefType | undefined>
 
@@ -28,6 +29,16 @@ export const editJsonAtom = atom({
   default: schemaAtom,
 })
 
+// 获取unitedSchema的typePath
+export const typePathAtom = selector<TypePath>({
+  key: 'typePathAtom',
+  get: ({ get }) => {
+    const unitedSchema = get(schemaAtom)
+    const { typePath } = parseUnitedSchema(unitedSchema)
+    return typePath
+  },
+})
+
 /**
  * 当前鼠标hover所在的元素的FieldKey
  */
@@ -50,14 +61,6 @@ export const componentsFoldAtom = atom<boolean>({
 export const selectedAtom = atom<string | null>({
   key: 'selected',
   default: null,
-})
-
-/**
- * 预览模块的可视化状态
- */
-export const previewVisibleAtom = atom<boolean>({
-  key: 'previewVisible',
-  default: false,
 })
 
 /**

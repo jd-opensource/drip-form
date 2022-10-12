@@ -79,6 +79,7 @@ export const parsedSchema = {
   typePath: {
     name: {
       fatherKey: '',
+      title: '名字',
       type: 'string',
       unitedSchemaKey: 'schema.1',
     },

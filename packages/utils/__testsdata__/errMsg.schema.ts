@@ -123,11 +123,13 @@ export const parsedSchema = {
   typePath: {
     babelRadio: {
       fatherKey: '',
+      title: '下拉输入',
       type: 'object',
       unitedSchemaKey: 'schema.1',
     },
     name: {
       fatherKey: '',
+      title: '名字',
       type: 'string',
       unitedSchemaKey: 'schema.0',
     },

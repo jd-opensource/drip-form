@@ -82,11 +82,13 @@ export const parsedSchema = {
   typePath: {
     array_g6NF65: {
       fatherKey: '',
+      title: '数组容器',
       type: 'array',
       unitedSchemaKey: 'schema.0',
     },
     'array_g6NF65.$container': {
       fatherKey: 'array_g6NF65',
+      title: '输入框',
       type: 'string',
       unitedSchemaKey: 'schema.0.items',
     },
