@@ -75,7 +75,6 @@ const EditJSON = () => {
         </div>
       </div>
       <MonacoEdit
-        theme="light"
         value={JSON.stringify(json)}
         defaultValue={defaultValue}
         onChange={handleEditorChange}

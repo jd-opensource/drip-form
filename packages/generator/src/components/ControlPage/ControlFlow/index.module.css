@@ -1,0 +1,28 @@
+.title {
+  @apply text-base font-bold;
+}
+
+.condintion,
+.action {
+  @apply flex-none flex-row mt-2 mb-2 ml-10;
+  display:flex;
+}
+
+.logicoperator,.addeffectbutton {
+  @apply ml-20;
+}
+
+.deleteicon {
+  @apply cursor-pointer;
+  height: 32px;
+  line-height: 32px;
+}
+
+.subtitle {
+  height: 32px;
+  line-height: 32px;
+}
+
+.addbutton {
+  @apply mt-8;
+}

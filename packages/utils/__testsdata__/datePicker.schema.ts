@@ -71,16 +71,19 @@ export const parsedSchema = {
   typePath: {
     hahaha: {
       fatherKey: '',
+      title: '时间选择框',
       type: 'array',
       unitedSchemaKey: 'schema.0',
     },
     'hahaha.0': {
       fatherKey: 'hahaha',
+      title: '',
       type: 'string',
       unitedSchemaKey: 'schema.0.items.0',
     },
     'hahaha.1': {
       fatherKey: 'hahaha',
+      title: '',
       type: 'string',
       unitedSchemaKey: 'schema.0.items.1',
     },

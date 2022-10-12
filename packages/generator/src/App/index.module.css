@@ -6,6 +6,7 @@
 
 .body {
   @apply flex divide-x divide-gray-100;
+  position: relative;
   height: calc(100vh - 52px);
   overflow: hidden;
   min-width:1024px;

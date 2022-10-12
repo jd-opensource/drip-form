@@ -8,6 +8,7 @@ import RightSideBar from '@generator/components/RightSideBar'
 import LeftSideBar from '@generator/components/LeftSideBar'
 import Viewport from '@generator/components/Viewport'
 import DndWrapper from '@generator/components/DndWrapper'
+import ControlPage from '@generator/components/ControlPage'
 import { PreviewJSON } from '@generator/components/Modal'
 import { produce } from 'immer'
 import { DripFormRefType } from '@jdfed/drip-form'
@@ -140,6 +141,7 @@ const Generator = forwardRef<GeneratorRef, GeneratorType>(
         <div className={styles.drip_form_generator}>
           {(headerConfig?.showHeader ?? true) && <Header />}
           <div className={cx(styles.body)}>
+            <ControlPage />
             <DndWrapper>
               <LeftSideBar />
               <Viewport schema={schema} removable />

@@ -56,6 +56,7 @@ function registerAjv(options?: Options): Ajv {
     'customFormat',
     // v1需要过滤该字段
     'transformToObject',
+    'flow',
   ])
   // 加载drip-form官方keywords插件
   addDripKeywords(ajv)

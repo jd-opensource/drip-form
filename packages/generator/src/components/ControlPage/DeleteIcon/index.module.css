@@ -1,0 +1,3 @@
+.hover {
+  @apply hover:text-blue-500
+}

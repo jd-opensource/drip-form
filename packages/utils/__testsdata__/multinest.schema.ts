@@ -199,48 +199,63 @@ export const parsedSchema = {
     },
   },
   typePath: {
-    nestObject: { fatherKey: '', type: 'object', unitedSchemaKey: 'schema.0' },
+    nestObject: {
+      fatherKey: '',
+      type: 'object',
+      unitedSchemaKey: 'schema.0',
+      title:
+        "2层嵌套对象 { personInfo: { erp: 'drip', age: 1 }, address: { location: '上海' } }",
+    },
     'nestObject.personInfo': {
       fatherKey: 'nestObject',
       type: 'object',
+      title: '个人信息',
       unitedSchemaKey: 'schema.0.schema.0',
     },
     'nestObject.personInfo.erp': {
       fatherKey: 'nestObject.personInfo',
       type: 'string',
+      title: 'ERP',
       unitedSchemaKey: 'schema.0.schema.0.schema.0',
     },
     'nestObject.personInfo.age': {
       fatherKey: 'nestObject.personInfo',
       type: 'number',
+      title: '年龄',
       unitedSchemaKey: 'schema.0.schema.0.schema.1',
     },
     'nestObject.address': {
       fatherKey: 'nestObject',
       type: 'object',
+      title: '住宅地址',
       unitedSchemaKey: 'schema.0.schema.1',
     },
     'nestObject.address.location': {
       fatherKey: 'nestObject.address',
       type: 'string',
+      title: '地址',
       unitedSchemaKey: 'schema.0.schema.1.schema.0',
     },
     nestArray: {
       fatherKey: '',
+      title: '3层嵌套数组 [{ xxx: [1,2,3] }, { xxx: [3,4,5] }...]',
       type: 'array',
       unitedSchemaKey: 'schema.1',
     },
     'nestArray.$container': {
       fatherKey: 'nestArray',
+      title: '',
       type: 'object',
       unitedSchemaKey: 'schema.1.items',
     },
     'nestArray.$container.xxx': {
+      title: 'xxx',
       fatherKey: 'nestArray.$container',
       type: 'array',
       unitedSchemaKey: 'schema.1.items.schema.0',
     },
     'nestArray.$container.xxx.$container': {
+      title: '',
       fatherKey: 'nestArray.$container.xxx',
       type: 'string',
       unitedSchemaKey: 'schema.1.items.schema.0.items',

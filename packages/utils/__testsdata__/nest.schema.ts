@@ -231,10 +231,12 @@ export const parsedSchema = {
   typePath: {
     addSameList: {
       fatherKey: '',
+      title: "允许添加的列表 ['a', 'b', ...]",
       type: 'array',
       unitedSchemaKey: 'schema.0',
     },
     'addSameList.$container': {
+      title: '姓名',
       fatherKey: 'addSameList',
       type: 'string',
       unitedSchemaKey: 'schema.0.items',
@@ -242,51 +244,62 @@ export const parsedSchema = {
     tupleItem: {
       fatherKey: '',
       type: 'array',
+      title: "元组 ['drip', 18]",
       unitedSchemaKey: 'schema.1',
     },
     'tupleItem.0': {
       fatherKey: 'tupleItem',
+      title: 'ERP',
       type: 'string',
       unitedSchemaKey: 'schema.1.items.0',
     },
     'tupleItem.1': {
       fatherKey: 'tupleItem',
+      title: '年龄',
       type: 'number',
       unitedSchemaKey: 'schema.1.items.1',
     },
     objectItem: {
       fatherKey: '',
       type: 'object',
+      title: "普通对象 { erp: 'drip', age: 1 }",
       unitedSchemaKey: 'schema.2',
     },
     'objectItem.erp': {
       fatherKey: 'objectItem',
       type: 'string',
+      title: 'ERP',
       unitedSchemaKey: 'schema.2.schema.0',
     },
     'objectItem.age': {
       fatherKey: 'objectItem',
+      title: '年龄',
       type: 'number',
       unitedSchemaKey: 'schema.2.schema.1',
     },
     nestArray: {
       fatherKey: '',
+      title:
+        "允许添加的对象数组 [{erp: 'drip', age: 1}, {erp: 'jmfe', age: 6}, ...]",
       type: 'array',
       unitedSchemaKey: 'schema.3',
     },
     'nestArray.$container': {
       fatherKey: 'nestArray',
       type: 'object',
+      title: '',
       unitedSchemaKey: 'schema.3.items',
     },
     'nestArray.$container.erp': {
       fatherKey: 'nestArray.$container',
       type: 'string',
+      title: 'ERP',
       unitedSchemaKey: 'schema.3.items.schema.0',
     },
     'nestArray.$container.age': {
       fatherKey: 'nestArray.$container',
       type: 'number',
+      title: '年龄',
       unitedSchemaKey: 'schema.3.items.schema.1',
     },
   },

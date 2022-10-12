@@ -10,31 +10,36 @@ loader.config({
 
 const MonacoEdit: React.FC<EditorProps> = ({
   language = 'json',
-  value,
+  value: oldValue,
   defaultLanguage = 'json',
-  defaultValue = '',
+  defaultValue,
   onChange,
-  theme = 'vs-dark',
+  options,
   ...props
 }) => {
-  const input = JSON.stringify(JSON.parse(value || defaultValue), null, 2)
+  const value =
+    defaultLanguage === 'json'
+      ? JSON.stringify(JSON.parse(oldValue || defaultValue || '""'), null, 2)
+      : oldValue
 
   return (
     <div className={styles.container}>
       <Editor
         width="100%"
         height="100%"
-        theme={theme}
+        theme="light"
         language={language}
         defaultLanguage={defaultLanguage}
         defaultValue={defaultValue}
         onChange={onChange}
-        value={input}
+        value={value}
         options={{
-          ...props.options,
+          ...options,
           glyphMargin: true,
           tabSize: 2,
           smoothScrolling: true,
+          formatOnPaste: true,
+          formatOnType: true,
           scrollbar: {
             verticalScrollbarSize: 5,
             horizontalScrollbarSize: 5,
@@ -42,6 +47,7 @@ const MonacoEdit: React.FC<EditorProps> = ({
           },
           fontSize: 13,
         }}
+        {...props}
       />
     </div>
   )

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-11 15:27:19
+ * @Last Modified time: 2022-10-12 15:53:26
  */
 import React, {
   forwardRef,
@@ -21,7 +21,13 @@ import validate from '../validate'
 import formDataReducer, { FormDataContext } from '../reducers'
 import renderCoreFn from '../render'
 import Tooltip from 'react-tooltip'
-import { typeCheck, parseUnitedSchema, randomString } from '@jdfed/utils'
+import {
+  typeCheck,
+  parseUnitedSchema,
+  randomString,
+  parseFlow,
+  setDeepProp,
+} from '@jdfed/utils'
 import {
   useValidate,
   useSchema,
@@ -47,7 +53,7 @@ import type { State, Action, Theme, UiSchema } from '@jdfed/utils'
 const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
   (
     {
-      formData: initFormData = {},
+      formData: initFormData,
       unitedSchema,
       ajv,
       uiComponents,
@@ -161,7 +167,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         formData:
           validate({
             schema: initDataSchema,
-            formData: parseFormData || initFormData,
+            formData: parseFormData || initFormData || {},
             ajv,
             customProps,
           }).formData || {},
@@ -255,7 +261,11 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       return errors
     }, [ajvErrors, customErrors, data.errors])
 
-    const { theme = 'antd', change } = uiSchema as UiSchema & {
+    const {
+      theme = 'antd',
+      change,
+      flow,
+    } = uiSchema as UiSchema & {
       change: string | ControlFuc
     }
 
@@ -449,13 +459,29 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           }
         } catch (error) {
           console.error('change函数体错误，请确认')
-          console.error(error)
+          console.warn(error)
+        }
+      }
+      // 避免viewport区域触发联动逻辑
+      if (flow && unitedSchema?.formMode !== 'generator') {
+        try {
+          const flowFn = parseFlow(flow)
+          new Function('props', flowFn)({
+            get,
+            set,
+            merge,
+            setDeepProp,
+          })
+        } catch (error) {
+          console.error('flow联动函数配置错误，请确认')
+          console.warn(error)
         }
       }
     }, [
       control,
       dataSchema,
       dispatch,
+      flow,
       formData,
       uiSchema,
       changeKey,
@@ -465,6 +491,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       merge,
       deleteField,
       change,
+      unitedSchema?.formMode,
     ])
     const globalTheme: Theme = theme
 
