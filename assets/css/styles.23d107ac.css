@@ -15806,6 +15806,10 @@ textarea.ant-pagination-options-quick-jumper input {
 .drip-form_objectContainer--collapse>div>div {
   background-color: #eff6ff;
 }
+.drip-form_objectContainerFlex {
+  display: flex;
+  flex-flow: row wrap;
+}
 
 .array-item--action {
   display: flex;
