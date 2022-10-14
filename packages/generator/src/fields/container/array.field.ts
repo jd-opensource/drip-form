@@ -146,6 +146,26 @@ const config: Field = {
         fieldKey: 'hasConfirm',
       },
       {
+        type: 'string',
+        title: '删除按钮',
+        default: 'hover',
+        ui: {
+          type: 'radio',
+          theme: 'antd',
+          options: [
+            {
+              label: '一直展示',
+              value: 'always',
+            },
+            {
+              label: '鼠标hover展示',
+              value: 'hover',
+            },
+          ],
+        },
+        fieldKey: 'showDeleteIcon',
+      },
+      {
         type: 'object',
         title: '二次确认配置',
         ui: {
