@@ -71,6 +71,7 @@ const SortableItem: FC<
     },
     // 是否可以拖拽排序
     canDrag,
+    showDeleteIcon = 'hover',
   } = uiProp
   const Popconfirm = uiComponents[theme]?.Popconfirm
 
@@ -117,11 +118,19 @@ const SortableItem: FC<
                   okText={confirm.okText || '确定'}
                   cancelText={confirm.cancelText || '取消'}
                 >
-                  <Remove className="array-item--remove" />
+                  <Remove
+                    className={cx({
+                      'array-item--remove': showDeleteIcon === 'always',
+                      'array-item--removehover': showDeleteIcon === 'hover',
+                    })}
+                  />
                 </Popconfirm>
               ) : (
                 <Remove
-                  className="array-item--remove"
+                  className={cx({
+                    'array-item--remove': showDeleteIcon === 'always',
+                    'array-item--removehover': showDeleteIcon === 'hover',
+                  })}
                   onClick={deltItem.bind(this, index)}
                 />
               ))}
