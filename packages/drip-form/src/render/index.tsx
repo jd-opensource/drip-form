@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-10 16:04:08
+ * @Last Modified time: 2022-10-14 13:45:37
  */
 import React from 'react'
 import { handleMargin } from '@jdfed/utils'
@@ -147,7 +147,7 @@ const Render = ({
       type === 'object' && properties[item]?.mode === 'collapse'
         ? { marginBottom: 20 }
         : {},
-      isRoot ? { width: '100%', ...globalContainerStyle } : {},
+      isRoot ? { width: '100%', ...globalContainerStyle } : { width: '100%' },
       properties[item]?.containerStyle || {}
     )
     handleMargin(containerStyle)

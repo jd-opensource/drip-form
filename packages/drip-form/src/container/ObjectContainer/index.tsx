@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-08-14 08:56:53
+ * @Last Modified time: 2022-10-14 13:52:57
  */
 import React, { useMemo, memo, useEffect } from 'react'
 import { useTitle } from '@jdfed/hooks'
@@ -110,6 +110,60 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
       ReactTooltip.rebuild()
     })
 
+    const childMemo = useMemo(() => {
+      return (
+        <div
+          className={cx(
+            {
+              'drip-form_objectContainer':
+                formMode === 'generator' && !isCollapse,
+            },
+            'drip-form_objectContainerFlex'
+          )}
+        >
+          {renderCoreFn({
+            uiComponents,
+            dataSchema,
+            uiSchema,
+            errors,
+            formData,
+            onQuery,
+            onValidate,
+            dispatch,
+            containerMap,
+            parentUiSchemaKey,
+            parentDataSchemaKey,
+            parentFormDataKey: fieldKey,
+            customComponents,
+            get,
+            getKey,
+            containerHoc,
+            arrayKey,
+          })}
+        </div>
+      )
+    }, [
+      arrayKey,
+      containerHoc,
+      containerMap,
+      customComponents,
+      dataSchema,
+      dispatch,
+      errors,
+      fieldKey,
+      formData,
+      formMode,
+      get,
+      getKey,
+      isCollapse,
+      onQuery,
+      onValidate,
+      parentDataSchemaKey,
+      parentUiSchemaKey,
+      uiComponents,
+      uiSchema,
+    ])
+
     return (
       <>
         {isCollapse ? (
@@ -142,53 +196,11 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
               forceRender={forceRender}
               {...panelProp}
             >
-              {renderCoreFn({
-                uiComponents,
-                dataSchema,
-                uiSchema,
-                errors,
-                formData,
-                onQuery,
-                onValidate,
-                dispatch,
-                containerMap,
-                parentUiSchemaKey,
-                parentDataSchemaKey,
-                parentFormDataKey: fieldKey,
-                customComponents,
-                get,
-                getKey,
-                containerHoc,
-                arrayKey,
-              })}
+              {childMemo}
             </Panel>
           </Collapse>
         ) : (
-          <div
-            className={cx({
-              'drip-form_objectContainer': formMode === 'generator',
-            })}
-          >
-            {renderCoreFn({
-              uiComponents,
-              dataSchema,
-              uiSchema,
-              errors,
-              formData,
-              onQuery,
-              onValidate,
-              dispatch,
-              containerMap,
-              parentUiSchemaKey,
-              parentDataSchemaKey,
-              parentFormDataKey: fieldKey,
-              customComponents,
-              get,
-              getKey,
-              containerHoc,
-              arrayKey,
-            })}
-          </div>
+          childMemo
         )}
       </>
     )
