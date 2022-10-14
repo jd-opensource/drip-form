@@ -15861,15 +15861,18 @@ textarea.ant-pagination-options-quick-jumper input {
   height: 32px;
   background-color: rgba(40,100,255,0.102);
 }
-.array-item--header:hover .array-item--remove {
+.array-item--header:hover .array-item--removehover {
   display: block;
 }
 .array-item--handle {
   display: flex;
   align-items: center;
 }
-.array-item--remove {
+.array-item--removehover {
   display: none;
+}
+.array-item--remove {
+  diplay: block;
 }
 .array-item--case {
   padding: 20px 20px 0;
