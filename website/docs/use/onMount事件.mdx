@@ -1,0 +1,16 @@
+---
+id: onMount
+title: onMount 事件
+---
+
+onMount是在`DripForm` componentDidMount的时候执行的回调函数
+
+```ts
+onMount?: (ref: MutableRefObject<DripFormRefType>) => void
+```
+
+```jsx
+<DripForm unitedSchema={unitedSchema} uiComponents={uiComponents} onMount={(ref)=>{
+        console.log(ref)
+      }}/>
+```

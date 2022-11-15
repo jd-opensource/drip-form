@@ -1,4 +1,8 @@
-import type { ElementType, Dispatch as DispatchR } from 'react'
+import type {
+  ElementType,
+  Dispatch as DispatchR,
+  MutableRefObject,
+} from 'react'
 import type { UnitedSchema, Action, Map, Get, Theme } from '@jdfed/utils'
 import type {
   Set,
@@ -94,39 +98,6 @@ export type DripFormEventType = {
 export type DripFormEventFuncType = (event: DripFormEventType) => any
 
 /**
- * 供DripFormContainer和DripForm使用的通用Props
- */
-export type DripFormProps = {
-  // 自定义Ajv插件
-  plugins?: Array<Plugin<Options>> | Plugin<Options>
-  unitedSchema: UnitedSchema
-  // 表单数据
-  formData?: Map
-  uiComponents: UiComponents
-  customComponents?: CustomComponents
-  customFunc?: Record<string, CustomFunc | JSX.Element>
-  control?: ControlFuc
-  onQuery?: FuncType
-  // 同 option.reload
-  reload?: boolean
-  onValidate?: OnValidate
-  // 首轮外渲染时都会触发对formData的解析
-  parse?: ParseFunc
-  // 每次渲染完成时都会触发对formData的转化，转化在校验后执行
-  transform?: TransformFunc
-  // 允许入参高阶组件，针对renderCoreFn中的Container进行包裹，便于执行拖拽等操作
-  containerHoc?: ContainerHoc
-  onSubmit?: FooterBtnFuncType
-  onCancel?: FooterBtnFuncType
-  ajvOptions?: Options
-  options?: GlobalOptions
-  // 公共事件回调机制
-  onEvent?: DripFormEventFuncType
-  // 透传到每个组件的全局数据
-  globalData?: Record<string, unknown>
-}
-
-/**
  * 供DripForm/index.tsx使用的组件入参
  */
 export type DripFormRenderProps = {
@@ -168,4 +139,38 @@ export type DripFormRefType = {
     // 添加表单项
     addField: AddField
   }
+}
+
+/**
+ * 供DripFormContainer和DripForm使用的通用Props
+ */
+export type DripFormProps = {
+  // 自定义Ajv插件
+  plugins?: Array<Plugin<Options>> | Plugin<Options>
+  unitedSchema: UnitedSchema
+  // 表单数据
+  formData?: Map
+  uiComponents: UiComponents
+  customComponents?: CustomComponents
+  customFunc?: Record<string, CustomFunc | JSX.Element>
+  control?: ControlFuc
+  onQuery?: FuncType
+  // 同 option.reload
+  reload?: boolean
+  onValidate?: OnValidate
+  // 首轮外渲染时都会触发对formData的解析
+  parse?: ParseFunc
+  // 每次渲染完成时都会触发对formData的转化，转化在校验后执行
+  transform?: TransformFunc
+  // 允许入参高阶组件，针对renderCoreFn中的Container进行包裹，便于执行拖拽等操作
+  containerHoc?: ContainerHoc
+  onSubmit?: FooterBtnFuncType
+  onMount?: (ref: MutableRefObject<DripFormRefType>) => void
+  onCancel?: FooterBtnFuncType
+  ajvOptions?: Options
+  options?: GlobalOptions
+  // 公共事件回调机制
+  onEvent?: DripFormEventFuncType
+  // 透传到每个组件的全局数据
+  globalData?: Record<string, unknown>
 }
