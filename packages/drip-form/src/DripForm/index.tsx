@@ -71,9 +71,11 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       options,
       onEvent,
       globalData,
+      onMount,
     },
     ref
   ) => {
+    const onMountRef = useRef(onMount)
     // 全局配置
     const globalOptions = useMemo(
       () => ({
@@ -362,9 +364,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       [onEvent]
     )
 
-    // 向外抛出表单数据
-    useImperativeHandle<DripFormRefType, DripFormRefType>(
-      ref,
+    const refReturn = useMemo(
       () => ({
         errors,
         checking,
@@ -402,6 +402,17 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         submit,
         transform,
       ]
+    )
+
+    const formRef = useRef(refReturn)
+
+    formRef.current = refReturn
+
+    // 向外抛出表单数据
+    useImperativeHandle<DripFormRefType, DripFormRefType>(
+      ref,
+      () => refReturn,
+      [refReturn]
     )
 
     useEffect(() => {
@@ -503,6 +514,12 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       }),
       [fireEvent, globalFormDataStoreKey, globalData]
     )
+
+    useEffect(() => {
+      if (onMountRef.current) {
+        onMountRef.current(formRef)
+      }
+    }, [])
 
     return (
       <globalOptionsContext.Provider value={globalOptions}>

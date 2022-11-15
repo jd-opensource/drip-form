@@ -26,6 +26,7 @@ module.exports = {
         'use/parse',
         'use/transform',
         'use/onEvent',
+        'use/onMount',
       ],
     },
     {
