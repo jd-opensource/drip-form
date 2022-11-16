@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-12 15:53:26
+ * @Last Modified time: 2022-11-16 13:55:24
  */
 import React, {
   forwardRef,
@@ -406,7 +406,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     const formRef = useRef(refReturn)
 
-    formRef.current = refReturn
+    useEffect(() => {
+      formRef.current = refReturn
+    }, [refReturn])
 
     // 向外抛出表单数据
     useImperativeHandle<DripFormRefType, DripFormRefType>(
@@ -439,6 +441,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             get,
             set,
             merge,
+            errors,
             deleteField,
           })
         } catch (error) {
@@ -466,6 +469,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
               set,
               merge,
               deleteField,
+              errors,
             })
           }
         } catch (error) {
@@ -502,6 +506,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       merge,
       deleteField,
       change,
+      errors,
       unitedSchema?.formMode,
     ])
     const globalTheme: Theme = theme
