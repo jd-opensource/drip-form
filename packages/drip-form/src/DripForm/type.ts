@@ -55,6 +55,7 @@ export type ControlFuc = ({
   get,
   set,
   deleteField,
+  errors,
 }: {
   uiSchema: Map
   dataSchema: Map
@@ -66,6 +67,7 @@ export type ControlFuc = ({
   set: Set
   merge: Merge
   deleteField: DeleteField
+  errors: Map
 }) => void
 
 export type CustomFunc = (
