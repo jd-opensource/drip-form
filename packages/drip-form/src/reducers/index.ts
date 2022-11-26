@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 15:43:02
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-13 15:02:43
+ * @Last Modified time: 2022-11-24 17:33:46
  */
 import { createContext } from 'react'
 import {
@@ -16,12 +16,13 @@ import {
 import addField from './addField'
 import deleteField from './deleteField'
 import { upgradeTips, toArray } from '@jdfed/utils'
-import type { Action, State, SetErrType } from '@jdfed/utils'
+import type { Action, State, SetErrType, FetchApi } from '@jdfed/utils'
 import { DripFormEventFuncType } from '../DripForm/type'
 
 export const FormDataContext = createContext<{
   globalFormDataStoreKey: string
   fireEvent?: DripFormEventFuncType
+  fetchApi?: FetchApi
   globalData?: Record<string, unknown>
 }>({
   globalFormDataStoreKey: '',

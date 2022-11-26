@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-11-16 13:55:24
+ * @Last Modified time: 2022-11-26 18:49:03
  */
 import React, {
   forwardRef,
@@ -27,6 +27,8 @@ import {
   randomString,
   parseFlow,
   setDeepProp,
+  isEqual,
+  fetchFn,
 } from '@jdfed/utils'
 import {
   useValidate,
@@ -72,10 +74,12 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       onEvent,
       globalData,
       onMount,
+      fetchApi,
     },
     ref
   ) => {
     const onMountRef = useRef(onMount)
+    const fetchApiRef = useRef(fetchApi)
     // 全局配置
     const globalOptions = useMemo(
       () => ({
@@ -427,6 +431,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       })
     }, [dataSchema, formData, validateDebounce, dispatch, visibleFieldKey, ajv])
 
+    const changeKeyData = get(changeKey).data
+    const preChangeData = usePrevious(changeKeyData)
+
     // 最高等级 表单联动控制逻辑
     useEffect(() => {
       if (control) {
@@ -481,12 +488,16 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       if (flow && unitedSchema?.formMode !== 'generator') {
         try {
           const flowFn = parseFlow(flow)
-          new Function('props', flowFn)({
-            get,
-            set,
-            merge,
-            setDeepProp,
-          })
+          // 表单数据未变化，过滤
+          if (!isEqual(get(changeKey).data, preChangeData)) {
+            new Function('props', flowFn)({
+              get,
+              set,
+              merge,
+              setDeepProp,
+              changeKey,
+            })
+          }
         } catch (error) {
           console.error('flow联动函数配置错误，请确认')
           console.warn(error)
@@ -508,6 +519,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       change,
       errors,
       unitedSchema?.formMode,
+      preChangeData,
     ])
     const globalTheme: Theme = theme
 
@@ -515,6 +527,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       () => ({
         globalFormDataStoreKey,
         fireEvent,
+        fetchApi: fetchApiRef.current || fetchFn,
         ...(globalData ? { globalData } : null),
       }),
       [fireEvent, globalFormDataStoreKey, globalData]

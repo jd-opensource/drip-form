@@ -4,11 +4,11 @@
  * @Author: jiangxiaowei
  * @Date: 2022-07-24 13:14:39
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-12 16:56:26
+ * @Last Modified time: 2022-11-23 16:34:11
  */
 import React, { memo, useMemo } from 'react'
 import { useRecoilState } from 'recoil'
-import { flowSchemaSelector } from '@generator/store'
+import { flowSchemaAtom } from '@generator/store'
 import { Button, Collapse, Space } from 'antd'
 import styles from './index.module.css'
 import type { SetEffect } from '@jdfed/utils'
@@ -25,7 +25,7 @@ import type { OperatorType } from '@generator/utils/flow'
 const { Panel } = Collapse
 
 const ControlFlow = () => {
-  const [flowSchema, setFlowSchema] = useRecoilState(flowSchemaSelector)
+  const [flowSchema, setFlowSchema] = useRecoilState(flowSchemaAtom)
 
   const {
     addControlFlow,
@@ -121,21 +121,23 @@ const ControlFlow = () => {
                                   })
                                 }}
                               />
-                              <SetValueField
-                                disabled={!condintion.fieldKey1}
-                                depencyKey={condintion.fieldKey1}
-                                value={condintion.value2}
-                                mode="compare"
-                                onChange={(value) => {
-                                  setFlowSchema((oldFlowSchema) => {
-                                    return produce(oldFlowSchema, (draft) => {
-                                      draft.actions[index].condintion[
-                                        condintionIndex
-                                      ].value2 = value
+                              {condintion.operator != 'change' && (
+                                <SetValueField
+                                  disabled={!condintion.fieldKey1}
+                                  depencyKey={condintion.fieldKey1}
+                                  value={condintion.value2}
+                                  mode="compare"
+                                  onChange={(value) => {
+                                    setFlowSchema((oldFlowSchema) => {
+                                      return produce(oldFlowSchema, (draft) => {
+                                        draft.actions[index].condintion[
+                                          condintionIndex
+                                        ].value2 = value
+                                      })
                                     })
-                                  })
-                                }}
-                              />
+                                  }}
+                                />
+                              )}
                             </Space>
                             <Space>
                               <DeleteIcon

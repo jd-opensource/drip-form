@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-07-11 15:20:24
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-08-12 13:34:05
+ * @Last Modified time: 2022-11-24 17:15:47
  */
 import { atom, selector, selectorFamily, atomFamily } from 'recoil'
 import { generateReg } from '@jdfed/utils'
@@ -16,20 +16,15 @@ export const controlVisibleAtom = atom<boolean>({
   default: false,
 })
 
-export const flowSchemaAtom = atom<Flow | null>({
-  key: 'flowSchemaAtom',
-  default: null,
-})
-
 // 联动配置schema
-export const flowSchemaSelector = selector<Flow>({
-  key: 'flowSchemaSelector',
-  get: ({ get }) => {
-    return get(flowSchemaAtom) || get(schemaAtom)?.ui?.flow || {}
-  },
-  set: ({ set }, newValue) => {
-    set(flowSchemaAtom, newValue)
-  },
+export const flowSchemaAtom = atom<Flow>({
+  key: 'flowSchemaAtom',
+  default: selector<Flow>({
+    key: 'flowSchemaAtom/default',
+    get: ({ get }) => {
+      return get(schemaAtom)?.ui?.flow || {}
+    },
+  }),
 })
 
 type ComponentTreeData = Array<
@@ -75,14 +70,32 @@ export const componentsFilterData = atomFamily<ComponentTreeData, string>({
   }),
 })
 
+type Options = Array<{ label: string; value: string }>
+
 // 比较操作符 根据比较值1动态更改比较操作符
 export const operatorOptionsAF = atomFamily<
-  Array<{ label: string; value: string }>,
+  Array<{ label: string; value: string; options?: Options }>,
   OperatorType
 >({
   key: 'operatorOptions',
   default: (dataType) => {
     // TODO dataType可能为混合形式，比如图片组件为['string','array']
-    return operatorMap[dataType || 'string']
+    return [
+      {
+        label: '比较操作符',
+        value: '比较操作符',
+        options: operatorMap[dataType || 'string'],
+      },
+      {
+        label: '数据变化',
+        value: '数据变化',
+        options: [
+          {
+            label: '表单数据变化时',
+            value: 'change',
+          },
+        ],
+      },
+    ]
   },
 })

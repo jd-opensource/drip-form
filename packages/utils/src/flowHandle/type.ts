@@ -19,6 +19,8 @@ export type Operator =
   | BooleanOperator
   | ObjectOperator
   | ArrayOperator
+  // 数据变化时
+  | 'change'
   | ''
 
 // 条件逻辑配置字段

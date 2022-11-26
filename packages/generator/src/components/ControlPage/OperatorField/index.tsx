@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-07-24 09:37:51
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-07-24 09:59:14
+ * @Last Modified time: 2022-11-23 16:45:39
  */
 import React, { memo, FC } from 'react'
 import { Select, SelectProps } from 'antd'
@@ -28,7 +28,7 @@ const OperatorField: FC<
       disabled={!newFieldKey1}
       // 根据fieldKey1动态设置operations
       options={operatorOptions}
-      style={{ width: 100 }}
+      style={{ width: 160 }}
       value={value}
       {...props}
     ></Select>
