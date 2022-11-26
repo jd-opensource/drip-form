@@ -7,7 +7,7 @@
  * @Last Modified time: 2022-08-12 14:29:10
  */
 import { useRecoilCallback } from 'recoil'
-import { flowSchemaSelector } from '@generator/store'
+import { flowSchemaAtom } from '@generator/store'
 import { produce } from 'immer'
 import type { ControlFlowAction, SetEffect, Condintion } from '@jdfed/utils'
 
@@ -50,7 +50,7 @@ const useFlow = (): {
   const addControlFlow = useRecoilCallback(
     ({ set }) =>
       () => {
-        set(flowSchemaSelector, (oldFlowSchema) => {
+        set(flowSchemaAtom, (oldFlowSchema) => {
           return produce(oldFlowSchema, (draft) => {
             if (!draft || !draft.actions) {
               draft = {
@@ -73,7 +73,7 @@ const useFlow = (): {
   const deleteControlFlow = useRecoilCallback(
     ({ set }) =>
       (index: number) => {
-        set(flowSchemaSelector, (oldFlowSchema) => {
+        set(flowSchemaAtom, (oldFlowSchema) => {
           return produce(oldFlowSchema, (draft) => {
             if (draft) {
               draft.actions.splice(index, 1)
@@ -95,7 +95,7 @@ const useFlow = (): {
     ],
     void
   >(({ set }) => ({ actionIndex, condintionIndex, logicOperator }) => {
-    set(flowSchemaSelector, (oldFlowSchema) => {
+    set(flowSchemaAtom, (oldFlowSchema) => {
       return produce(oldFlowSchema, (draft) => {
         if (draft) {
           draft.actions[actionIndex].condintion[condintionIndex].logicOperator =
@@ -112,7 +112,7 @@ const useFlow = (): {
     [{ actionIndex: number; condintionIndex: number }],
     void
   >(({ set }) => ({ actionIndex, condintionIndex }) => {
-    set(flowSchemaSelector, (oldFlowSchema) => {
+    set(flowSchemaAtom, (oldFlowSchema) => {
       return produce(oldFlowSchema, (draft) => {
         if (draft) {
           // 点击删除清空最后一个条件
@@ -133,7 +133,7 @@ const useFlow = (): {
   const addEffect = useRecoilCallback<[actionIndex: number], void>(
     ({ set }) =>
       (actionIndex) => {
-        set(flowSchemaSelector, (oldFlowSchema) => {
+        set(flowSchemaAtom, (oldFlowSchema) => {
           return produce(oldFlowSchema, (draft) => {
             if (draft) {
               draft.actions[actionIndex].effect.push(initEffect)
@@ -148,7 +148,7 @@ const useFlow = (): {
     [{ actionIndex: number; effectIndex: number }],
     void
   >(({ set }) => ({ actionIndex, effectIndex }) => {
-    set(flowSchemaSelector, (oldFlowSchema) => {
+    set(flowSchemaAtom, (oldFlowSchema) => {
       return produce(oldFlowSchema, (draft) => {
         if (draft) {
           draft.actions[actionIndex].effect.splice(effectIndex, 1)

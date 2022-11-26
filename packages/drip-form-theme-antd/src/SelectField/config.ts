@@ -1,3 +1,4 @@
+import { queryCofnig } from '../global'
 /**
  * 下拉选择器
  */
@@ -5,13 +6,17 @@ const config = {
   icon: 'iconfont icon-select',
   title: '选择器',
   unitedSchema: {
-    type: ['string', 'number', 'array'],
+    type: 'string',
     title: '选择器',
     ui: {
       type: 'select',
       theme: 'antd',
       style: { width: 120 },
-      options: [],
+      queryConfig: {
+        optionsType: '1',
+        options: [],
+        setPath: 'options',
+      },
     },
   },
   propertyConfig: {
@@ -81,38 +86,7 @@ const config = {
           allowClear: true,
         },
       },
-      {
-        fieldKey: 'options',
-        type: 'array',
-        title: '选项',
-        default: [],
-        ui: { type: 'array' },
-        items: {
-          type: 'object',
-          title: '',
-          ui: { type: 'object', showTitle: false },
-          schema: [
-            {
-              type: 'string',
-              fieldKey: 'label',
-              title: '选项名',
-              ui: {
-                type: 'text',
-                placeholder: '选项',
-              },
-            },
-            {
-              type: 'string',
-              fieldKey: 'value',
-              title: '选项值',
-              ui: {
-                type: 'text',
-                placeholder: '值',
-              },
-            },
-          ],
-        },
-      },
+      ...queryCofnig,
     ],
   },
 }

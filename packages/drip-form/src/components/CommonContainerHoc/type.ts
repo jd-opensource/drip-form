@@ -3,6 +3,7 @@ import type { Dispatch, NamedExoticComponent, ComponentType } from 'react'
 import type { Action } from '@jdfed/utils'
 import type { Theme, Description, TitleUi, ContainerStyle } from '@jdfed/utils'
 import type { UiComponents } from '../../DripForm/type'
+import type { GetKey } from '@jdfed/hooks'
 
 export type CommonContainer = {
   titleUi: TitleUi
@@ -22,6 +23,7 @@ export type CommonContainer = {
   uiProp: Record<string, unknown>
   type: string
   customComponents: Record<string, ElementType>
+  getKey: GetKey
 }
 
 export type CommonContainerProps = {

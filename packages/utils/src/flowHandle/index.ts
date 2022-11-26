@@ -3,12 +3,12 @@
  * @Author: jiangxiaowei
  * @Date: 2022-07-12 15:13:44
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-11 13:42:07
+ * @Last Modified time: 2022-11-23 23:49:26
  */
 import stringify from 'js-stringify'
 import type { Flow, ControlFlowAction } from './type'
 
-const commonStr = 'const {get,set,merge,setDeepProp}=props;'
+const commonStr = 'const {get,set,merge,setDeepProp,changeKey}=props;'
 
 const getFileKeyToString = (fieldKey: string) => {
   const [newFieldKey, type, property] = fieldKey.trim().split(' ')
@@ -39,13 +39,18 @@ const parseControlFlow = (
 
     // 需要前面加.的操作符
     const isdotOperator = ['includes', 'in'].includes(operator)
-    condintionStr += `(${getFileKeyToString(condintion.fieldKey1)}${
-      isdotOperator ? '?.' : ''
-    }${operator}${
-      ['true', 'false'].includes(condintion.operator)
-        ? condintion.operator
-        : `${stringify(condintion.value2)}`
-    })${
+    // change是特殊的判断
+    const operatorStr =
+      operator === 'change'
+        ? `('${condintion.fieldKey1.trim().split(' ').shift()}'===changeKey)`
+        : `(${getFileKeyToString(condintion.fieldKey1)}${
+            isdotOperator ? '?.' : ''
+          }${operator}${
+            ['true', 'false'].includes(condintion.operator)
+              ? condintion.operator
+              : `${stringify(condintion.value2)}`
+          })`
+    condintionStr += `${operatorStr}${
       condintion.logicOperator && index != condintions.length - 1
         ? condintion.logicOperator
         : ''
@@ -59,13 +64,20 @@ const parseControlFlow = (
         `set('${fieldKey}','${subType}',${
           property
             ? `(oldValue)=>{
-          setDeepProp(['${property.split('.')}'],oldValue,${
+          ${
+            property == 'queryConfig.refreshId'
+              ? 'let newRefreshId=oldValue?.queryConfig?.refreshId||0;newRefreshId++;'
+              : ''
+          }
+          setDeepProp(${stringify(property.split('.'))},oldValue,${
                 property === 'vcontrol'
                   ? stringify(
                       `const {get}=props;return ${
                         effect.value ? condintionStr : `!(${condintionStr})`
                       }`
                     )
+                  : property == 'queryConfig.refreshId'
+                  ? 'newRefreshId'
                   : stringify(effect.value)
               })
       }`

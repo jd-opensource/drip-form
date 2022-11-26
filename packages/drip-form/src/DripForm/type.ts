@@ -3,7 +3,14 @@ import type {
   Dispatch as DispatchR,
   MutableRefObject,
 } from 'react'
-import type { UnitedSchema, Action, Map, Get, Theme } from '@jdfed/utils'
+import type {
+  UnitedSchema,
+  Action,
+  Map,
+  Get,
+  Theme,
+  FetchApi,
+} from '@jdfed/utils'
 import type {
   Set,
   Merge,
@@ -175,4 +182,6 @@ export type DripFormProps = {
   onEvent?: DripFormEventFuncType
   // 透传到每个组件的全局数据
   globalData?: Record<string, unknown>
+  // 内部接口请求api
+  fetchApi?: FetchApi
 }

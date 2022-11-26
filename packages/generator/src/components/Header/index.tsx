@@ -74,11 +74,17 @@ const Header = () => {
     })
   }
 
-  const setControl = useCallback(() => {
-    setControlVisible(true)
-    // 避免修改表单fieldKey，导致typeMap非最新
-    setVersion((version) => version + 1)
-  }, [setControlVisible, setVersion])
+  const setControl = useRecoilCallback(
+    ({ snapshot, set }) =>
+      async () => {
+        const unitedSchema = await snapshot.getPromise(schemaAtom)
+        set(flowSchemaAtom, unitedSchema?.ui?.flow || {})
+        setControlVisible(true)
+        // 避免修改表单fieldKey，导致typeMap非最新
+        setVersion((version) => version + 1)
+      },
+    [setControlVisible, setVersion]
+  )
 
   const editJson = () => {
     setFold(true)
