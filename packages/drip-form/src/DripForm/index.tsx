@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-11-26 18:49:03
+ * @Last Modified time: 2022-12-09 12:18:07
  */
 import React, {
   forwardRef,
@@ -274,11 +274,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     } = uiSchema as UiSchema & {
       change: string | ControlFuc
     }
-
-    useEffect(() => {
-      // 当前值为暂时获取其他表单数据，后续会更新获取方法
-      ;(window as any)[globalFormDataStoreKey] = formData
-    }, [globalFormDataStoreKey, formData])
+    // 当前值为暂时获取其他表单数据，后续会更新获取方法
+    ;(window as any)[globalFormDataStoreKey] = formData
 
     // 实时校验
     const validateDebounce = useValidate(validate)
