@@ -19,6 +19,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import generatorTheme from '@generator/components/GeneratorFormTheme'
 import type { SetType } from '@jdfed/hooks'
 import type { Map, UnitedSchema, UiSchema, Description } from '@jdfed/utils'
+import type { QueryConfig } from './type'
 
 const PropertyConfig = () => {
   const {
@@ -55,6 +56,9 @@ const PropertyConfig = () => {
       description: uiSchema.description || {},
       ...(type === 'root' && { footer: {} }),
       validateTime: dataSchema?.validateTime || 'change',
+      ...((uiSchema?.queryConfig as QueryConfig)?.setPath == 'options'
+        ? { options: (uiSchema?.queryConfig as QueryConfig)?.options || [] }
+        : null),
       ui: {
         ...uiSchema,
         ...(!!dataSchema.default && { default: dataSchema.default }),
