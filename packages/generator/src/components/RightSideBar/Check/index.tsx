@@ -4,7 +4,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-16 11:32:22
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-08-16 14:32:57
+ * @Last Modified time: 2022-12-09 14:33:09
  */
 import React, { useMemo, memo, useCallback } from 'react'
 import {
@@ -17,6 +17,7 @@ import DripForm from '@jdfed/drip-form'
 import commonSchema from '../../../fields/common/checkConfig/Common'
 import typeMap from './type'
 import useRightSidebar from '../HeadlessComponents'
+import produce from 'immer'
 import type { Map, UnitedSchema } from '@jdfed/utils'
 
 const CheckConfig = (): JSX.Element => {
@@ -339,21 +340,7 @@ const CheckConfig = (): JSX.Element => {
 
   // viewport dataSchema配置转换成校验配置的数据
   const formData = useMemo(() => {
-    const formData = {}
-    // 设置required
-    if (
-      generatorContext.current?.get &&
-      parentKey !== undefined &&
-      selectedFieldKey
-    ) {
-      const required =
-        (generatorContext.current?.get(parentKey).dataSchema
-          .required as Array<string>) || []
-      // 判断当前选中的表单是否必填
-      if (required.includes(selectedFieldKey.split('.').pop() as string)) {
-        setDeepProp(['common', 'required'], formData, true)
-      }
-    }
+    let formData = {}
     // 遍历dataSchema配置的校验关键字并输出到formData
     Object.entries(dataSchema).map(([key, value]) => {
       // TODO @jiangxiaowei 针对嵌套做适配
@@ -370,6 +357,31 @@ const CheckConfig = (): JSX.Element => {
         setDeepProp(['errorMessage'], formData, value)
       }
     })
+    // 设置required
+    if (
+      generatorContext.current?.get &&
+      parentKey !== undefined &&
+      selectedFieldKey
+    ) {
+      const required =
+        (generatorContext.current?.get(parentKey).dataSchema
+          .required as Array<string>) || []
+      let requiredMsg = '必填'
+      try {
+        requiredMsg =
+          generatorContext.current?.get(parentKey).dataSchema?.errorMessage
+            ?.required[selectedFieldKey]
+      } catch (error) {
+        //do nothing
+      }
+      // 判断当前选中的表单是否必填
+      if (required.includes(selectedFieldKey.split('.').pop() as string)) {
+        formData = produce(formData, (draft: Map) => {
+          setDeepProp(['common', 'required'], draft, true)
+          setDeepProp(['errorMessage', 'required'], draft, requiredMsg)
+        })
+      }
+    }
     return formData
   }, [
     businessKeywords,
@@ -433,12 +445,13 @@ const CheckConfig = (): JSX.Element => {
                   // 如果当前变化的key是必填错误文案（errorMessage.required），则默认使用设置的错误文案，否则文案为必填
                   [requiredKey]: key.startsWith('errorMessage')
                     ? data || '必填'
-                    : '必填',
+                    : get('errorMessage.required').data || '必填',
                 },
               },
               required: newRequired,
             })
           } else {
+            // 关闭必填
             const index = oldRequired?.findIndex((item) => item === requiredKey)
             // 删除必填校验
             generatorContext.current?.set(parentKey, 'dataSchema', (draft) => {
