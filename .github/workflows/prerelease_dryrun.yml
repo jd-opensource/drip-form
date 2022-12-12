@@ -71,7 +71,7 @@ jobs:
       - name: 'lerna command forcePublish'
         if: ${{github.event.inputs.forcePublish=='true'}}
         env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version ${{github.event.inputs.version}} --force-publish --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}}
           # TODO 输出prerelease dryrun脚本
@@ -80,7 +80,7 @@ jobs:
       - name: 'lerna command'
         if: ${{github.event.inputs.forcePublish=='false'}}
         env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version ${{github.event.inputs.version}} --yes --conventional-commits --conventional-prerelease --force-git-tag --no-private --no-changelog --amend --preid ${{github.event.inputs.preid||'alpha'}} ${{github.event.inputs.bump}}
           # TODO 输出prerelease dryrun脚本

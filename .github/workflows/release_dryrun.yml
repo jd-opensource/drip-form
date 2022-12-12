@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: dev
-          token: ${{secrets.GH_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.0
@@ -62,7 +62,7 @@ jobs:
       - name: 'lerna command'
         if: ${{github.event.inputs.forcePublish=='true'}}
         env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version --yes --conventional-commits --force-publish --force-git-tag --create-release github --no-private --amend
           cat lerna.json
@@ -71,7 +71,7 @@ jobs:
       - name: 'lerna command'
         if: ${{github.event.inputs.forcePublish=='false'}}
         env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version --yes --conventional-commits --force-git-tag --create-release github --no-private --amend
           cat lerna.json
