@@ -28,11 +28,14 @@ export type GlobalOptions = Partial<{
         consoleType: 'log' | 'warn' | 'error'
         value: string | UndefinedComponentFn
       }
+  // ajv校验防抖延迟时间 单位：ms（避免数据频繁变化多次调用ajv校验函数） 默认不延迟 注意：大部分情况无需设置延迟
+  ajvValidateDelay: number
 }>
 
 // 默认全局配置
 export const defaultGlobalOptions: GlobalOptions = {
   reload: true,
+  ajvValidateDelay: 0,
   undefinedComponent: {
     type: 'tips',
     value: ({ theme, type, fieldKey }) => {
