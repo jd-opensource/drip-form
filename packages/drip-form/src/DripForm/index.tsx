@@ -17,7 +17,6 @@ import produce from 'immer'
 import { useImmerReducer } from 'use-immer'
 import './index.styl'
 // 配置与工具
-import validate from '../validate'
 import formDataReducer, { FormDataContext } from '../reducers'
 import renderCoreFn from '../render'
 import Tooltip from 'react-tooltip'
@@ -38,6 +37,7 @@ import {
   RequiredModeContext,
   globalOptionsContext,
   defaultGlobalOptions,
+  validate,
 } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
@@ -278,7 +278,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     ;(window as any)[globalFormDataStoreKey] = formData
 
     // 实时校验
-    const validateDebounce = useValidate(validate)
+    const validateDebounce = useValidate(globalOptions.ajvValidateDelay)
 
     // dispatch setFormData、setUiSchema、setDataSchema 语法糖
     const { get, set, deleteField, addField, merge } = useSchema({
