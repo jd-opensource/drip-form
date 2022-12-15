@@ -5,7 +5,7 @@
  * @Author: jiangxiaowei
  * @Date: 2022-01-18 14:04:45
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-11-26 19:07:33
+ * @Last Modified time: 2022-12-15 13:54:02
  */
 import cx from 'classnames'
 import React, {
@@ -92,7 +92,11 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
     //替换data中部分参数
     useEffect(() => {
       ;(async () => {
-        if (fetchApi && queryConfig?.optionsType === '0') {
+        if (
+          fetchApi &&
+          queryConfig?.optionsType === '0' &&
+          formMode !== 'generator'
+        ) {
           try {
             const {
               // 重置请求
@@ -155,6 +159,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
       })()
     }, [
       queryConfig,
+      formMode,
       dispatch,
       fetchApi,
       fieldKey,
