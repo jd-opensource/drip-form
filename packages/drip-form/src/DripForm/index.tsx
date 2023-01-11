@@ -79,10 +79,13 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     ref
   ) => {
     const onMountRef = useRef(onMount)
+    const globalFormRef = useRef<DripFormRefType | null>(null)
+    onMountRef.current = onMount
     const fetchApiRef = useRef(fetchApi)
     // 全局配置
     const globalOptions = useMemo(
       () => ({
+        globalFormRef,
         ...defaultGlobalOptions,
         reload,
         ...options,
@@ -405,11 +408,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       ]
     )
 
-    const formRef = useRef(refReturn)
-
-    useEffect(() => {
-      formRef.current = refReturn
-    }, [refReturn])
+    globalFormRef.current = refReturn
 
     // 向外抛出表单数据
     useImperativeHandle<DripFormRefType, DripFormRefType>(
@@ -532,7 +531,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     useEffect(() => {
       if (onMountRef.current) {
-        onMountRef.current(formRef)
+        onMountRef.current(
+          globalFormRef as React.MutableRefObject<DripFormRefType>
+        )
       }
     }, [])
 
