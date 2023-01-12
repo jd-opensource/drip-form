@@ -152,7 +152,7 @@ const CheckConfig = (): JSX.Element => {
   // 校验配置schema
   const unitedSchema = useMemo<UnitedSchema>(() => {
     return {
-      validateTime: 'change',
+      showError: 'change',
       theme: 'antd',
       ui: {
         containerStyle: {
@@ -162,15 +162,16 @@ const CheckConfig = (): JSX.Element => {
       schema: !selectedFieldKey
         ? [
             {
-              fieldKey: 'validateTime',
+              fieldKey: 'showError',
               type: 'string',
-              title: '校验时机',
-              default: 'submit',
+              title: '错误展示策略',
+              default: 'change',
               ui: {
                 type: 'select',
                 options: [
-                  { label: '值变化时', value: 'change' },
-                  { label: '提交时', value: 'submit' },
+                  { label: '实时展示', value: 'change' },
+                  { label: '提交时展示', value: 'submit' },
+                  { label: '不展示', value: 'none' },
                 ],
               },
             },
@@ -345,7 +346,7 @@ const CheckConfig = (): JSX.Element => {
     Object.entries(dataSchema).map(([key, value]) => {
       // TODO @jiangxiaowei 针对嵌套做适配
       // TODO @jiangxiaowei 支持自定义转换
-      if (['validateTime', 'requiredMode'].includes(key)) {
+      if (['validateTime', 'showError', 'requiredMode'].includes(key)) {
         setDeepProp(key.split('.'), formData, value)
       } else if (key !== 'errorMessage') {
         setDeepProp(
@@ -398,7 +399,7 @@ const CheckConfig = (): JSX.Element => {
       const data = get(changeKey).data
       if (
         !selectedFieldKey &&
-        ['validateTime', 'requiredMode'].includes(changeKey)
+        ['validateTime', 'showError', 'requiredMode'].includes(changeKey)
       ) {
         generatorContext.current?.merge('', 'dataSchema', {
           [changeKey]: data,

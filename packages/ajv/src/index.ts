@@ -49,6 +49,7 @@ function registerAjv(options?: Options): Ajv {
   // 添加drip-form官方忽略关键字(添加customFormat是为了node校验支持旧版的语法)
   ajv.addVocabulary([
     'validateTime',
+    'showError',
     'requiredMode',
     '$container',
     // 用于绑定generator 切换的fieldKey

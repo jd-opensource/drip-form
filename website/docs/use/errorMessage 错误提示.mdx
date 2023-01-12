@@ -7,9 +7,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 
 drip-form 是实时校验的。不过可以通过配置`dataSchema`来控制是否展示错误信息
 
-`dataSchema`的`validateTime`字段为`change`时，将会展示表单错误信息在表单下方。
+`dataSchema`的`showError`字段为`change`时，将会展示表单错误信息在表单下方。
 
-不配置`validateTime`字段时，默认不展示错误信息
+`dataSchema`的`showError`字段为`submit`时，将会在提交时展示表单错误信息在表单下方，提交前不展示。
+
+`dataSchema`的`showError`字段为`none`时，将不会展示表单错误信息，可自行获取错误信息进行展示，参考文末提示。
+
+不配置`showError`字段时，默认实时展示错误信息
 
 ## 使用场景
 
@@ -19,7 +23,7 @@ drip-form 是实时校验的。不过可以通过配置`dataSchema`来控制是�
    {
    	"$schema": "http://json-schema.org/draft-07/schema#",
    	"type": "object",
-   	"validateTime": "change",
+   	"showError": "change",
    	"properties": {
    		"name": {
    			"title": "名字",
@@ -44,14 +48,12 @@ drip-form 是实时校验的。不过可以通过配置`dataSchema`来控制是�
 
 2. 表单提交才展示错误信息
 
-   1. 首先设置 dataSchem 的 validateTime 字段为`submit`
-
       ```json title="dataSchema.json"
       {
       	"$schema": "http://json-schema.org/draft-07/schema#",
       	"type": "object",
       	//highlight-next-line
-      	"validateTime": "submit",
+      	"showError": "submit",
       	"properties": {
       		"name": {
       			"title": "名字",
@@ -68,45 +70,28 @@ drip-form 是实时校验的。不过可以通过配置`dataSchema`来控制是�
       }
       ```
 
-   2. 点击提交按钮，使用`ref.current.dispatch`设置 validateTime 为 change
+3. 不展示错误信息
 
-      ```jsx
-      const Form = () => {
-      	const ref = useRef(null)
-      	const onSubmit = () => {
-      		//highlight-start
-      		const { dispatch } = ref.current
-      		// 点击的时候才展示错误信息
-      		dispatch({
-      			type: 'setValidate',
-      			action: {
-      				set: {
-      					validateTime: 'change',
-      				},
-      			},
-      		})
-      		//highlight-end
+
+      ```json title="dataSchema.json"
+      {
+      	"$schema": "http://json-schema.org/draft-07/schema#",
+      	"type": "object",
+      	//highlight-next-line
+      	"showError": "none",
+      	"properties": {
+      		"name": {
+      			"title": "名字",
+      			"type": "string",
+      			"transform": ["trim"]
+      		}
+      	},
+      	"required": ["name"],
+      	"errorMessage": {
+      		"required": {
+      			"name": "必填"
+      		}
       	}
-
-      	return (
-      		<>
-      			<DripForm
-      				ref={ref}
-      				dataSchema={dataSchemaMult}
-      				uiSchema={uiSchemaMult}
-      				uiComponents={{ 'drip-design': DripDesign }}
-      			/>
-      			<Button
-      				type="primary"
-      				className="button--submit"
-      				onClick={() => {
-      					onSubmit()
-      				}}
-      			>
-      				提交表单
-      			</Button>
-      		</>
-      	)
       }
       ```
 

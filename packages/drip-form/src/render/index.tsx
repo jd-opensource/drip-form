@@ -70,7 +70,9 @@ const Render = ({
     type: parentType = 'object',
   } = currentUiSchema
   // 表单是否在下方直接展示错误信息
-  const showError = dataSchema.validateTime === 'change'
+  const showError = dataSchema.showError
+    ? dataSchema.showError === 'change'
+    : dataSchema.validateTime === 'change'
   return (order || []).map((item: string, i: number) => {
     // 当前Field ui类型
     const type = properties[item].type
