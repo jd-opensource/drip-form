@@ -18,7 +18,7 @@ export const schemaAtom = atom<UnitedSchema>({
   key: 'unitedSchema',
   default: {
     theme: 'antd',
-    validateTime: 'change',
+    showError: 'change',
     type: 'object',
     schema: [],
   },

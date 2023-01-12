@@ -311,6 +311,12 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     // 提交表单
     const submit = useCallback<DripFormRefType['submit']>(() => {
+      const showError = get('').dataSchema.showError
+      if (showError === 'submit') {
+        merge('', 'dataSchema', {
+          showError: 'change',
+        })
+      }
       const onValidateResMap: Record<string, any> = {}
       Object.entries(onValidate).map(([key, value]) => {
         if (value.type === 'submit') {
@@ -348,7 +354,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         .then(() => {
           return submitReturn.current
         })
-    }, [dispatch, get, onValidate])
+    }, [dispatch, get, merge, onValidate])
 
     // 重置表单
     const reset = useCallback(() => {

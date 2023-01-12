@@ -56,6 +56,7 @@ const PropertyConfig = () => {
       description: uiSchema.description || {},
       ...(type === 'root' && { footer: {} }),
       validateTime: dataSchema?.validateTime || 'change',
+      showError: dataSchema?.showError || 'change',
       ...((uiSchema?.queryConfig as QueryConfig)?.setPath == 'options'
         ? { options: (uiSchema?.queryConfig as QueryConfig)?.options || [] }
         : null),
@@ -73,6 +74,7 @@ const PropertyConfig = () => {
     themeAndType,
     dataSchema.$fieldKey,
     dataSchema?.validateTime,
+    dataSchema?.showError,
     dataSchema.default,
     fieldKey,
     uiSchema,
@@ -181,6 +183,9 @@ const PropertyConfig = () => {
       let changeSchema = 'uiSchema'
       // 处理全局属性
       if (changeKey === 'validateTime') {
+        changeSchema = 'dataSchema'
+      }
+      if (changeKey === 'showError') {
         changeSchema = 'dataSchema'
       }
       // 更改表单fieldKey
@@ -384,7 +389,7 @@ const PropertyConfig = () => {
    */
   const unitedSchema = useMemo<UnitedSchema>(() => {
     return {
-      validateTime: 'change',
+      showError: 'change',
       theme: 'antd',
       ui: {
         ...(propertyConfigOptions.control && {
