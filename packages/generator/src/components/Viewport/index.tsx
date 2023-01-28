@@ -182,7 +182,11 @@ const Viewport = forwardRef<HTMLDivElement, Props>(
     }, [setThemeAndType, setSelectedFieldKey])
 
     return (
-      <div className={styles.viewport} onClick={clickFn}>
+      <div
+        id="drip-form-generator--viewport"
+        className={styles.viewport}
+        onClick={clickFn}
+      >
         <TitleHeader />
         <div className={styles.formstyle} ref={ref}>
           <DripFrom
