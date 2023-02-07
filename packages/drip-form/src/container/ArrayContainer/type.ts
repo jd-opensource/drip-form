@@ -24,6 +24,7 @@ export type ArrayProps = {
       okText: string
       cancelText: string
     }
+    showHeader?: boolean
     maxAddCount: number
     // 删除按钮如何展示 hover：鼠标hover之后展示删除按钮 always：一直展示
     showDeleteIcon?: 'hover' | 'always'
