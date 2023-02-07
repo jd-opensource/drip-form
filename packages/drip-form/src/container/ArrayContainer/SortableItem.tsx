@@ -71,6 +71,9 @@ const SortableItem: FC<
     },
     // 是否可以拖拽排序
     canDrag,
+    mode,
+    // 是否展示header
+    showHeader = true,
     showDeleteIcon = 'hover',
   } = uiProp
   const Popconfirm = uiComponents[theme]?.Popconfirm
@@ -96,50 +99,56 @@ const SortableItem: FC<
           'array-item--field_last-child': isAdd && index === array.length - 1,
         })}
       >
-        <div className="array-item--header">
-          {showNo ? (
-            <div className="array-item--number">
-              {serialText.beforeText}
-              {serialText.serialLang === 'CN'
-                ? number2Chinese(index + 1)
-                : index + 1}
-              {serialText.afterText}
-            </div>
-          ) : (
-            <div />
-          )}
-          <div className="array-item--handle">
-            {isAdd &&
-              !isDragging &&
-              (Popconfirm && hasConfirm ? (
-                <Popconfirm
-                  title={confirm.confirmTitle || '确定删除这一项？'}
-                  onConfirm={deltItem.bind(this, index)}
-                  okText={confirm.okText || '确定'}
-                  cancelText={confirm.cancelText || '取消'}
-                >
+        {mode === 'fixed' && !showHeader ? null : (
+          <div className="array-item--header">
+            {showNo ? (
+              <div className="array-item--number">
+                {serialText.beforeText}
+                {serialText.serialLang === 'CN'
+                  ? number2Chinese(index + 1)
+                  : index + 1}
+                {serialText.afterText}
+              </div>
+            ) : (
+              <div />
+            )}
+            <div className="array-item--handle">
+              {isAdd &&
+                !isDragging &&
+                (Popconfirm && hasConfirm ? (
+                  <Popconfirm
+                    title={confirm.confirmTitle || '确定删除这一项？'}
+                    onConfirm={deltItem.bind(this, index)}
+                    okText={confirm.okText || '确定'}
+                    cancelText={confirm.cancelText || '取消'}
+                  >
+                    <Remove
+                      className={cx({
+                        'array-item--remove': showDeleteIcon === 'always',
+                        'array-item--removehover': showDeleteIcon === 'hover',
+                      })}
+                    />
+                  </Popconfirm>
+                ) : (
                   <Remove
                     className={cx({
                       'array-item--remove': showDeleteIcon === 'always',
                       'array-item--removehover': showDeleteIcon === 'hover',
                     })}
+                    onClick={deltItem.bind(this, index)}
                   />
-                </Popconfirm>
-              ) : (
-                <Remove
-                  className={cx({
-                    'array-item--remove': showDeleteIcon === 'always',
-                    'array-item--removehover': showDeleteIcon === 'hover',
-                  })}
-                  onClick={deltItem.bind(this, index)}
-                />
-              ))}
-            {isAdd && canDrag && (
-              <Handle className="array-item--move" {...listeners} />
-            )}
+                ))}
+              {isAdd && canDrag && (
+                <Handle className="array-item--move" {...listeners} />
+              )}
+            </div>
           </div>
-        </div>
-        <div className="array-item--case">
+        )}
+        <div
+          className={cx({
+            'array-item--case': !(mode === 'fixed' && !showHeader),
+          })}
+        >
           {renderCoreFn({
             uiComponents,
             dataSchema,
