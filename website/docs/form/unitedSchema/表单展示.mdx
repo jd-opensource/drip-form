@@ -1,0 +1,355 @@
+---
+id: uiType
+title: 表单展示
+description: 如何配置表单的展示形式？
+---
+
+通过下面图片来了解`Drip Form`表单控件的组成部分
+
+![Drip Form表单控件组成](https://img13.360buyimg.com/imagetools/jfs/t1/8978/25/20797/43362/63b52c27F35db8f94/3cd9b7b2d68e1f13.png)
+
+表单展示可以分为几个部分：**标题**、**提示**、**表单组件**、**布局**
+
+:::tip
+`Drip Form`通过`ui`对象来描述表单提示信息、表单控件信息;
+
+通过`title`字段来描述表单标题
+:::
+
+上面组件使用 unitedSchema 协议描述如下：
+
+```tsx title=unitedSchema
+{
+  //最外层是对象类型
+  type:'object',
+  //数据变化时触发校验
+  validaTime:'change',
+  //全局默认使用antd主题
+  theme:'antd',
+  schema:[
+    {
+      //表单数据类型
+      type:'string',
+      //标题
+      //highlight-start
+      title:'姓名',
+      ui:{
+        //使用antd主题的text控件
+        type:'text',
+        //当前表单控件使用antd主题（若和全局使用的theme一致，则可省略）
+        theme:'antd',
+        //当前表单控件使用编辑模式
+        formMode:'edit'
+        //提示信息
+        description:[
+          {
+            type:'icon',
+            title:'这是姓名'
+          },
+          {
+            type:'text',
+            title:'填写姓名'
+          }
+        ],
+        //表单布局描述信息
+        containerStyle:{
+          width:'100%'
+        }
+      },
+      //highlight-end
+      //数据绑定
+      fieldKey:'name'
+    }
+  ]
+}
+```
+
+上面**JSON 高亮部分**描述了表单控件的标题、提示、表单控件类型、表单所使用的主题信息。
+
+## 常见配置
+
+### 表单组件主题（theme）
+
+> `theme`字段用来描述当前表单控件的主题。
+> :::tip
+> [uiComponents](../API/formProp/uiComponents)中导入的主题均可使用。
+> :::
+
+```tsx
+//导入drip form渲染核心
+import DripForm from '@jdfed/drip-form'
+//导入antd主题
+//highlight-next-line
+import antd from '@jdfed/drip-form-theme-antd'
+//导入表单配置文件
+import unitedSchema from './unitedSchema'
+//导入drip form样式
+import '@jdfed/drip-form/dist/index.css'
+//导入antd主题样式
+import '@jdfed/drip-form-theme-antd/dist/index.css'
+//导入antd样式
+import 'antd/dist/antd.css'
+
+function App() {
+  return (
+    <DripForm
+      // 表单配置文件
+      unitedSchema={unitedSchema}
+      // 导入组件
+      //highlight-next-line
+      uiComponents={{ antd }}
+      // 设置表单值
+      formData={{
+        checkbox: '1',
+        colorPicker: '#000000',
+        text: '1111',
+        number: 1,
+      }}
+    ></DripForm>
+  )
+}
+
+export default App
+```
+
+:::info
+`Drip Form`支持导入多个主题，并使用不同主题的不同表单控件。
+
+详细参考 [主题](../use/theme)
+:::
+
+### 表单组件类型（type）
+
+> `type`字段用来描述当前字段的表单控件类型。
+
+主题包含了多个表单控件，选定使用主题之后，需要确定使用的控件类型。
+
+以 antd 主题为例，antd 支持以下控件
+
+| type 类型   | 组件名     | 预览                                                                                                            |
+| ----------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| text        | 文本输入   | ![](https://storage.360buyimg.com/imgtools/765270b83b-8795ec80-4cf9-11ec-ba01-fb2536faa70c.png)                 |
+| number      | 数字输入   | ![](https://storage.360buyimg.com/imgtools/3993d64efc-85bf30b0-4cf9-11ec-ba01-fb2536faa70c.png)                 |
+| select      | 选择器     | ![](https://storage.360buyimg.com/imgtools/f936078b88-86a041e0-4cf9-11ec-ba01-fb2536faa70c.png)                 |
+| cascader    | 级联选择器 | ![](https://img13.360buyimg.com/imagetools/jfs/t1/44791/40/22719/45767/63b52aebF65baee06/3a41e889cd0b0478.png)  |
+| colorPicker | 颜色选择器 | ![](https://storage.360buyimg.com/imgtools/6e88859476-82b63670-4cf9-11ec-bf12-d7e468206312.png)                 |
+| datePicker  | 日期选择框 | ![](https://storage.360buyimg.com/imgtools/e0d437f1bc-83597b50-4cf9-11ec-bf12-d7e468206312.png)                 |
+| timePicker  | 时间选择框 | ![](https://storage.360buyimg.com/imgtools/735c0c2377-882ad980-4cf9-11ec-9620-6d9821f0161f.png)                 |
+| radio       | 单选框     | ![](https://storage.360buyimg.com/imgtools/a592d3f1d3-865b49a0-4cf9-11ec-9620-6d9821f0161f.png)                 |
+| checkbox    | 多选框     | ![](https://storage.360buyimg.com/imgtools/e9f2c83c4e-82939340-4cf9-11ec-89c8-f9e7ed0c7791.png)                 |
+| slider      | 滑动输入条 | ![](https://storage.360buyimg.com/imgtools/92dcc7c036-86e3b380-4cf9-11ec-ba01-fb2536faa70c.png)                 |
+| switch      | 开关       | ![](https://storage.360buyimg.com/imgtools/d16134741b-875e3ab0-4cf9-11ec-beba-01cc54c313fe.png)                 |
+| uploader    | 上传       | ![](https://storage.360buyimg.com/imgtools/ec45135acb-8990f930-4cf9-11ec-89c8-f9e7ed0c7791.png)                 |
+| transfer    | 穿梭框     | ![](https://img13.360buyimg.com/imagetools/jfs/t1/92236/15/33195/37185/63b52b34F688a3703/6a96c74443be57ec.png)  |
+| null        | 文本       | ![](https://storage.360buyimg.com/imgtools/57486b4111-857fddc0-4cf9-11ec-89c8-f9e7ed0c7791.png)                 |
+| array       | 数组容器   | ![](https://img13.360buyimg.com/imagetools/jfs/t1/222218/11/17781/43402/63b52b70F7f98b1a3/d632706cd102ac55.png) |
+| object      | 对象容器   | ![](https://img14.360buyimg.com/imagetools/jfs/t1/124111/35/28326/46020/63b52b8bF6c518492/3e1a293ba802805a.png) |
+
+### 标题（title）
+
+> `title`字段用来描述当前表单的标题
+
+`Drip Form`针对标题有多个配置项（查看高亮部分）
+
+```ts
+{
+  //最外层是对象类型
+  type:'object',
+  //数据变化时触发校验
+  validaTime:'change',
+  //全局默认使用antd主题
+  theme:'antd',
+  schema:[
+    {
+      //表单数据类型
+      type:'string',
+      //标题
+      //highlight-next-line
+      title:'姓名',
+      ui:{
+        //使用antd主题的text控件
+        type:'text',
+        //当前表单控件使用antd主题（若和全局使用的theme一致，则可省略）
+        theme:'antd',
+        //highlight-start
+        //标题配置
+        title: {
+          // 是否展示标题
+          showTitle: true,
+          // 必填是否展示*号
+          requiredIcon: false,
+          // 标题后面是否展示冒号
+          showColon: false,
+          // 标题宽度
+          width: 82,
+          // 标题位置 'left' | 'right' | 'bottom' | 'top'
+          placement: "left",
+          // 标题字号
+          fontSize: "12",
+          // 标题颜色
+          color: "#000000",
+          // 标题文字水平对齐方向 right ｜ left ｜ center
+          textAlign: "left",
+          // 标题文字垂直对齐方向 top ｜ center ｜ bottom
+          verticalAlign: "center"
+        },
+        //highlight-end
+        //提示信息
+        description:[
+          {
+            type:'icon',
+            title:'这是姓名'
+          },
+          {
+            type:'text',
+            title:'填写姓名'
+          }
+        ],
+        //表单布局描述信息
+        containerStyle:{
+          width:'100%'
+        }
+      },
+      //数据绑定
+      fieldKey:'name'
+    }
+  ]
+}
+
+```
+
+### 提示（description）
+
+> description字段描述表单提示信息
+
+提示在表单控件中分两种形式：
+
+- 下方文字直接展示
+
+  ```js
+  {
+    ui:{
+      description: {
+        type:"text",
+        title:"下方文字直接粘腻"
+      }
+    }
+  }
+  ```
+
+- icon按钮悬浮或点击展示（默认悬浮展示提示）
+
+  ```js
+  {
+    ui:{
+      description:{
+        type:'icon',
+        title:'按钮悬浮展示',
+        trigger:'hover'
+      }
+    }
+  }
+  ```
+
+<details>
+<summary>typescript</summary>
+
+```ts
+type DescriptionItem =
+  | {
+      type: 'icon'
+      title: string
+      trigger?: 'click' | 'hover'
+    }
+  | {
+      type: 'text'
+      title: string
+    }
+  | null
+export type Description = DescriptionItem | Array<DescriptionItem>
+```
+</details>
+
+### 布局（containerStyle）
+
+> `containerStyle`字段描述表单布局信息
+
+:::tip
+`Drip Form`使用flex布局，默认组件一行一个（宽度100%）。
+用户可更改containerStyle来修改组件宽度达到一行多个表单的效果。
+:::
+<details>
+<summary>typescript</summary>
+
+```ts
+export type ContainerStyle = Partial<{
+  // 表单宽度
+  width: number | string
+  // 容器margin-top
+  marginTop: number | string
+  // 容器margin-right
+  marginRight: number | string
+  // 容器margin-bottom
+  marginBottom: number | string
+  // 容器margin-left
+  marginLeft: number | string
+  // 容器margin
+  margin: string
+  // 容器padding
+  padding: string
+  paddingTop: number | string
+  paddingBottom: number | string
+  paddingRigth: number | string
+  paddingLeft: number | string
+}> | null
+```
+</details>
+
+## 特殊配置
+
+### 展示模式（formMode）
+
+> `Drip Form` 表单以下两种常用模式
+
+- `edit` 编辑模式 （用户可修改表单数据）
+
+- `view` 查看模式（只读，不可修改数据）
+
+```typescript
+type FormMode = 'edit' | 'view'
+```
+
+:::caution
+不是所有的表单控件都支持formMode配置，取决于表单控件是否有相应模式的实现。
+:::
+<details>
+<summary>支持展示模式的表单控件</summary>
+
+若除了以上的表单希望支持展示模式，欢迎贡献，让`Drip form`支持更多的组件支持formMode模式。
+- [贡献必看](https://github.com/JDFED/drip-form/blob/dev/CONTRIBUTING.md)
+- [如何让组件支持展示模式](../use/customComponent#表单模式)
+
+</details>
+
+### 展示隐藏（vcontrol）
+
+`vcontrol`可以按照条件控制表单展示、隐藏。
+
+详细了解[展示隐藏](../use/control/vcontrol)章节
+
+### 组件选项（queryConfig）
+
+在组件第一次加载时，可以配合 [fetchApi](../API/formProp/fetchApi) 调用接口，并将后端数据映射到ui对象中。
+
+详细了解[queryConfig设置选项章节](../use/control/other#queryconfig设置选项)
+
+
+## 自定义配置
+
+### 样式（表单组件其余属性）
+
+> ui中其余字段会透传给表单控件。
+
+:::tip
+antd组件支持的prop均可以在ui对象中填写。（具体参考antd 各组件prop）
+:::

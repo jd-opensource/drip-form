@@ -17,8 +17,7 @@
 	"workspaces": {
 		"packages": [
 			"packages/*",
-			"examples/*",
-			"website"
+			"examples/*"
 		],
 		"nohoist": [
 			"**/ajv*",

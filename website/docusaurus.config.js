@@ -1,3 +1,5 @@
+const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const styleLoader = require('./plugins/styleLoader')
 const path = require('path')
 
@@ -11,11 +13,28 @@ module.exports = {
     'https://storage.360buyimg.com/imgtools/7e0e546a96-d962c880-f9a2-11eb-bf08-d585041b7c80.svg',
   organizationName: 'drip-form', // Usually your GitHub org/user name.
   projectName: 'drip-form', // Usually your repo name.
+  i18n: {
+    defaultLocale: 'zh',
+    locales: ['zh'],
+  },
   themeConfig: {
+    prism: {
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
+    },
     colorMode: {
+      defaultMode: 'light',
       disableSwitch: true,
+      respectPrefersColorScheme: true,
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
     },
     navbar: {
+      hideOnScroll: true,
       title: 'Drip-Form',
       logo: {
         alt: 'drip-form Logo',
@@ -23,29 +42,23 @@ module.exports = {
       },
       items: [
         {
-          type: 'dropdown',
-          label: '文档',
+          type: 'doc',
+          label: 'drip-form文档',
+          docId: 'form/introduction/introduction',
           position: 'right',
-          items: [
-            {
-              type: 'doc',
-              label: 'drip-form文档',
-              docId: 'background/background',
-            },
-            {
-              type: 'doc',
-              label: 'drip-form-generator文档',
-              docId: 'generator/start/generator',
-            },
-          ],
+        },
+        {
+          type: 'doc',
+          label: '表单设计器文档',
+          docId: 'generator/start/generator',
+          position: 'right',
         },
         {
           to: 'generator_demo',
-          label: '编辑器',
+          label: '表单设计器demo',
           position: 'right',
           target: '_blank',
         },
-        { to: 'faq', label: '常见问题', position: 'right' },
         {
           href: 'https://github.com/JDFED/drip-form',
           label: 'GitHub',
