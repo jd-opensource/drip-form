@@ -7,13 +7,15 @@
         <lastBuildDate>Thu, 27 Aug 2020 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <language>zh</language>
         <item>
             <title><![CDATA[使用babel-form快速搭建表单]]></title>
             <link>https://jdfed.github.io/drip-form/blog/drip-form-create</link>
-            <guid>drip-form-create</guid>
+            <guid>https://jdfed.github.io/drip-form/blog/drip-form-create</guid>
             <pubDate>Thu, 27 Aug 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[如何使用 drip-form 快速搭建表单]]></description>
             <content:encoded><![CDATA[<p>如何使用 drip-form 快速搭建表单</p>]]></content:encoded>
+            <category>介绍</category>
         </item>
     </channel>
 </rss>
