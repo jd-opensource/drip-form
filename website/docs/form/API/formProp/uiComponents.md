@@ -11,7 +11,7 @@ description: 导入主题、自定义主题
 
 :::tip 自定义主题
 
-用户也可开发业务相关的主题或不同ui库的主题，详细参考[自定义主题](../advanced/customTheme)
+用户也可开发业务相关的主题或不同ui库的主题，详细参考[自定义主题](../../advanced/customTheme)
 
 :::
 
