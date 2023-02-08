@@ -1,0 +1,374 @@
+---
+id: quickStart
+title: 快速开始
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## 安装流程
+
+<Tabs
+defaultValue="NPM"
+values={[
+{label: 'npm', value: 'NPM'},
+{label: 'yarn', value: 'yarn'},
+]}>
+<TabItem value="NPM">
+
+1.  安装 `Drip Form` 渲染核心
+
+    ```bash
+    npm install @jdfed/drip-form
+    ```
+
+2.  安装 ui 库对应的 Drip Form 主题库（这里以 antd 主题为例）
+
+    ```bash
+    npm install @jdfed/drip-form-theme-antd
+    ```
+
+3.  安装 ui 库
+
+    ```bash
+    npm install antd
+    ```
+
+</TabItem>
+<TabItem value = "yarn">
+
+1.  安装 `Drip Form` 渲染核心
+
+    ```bash
+    yarn add @jdfed/drip-form
+    ```
+
+2.  安装 ui 库对应的 Drip Form 主题库（这里以 antd 主题为例）
+
+    ```bash
+    yarn add @jdfed/drip-form-theme-antd
+    ```
+
+3.  安装 ui 库
+
+    ```bash
+    yarn add antd
+    ```
+
+</TabItem>
+</Tabs>
+
+## 用法
+
+### 基础使用
+
+<Tabs>
+
+<TabsItem value="App" label="App.tsx">
+
+```tsx
+//导入drip form渲染核心
+import DripForm from '@jdfed/drip-form';
+//导入antd主题
+import antd from '@jdfed/drip-form-theme-antd';
+//导入表单配置文件
+import unitedSchema from './unitedSchema';
+//导入drip form样式
+import '@jdfed/drip-form/dist/index.css';
+//导入antd主题样式
+import '@jdfed/drip-form-theme-antd/dist/index.css';
+//导入antd样式
+import 'antd/dist/antd.css';
+
+function App() {
+  return (
+    <DripForm
+      // 表单配置文件
+      unitedSchema={unitedSchema}
+      // 导入组件
+      uiComponents={{ antd }}
+      // 设置表单值
+      formData={{
+        checkbox: '1',
+        colorPicker: '#000000',
+        text: '1111',
+        number: 1,
+      }}
+    ></DripForm>
+  );
+}
+
+export default App;
+```
+
+
+
+</TabsItem>
+
+<TabsItem value="unitedSchema" label="unitedSchema.ts">
+
+```tsx
+// 表单配置文件
+export default {
+  type: 'object',
+  validateTime: 'change',
+  ui: {},
+  theme: 'antd',
+  schema: [
+    {
+      type: 'array',
+      title: '多选框',
+      ui: {
+        type: 'checkbox',
+        theme: 'antd',
+        options: [
+          {
+            label: '选项1',
+            value: '1',
+          },
+          {
+            value: '2',
+            label: '选项2',
+          },
+        ],
+      },
+      fieldKey: 'checkbox',
+    },
+    {
+      type: 'string',
+      title: '颜色选择框',
+      format: 'color',
+      default: '#310bec',
+      ui: {
+        type: 'colorPicker',
+        theme: 'antd',
+        defaultValue: '#310bec',
+      },
+      fieldKey: 'colorPicker',
+    },
+    {
+      type: 'string',
+      title: '日期选择框',
+      ui: {
+        type: 'datePicker',
+        showTime: true,
+        theme: 'antd',
+      },
+      fieldKey: 'datePicker',
+    },
+    {
+      type: 'string',
+      title: '输入框',
+      ui: {
+        type: 'text',
+        style: {
+          width: '100%',
+        },
+        theme: 'antd',
+      },
+      fieldKey: 'text',
+    },
+    {
+      type: 'number',
+      title: '数字输入框',
+      ui: {
+        type: 'number',
+        theme: 'antd',
+      },
+      fieldKey: 'number',
+    },
+  ],
+};
+```
+
+
+
+</TabsItem>
+
+</Tabs>
+
+### 代码沙盒
+
+上述代码可在Stackblitz[^1]在线查看。点击下面按钮在线演示
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/drip-form?file=src/App.tsx)
+
+### 主题
+
+> 每个表单控件是一个自定义组件，多个自定义组件的集合即**主题**。
+
+`Drip Form`只是一个渲染器（用来处理全局状态、校验、联动等逻辑），具体组件展示是由主题实现的。
+
+:::tip 
+
+为了提高表单组件在不同项目的复用，`Drip Form`支持导入多个不同的主题。
+
+用户也可开发业务相关的主题或不同ui库的主题，详细参考[自定义主题](../advanced/customTheme)
+
+:::
+
+`Drip From`默认提供antd ui（v4版本）库的主题适配，即`@jdfed/drip-form-theme-antd`。
+
+```tsx title=通过配置uiComponents来配置主题
+import DripForm from '@jdfed/drip-form';
+//导入antd主题
+// highlight-next-line
+import antd from '@jdfed/drip-form-theme-antd';
+import unitedSchema from './unitedSchema';
+import '@jdfed/drip-form/dist/index.css';
+//导入antd主题样式
+// highlight-next-line
+import '@jdfed/drip-form-theme-antd/dist/index.css';
+//导入antd样式
+import 'antd/dist/antd.css';
+
+function App() {
+  return (
+    <DripForm
+      // 表单配置文件
+      unitedSchema={unitedSchema}
+      // 导入组件
+      // highlight-next-line
+      uiComponents={{ antd }}
+      // 设置表单值
+      formData={{
+        checkbox: '1',
+        colorPicker: '#000000',
+        text: '1111',
+        number: 1,
+      }}
+    />
+  );
+}
+```
+
+详细用法参考 [主题](../use/theme)
+
+### unitedSchema 配置表单
+
+在配置了`Drip Form`支持的主题之后，就可以配置`unitedSchem prop`来配置表单了。
+
+下面通过一个例子来描述unitedSchema是如何描述一个表单的。
+
+```ts title=unitedSchema.ts
+{
+  type: 'object',
+  validateTime: 'change',
+  ui: {},
+  theme: 'antd',
+  schema: [
+    {
+      type: 'array',
+      title: '多选框',
+      default: [],
+      ui: {
+        type: 'checkbox',
+        theme: 'antd',
+        options: [
+          {
+            label: '选项1',
+            value: '1',
+          },
+          {
+            value: '2',
+            label: '选项2',
+          },
+        ],
+      },
+      fieldKey: 'checkbox',
+    }
+  ]
+}
+```
+
+
+<details>
+<summary>unitedSchema最外层属性</summary>
+
+- `type`是用来描述当前表单的数据类型
+
+  `Drip Form`是数据驱动的，所以需要确定表单的数据类型。
+
+  常见数据类型有：`object`、`array`、`string`、`number`、`boolean`、`integer`、`null`
+
+  :::caution
+
+  目前最外层只支持`object`类型 
+
+  :::
+
+- **validateTime**用来描述表单校验时机
+
+  默认`change`，表单数据变化时立刻校验。
+
+- **theme**当前表单默认使用的主题
+
+  支持输入的值即[uiComponents prop](../API/formProp/uiComponents)对象的key
+
+- **schema**中每个对象都是一个表单
+
+  由于表单在业务中有序排列的，所以表单在schema中的顺序代表了在界面上先后顺序。
+
+</details>
+
+<details>
+<summary>unitedSchema.schema中每个对象的属性</summary>
+
+- **type**同外层type，描述表单的数据类型
+
+- **title**表单的标题
+
+- **ui**对象
+
+  - **type** 描述当前表单控件的类型
+
+    支持的类型取决于使用的主题支持的控件类型
+
+  - **theme** 描述当前表单控件使用的主题（可选，不配置默认使用全局`theme`）
+
+    全局theme属性用来控制所有表单默认主题，ui.theme权重更高
+
+  - **其他属性**
+
+    ui对象中的其他属性均会透传给表单控件
+
+    :::tip
+
+    组件所有的prop都可以在ui中配置
+
+    :::
+
+- **default** 表单的默认数据
+
+- **fieldKey** 表单数据对应的key值
+
+</details>
+
+
+想要了解更详细的unitedSchema配置协议，参考文档[unitedSchema协议](../unitedSchema)
+
+### 初始化表单数据
+
+表单通常需要初始化表单数据，一种是在unitedSchema中配置default默认值；另一种是使用[formData prop](../API/formProp/formData)
+
+```tsx title=formData初始化表单数据
+<DripForm
+  // 表单配置文件
+  unitedSchema={unitedSchema}
+  // 导入组件
+  uiComponents={{ antd }}
+  // 设置表单值
+  //highlight-start
+  formData={{
+    checkbox: '1',
+    colorPicker: '#000000',
+    text: '1111',
+    number: 1,
+  }}
+  //highlight-end
+/>
+```
+
+
+
+[^1]: [Stackblitz](https://stackblitz.com/)

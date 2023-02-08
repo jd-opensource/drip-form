@@ -1,0 +1,234 @@
+---
+id: dataType
+title: 数据类型
+description: 如何配置表单数据格式?
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<details>
+  <summary>个人信息数据</summary>
+
+```js
+{
+  name: '张三',
+  age: 23,
+  married: true,
+  hobby: ['钓鱼', '游泳'],
+  address: {province: 'xx省', city: 'xx市'},
+  mate: ['王四', 23],
+  schools: [{name:'xxx小学',year:'2000-2006'},{name:'xxx中学',year:'2007-2010'}]
+}
+```
+
+</details>
+
+```typescript title=TypeScript描述个人信息数据
+{
+  name: string
+  age: number
+  married: boolean
+  hobby: Array<string>
+  address: {province:string,city:string}
+  mate: [string,number]
+  schools: Array<{name:string,year:string}>
+}
+```
+
+## 描述数据类型
+
+:::tip
+
+通过`type`、`schema`、`items`描述数据类型
+
+:::
+
+一个数据可能对应一个或多个表单控件，由此可将数据类型分为以下两种：
+
+1. 一个表单控件对应一个数据类型（普通数据类型-单表单）；
+
+2. 多个表单控件嵌套关系，组合形成一份数据（复杂数据类型-多表单嵌套）；
+
+### 普通数据类型（单表单控件）
+
+<Tabs>
+
+<TabItem label="string" value="string">
+
+```js
+{
+	type: 'string'
+}
+```
+
+</TabItem>
+<TabItem label="number" value="number">
+
+```js
+{
+	type: 'number'
+}
+```
+
+</TabItem>
+<TabItem label="boolean" value="boolean">
+
+```js
+{
+	type: 'boolean'
+}
+```
+
+</TabItem>
+
+<TabItem label="object" value="object">
+
+```js
+{
+	type: 'object'
+}
+```
+
+</TabItem>
+<TabItem label="array" value="array">
+
+```js
+{
+  type: 'array',
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### 复杂数据类型（多个表单控件嵌套）
+
+对于嵌套关系的表单数据类型描述如下
+
+<Tabs>
+
+<TabItem label="object" value="object">
+
+```js
+//{address: {province:'xx省',city:'xx市'}}描述如下
+{
+  type: 'object',
+  //由于对象是无序的，而表单是有序的，所以这里schema使用数组形式
+  schema:[{type:'string'},{type:'string'}]
+}
+```
+
+</TabItem>
+
+<TabItem label="array" value="array">
+
+```js
+//普通数组（数组每一项格式相同）例如：['钓鱼','游泳']
+{
+  type:'array',
+  items:{
+    type:'string'
+  }
+}
+//元祖（数组中每一项格式不相同）例如：['王四',23]
+{
+  type:'array',
+  items:[
+    {type:'string'},
+    {type:'number'}
+  ]
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## 绑定数据
+
+:::tip
+
+通过`fieldKey`绑定数据
+
+:::
+
+```js title=个人信息数据name字段配置
+{
+  type:"string",
+  fieldKey:'name'
+}
+```
+
+## 完整数据类型配置
+最终个人信息数据完整数据格式配置如下
+
+```js title=个人信息数据数据格式部分配置
+{
+  type:'object',
+  schema:[
+    {
+      type:"string",
+      fieldKey:'name'
+    },
+    {
+      type:'number',
+      fieldkey:'age'
+    },
+    {
+      type:'boolean',
+      fieldKey:'married'
+    },
+    {
+      type:"array",
+      fieldKey:'hobby',
+      items: {
+        type:'string'
+      }
+    },
+    {
+      type:'object',
+      schema:[
+        {
+          type:'string',
+          fieldKey:'province'
+        },
+        {
+          type:'string',
+          fieldKey:'city'
+        },
+      ]
+    },
+    {
+      type:'array',
+      fieldKey:'mate'
+      items:[
+        {
+          type:'string',
+        },
+        {
+          type:'number',
+        }
+      ]
+    },
+    {
+      type:'array',
+      fieldKey:'schools',
+      items:{
+        type:'object',
+        schema:[
+          {
+            type:'string',
+            fieldKey:'name'
+          },
+          {
+            type:'string',
+            fieldKey:'year'
+          }
+        ]
+      }
+    }
+  ]
+}
+```

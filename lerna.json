@@ -1,8 +1,7 @@
 {
 	"packages": [
 		"packages/*",
-		"examples/*",
-		"website"
+		"examples/*"
 	],
 	"npmClient": "yarn",
 	"useWorkspaces": true,
