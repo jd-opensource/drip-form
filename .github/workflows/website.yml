@@ -50,6 +50,7 @@ jobs:
           yarn
           yarn build:prod
           cd website
+          yarn
           yarn build:website
 
       - name: Deploy 🚀
