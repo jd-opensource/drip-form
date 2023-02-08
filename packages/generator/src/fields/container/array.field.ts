@@ -88,6 +88,16 @@ const config: Field = {
         },
       },
       {
+        fieldKey: 'showHeader',
+        type: 'boolean',
+        title: '是否展示header',
+        default: true,
+        ui: {
+          type: 'switch',
+          vcontrol: 'return props.formData.ui.mode==="fixed"',
+        },
+      },
+      {
         fieldKey: 'addTitle',
         type: 'string',
         title: '新增按钮文案',

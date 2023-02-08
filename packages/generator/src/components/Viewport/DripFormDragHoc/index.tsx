@@ -5,7 +5,14 @@
  * @Last Modified by: jiangxiaowei
  * @Last Modified time: 2022-07-14 11:22:52
  */
-import React, { memo, useCallback, useMemo, useEffect, useState } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+} from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import cx from 'classnames'
@@ -57,6 +64,14 @@ const DripFormDragHoc: FC<Props> = memo(
     isFirst,
     theme,
   }) => {
+    const staticRef = useRef<{
+      fieldKey: string | null
+      selectedFieldKey: string | null
+    }>({
+      selectedFieldKey: null,
+      fieldKey: null,
+    })
+    staticRef.current.fieldKey = fieldKey
     const [ref, setRef] = useState<HTMLElement | null>(null)
     const allField = useRecoilValue(allFieldAtom)
     // 对象、数组容器为空（改变碰撞检测算法实现）
@@ -100,6 +115,7 @@ const DripFormDragHoc: FC<Props> = memo(
 
     // 当前选中的field
     const [selectedFieldKey, setSelectedFieldKey] = useRecoilState(selectedAtom)
+    staticRef.current.selectedFieldKey = selectedFieldKey
     const setThemeAndType = useSetRecoilState(curThemeAndTypeAtom)
     // 当前拖拽的组件them::type类型
     const curThemeAndType = useMemo(() => {
@@ -122,10 +138,25 @@ const DripFormDragHoc: FC<Props> = memo(
     )
 
     useEffect(() => {
-      if (selectedFieldKey === fieldKey) {
-        ref?.scrollIntoView()
+      if (!ref) return
+      const intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          // 如果在视口内，不作处理
+          if (entries[0].intersectionRatio >= 1) return
+          if (staticRef.current.fieldKey !== staticRef.current.selectedFieldKey)
+            return
+          ref?.scrollIntoView({ behavior: 'smooth' })
+        },
+        {
+          root: document.querySelector('#drip-form-generator--viewport'),
+        }
+      )
+      // 开始监听
+      intersectionObserver.observe(ref)
+      return () => {
+        intersectionObserver?.disconnect()
       }
-    }, [fieldKey, ref, selectedFieldKey])
+    }, [ref])
 
     const setRefFn = useCallback(
       (el) => {
