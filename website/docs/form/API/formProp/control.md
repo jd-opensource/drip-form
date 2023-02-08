@@ -4,6 +4,9 @@ title: control
 description: 监听内部数据变化
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 ```ts
 type ControlFuc = ({
   formData,
