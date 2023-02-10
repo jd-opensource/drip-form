@@ -9,6 +9,7 @@ import React from 'react'
 import { handleMargin } from '@jdfed/utils'
 import type { RenderFnProps } from './type'
 import type { Map, Theme } from '@jdfed/utils'
+import { useGlobalState } from '@jdfed/hooks'
 
 /*TODO 优化renderprops和container编写 区分component prop和container prop*/
 const Render = ({
@@ -32,6 +33,9 @@ const Render = ({
   isRoot,
   arrayKey,
 }: RenderFnProps): Array<JSX.Element | null> => {
+  const globalState = useGlobalState()
+  console.log('useGlobalState', globalState)
+  const { stageErrors = {} } = globalState
   const {
     theme = 'antd',
     title: globalTitleUi = {},
@@ -71,7 +75,7 @@ const Render = ({
   } = currentUiSchema
   // 表单是否在下方直接展示错误信息
   const showError = dataSchema.showError
-    ? dataSchema.showError === 'change'
+    ? dataSchema.showError === 'change' || dataSchema.showError === 'submit'
     : dataSchema.validateTime === 'change'
   return (order || []).map((item: string, i: number) => {
     // 当前Field ui类型
@@ -133,7 +137,10 @@ const Render = ({
     const queryFunc = onQuery?.[item]
     const asyncValidate = onValidate?.[item]
     // 当前Field的错误信息
-    const error = errors[currentFieldKey] || ''
+    const error =
+      dataSchema.showError === 'submit'
+        ? stageErrors[currentFieldKey] || ''
+        : errors[currentFieldKey] || ''
     // 当前Field的数据
     const cKey = isArrayItem ? (currentArrayKey as number) : item
     const fieldData = currentFormData[cKey]
