@@ -3,9 +3,9 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-14 13:45:37
+ * @Last Modified time: 2023-02-10 16:22:00
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { handleMargin } from '@jdfed/utils'
 import type { RenderFnProps } from './type'
 import type { Map, Theme } from '@jdfed/utils'
@@ -32,7 +32,7 @@ const Render = ({
   getKey,
   isRoot,
   arrayKey,
-}: RenderFnProps): Array<JSX.Element | null> => {
+}: RenderFnProps): ReactElement => {
   const globalState = useGlobalState()
   console.log('useGlobalState', globalState)
   const { stageErrors = {} } = globalState

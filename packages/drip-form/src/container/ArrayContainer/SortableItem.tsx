@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities'
 import cx from 'classnames'
 import { number2Chinese } from '@jdfed/utils'
 import { useArray } from '@jdfed/hooks'
-import renderCoreFn from '../../render'
+import RenderCore from '../../render'
 import { Handle } from './Handle'
 import { Remove } from './Remove'
 import type { RenderFnProps } from '../../render/type'
@@ -149,26 +149,26 @@ const SortableItem: FC<
             'array-item--case': !(mode === 'fixed' && !showHeader),
           })}
         >
-          {renderCoreFn({
-            uiComponents,
-            dataSchema,
-            uiSchema,
-            errors,
-            formData,
-            onQuery,
-            onValidate,
-            dispatch,
-            containerHoc,
-            containerMap,
-            parentUiSchemaKey,
-            parentDataSchemaKey,
-            parentFormDataKey: fieldKey,
-            customComponents,
-            currentArrayKey: index,
-            get,
-            getKey,
-            arrayKey,
-          })}
+          <RenderCore
+            uiComponents={uiComponents}
+            dataSchema={dataSchema}
+            uiSchema={uiSchema}
+            errors={errors}
+            formData={formData}
+            onQuery={onQuery}
+            onValidate={onValidate}
+            dispatch={dispatch}
+            containerHoc={containerHoc}
+            containerMap={containerMap}
+            parentUiSchemaKey={parentUiSchemaKey}
+            parentDataSchemaKey={parentDataSchemaKey}
+            parentFormDataKey={fieldKey}
+            customComponents={customComponents}
+            currentArrayKey={index}
+            get={get}
+            getKey={getKey}
+            arrayKey={arrayKey}
+          ></RenderCore>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-12-09 12:18:07
+ * @Last Modified time: 2023-02-10 16:39:57
  */
 import React, {
   forwardRef,
@@ -19,7 +19,7 @@ import { useImmerReducer } from 'use-immer'
 import './index.styl'
 // 配置与工具
 import formDataReducer, { FormDataContext } from '../reducers'
-import renderCoreFn from '../render'
+import RenderFn from '../render'
 import Tooltip from 'react-tooltip'
 import {
   typeCheck,
@@ -563,23 +563,23 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           >
             <FormDataContext.Provider value={formDataContextState}>
               <div className={'drip-form-root'}>
-                {renderCoreFn({
-                  uiComponents,
-                  dataSchema,
-                  uiSchema,
-                  errors,
-                  formData,
-                  onQuery,
-                  onValidate,
-                  dispatch,
-                  customComponents,
-                  containerMap,
-                  getKey,
-                  get,
-                  containerHoc,
-                  arrayKey,
-                  isRoot: true,
-                })}
+                <RenderFn
+                  uiComponents={uiComponents}
+                  dataSchema={dataSchema}
+                  uiSchema={uiSchema}
+                  errors={errors}
+                  formData={formData}
+                  onQuery={onQuery}
+                  onValidate={onValidate}
+                  dispatch={dispatch}
+                  customComponents={customComponents}
+                  containerMap={containerMap}
+                  getKey={getKey}
+                  get={get}
+                  containerHoc={containerHoc}
+                  arrayKey={arrayKey}
+                  isRoot={true}
+                ></RenderFn>
                 <Tooltip clickable={true} />
                 <Footer
                   uiSchema={uiSchema}
