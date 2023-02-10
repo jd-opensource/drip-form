@@ -19,7 +19,7 @@ import { useImmerReducer } from 'use-immer'
 import './index.styl'
 // 配置与工具
 import formDataReducer, { FormDataContext } from '../reducers'
-import RenderFn from '../render'
+import RenderCore from '../render'
 import Tooltip from 'react-tooltip'
 import {
   typeCheck,
@@ -355,10 +355,9 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           })
         })
         .then(() => {
-          console.log('set', submitReturn.current.errors)
           setGlobalState((prev) => ({
             ...prev,
-            stageErrors: { ...submitReturn.current.errors },
+            stageErrors: submitReturn.current.errors,
           }))
           return submitReturn.current
         })
@@ -553,7 +552,6 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
         onMountRef.current(formRef)
       }
     }, [])
-    console.log(globalState)
 
     return (
       <globalOptionsContext.Provider value={globalOptions}>
@@ -563,7 +561,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           >
             <FormDataContext.Provider value={formDataContextState}>
               <div className={'drip-form-root'}>
-                <RenderFn
+                <RenderCore
                   uiComponents={uiComponents}
                   dataSchema={dataSchema}
                   uiSchema={uiSchema}
@@ -579,7 +577,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
                   containerHoc={containerHoc}
                   arrayKey={arrayKey}
                   isRoot={true}
-                ></RenderFn>
+                />
                 <Tooltip clickable={true} />
                 <Footer
                   uiSchema={uiSchema}

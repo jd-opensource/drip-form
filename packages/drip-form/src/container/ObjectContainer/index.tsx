@@ -139,7 +139,7 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
             getKey={getKey}
             containerHoc={containerHoc}
             arrayKey={arrayKey}
-          ></RenderCore>
+          />
         </div>
       )
     }, [

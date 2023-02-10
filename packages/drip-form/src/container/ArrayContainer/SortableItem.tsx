@@ -168,7 +168,7 @@ const SortableItem: FC<
             get={get}
             getKey={getKey}
             arrayKey={arrayKey}
-          ></RenderCore>
+          />
         </div>
       </div>
     </div>

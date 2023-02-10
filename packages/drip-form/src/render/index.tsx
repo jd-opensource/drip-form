@@ -33,9 +33,7 @@ const Render = ({
   isRoot,
   arrayKey,
 }: RenderFnProps): ReactElement => {
-  const globalState = useGlobalState()
-  console.log('useGlobalState', globalState)
-  const { stageErrors = {} } = globalState
+  const { stageErrors = {} } = useGlobalState()
   const {
     theme = 'antd',
     title: globalTitleUi = {},
