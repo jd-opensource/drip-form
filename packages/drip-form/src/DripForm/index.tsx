@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2023-02-10 16:39:57
+ * @Last Modified time: 2023-02-13 15:29:24
  */
 import React, {
   forwardRef,
@@ -464,6 +464,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
             merge,
             errors,
             deleteField,
+            addField,
           })
         } catch (error) {
           console.error(error)
@@ -490,6 +491,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
               set,
               merge,
               deleteField,
+              addField,
               errors,
             })
           }
@@ -520,6 +522,7 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
     }, [
       control,
       dataSchema,
+      addField,
       dispatch,
       flow,
       formData,

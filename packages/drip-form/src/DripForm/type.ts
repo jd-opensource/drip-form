@@ -62,6 +62,7 @@ export type ControlFuc = ({
   get,
   set,
   deleteField,
+  addField,
   errors,
 }: {
   uiSchema: Map
@@ -74,6 +75,7 @@ export type ControlFuc = ({
   set: Set
   merge: Merge
   deleteField: DeleteField
+  addField: AddField
   errors: Map
 }) => void
 
