@@ -15,7 +15,7 @@ import MonacoEdit from './MonacoEdit'
 import { OnChange } from '@monaco-editor/react'
 const defaultValue = JSON.stringify({
   theme: 'antd',
-  validateTime: 'change',
+  showError: 'change',
   schema: [],
 })
 

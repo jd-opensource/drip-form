@@ -9,6 +9,7 @@ import type { Get, GetKey } from '@jdfed/utils'
 import type { Validate, ErrorsMap } from './useValidate'
 import type { MarginType, TitleWidth } from './useTitle'
 import type { GlobalOptions, UndefinedComponentFn } from './useGlobalOption'
+import type { TGlobalState } from './useGlobalState'
 export { default as useModal } from './useModal'
 export { default as useRefProp } from './useRefProp'
 export { default as usePrevious } from './usePrevious'
@@ -31,6 +32,11 @@ export {
   globalOptionsContext,
   defaultGlobalOptions,
 } from './useGlobalOption'
+export {
+  default as useGlobalState,
+  globalStateContext,
+  defaultGlobalState,
+} from './useGlobalState'
 export type {
   Get,
   Set,
@@ -45,4 +51,5 @@ export type {
   TitleWidth,
   GlobalOptions,
   UndefinedComponentFn,
+  TGlobalState,
 }

@@ -58,7 +58,7 @@ export default App;
 
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {
     //highlight-start
     footer: {

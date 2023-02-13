@@ -121,7 +121,7 @@ export default App;
 // 表单配置文件
 
 export default {
-  validateTime: 'submit',
+  showError: 'change',
   type: 'object',
   theme: 'antd',
   schema: [

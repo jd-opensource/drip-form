@@ -3,12 +3,12 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-11 15:26:55
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-14 13:52:57
+ * @Last Modified time: 2023-02-10 16:38:58
  */
 import React, { useMemo, memo, useEffect } from 'react'
 import { useTitle } from '@jdfed/hooks'
 import ReactTooltip from 'react-tooltip'
-import renderCoreFn from '../../render'
+import RenderCore from '../../render'
 import { Title, CommonContainerHoc } from '@form/components/index'
 import cx from 'classnames'
 import type { RenderFnProps, ContainerType } from '../../render/type'
@@ -121,25 +121,25 @@ const objectContainer = memo<Props & RenderFnProps & ObjectContainerProps>(
             'drip-form_objectContainerFlex'
           )}
         >
-          {renderCoreFn({
-            uiComponents,
-            dataSchema,
-            uiSchema,
-            errors,
-            formData,
-            onQuery,
-            onValidate,
-            dispatch,
-            containerMap,
-            parentUiSchemaKey,
-            parentDataSchemaKey,
-            parentFormDataKey: fieldKey,
-            customComponents,
-            get,
-            getKey,
-            containerHoc,
-            arrayKey,
-          })}
+          <RenderCore
+            uiComponents={uiComponents}
+            dataSchema={dataSchema}
+            uiSchema={uiSchema}
+            errors={errors}
+            formData={formData}
+            onQuery={onQuery}
+            onValidate={onValidate}
+            dispatch={dispatch}
+            containerMap={containerMap}
+            parentUiSchemaKey={parentUiSchemaKey}
+            parentDataSchemaKey={parentDataSchemaKey}
+            parentFormDataKey={fieldKey}
+            customComponents={customComponents}
+            get={get}
+            getKey={getKey}
+            containerHoc={containerHoc}
+            arrayKey={arrayKey}
+          />
         </div>
       )
     }, [

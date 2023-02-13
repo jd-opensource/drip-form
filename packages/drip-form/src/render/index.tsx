@@ -3,12 +3,13 @@
  * @Author: jiangxiaowei
  * @Date: 2021-07-30 16:35:48
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-10-14 13:45:37
+ * @Last Modified time: 2023-02-10 16:22:00
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { handleMargin } from '@jdfed/utils'
 import type { RenderFnProps } from './type'
 import type { Map, Theme } from '@jdfed/utils'
+import { useGlobalState } from '@jdfed/hooks'
 
 /*TODO 优化renderprops和container编写 区分component prop和container prop*/
 const Render = ({
@@ -31,7 +32,8 @@ const Render = ({
   getKey,
   isRoot,
   arrayKey,
-}: RenderFnProps): Array<JSX.Element | null> => {
+}: RenderFnProps): ReactElement => {
+  const { stageErrors = {} } = useGlobalState()
   const {
     theme = 'antd',
     title: globalTitleUi = {},
@@ -70,7 +72,9 @@ const Render = ({
     type: parentType = 'object',
   } = currentUiSchema
   // 表单是否在下方直接展示错误信息
-  const showError = dataSchema.validateTime === 'change'
+  const showError = dataSchema.showError
+    ? dataSchema.showError === 'change' || dataSchema.showError === 'submit'
+    : dataSchema.validateTime === 'change'
   return (order || []).map((item: string, i: number) => {
     // 当前Field ui类型
     const type = properties[item].type
@@ -131,7 +135,10 @@ const Render = ({
     const queryFunc = onQuery?.[item]
     const asyncValidate = onValidate?.[item]
     // 当前Field的错误信息
-    const error = errors[currentFieldKey] || ''
+    const error =
+      dataSchema.showError === 'submit'
+        ? stageErrors[currentFieldKey] || ''
+        : errors[currentFieldKey] || ''
     // 当前Field的数据
     const cKey = isArrayItem ? (currentArrayKey as number) : item
     const fieldData = currentFormData[cKey]

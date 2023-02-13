@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-12-09 12:18:07
+ * @Last Modified time: 2023-02-10 16:39:57
  */
 import React, {
   forwardRef,
@@ -12,13 +12,14 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from 'react'
 import produce from 'immer'
 import { useImmerReducer } from 'use-immer'
 import './index.styl'
 // 配置与工具
 import formDataReducer, { FormDataContext } from '../reducers'
-import renderCoreFn from '../render'
+import RenderCore from '../render'
 import Tooltip from 'react-tooltip'
 import {
   typeCheck,
@@ -38,6 +39,8 @@ import {
   globalOptionsContext,
   defaultGlobalOptions,
   validate,
+  globalStateContext,
+  defaultGlobalState,
 } from '@jdfed/hooks'
 import containerMap from '../container'
 import Footer from './Footer'
@@ -89,6 +92,8 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       }),
       [options, reload]
     )
+    // 全局配置
+    const [globalState, setGlobalState] = useState(defaultGlobalState)
     const prevUnitedSchema = usePrevious(unitedSchema)
     const prevFormData = usePrevious(initFormData)
     const parseFormData = useMemo(() => {
@@ -219,6 +224,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           (prevFormData && prevFormData !== initFormData)) &&
         globalOptions.reload
       ) {
+        setGlobalState((prev) => ({
+          ...prev,
+          stageErrors: {},
+        }))
         dispatch({
           type: 'reset',
           action: {
@@ -346,12 +355,20 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           })
         })
         .then(() => {
+          setGlobalState((prev) => ({
+            ...prev,
+            stageErrors: submitReturn.current.errors,
+          }))
           return submitReturn.current
         })
     }, [dispatch, get, onValidate])
 
     // 重置表单
     const reset = useCallback(() => {
+      setGlobalState((prev) => ({
+        ...prev,
+        stageErrors: {},
+      }))
       dispatch({
         type: 'reset',
         action: {
@@ -538,43 +555,45 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
 
     return (
       <globalOptionsContext.Provider value={globalOptions}>
-        <RequiredModeContext.Provider
-          value={dataSchema?.requiredMode || 'default'}
-        >
-          <FormDataContext.Provider value={formDataContextState}>
-            <div className={'drip-form-root'}>
-              {renderCoreFn({
-                uiComponents,
-                dataSchema,
-                uiSchema,
-                errors,
-                formData,
-                onQuery,
-                onValidate,
-                dispatch,
-                customComponents,
-                containerMap,
-                getKey,
-                get,
-                containerHoc,
-                arrayKey,
-                isRoot: true,
-              })}
-              <Tooltip clickable={true} />
-              <Footer
-                uiSchema={uiSchema}
-                uiComponents={uiComponents}
-                onSubmit={onSubmit}
-                submit={submit}
-                submitReturn={submitReturn}
-                onCancel={onCancel}
-                globalTheme={globalTheme}
-                initFormData={initArgs.formData}
-                dispatch={dispatch}
-              />
-            </div>
-          </FormDataContext.Provider>
-        </RequiredModeContext.Provider>
+        <globalStateContext.Provider value={globalState}>
+          <RequiredModeContext.Provider
+            value={dataSchema?.requiredMode || 'default'}
+          >
+            <FormDataContext.Provider value={formDataContextState}>
+              <div className={'drip-form-root'}>
+                <RenderCore
+                  uiComponents={uiComponents}
+                  dataSchema={dataSchema}
+                  uiSchema={uiSchema}
+                  errors={errors}
+                  formData={formData}
+                  onQuery={onQuery}
+                  onValidate={onValidate}
+                  dispatch={dispatch}
+                  customComponents={customComponents}
+                  containerMap={containerMap}
+                  getKey={getKey}
+                  get={get}
+                  containerHoc={containerHoc}
+                  arrayKey={arrayKey}
+                  isRoot={true}
+                />
+                <Tooltip clickable={true} />
+                <Footer
+                  uiSchema={uiSchema}
+                  uiComponents={uiComponents}
+                  onSubmit={onSubmit}
+                  submit={submit}
+                  submitReturn={submitReturn}
+                  onCancel={onCancel}
+                  globalTheme={globalTheme}
+                  initFormData={initArgs.formData}
+                  dispatch={dispatch}
+                />
+              </div>
+            </FormDataContext.Provider>
+          </RequiredModeContext.Provider>
+        </globalStateContext.Provider>
       </globalOptionsContext.Provider>
     )
   }

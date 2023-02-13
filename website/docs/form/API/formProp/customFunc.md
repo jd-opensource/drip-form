@@ -14,29 +14,29 @@ description: 函数占位符
 
   ```json title="unitedSchema.json" {7,11}
   {
-  	"validateTime": "submit",
-  	"type": "object",
-  	"theme": "drip-theme",
-  	"schema": [
-  		{
-  			"title": "开关",
-  			"type": "string",
-  			"ui": {
-  				"type": "switch",
-  				"onChange": "$$switchChange"
-  			},
-  			"fieldKey": "switchItem"
-  		},
-  		{
-  			"type": "string",
-  			"title": "自定义组件",
-  			"ui": {
-  				"type": "text",
-  				"vcontrol": "$$textVcontrol"
-  			},
-  			"fieldKey": "text1"
-  		}
-  	]
+    "showError": "change",
+    "type": "object",
+    "theme": "drip-theme",
+    "schema": [
+      {
+        "title": "开关",
+        "type": "string",
+        "ui": {
+          "type": "switch",
+          "onChange": "$$switchChange"
+        },
+        "fieldKey": "switchItem"
+      },
+      {
+        "type": "string",
+        "title": "自定义组件",
+        "ui": {
+          "type": "text",
+          "vcontrol": "$$textVcontrol"
+        },
+        "fieldKey": "text1"
+      }
+    ]
   }
   ```
 
@@ -53,11 +53,11 @@ description: 函数占位符
           '$$switchChange': (val, dispatch, fieldKey) => {
               dispatch({
                   type: 'setData',
-  								action:{
-  									set:{
-  										[fieldKey]: val
-  									}
-  								}
+                  action:{
+                    set:{
+                      [fieldKey]: val
+                    }
+                  }
               })
           },
           '$$textVcontrol': (formData, uiSchema, dataSchema) => {

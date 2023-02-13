@@ -1,10 +1,18 @@
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {
     title: {
       width: 82,
       placement: 'left',
+    },
+    footer: {
+      onOk: {
+        text: '保存',
+        type: 'primary',
+        size: 'middle',
+        shape: 'squash',
+      },
     },
     flow: {
       version: '0.1.0',
@@ -70,6 +78,7 @@ export default {
         },
         theme: 'antd',
       },
+      requiredMsg: '必填',
       fieldKey: 'text_lkXQ-Y',
     },
     {
