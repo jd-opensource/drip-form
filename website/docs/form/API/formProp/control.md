@@ -98,7 +98,7 @@ export default App;
 
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   theme: 'antd',
   schema: [
     {

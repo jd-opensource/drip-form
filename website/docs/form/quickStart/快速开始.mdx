@@ -111,7 +111,7 @@ export default App;
 // 表单配置文件
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {},
   theme: 'antd',
   schema: [
@@ -253,7 +253,7 @@ function App() {
 ```ts title=unitedSchema.ts
 {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {},
   theme: 'antd',
   schema: [
@@ -297,7 +297,7 @@ function App() {
 
   :::
 
-- **validateTime**用来描述表单校验时机
+- **showError**用来描述表单校验时机
 
   默认`change`，表单数据变化时立刻校验。
 

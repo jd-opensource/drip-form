@@ -100,7 +100,7 @@ export default App;
 
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {},
   theme: 'antd',
   schema: [
@@ -171,7 +171,7 @@ export default {
 
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {},
   theme: 'antd',
   schema: [
@@ -258,7 +258,7 @@ export default App
 
 export default {
   type: 'object',
-  validateTime: 'change',
+  showError: 'change',
   ui: {},
   theme: 'antd',
   schema: [

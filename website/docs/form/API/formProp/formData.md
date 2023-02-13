@@ -70,7 +70,7 @@ export default App
 // 表单配置文件
 
 export default {
-	validateTime: 'change',
+	showError: 'change',
 	type: 'object',
 	ui: {},
 	theme: 'antd',
@@ -244,7 +244,7 @@ export default App
 
 export default {
 	type: 'object',
-	validateTime: 'change',
+	showError: 'change',
 	ui: {
 		footer: {
 			justifyContent: 'right',
