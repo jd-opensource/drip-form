@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 13:33:14
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-09-16 11:44:14
+ * @Last Modified time: 2023-04-10 15:05:58
  */
 import React, { memo, useEffect, FC } from 'react'
 import { useImmer as useState } from 'use-immer'
@@ -98,6 +98,10 @@ const UploaderField: FC<UploaderFieldProps> = ({
 }) => {
   const [initValue, setValue] = useState(fieldData)
   const prevValue = usePrevious(initValue)
+
+  useEffect(() => {
+    setValue(fieldData)
+  }, [fieldData])
 
   let jdOssDomain: string, jsfBusinessName: string
   // 如果传入了jdAction，则解析其配置
