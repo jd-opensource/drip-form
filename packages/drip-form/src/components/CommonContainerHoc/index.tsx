@@ -193,7 +193,7 @@ const CommonContainerHoc: CommonContainerHocType = (Component, props) => {
           'form-container-view': formMode === 'view',
           'form-container-generator': formMode === 'generator',
           'form-container-edit': formMode === 'edit',
-        })}
+        }, uiProp.classCode || '')}
         style={{
           ...(['array', 'object'].includes(uiProp.type as string)
             ? (uiProp?.style as CSSProperties)
