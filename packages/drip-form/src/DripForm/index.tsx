@@ -479,19 +479,22 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
           }
 
           if (changeFn) {
-            changeFn({
-              formData,
-              uiSchema,
-              dataSchema,
-              dispatch,
-              changeKey,
-              checking,
-              get,
-              set,
-              merge,
-              deleteField,
-              errors,
-            })
+            // 表单数据未变化，过滤
+            if (!isEqual(get(changeKey).data, preChangeData)) {
+              changeFn({
+                formData,
+                uiSchema,
+                dataSchema,
+                dispatch,
+                changeKey,
+                checking,
+                get,
+                set,
+                merge,
+                deleteField,
+                errors,
+              })
+            }
           }
         } catch (error) {
           console.error('change函数体错误，请确认')
