@@ -12,6 +12,14 @@ type Get = (fieldKey?: string) => {
   dataSchema: DataSchema
   uiSchema: UiSchema
 }
+type Get = (fieldKey: string,option:{
+	// 是否获取上一次的值
+	isPrev:boolean
+}) => {
+  data: unknown
+  dataSchema: DataSchema|undefined
+  uiSchema: UiSchema|undefined
+}
 ```
 
 获取表单的数据、ui、校验信息。
@@ -21,6 +29,12 @@ type Get = (fieldKey?: string) => {
 1. fieldKey （string）
 
 	需要获取表单的key。如果是空字符，则获取所有表单数据
+
+1. option (object)
+
+	**可选**，默认为{isPrev:false}
+	
+	`get`的配置对象，可配置`isPrev`获取上一次值
 
 ### 返回
 
@@ -33,10 +47,16 @@ type Get = (fieldKey?: string) => {
 ```js
 //获取全局表单数据
 get('').data
+//获取上一次的
+get('',{isPrev:true}).data
 //获取表单a的校验配置
 get('a').dataSchema
+//获取上一次的
+get('',{isPrev:true}).dataSchema
 //获取表单 a.b.c 的ui配置
 get('a.b.c').uiSchema
+//获取上一次的
+get('',{isPrev:true}).uiSchema
 ```
 
 ### 获取表单数据

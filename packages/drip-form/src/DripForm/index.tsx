@@ -2,7 +2,7 @@
  * @Author: jiangxiaowei
  * @Date: 2020-05-14 16:54:32
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2023-02-10 16:39:57
+ * @Last Modified time: 2023-07-19 13:51:16
  */
 import React, {
   forwardRef,
@@ -296,6 +296,10 @@ const DripForm = forwardRef<DripFormRefType, DripFormRenderProps>(
       typeMap: typePath,
       dispatch,
       formData,
+      prevFormData: usePrevious(formData),
+      prevDataSchema: usePrevious(dataSchema),
+      prevUiSchema: usePrevious(uiSchema),
+      prevTypeMap: usePrevious(typePath),
     })
 
     // 获取当前fieldKey相对uiSchema、dataSchema路径

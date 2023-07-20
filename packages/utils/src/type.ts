@@ -1,9 +1,16 @@
 import { Map, ClosestEdge } from './common/type'
 import { UnitedSchema, UiSchema, DataSchema } from './schemaHandle/types'
-export type Get = (fieldKey?: string) => {
-  data: Map | undefined
-  dataSchema: DataSchema
-  uiSchema: UiSchema
+export type Get = {
+  (fieldKey?: string): {
+    data: Map | undefined
+    dataSchema: DataSchema
+    uiSchema: UiSchema
+  }
+  (fieldKey: string, option: { isPrev: boolean }): {
+    data: Map | undefined
+    dataSchema: DataSchema | undefined
+    uiSchema: UiSchema | undefined
+  }
 }
 
 export type GetKey = (

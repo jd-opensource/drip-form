@@ -3,7 +3,7 @@
  * @Author: jiangxiaowei
  * @Date: 2021-08-06 15:33:25
  * @Last Modified by: jiangxiaowei
- * @Last Modified time: 2022-04-22 11:31:56
+ * @Last Modified time: 2023-07-20 16:45:31
  */
 import { typeCheck } from '@jdfed/utils'
 import { useCallback } from 'react'
@@ -61,12 +61,20 @@ const useSchema = ({
   typeMap,
   formData,
   dispatch,
+  prevFormData,
+  prevUiSchema,
+  prevDataSchema,
+  prevTypeMap,
 }: {
   dispatch: Dispatch<Action>
   uiSchema: UiSchema
   dataSchema: DataSchema
   typeMap: Map
   formData: Map
+  prevFormData: Map
+  prevUiSchema: UiSchema
+  prevDataSchema: DataSchema
+  prevTypeMap: Map
 }): {
   get: Get
   set: Set
@@ -75,69 +83,109 @@ const useSchema = ({
   merge: Merge
 } => {
   const { getTypeKey, getKey } = useGetKey(typeMap)
-  const get = useCallback<Get>(
-    (fieldKey) => {
-      // 找不到则获取根目录
-      if (!fieldKey) {
-        return {
-          uiSchema,
-          dataSchema,
-          data: formData,
-        }
-      } else {
-        const fieldKeyMap = fieldKey.split('.')
-        const arr = getTypeKey(fieldKey).split('.')
-        return arr.reduce(
-          (prev, cur, index, arr) => {
-            if (cur === '') {
-              // 返回根目录的dataSchema、uiSchema、formData
-              return prev
-            } else if (
-              index === 0 ||
-              (typeMap[arr.slice(0, index).join('.')] as Map).type === 'object'
-            ) {
-              // 对象类型
-              return {
-                uiSchema: (prev.uiSchema.properties as Map)[cur],
-                dataSchema: (prev.dataSchema.properties as Map)[cur],
-                data: prev.data ? prev.data[cur] : undefined,
-              }
-            } else if (
-              (typeMap[arr.slice(0, index).join('.')] as Map).type === 'array'
-            ) {
-              // 数组类型
-              if (cur === '$container') {
-                // 普通数组
+  const get = useCallback<
+    (
+      fieldKey?: string,
+      option?: { isPrev: boolean }
+    ) => {
+      data: Map | undefined
+      dataSchema: DataSchema | undefined
+      uiSchema: UiSchema | undefined
+    }
+  >(
+    (fieldKey, option = { isPrev: false }) => {
+      const isPrev = option?.isPrev
+      const newFormData = isPrev ? prevFormData : formData
+      const newTypeMap = isPrev ? prevTypeMap : typeMap
+      const newUiSchema = isPrev ? prevUiSchema : uiSchema
+      const newDataSchema = isPrev ? prevDataSchema : dataSchema
+      try {
+        // 找不到则获取根目录
+        if (!fieldKey) {
+          return {
+            uiSchema: newUiSchema,
+            dataSchema: newDataSchema,
+            data: newFormData,
+          }
+        } else {
+          const fieldKeyMap = fieldKey.split('.')
+          const arr = getTypeKey(fieldKey).split('.')
+          return arr.reduce(
+            (prev, cur, index, arr) => {
+              if (cur === '') {
+                // 返回根目录的dataSchema、uiSchema、formData
+                return prev
+              } else if (
+                index === 0 ||
+                (newTypeMap[arr.slice(0, index).join('.')] as Map).type ===
+                  'object'
+              ) {
+                // 对象类型
                 return {
-                  uiSchema: prev.uiSchema.properties.$container,
-                  dataSchema:
-                    prev.dataSchema[index === 0 ? 'properties' : 'items'],
-                  data: prev.data ? prev.data[fieldKeyMap[index]] : undefined,
-                }
-              } else {
-                // 元祖
-                return {
-                  uiSchema: prev.uiSchema.properties[cur],
-                  dataSchema: (
-                    prev.dataSchema[index === 0 ? 'properties' : 'items'] as Map
-                  )[cur],
+                  uiSchema: (prev.uiSchema.properties as Map)[cur],
+                  dataSchema: (prev.dataSchema.properties as Map)[cur],
                   data: prev.data ? prev.data[cur] : undefined,
                 }
+              } else if (
+                (newTypeMap[arr.slice(0, index).join('.')] as Map).type ===
+                'array'
+              ) {
+                // 数组类型
+                if (cur === '$container') {
+                  // 普通数组
+                  return {
+                    uiSchema: prev.uiSchema.properties.$container,
+                    dataSchema:
+                      prev.dataSchema[index === 0 ? 'properties' : 'items'],
+                    data: prev.data ? prev.data[fieldKeyMap[index]] : undefined,
+                  }
+                } else {
+                  // 元祖
+                  return {
+                    uiSchema: prev.uiSchema.properties[cur],
+                    dataSchema: (
+                      prev.dataSchema[
+                        index === 0 ? 'properties' : 'items'
+                      ] as Map
+                    )[cur],
+                    data: prev.data ? prev.data[cur] : undefined,
+                  }
+                }
+              } else {
+                return {
+                  uiSchema: prev.uiSchema,
+                  dataSchema: prev.dataSchema,
+                  data: prev.data,
+                }
               }
-            } else {
-              return {
-                uiSchema: prev.uiSchema,
-                dataSchema: prev.dataSchema,
-                data: prev.data,
-              }
+            },
+            {
+              data: newFormData,
+              uiSchema: newUiSchema,
+              dataSchema: newDataSchema,
             }
-          },
-          { data: formData, uiSchema, dataSchema }
-        )
+          )
+        }
+      } catch (error) {
+        return {
+          data: undefined,
+          uiSchema: undefined,
+          dataSchema: undefined,
+        }
       }
     },
-    [dataSchema, formData, getTypeKey, typeMap, uiSchema]
-  )
+    [
+      dataSchema,
+      formData,
+      getTypeKey,
+      prevDataSchema,
+      prevFormData,
+      prevTypeMap,
+      prevUiSchema,
+      typeMap,
+      uiSchema,
+    ]
+  ) as Get
 
   /**
    * 获取当前value值
